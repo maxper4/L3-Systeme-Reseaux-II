@@ -1,0 +1,137 @@
+NOTE PREMIERE SEANCE DE TP:
+
+ip address; pour connaitre l'address ip 
+ip route; pour afficher les routes
+apt install net-tools;
+Demarrage du bios "PXE IEM"
+nom du domaine : sartre.iem
+3 partition sur les disques pour l'installation de Debian
+mdr root: toor
+mdr user: resu
+connecter en root: su -
+
+carte réseau sur la carte mère connecté sur le réseau IEM;
+première carte réseau externe sur le switch;
+deuxième carte réseau externe sur le client;
+
+chemin pour acceder au interfaces réseaux qui permette de définir l'utilisation des cartes réseaux : /etc/network/interfaces
+
+redemarrer le service reseaux ip : service networking restart
+redemarrer le service reseaux ip : /etc/init.d/networking restart
+
+Chaque groupe de TP possede une IP et un masque de classe c pour son le réseau interco, afin de mettre en place le réseau d'intercommunication nous avons pris une plage IP compris entre 192.168.1.1 et 192.168.1.5 avec ce masque 255.255.255.248, 248 car nous avions besoin de 3 bits pour définir l'ensemble des router qui sont dans le sous-réseau. 3 bits car nous voulions distribuer les IP pour 6 routeur 5+1(reso interco).
+
+Tableau des adresses dans le fichier "maskRéseauInterco" : on a donc les sous réseaux et les ips pour chaque groupe.
+
+modification du contenue du fichier interfaces pour le router avec : 
+    auto eno1
+    iface eno1 inet static
+            address 172.31.20.112/24
+            netmask 255.255.255.0
+            network 172.31.20.1
+
+Configuration du client en modifiant le fichier interfaces de celui ci :
+    auto enp11s0
+    iface enp11s0 inet static
+                address 10.1.2.2
+                netmask 255.255.255.0
+                network 10.1.2.0
+                gateway 10.1.2.1
+        
+reseau prive du router:
+    auto enp3s0
+    iface enp3s0 inet static
+            address 10.1.2.1
+            netmask 255.255.255.240
+            network 10.1.2.0
+        
+client -> serveur, ok
+serveur -> client, ok
+serveur -> serveur, ok
+client -> client, ok grace a la table de routage
+
+Table de routage :
+    
+    route du router :
+        sudo ip route add 10.1.1.0/24 via 192.168.1.1
+        sudo ip route add default via 172.31.20.1
+
+    route du client :
+        sudo ip route add 10.1.1.0/24 via 10.1.2.1
+
+    au final on a sur le router les routes (toutes même celle qu'on n'a pas ajouté a la main) :
+        default via 172.31.20.1 dev eno1 onlink
+        10.1.1.0/24 via 192.168.1.1 dev enp1s0
+        10.1.2.0/24 dev enp3s0 proto kernel scope link scr 10.1.2.1
+        172.31.20.0/24 dev eno1 proto kernel scope link src 172.31.20.112
+        192.168.1.0/29 dev enp1s0 proto kernel scope link src 192.168.1.2
+
+    et on a comme routes sur le client (toutes même celle qu'on n'a pas ajouté a la main) :
+        default via 10.1.2.1 dev enp11s0 onlink
+        10.1.1.0/24 via 10.1.2.1 dev enp11s0
+        10.1.2.0/24 via enps11s0 proto kernel scope link scr 10.1.2.2
+        169.254.0.0/16 dev enp11s0 scope link metric 1000
+
+Mise en place d'un serveur DHCP afin d'allouer automatiquement les address IP au client connecté a se routeur : 
+    nano /etc/default/isc-dhcp-server -> fichier de configuration de l'interfaces du DHCP
+    
+    INTERFACESv4="enp3s0"
+    INTERFACESv6=""
+
+fichier rsyslog.conf : /etc/rsyslog.conf -> fichier de configuration du DHCP    
+    
+    deny unknow-clients;
+    log-facility local7;
+    
+    subnet 10.1.2.0 netmask 255.255.255.0 {
+        option routers 10.1.2.1;
+    }
+    
+    host client1 {
+        hardware ethernet f0:4d:a2:a0:e1:af;
+        fixed-address 10.1.2.2;
+    }
+
+Pour redemarrer le service DHCP :
+    sudo service isc-dhcp-server restart
+    
+Pour redemarrer le service rsyslog :
+    sudo service rsyslog restart
+
+Regles iptables pour avoir internet sur le client relier au router : 
+    iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
+    
+Sauvegarde automatique avec rsync et avec cron qui va permettre la mise à jour, a heure précise:
+    crontab -e (afin d'éditer les action du fichier crontab)
+        0 15 * * * rsync -avz -e ssh /etc etudiant@10.1.2.2:/home/etudiant/Bureau/backup/
+    
+SSH :
+    sudo apt install openssh-serveur
+    ssh-keygen
+    ssh-copy-id -i ~/.ssh/id_rsa.pub etudiant@10.1.2.2
+    ssh etudiant@10.1.2.2
+    
+
+A voir la prochaine fois dans les salles de tp:
+1) les partitions que l'on a pas faites, faut-il vraiment les faires ?
+
+2) screen d'une installation linux pour le rapport
+        
+Pour la suite :
+1) Activer le routage, packet forwarding fait 
+
+2) Créer 4 routes 
+            
+3) Pour les routes permanante il faut regarder dans man interfaces pour rajouter les routes dans le fichiers interfaces pour quelle soit permanante.
+
+4) DHCP, packet "isc-dhcp-serveur", fichier de configuration .conf. On veut l'address IP, le masque, la gateway et le dns. Service DHCP a relancer.
+
+5, bonus) Crée un fichier de log spéciale de DHCP 
+
+6, internet) Regles ipetable, regles de net, "iptables -t nat" permet d'avoir internet sur le CLIENT
+
+9, bonus) Sauvegarde automatique avec rsync 
+
+10) Manipulation de packet debian, une partie des réponse a la page suivante
+
+NOTE DEUXIEME SEANCE DE TP:

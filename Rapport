@@ -1,0 +1,37 @@
+\documentclass[a4paper,10pt]{article}
+%\documentclass[a4paper,10pt]{scrartcl}
+
+\usepackage[utf8]{inputenc}
+
+\title{Rapport système et réseaux II}
+\author{Perion Maxence, Pinon Alexandre}
+\date{}
+
+\pdfinfo{%
+  /Title    ()
+  /Author   ()
+  /Creator  ()
+  /Producer ()
+  /Subject  ()
+  /Keywords ()
+}
+
+\begin{document}
+\maketitle 
+Résumer : installation de linux via le réseaux, paramétrage des interfaces réseaux sur le routeur puis le client, création de route afin de faire communiquer le client et le router, puis les routers et finalement 2 clients. Mise en place d'un service DHCP. Sauvegarde automatique avec rsync. Et finalement utilisation de packet sous Debian.
+\section{Installation de distribution linux}
+\subsection{Installation avec le réseau}
+\section{Paramétrage du réseau}
+\subsection{Interfaces réseau}
+\subsection{Répartition des IP entre les membres du groupe}
+\subsection{Communication sans table de routage}
+\subsection{Mise en place de la table de routage}
+\section{Service DHCP}
+\subsection{}
+\section{Sauvegarde automatique}
+\subsection{Rsync}
+\subsection{Cron}
+\section{Manipulation packet de Debian}
+\subsection{Mise à jour du système}
+\subsection{Les paquets}
+\end{document}
