@@ -1,0 +1,588 @@
+NOTE PREMIERE SEANCE DE TP:
+
+ip address; pour connaitre l'address ip 
+ip route; pour afficher les routes
+ip a; afficher les interfaces réseaux
+apt install net-tools;
+Demarrage du bios "PXE IEM"
+nom du domaine : sartre.iem
+3 partition sur les disques pour l'installation de Debian
+mdr root: toor
+mdr user: resu
+connecter en root: su -
+
+carte réseau sur la carte mère connecté sur le réseau IEM;
+première carte réseau externe sur le switch;
+deuxième carte réseau externe sur le client;
+
+chemin pour acceder au interfaces réseaux qui permette de définir l'utilisation des cartes réseaux : /etc/network/interfaces
+
+redemarrer le service reseaux ip : service networking restart
+redemarrer le service reseaux ip : /etc/init.d/networking restart
+
+Chaque groupe de TP possede une IP et un masque de classe c pour son le réseau interco, afin de mettre en place le réseau d'intercommunication nous avons pris une plage IP compris entre 192.168.1.1 et 192.168.1.5 avec ce masque 255.255.255.248, 248 car nous avions besoin de 3 bits pour définir l'ensemble des router qui sont dans le sous-réseau. 3 bits car nous voulions distribuer les IP pour 6 routeur 5+1(reso interco).
+
+Tableau des adresses dans le fichier "maskRéseauInterco" : on a donc les sous réseaux et les ips pour chaque groupe.
+
+modification du contenue du fichier interfaces pour le router avec : 
+    auto eno1
+    iface eno1 inet static
+            address 172.31.20.112/24
+            netmask 255.255.255.0
+            network 172.31.20.1
+
+Configuration du client en modifiant le fichier interfaces de celui ci :
+    auto enp11s0
+    iface enp11s0 inet static
+                address 10.1.2.2
+                netmask 255.255.255.0
+                network 10.1.2.0
+                gateway 10.1.2.1
+        
+reseau prive du router:
+    auto enp3s0
+    iface enp3s0 inet static
+            address 10.1.2.1
+            netmask 255.255.255.240
+            network 10.1.2.0
+        
+client -> serveur, ok
+serveur -> client, ok
+serveur -> serveur, ok
+client -> client, ok grace a la table de routage
+
+Table de routage (afficher les routes avec : ip route show):
+    
+    route du router :
+        sudo ip route add 10.1.1.0/24 via 192.168.1.1
+        sudo ip route add 10.1.2.0/24 v
+        sudo ip route add default via 172.31.20.1
+
+    route du client :
+        sudo ip route add 10.1.1.0/24 via 10.1.2.1
+
+    au final on a sur le router les routes (toutes même celle qu'on n'a pas ajouté a la main) :
+        default via 172.31.20.1 dev eno1 onlink
+        10.1.1.0/24 via 192.168.1.1 dev enp1s0
+        10.1.2.0/24 dev enp3s0 proto kernel scope link scr 10.1.2.1
+        172.31.20.0/24 dev eno1 proto kernel scope link src 172.31.20.112
+        192.168.1.0/29 dev enp1s0 proto kernel scope link src 192.168.1.2
+
+    et on a comme routes sur le client (toutes même celle qu'on n'a pas ajouté a la main) :
+        default via 10.1.2.1 dev enp11s0 onlink
+        10.1.1.0/24 via 10.1.2.1 dev enp11s0
+        10.1.2.0/24 via enps11s0 proto kernel scope link scr 10.1.2.2
+        169.254.0.0/16 dev enp11s0 scope link metric 1000
+
+Mise en place d'un serveur DHCP afin d'allouer automatiquement les address IP au client connecté a se routeur : 
+    nano /etc/default/isc-dhcp-server -> fichier de configuration de l'interfaces du DHCP
+    
+    INTERFACESv4="enp3s0"
+    INTERFACESv6=""
+
+fichier /etc/dhcp/dhcpd.conf -> fichier de configuration du DHCP 
+    
+    deny unknow-clients;
+    log-facility local7;
+    
+    subnet 10.1.2.0 netmask 255.255.255.0 {
+        option routers 10.1.2.1;
+    }
+    
+    host client1 {
+        hardware ethernet f0:4d:a2:a0:e1:af;
+        fixed-address 10.1.2.2;
+    }
+    
+fichier rsyslog.conf : /etc/rsyslog.conf
+    local7.*
+
+Pour redemarrer le service DHCP :
+    sudo service isc-dhcp-server restart
+    
+Pour redemarrer le service rsyslog :
+    sudo service rsyslog restart
+
+Regles iptables pour avoir internet sur le client relier au router : 
+    iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
+    
+Sauvegarde automatique avec rsync et avec cron qui va permettre la mise à jour, a heure précise:
+    crontab -e (afin d'éditer les action du fichier crontab)
+        0 15 * * * rsync -avz -e ssh /etc etudiant@10.1.2.2:/home/etudiant/Bureau/backup/
+    
+SSH :
+    sudo apt install openssh-serveur
+    ssh-keygen
+    ssh-copy-id -i ~/.ssh/id_rsa.pub etudiant@10.1.2.2
+    ssh etudiant@10.1.2.2
+    
+
+A voir la prochaine fois dans les salles de tp:
+1) les partitions que l'on a pas faites, faut-il vraiment les faires ?
+
+2) screen d'une installation linux pour le rapport
+        
+Pour la suite :
+1) Activer le routage, packet forwarding fait 
+
+2) Créer 4 routes 
+            
+3) Pour les routes permanante il faut regarder dans man interfaces pour rajouter les routes dans le fichiers interfaces pour quelle soit permanante.
+
+4) DHCP, packet "isc-dhcp-serveur", fichier de configuration .conf. On veut l'address IP, le masque, la gateway et le dns. Service DHCP a relancer.
+
+5, bonus) Crée un fichier de log spéciale de DHCP 
+
+6, internet) Regles ipetable, regles de net, "iptables -t nat" permet d'avoir internet sur le CLIENT
+
+9, bonus) Sauvegarde automatique avec rsync 
+
+10) Manipulation de packet debian, une partie des réponse a la page suivante
+
+
+NOTE DEUXIEME SEANCE DE TP:
+
+TP1,bis :
+
+mise en place du dns : 
+
+www.u-bourgogne.fr : nom du serveur : tokyo.dmz.u-bourgogne.fr -> 193.52.234.14
+Serveur dns qui répond : 172.31.21.35
+Pour changer de dns : dig nom domaine @ip : par exemple -> dig www.u-bourgogne.fr @8.8.8.8 (pour google)
+host -t ns u-bourgogne.fr (dig u-bourgogne.fr ns) renvoi : name server dnsi1.u-bourgogne.fr (193.50.50.2)
+                                                           name server dnsi2.u-bourgogne.fr (193.50.50.6) 
+                                                           
+dig u-bourgogne.fr -> 193.52.235.98
+    fr -> blablabla
+    .  -> blabla
+    
+dig +trace www.u-bourgogne.fr : nous donne toutes les redirection / les routes par lesquels il est passé
+
+16 pour le .
+254 pour le e
+
+fichier système qui renseigne le serveur dns : /etc/network/interfaces
+
+/etc/dhcpd.conf définie les adresses du réseaux privée comme le loopback (localhost) 127.0.0.1
+service isc-dhcp-server restart
+
+subnet 10.1.2.0 netmask 255.255.255.0 {
+        option routers 10.1.2.1;
+        options domain-name "agence.altlantide";
+        options domain-name-servers 198.168.1.2;
+    }
+    
+    host client1 {
+        hardware ethernet f0:4d:a2:a0:e1:af;
+        fixed-address 10.1.2.2;
+    }
+    
+pour le routeur (3 fichier changé):
+    /etc/resolv.conf
+        domain iem
+        search iem
+        nameserver 127.0.0.1
+        
+    /etc/bind/named.conf.local
+        zone "2.1.10.in-addr.arpa" {
+            type master;
+            file "/etc/bind/db.agence.atlantide.inv";
+        }
+        
+        zone "agence.atlantide" {
+            type master;
+            file "/etc/bind/db.agence.atlantide";
+        }
+        
+    /etc/bind/named.conf.options
+        formarders {
+            172.31.21.35;
+            198.168.1.1;
+        }
+        ...
+        dnssec-validation no;
+    
+    crée :
+    db.agence.atlantide
+        @       IN      SDA     agence.atlantide. root.agence.atlantide. 
+                                (...)
+        @       IN      NS      agence.atlantide.
+        @       IN      A       10.1.2.1    
+        client  IN      A       10.1.2.2
+        
+    db.agence.atlantide.inv
+        @       IN      SDA     agence.atlantide. root.agence.atlantide. 
+                                (...)
+        @       IN      NS      agence.atlantide.
+        1       IN      PTR     agence.atlantide.   
+        2       IN      PTR     client.agence.atlantide.
+
+
+pour le client : 
+    auto enp11s0
+    iface enp11s0 inet static
+                address 10.1.2.2
+                netmask 255.255.255.0
+                network 10.1.2.0
+                gateway 10.1.2.1
+                dns-nameservers 10.1.2.1
+                
+
+TP2 :
+                
+serveur LAMP:
+    
+Installation de Apache 2.4 :
+    apt-get install apache2
+    systemcl enable apache2 -> starting apache2 au boot
+    la page web se trouve dans le fichier : /var/www/html/index.html
+    
+Avec un clien connecté a internet et au réseau on peut aller sur : http://agence.atlantide/
+     
+Création compte pour un dev web :
+    adduser dev1
+    mkdir /srv/dev1
+    chown -R dev1 dev1
+    chmod -R 755 dev1
+    Alias "/dev1" "/srv/dev1/www" dans le fichier /etc/apache2/apache2.conf
+    mkdir /srv/dev1/www
+    touche /srv/dev1/www/index.html
+    nano /srv/dev1/www/index.html
+        <html>
+            <head>
+            <title> DEV 1 WEBSITE </title>
+            </head>
+            <body>
+            <h1>Succès</h1>
+            </body>
+        </html>
+    
+Création compte pour un second utilisateur :
+    adduser dev2
+    chown -R dev2 dev2
+    chmod -R 755 dev2
+    mkdir /srv/dev2
+    mkdir /srv/dev2/www
+    touche /srv/dev2/www/index.html
+    nano /srv/dev2/www/index.html
+        <html>
+            <head>
+            <title> DEV 2 WEBSITE </title>
+            </head>
+            <body>
+            <h1>Encore Succès</h1>
+            </body>
+        </html>
+        
+    Dans le fichier /etc/apache2/sites-available/dev2.conf
+    <VirtualHost *:80>
+        ServerName informatique.agence.atlantide
+        DocumentRoot "/srv/dev2/www"
+    </VirtualHost>
+
+Redemarrer service apache : systemctl restart apache2
+Recharger service apache : systemctl reload apache2
+
+Dans le fichier /etc/bind/db.agence.atlantide  
+on a rajouter la ligne :
+    informatique IN A 10.1.2.1
+    
+Redemarer avec systemctl restart bind9
+    
+    on accede a la page avec : "informatique.agence.atlantide"
+
+Mise en place d'un public html :
+    création du dossier qui va contenir les pages des utilisateur : mkdir /var/www/html/public_html 
+    a2enmod userdir
+    su dev1 //changer de user
+    mkdir ~/public_html
+    touch index.html
+    nano index.html
+        <html>
+            <head>
+            <title> PUBLIC HTMl </title>
+            </head>
+            <body>
+            <h1>public html succès</h1>
+            </body>
+        </html>
+    on accede a la page avec : "agence.altlantide/~dev1/"
+    
+    
+Installation MariaDB :
+    sudo apt install mariadb-server
+    mysql -u root -p
+        CREATE DATABASE dbtest
+    mysql -u root -p dbtest
+        CREATE TABLE test (nom TEXT, prenom TEXT);
+        INSERT INTO test(nom,prenom) VALUES ("NomTest","PrenomTest");
+        SELECT * from test;
+        
+    ajout d'un utilisateur a la base de donnée pour l'utilisé dans le script php :
+    mysql
+        CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
+        GRANT ALL PRIVILEGES ON * . * TO user; 
+
+Installation PHP :
+    touch /srv/dev2/www/testMariaDb.php
+    apt install php 7.4
+    dans srv/dev2/www/testDb.php
+    <?php
+    $host_name = "localhost";
+    $database = "dbtest";
+    $user_name = "user";
+    $password = "password";
+    
+    echo "<h1>page de test de données de MariaDB</h1>"
+
+    $connect = mysqli_connect($host_name, $user_name, $password, $database);
+    ou 
+    $connect = new  mysqli($host_name, $user_name, $password, $database);
+    
+    if(mysqli_connect_errno()) ou ($connect->connect_error)
+    {
+        echo '<p>connexion au serveur MySQL  échouée: '.mysqli_connect_error().'</p>';
+    }
+    else
+    {
+        $result =  $connect->query('SELECT * FROM test');
+        if($result->num_rows > 0){
+            while($row=$result->fetch_assoc()){
+                echo "NOM : " . $row["nom"] . "PRENOM : " . $row["prenom"]; 
+            }
+        }
+        else{   
+            echo '<p>0 result</p>';
+        }
+    }
+
+    mysqli_close($conn);
+    ?>
+
+    page -> informatique.agence.atlantide/testMariaDb.php
+
+Installation PostgreSQL :
+    apt install postgresql postgresql-client
+    apt-get install php-pgsql
+    systemctl enable --now postgresql
+    su -postgres
+    createuser --interactive --pwprompt
+    su postgres
+    psql
+        CREATE TABLE test (nom TEXT, prenom TEXT);
+        INSERT INTO test(nom,prenom) VALUES ('Postgre','SQL');
+        SELECT * FROM test;
+    psql dbtest //pour se connecter a la bdd
+    
+    nano testPostgreSQL.php
+    cp testMariaDb.php testPostgreSQL.php
+    
+    <?php
+    
+    echo "<h1>page de test de données de PosteGreSQL</h1>"
+    $connect = pg_connect("host=localhost dbname=dbtest user=user password=password");
+
+    if(pg_result_error()) 
+    {
+        echo '<p>connexion au serveur PostgreSQL échouée: '.pg_result_error().'</p>';
+    }
+    else
+    {
+        $result = pgquery('SELECT * FROM test');
+            while($row=pg_fetch_array($result, nulln PGSQL_ASSOC)){
+                foreach($row as $value)
+                    echo $value . " ";
+                echo "<br />;
+            }
+        pg_free_result($result);
+    }
+    
+    pg_close($connect);
+
+    ?>
+    
+    page -> informatique.agence.atlantide/testPostgreSQL.php
+
+Installation du module PDO dans PHP :
+    nano testPDO.php
+    cp testMariaDb.php testPDO.php
+        
+    <?php
+    
+    echo "<h1>page de test des bases de données de PDO</h1>"
+    echo "<h1>MariaDb</h1>"
+    try {
+            $conn = new PDO("mysql:host=local;dbname=dbtest;charset=utf8", "user", "password");
+            $query = $conn->prepare("SELECT * FROM test;");
+            $query->execute();
+            $result=$query->fetchAll();
+            foreach($results as $r)
+                echo $r["nom"] . " " . $["prenom"]; 
+        }
+    catch (Exception $e) {
+            echo "Maria db error : " . $e->getMessage();
+        }
+        
+    echo "<h1>MariaDb</h1>"
+      
+    try{
+            $conn2 = new PDO("psql:host=local;dbname=dbtest;charset=utf8", "user", "password");
+            $query2 = $conn->prepare("SELECT * FROM test;");
+            $query2->execute();
+            $result2=$query->fetchAll();
+            foreach($results as $r2)
+                echo $r2["nom"] . " " . $r2["prenom"]; 
+        }
+    catch (Exception $e){
+            echo "PosteGreSQL error : " . $e->getMessage();
+        }
+    
+    ?>
+     
+    page -> informatique.agence.atlantide/testPDO.php
+
+Route et filtrage au démarrage :
+    cd /etc/init.d
+    touch demarrage
+    nano demarrage 
+        #!/bin/sh
+        iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
+        sudo ip route add 10.1.1.0/24 via 192.168.1.1
+        sudo ip route add 10.1.2.0/24 v
+        sudo ip route add default via 172.31.20.1
+        
+    nano /etc/firewall-rules.sh
+        iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
+    ensuite dans interfaces on ajoute (apres la premiere interface):
+        pre-up /etc/firewall-rules.sh
+    
+        
+Matrice de filtrage : 
+    nano /etc/firewall-free.sh
+    
+    #!/bin/sh
+    //supprimer les règles
+    iptables -F
+    
+    
+    nano /etc/firewall-rules.sh
+    #!/bin/sh
+    
+    ./etc/firewall-free.sh
+    
+    //autoriser l'interface loopback
+    iptables -t filter -A INPUT -i lo -j ACCEPT
+    iptables -t filter -A OUTPUT -o lo -j ACCEPT   
+    
+    //définir la politique par défaut
+    iptables -P INPUT DROP
+    iptables -P OUTPUT DROP
+    iptables -P FORWARD DROP
+    
+    //accepter le ping pour les tests
+    iptables -A INPUT -p icmp -j ACCEPT
+    iptables -A OUTPUT -p icmp -j ACCEPT
+    
+    //ouvertures des bon ports. Port 80 fait réference au protocol http. Le port 443 fait référence au protocol https. Et le port 53 fait référence au DNS. Et 22 est pour SSH.
+    //régles serveur local
+    iptables -A OUTPUT -p tcp --dport 80 -j ACCEPT //http out 
+    iptables -A OUTPUT -p tcp --dport 53 -j ACCEPT //DNS out, tcp
+    iptables -A OUTPUT -p udp --dport 53 -j ACCEPT //DNS out, udp
+    iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT//https out
+    iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT //ssh out
+    
+    iptables -A INPUT -p tcp --dport 22 -j ACCEPT  //ssh in
+    iptables -A INPUT -p tcp -m state --state ESTABLISHED,RELATED -j ACCEPT //paquets en retour
+    iptables -A INPUT -p udp -m state --state ESTABLISHED,RELATED -j ACCEPT //paquets en retour
+    iptables -A OUTPUT -p tcp -m state --state ESTABLISHED/RELATED -j ACCEPT //paquets en retour
+    iptables -A OUTPUT -p udp -m state --state ESTABLISHED/RELATED -j ACCEPT //paquets en retour
+
+    //régles réseaux clients
+    iptables -A FORWARD tcp --dport 80 -s 10.1.2.0/24 -o eno1 -j ACCEPT //http
+    iptables -A FORWARD tcp --dport 53 -s 10.1.2.0/24 -o eno1 -j ACCEPT //dns
+    iptables -A FORWARD udp --dport 53 -s 10.1.2.0/24 -o eno1 -j ACCEPT //dns
+    iptables -A FORWARD tcp --dport 443 -s 10.1.2.0/24 -o eno1 -j ACCEPT //https
+    iptables -A FORWARD tcp --dport 22 -s 10.1.2.0/24 -o eno1 -j ACCEPT //ssh
+    iptables -A FORWARD -p tcp -m state --state ESTABLISHED/RELATED -j ACCEPT //paquets en retour
+    iptables -A FORWARD -p udp -m state --state ESTABLISHED/RELATED -j ACCEPT //paquets en retour
+    
+    //dialogue entre client et serveur
+    iptables -A INPUT -s 10.1.2.0/24 -i enp3s0 -j ACCEPT
+    
+    //masquerade pour aller sur le net
+    iptables -t nat -A POSTROUTING -s 10.1.2.0/24 -o eno1 -j MASQUERADE //translation d'address depuis le client
+    
+    
+Sauvegarde MySQL et PostgreSQL :
+    MySQL :
+    apt-get install aptitude
+    aptitude install automysqlbackup 
+    
+    cp /etc/default/automysqlbackup /etc/automysqlbackup/myserver.conf
+    nano /etc/automysqlbackup/myserver.conf
+    
+    automysqlbackup myserveur.conf
+    
+    posteGreSQL :
+    
+    mkdir -p /backups/postgresql
+    chown postgre /backups/postsresql/
+    
+    su - postgre
+    
+    crontab -e 
+        0 0 * * 0 pg_dumpall -U postgres | gzip > /backups/postgresql/save.gz //sauvegarder tous les dimanches a minuit
+    
+Configuration apache et relancer le serveur :    
+    visudo ou /etc/sudoers
+    a la fin du fichier:
+        dev1 ALL=(ALL:ALl) /usr/bin/nano /etc/apache2/*, etc/init.d/apache2 restart, /usr/sbin/service apache2 restart
+     
+TP3 :
+
+LDAP : Lightweight Directory Access Protocol = Annuaire
+       Protocole d'accès à un annuaire (tcp/ip)
+    OpenLDAP : version libre du protocole
+    C'est un structure aborescente constituée d'entrées nominé D.I.T
+    Chaque entrée -> ensemble d'attributs
+    1 attribut -> un type, un nom, une description et une ou plusieurs valeurs
+    Les attributs sont définis dans des schémas
+    NIS permet de faire l'authentification sur un serveur et mintenant c'est LDAP
+
+Samba (Client/Serveur): Permet le partage de fichier/imprimantes
+Port LDAP : 389
+     LDPAS : 636
+     LDIF  : ldap Data Interchange Format
+Pour débuger LDAP : [slapd -d 16383] 
+DIT example
+DC = agence, DC = dijon
+
+paquet a installé : slapd 
+téléchargé une archive qui contien un fichier de configuration : slapd.conf qui va nous permettre de mettre en place le LDAP
+Dans un premier temps on arrete openLDAP, et on supprime slapd.d
+2 types d'installation, eldif ou slapd.conf
+Par défaut tous ce qui est enregistré est dans /ldap
+Crée les bon droits car a l'installation un user et un groupe ldap sont crée
+Installer soft-lib-chepa quoi qui permet de s'authentifier
+Rajouter le schéma (schéma INET) samba dans LDAP
+
+
+apt-get install unzip
+unzip FichierconfTp3.zip 
+
+apt-get install slapd
+mdp : toor 
+systemctl restart slapd
+slapcat
+
+apt-get install libnss-ldap
+apt-get install smbldap-tools
+mv smbldap.conf /etc/smbldap-tools/smbldap_bind.conf
+
+mv /smb.conf /etc/samba/smb.conf
+
+http://www.ced-info.com/administration-reseaux/pdc-samba-ldap
+
+/etc/init.d/slapd restart
+
+
