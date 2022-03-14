@@ -15,8 +15,7 @@ carte réseau sur la carte mère connecté sur le réseau IEM;
 première carte réseau externe sur le switch;
 deuxième carte réseau externe sur le client;
 
-chemin pour acceder au interfaces réseaux qui permette de défi
-nir l'utilisation des cartes réseaux : /etc/network/interfaces
+chemin pour acceder au interfaces réseaux qui permette de définir l'utilisation des cartes réseaux : /etc/network/interfaces
 
 redemarrer le service reseaux ip : service networking restart
 redemarrer le service reseaux ip : /etc/init.d/networking restart
