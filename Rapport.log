@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.30)  13 MAR 2022 17:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.30)  17 MAR 2022 23:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -52,91 +52,83 @@ Package: inputenc 2018/08/11 v1.3c Input encoding file
 \inpenc@prehook=\toks15
 \inpenc@posthook=\toks16
 )
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count175
+\lst@gtempboxa=\box45
+\lst@token=\toks17
+\lst@length=\count176
+\lst@currlwidth=\dimen137
+\lst@column=\count177
+\lst@pos=\count178
+\lst@lostspace=\dimen138
+\lst@width=\dimen139
+\lst@newlines=\count179
+\lst@lineno=\count180
+\lst@maxwidth=\dimen140
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
+\c@lstnumber=\count181
+\lst@skipnumbers=\count182
+\lst@framebox=\box46
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2019/09/10 1.8c listings configuration
+))
+Package: listings 2019/09/10 1.8c (Carsten Heinz)
+
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count175
-\l__pdf_internal_box=\box45
+\l__kernel_color_stack_int=\count183
+\l__pdf_internal_box=\box47
 )
 (./Rapport.aux)
 \openout1 = `Rapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count176
-\scratchdimen=\dimen137
-\scratchbox=\box46
-\nofMPsegments=\count177
-\nofMParguments=\count178
-\everyMPshowfont=\toks17
-\MPscratchCnt=\count179
-\MPscratchDim=\dimen138
-\MPnumerator=\count180
-\makeMPintoPDFobject=\count181
-\everyMPtoPDFconversion=\toks18
+\scratchcounter=\count184
+\scratchdimen=\dimen141
+\scratchbox=\box48
+\nofMPsegments=\count185
+\nofMParguments=\count186
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count187
+\MPscratchDim=\dimen142
+\MPnumerator=\count188
+\makeMPintoPDFobject=\count189
+\everyMPtoPDFconversion=\toks19
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
-
-(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
-Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/latex/grfext/grfext.sty
-Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
-Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
-))
-(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
-Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
-)
-(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
-Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
-))
-(/usr/share/texlive/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
-Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2019/11/07 v1.0c TeX engine tests
-)
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-)
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
-Package grfext Info: Graphics extension search list:
-(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
-G,.JBIG2,.JB2,.eps]
-(grfext)             \AppendGraphicsExtensions on input line 504.
 
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+\c@lstlisting=\count190
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 21.
+(Font)              <12> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 21.
+(Font)              <8> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 21.
+(Font)              <6> on input line 22.
 
 (./Rapport.toc
 Overfull \hbox (22.36333pt too wide) in paragraph at lines 1--1
@@ -148,47 +140,105 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 2.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 2.
-)
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
 \tf@toc=\write3
 \openout3 = `Rapport.toc'.
 
- [1
-
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (12.1096pt too wide) in paragraph at lines 27--27
+ [2]
+Overfull \hbox (12.1096pt too wide) in paragraph at lines 30--30
 []\OT1/cmr/bx/n/14.4 Installation d'une dis-tri-bu-tion GNU/Linux sans
  []
 
-<images/ReseauInterco&Prive.png, id=11, 542.025pt x 233.37187pt>
-File: images/ReseauInterco&Prive.png Graphic file (type png)
-<use images/ReseauInterco&Prive.png>
-Package pdftex.def Info: images/ReseauInterco&Prive.png  used on input line 38.
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+<images/partitionDisque.PNG, id=14, 839.38594pt x 176.15813pt>
+File: images/partitionDisque.PNG Graphic file (type png)
+<use images/partitionDisque.PNG>
+Package pdftex.def Info: images/partitionDisque.PNG  used on input line 42.
+(pdftex.def)             Requested size: 625.9645pt x 170.71725pt.
 
-(pdftex.def)             Requested size: 455.25653pt x 170.72325pt.
-
-Overfull \hbox (110.25653pt too wide) in paragraph at lines 38--40
+Overfull \hbox (280.9645pt too wide) in paragraph at lines 42--45
  [] 
  []
 
-[2] [3 <./images/ReseauInterco&Prive.png (PNG copy)>] (./Rapport.aux) ) 
+[3 <./images/partitionDisque.PNG>]
+<images/ReseauInterco&Prive.png, id=22, 542.025pt x 233.37187pt>
+File: images/ReseauInterco&Prive.png Graphic file (type png)
+<use images/ReseauInterco&Prive.png>
+Package pdftex.def Info: images/ReseauInterco&Prive.png  used on input line 55.
+
+(pdftex.def)             Requested size: 455.25653pt x 170.72325pt.
+
+Overfull \hbox (110.25653pt too wide) in paragraph at lines 55--58
+ [] 
+ []
+
+<images/interfacesRouteur.png, id=23, 835.62187pt x 417.81094pt>
+File: images/interfacesRouteur.png Graphic file (type png)
+<use images/interfacesRouteur.png>
+Package pdftex.def Info: images/interfacesRouteur.png  used on input line 66.
+(pdftex.def)             Requested size: 455.25826pt x 170.71707pt.
+
+Overfull \hbox (110.25826pt too wide) in paragraph at lines 66--69
+ [] 
+ []
+
+[4 <./images/ReseauInterco&Prive.png (PNG copy)>]
+<images/routeurPingRouteur.png, id=27, 834.11626pt x 148.30406pt>
+File: images/routeurPingRouteur.png Graphic file (type png)
+<use images/routeurPingRouteur.png>
+Package pdftex.def Info: images/routeurPingRouteur.png  used on input line 93.
+(pdftex.def)             Requested size: 455.25255pt x 170.72256pt.
+
+Overfull \hbox (110.25255pt too wide) in paragraph at lines 93--96
+ [] 
+ []
+
+[5 <./images/interfacesRouteur.PNG>] [6 <./images/routeurPingRouteur.PNG>]
+Overfull \hbox (59.69527pt too wide) in paragraph at lines 140--141
+\OT1/cmr/m/n/10 du fichier "db.local" en "deb.agence.atlantide", copie de "db.1
+27" en "db.agence.atlantide.inv"
+ []
+
+
+Overfull \hbox (11.49133pt too wide) in paragraph at lines 140--141
+\OT1/cmr/m/n/10 pour la zone de recherche in-vers^^Se. Ajout des for-warders da
+ns "named.conf.options".
+ []
+
+
+Overfull \hbox (16.27621pt too wide) in paragraph at lines 167--168
+\OT1/cmr/m/n/10 Programme PHP qui se con-necte a Post-greSQL et af-fichage in-f
+os pour la v^^Serification. 
+ []
+
+[7] [8] (./Rapport.aux) ) 
 Here is how much of TeX's memory you used:
- 1674 strings out of 481239
- 25657 string characters out of 5920377
- 261169 words of memory out of 5000000
- 16938 multiletter control sequences out of 15000+600000
- 536593 words of font info for 38 fonts, out of 8000000 for 9000
+ 2944 strings out of 481239
+ 40617 string characters out of 5920377
+ 467013 words of memory out of 5000000
+ 18217 multiletter control sequences out of 15000+600000
+ 536928 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,6n,29p,1041b,189s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/sh
-are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on Rapport.pdf (3 pages, 123072 bytes).
+ 32i,6n,51p,1077b,1146s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts
+1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/t
+exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/pub
+lic/cm-super/sfrm1000.pfb>
+Output written on Rapport.pdf (8 pages, 188260 bytes).
 PDF statistics:
- 35 PDF objects out of 1000 (max. 8388607)
- 23 compressed objects within 1 object stream
+ 68 PDF objects out of 1000 (max. 8388607)
+ 43 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

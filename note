@@ -55,7 +55,7 @@ Table de routage (afficher les routes avec : ip route show):
     
     route du router :
         sudo ip route add 10.1.1.0/24 via 192.168.1.1
-        sudo ip route add 10.1.2.0/24 v
+        sudo ip route add 10.1.2.0/24 via 
         sudo ip route add default via 172.31.20.1
 
     route du client :

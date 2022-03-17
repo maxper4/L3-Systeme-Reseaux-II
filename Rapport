@@ -2,6 +2,7 @@
 %\documentclass[a4paper,10pt]{scrartcl}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
+\usepackage{listings}
 
 \title{Rapport système et réseaux II}
 \author{Perion Maxence, Pinon Alexandre}
@@ -22,12 +23,28 @@
 \tableofcontents
 
 \newpage
-Introduction : installation de Debian GNU/Linux via le réseaux, vien ensuite la répartition des adresses IP pour chaque groupe. Ensuite nous allons aborder le paramétrage des interfaces réseaux sur le routeur puis le client. L'étape suivante et évidemment la création de route afin de faire communiquer le client et le router. Vien ensuite la mise en place d'un service DHCP. Sauvegarde automatique avec rsync. Et finalement un approfonssidement de l'utilisation de packet sous Debian. Afin de mettre en place toutes cette architecture nous somme en possession d'un serveur fesant office de routeur et d'un client.
+Introduction : général
+
+Introduction tp1 : dans un premier temps nous avons installation de Debian GNU/Linux via le réseaux pour avoir tout simplement un outil de travail, vien ensuite la répartition des adresses IP pour chaque groupe. Ensuite nous allons aborder le paramétrage des interfaces réseaux sur le routeur puis le client. L'étape suivante et évidemment la création de route afin de faire communiquer le client et le router. Vien ensuite la mise en place d'un service DHCP. Sauvegarde automatique avec rsync. Et finalement un approfonssidement de l'utilisation de packet sous Debian. Afin de mettre en place toutes cette architecture nous somme en possession d'un serveur fesant office de routeur et d'un client.
 
 \section{Installation d'une distribution GNU/Linux sans interface graphique}
+
 \subsection{Installation via le réseau}
 
-Tout d'abord nous avons installé une distribution Debian GNU/Linux sans interface graphique. En effet cette distribution est un système d'exploitation et va nous permettre pour la suite des manipulations d'avoir une base de travail. Afin d'installer cette distribution les administrateurs système et réseau nous on mit à disposition un boot via le réseau. En temps normal pour installer un système d'exploitation qu'elle qu'il soit les utilisateurs lambda utilisent des clés USB ou disque dur qui permette de boot. Le principe est le même sauf que cette installation se fait par le réseau IEM qui est le réseau de l'université de Bourgogne. Pour lancer l'installation nous devions brancher notre serveur sur le réseau et la démarrer depuis le bios en sélectionnant le bouton "PXE IEM". Une fois l'installation démarrée nous devions suivres les étapes d'installation, tel que le nom et mot de passe du root, la fragmentation du disque, le nom de domaine (sartre.iem)... Ajouter screen de l'installation...
+La première étape pour commencer à travailler a tout simplement était d'installé une distribution Debian GNU/Linux sans interface graphique. En effet cette distribution est un système d'exploitation et va nous permettre pour la suite des manipulations d'avoir une base de travail. Afin d'installer cette distribution les administrateurs système et réseau nous on mit à disposition un boot via le réseau. En temps normal pour installer un système d'exploitation qu'elle qu'il soit, les utilisateurs lambda utilisent des clés USB ou disque dur qui permette de boot sur celle-ci. Le principe est le même sauf que cette installation se fait par le réseau IEM qui est le réseau de l'université de Bourgogne. Pour lancer l'installation nous devions brancher notre serveur sur le réseau et la démarrer depuis le bios en sélectionnant le bouton "PXE IEM". Une fois l'installation démarrée nous devions suivres les étapes d'installation, tel que le nom et mot de passe du root, la choix des partition du disque, le nom de domaine (sartre.iem)... 
+Le disque est composé de 3 partitions, il est possible d'afficher les partitions et des détails supplémentaire avec la commande :
+
+\begin{lstlisting}[language=bash]
+  $ sudo fdisk -l
+\end{lstlisting}
+
+\begin{center}
+ \includegraphics[width=22cm, height=6cm]{images/partitionDisque.PNG}
+ % partitionDisque.PNG: 1115x234 px, 96dpi, 29.51x6.19 cm, bb=0 0 836 176
+ \underline{Les 3 partitions d'un disque.}
+\end{center}
+
+Maintenant que Debian est installé sur notre routeur il est prêt à être configuré et utilisé pour différentes taches. 
 
 \section{Paramétrage du réseau}
 Avant tout paramétrage il est important de préciser que nous avons branché le réseau IEM sur la carte réseau intégré à la carte mère sur routeur. La première carte réseau externe à était branchée au switch afin de permettre la communication avec les autres groupes. Dernièrement la deuxième carte réseau externe est branchée sur le client. Ici le but de la manipulation est de mettre en place un réseau d'entreprises et d'une infrastructure de services.
@@ -37,14 +54,60 @@ Chaque groupe de TP possède une IP et un masque de classe C pour le réseau d'i
 \begin{center}
  \includegraphics[width=16cm, height=6cm]{images/ReseauInterco&Prive.png}
  % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
+ \underline{Tableau des adresse IP de chaque groupe.}
 \end{center}
 
 Ce petit tableau récapitule les adresses IP allouer pour chaque réseau et pour chaque groupe.
 
 \subsection{Interfaces réseau du routeur}
+
+Nous allons mintenant éxpliquer comment nous avons paramétré les interfaces réseau sur le routeur. Pour cela il suffie simplement de se rendre dans le fichier /etc/network/interfaces et de modifier le fichier comme ceci : 
+\begin{center}
+ \includegraphics[width=16cm, height=6cm]{images/interfacesRouteur.png}
+ % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
+ \underline{Fichier de configuration des interfaces réseaux du routeur.}
+\end{center}
+
 \subsection{Interfaces réseau du client}
+
+Nous allons mintenant éxpliquer comment nous avons paramétré les interfaces réseau sur le client. Comme pour le routeur le fichier de configuration se trouve dans /etc/network/interfaces.
+
+\begin{lstlisting}[language=bash]
+    auto eno1
+        iface eno1 inet static
+                address 172.31.20.112/24
+                netmask 255.255.255.0
+                network 172.31.20.1
+\end{lstlisting}
+
+
 \subsection{Communication sans table de routage}
+
+Par défaut le client et le routeur peuvent communiquer car il sont branché physiquement entre eux. Il en est de même pour tous les routeurs qui sont brancher sur le réseau IEM. Afin de tester les communication entre différentes machines, que se soit routeurs ou clients, il nous suffie simplement de ping la machine avec sont IP et avec cette commande : 
+\begin{lstlisting}[language=bash]
+  $ ping ip_machine
+\end{lstlisting}
+
+Par exemple avec notre routeur nous allons ping le routeur d'un groupe d'amis via le réseau IEM :
+\begin{center}
+ \includegraphics[width=16cm, height=6cm]{images/routeurPingRouteur.png}
+ % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
+ \underline{Ping d'un routeur à un autre.}
+\end{center}
+
+Nous pouvons voir ici que les paquets sont bien envoyé et reçu par notre correspondant. Donc pas de soucis pour ping un autre routeur.
+
 \subsection{Mise en place de la table de routage}
+
+Dans la configuration actuelle il nous est impossible de ping le client qui passe par un autre routeur que le notre, en effet pour arriver a faire ceci il nous faut mettre en place une table de rootage.
+La table de routage permet de simplement d'indiquer les routes a prendre par tel ou tel machines. 
+\begin{center}
+ %\includegraphics[width=16cm, height=6cm]{images/routeurPingRouteur.png}
+ % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
+ \underline{Route du routeur.}
+\end{center}
+
+
 \subsection{Règles iptables pour laisser accès a internet a une machine}
 
 \section{Service DHCP}
@@ -61,5 +124,67 @@ Ce petit tableau récapitule les adresses IP allouer pour chaque réseau et pour
 
 Conclusion tp 1 
 
+Introduction tp 1bis
+
+\section{Interrogation d'un serveur DNS}
+\subsection{Les commandes host, dig et nslookup}
+\subsection{Fichier de renseignement du serveur DNS}
+\subsection{Rôle du fichier /etc/hosts}
+
+\section{Installation d'un DNS}
+
+Pour la suite des explication il est important de préciser que nous avons choisie comme nom de domaine : agence.altantide.
+
+\subsection{Mise en place du DNS}
+
+Création des deux zones, (named.conf.local et named.conf.default-zone), copie du fichier "db.local" en "deb.agence.atlantide", copie de "db.127" en "db.agence.atlantide.inv" pour la zone de recherche inversé. Ajout des forwarders dans "named.conf.options". Redémarrage avec systemctl restart bind 9. Changement du dhcp pour prendre en compte le serveur DNS.
+
+\subsection{Test réaliser afin de valider le DNS}
+named-checkzone et named-checkconf pour vérifier la syntaxe
+/var/log/syslog pour voir les erreurs si présente au démarrage
+depuis le serveur : nslookup ip-client
+depuis le serveur : nslookup nom-client
+depuis un client connecté en filaire au routeur : nslookup ip-client
+depuis un client connecté en filaire au routeur : nslookup nom-client
+vers le serveur d'une autre agence : 
+vers le client d'une autre agence :
+
+Conclusion tp 1bis
+
+Introduction tp 2
+
+\section{Installation d'un serveur LAMP}
+\subsection{Installation et mise en place d'Apache}
+
+Test, localisation de la page web, création du compte utilisateur développeur, modification du serveur pour que www soit associé au dev web (crée dabs /srv), les bon droits, mise en place du virtuals hosts pointant sur /srv/www 
+
+\subsection{Installation et mise en place de PostgreSQL}
+
+Déroulement...
+
+\subsection{Installation et mise en place de PHP}
+
+Programme PHP qui se connecte a PostgreSQL et affichage infos pour la vérification.
+
+\subsection{Installation et mise en place de MySQL}
+
+Comme pour PostgreSQL et php
+
+\subsection{Installation et mise en place d'un PDO}
+
+\section{Script de routage et matrice de filtrage}
+\subsection{Scripts de routage au démarrage}
+\subsection{Règles iptables de la matrice de filtrage}
+
+
+Conclusion tp 2
+
+Introduction 3
+
+\section{}
+\subsection{}
+\subsection{}
+
+Conclusion tp 3
 
 \end{document}

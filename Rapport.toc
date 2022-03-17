@@ -1,18 +1,37 @@
-\contentsline {section}{\numberline {1}Installation d'une distribution GNU/Linux sans interface graphique}{2}%
-\contentsline {subsection}{\numberline {1.1}Installation via le réseau}{2}%
-\contentsline {section}{\numberline {2}Paramétrage du réseau}{2}%
-\contentsline {subsection}{\numberline {2.1}Répartition des adresse IP (réseau Interconnexion et réseau privé)}{2}%
-\contentsline {subsection}{\numberline {2.2}Interfaces réseau du routeur}{3}%
-\contentsline {subsection}{\numberline {2.3}Interfaces réseau du client}{3}%
-\contentsline {subsection}{\numberline {2.4}Communication sans table de routage}{3}%
-\contentsline {subsection}{\numberline {2.5}Mise en place de la table de routage}{3}%
-\contentsline {subsection}{\numberline {2.6}Règles iptables pour laisser accès a internet a une machine}{3}%
-\contentsline {section}{\numberline {3}Service DHCP}{3}%
-\contentsline {subsection}{\numberline {3.1}Mise en place du DHCP}{3}%
-\contentsline {subsection}{\numberline {3.2}Fichier de log pour le DHCP}{3}%
-\contentsline {section}{\numberline {4}Sauvegarde automatique}{3}%
-\contentsline {subsection}{\numberline {4.1}Rsync}{3}%
-\contentsline {subsection}{\numberline {4.2}Cron}{3}%
-\contentsline {section}{\numberline {5}Manipulation packet de Debian}{3}%
-\contentsline {subsection}{\numberline {5.1}Mise à jour du système}{3}%
-\contentsline {subsection}{\numberline {5.2}Les paquets}{3}%
+\contentsline {section}{\numberline {1}Installation d'une distribution GNU/Linux sans interface graphique}{3}%
+\contentsline {subsection}{\numberline {1.1}Installation via le réseau}{3}%
+\contentsline {section}{\numberline {2}Paramétrage du réseau}{4}%
+\contentsline {subsection}{\numberline {2.1}Répartition des adresse IP (réseau Interconnexion et réseau privé)}{4}%
+\contentsline {subsection}{\numberline {2.2}Interfaces réseau du routeur}{4}%
+\contentsline {subsection}{\numberline {2.3}Interfaces réseau du client}{5}%
+\contentsline {subsection}{\numberline {2.4}Communication sans table de routage}{5}%
+\contentsline {subsection}{\numberline {2.5}Mise en place de la table de routage}{6}%
+\contentsline {subsection}{\numberline {2.6}Règles iptables pour laisser accès a internet a une machine}{6}%
+\contentsline {section}{\numberline {3}Service DHCP}{6}%
+\contentsline {subsection}{\numberline {3.1}Mise en place du DHCP}{6}%
+\contentsline {subsection}{\numberline {3.2}Fichier de log pour le DHCP}{6}%
+\contentsline {section}{\numberline {4}Sauvegarde automatique}{6}%
+\contentsline {subsection}{\numberline {4.1}Rsync}{6}%
+\contentsline {subsection}{\numberline {4.2}Cron}{6}%
+\contentsline {section}{\numberline {5}Manipulation packet de Debian}{6}%
+\contentsline {subsection}{\numberline {5.1}Mise à jour du système}{6}%
+\contentsline {subsection}{\numberline {5.2}Les paquets}{6}%
+\contentsline {section}{\numberline {6}Interrogation d'un serveur DNS}{7}%
+\contentsline {subsection}{\numberline {6.1}Les commandes host, dig et nslookup}{7}%
+\contentsline {subsection}{\numberline {6.2}Fichier de renseignement du serveur DNS}{7}%
+\contentsline {subsection}{\numberline {6.3}Rôle du fichier /etc/hosts}{7}%
+\contentsline {section}{\numberline {7}Installation d'un DNS}{7}%
+\contentsline {subsection}{\numberline {7.1}Mise en place du DNS}{7}%
+\contentsline {subsection}{\numberline {7.2}Test réaliser afin de valider le DNS}{7}%
+\contentsline {section}{\numberline {8}Installation d'un serveur LAMP}{7}%
+\contentsline {subsection}{\numberline {8.1}Installation et mise en place d'Apache}{7}%
+\contentsline {subsection}{\numberline {8.2}Installation et mise en place de PostgreSQL}{7}%
+\contentsline {subsection}{\numberline {8.3}Installation et mise en place de PHP}{7}%
+\contentsline {subsection}{\numberline {8.4}Installation et mise en place de MySQL}{7}%
+\contentsline {subsection}{\numberline {8.5}Installation et mise en place d'un PDO}{8}%
+\contentsline {section}{\numberline {9}Script de routage et matrice de filtrage}{8}%
+\contentsline {subsection}{\numberline {9.1}Scripts de routage au démarrage}{8}%
+\contentsline {subsection}{\numberline {9.2}Règles iptables de la matrice de filtrage}{8}%
+\contentsline {section}{\numberline {10}}{8}%
+\contentsline {subsection}{\numberline {10.1}}{8}%
+\contentsline {subsection}{\numberline {10.2}}{8}%
