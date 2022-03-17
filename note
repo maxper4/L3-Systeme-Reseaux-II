@@ -326,28 +326,26 @@ Installation MariaDB :
 Installation PHP :
     touch /srv/dev2/www/testMariaDb.php
     apt install php 7.4
-    dans srv/dev2/www/testDb.php
+    dans /srv/dev2/www/testMariaDb.php
     <?php
+    echo "<h1>Page de test de la base de données de MariaDB</h1>"
+
     $host_name = "localhost";
     $database = "dbtest";
     $user_name = "user";
     $password = "password";
     
-    echo "<h1>page de test de données de MariaDB</h1>"
-
-    $connect = mysqli_connect($host_name, $user_name, $password, $database);
-    ou 
     $connect = new  mysqli($host_name, $user_name, $password, $database);
     
-    if(mysqli_connect_errno()) ou ($connect->connect_error)
+    if($connect->connect_error)
     {
-        echo '<p>connexion au serveur MySQL  échouée: '.mysqli_connect_error().'</p>';
+        echo '<p>connexion au serveur MySQL  échouée: ' . $connect->connect_error . '</p>';
     }
     else
     {
-        $result =  $connect->query('SELECT * FROM test');
+        $result =  $connect->query("SELECT * FROM test;");
         if($result->num_rows > 0){
-            while($row=$result->fetch_assoc()){
+            while($row = $result->fetch_assoc()){
                 echo "NOM : " . $row["nom"] . "PRENOM : " . $row["prenom"]; 
             }
         }
@@ -355,8 +353,6 @@ Installation PHP :
             echo '<p>0 result</p>';
         }
     }
-
-    mysqli_close($conn);
     ?>
 
     page -> informatique.agence.atlantide/testMariaDb.php
@@ -378,18 +374,17 @@ Installation PostgreSQL :
     cp testMariaDb.php testPostgreSQL.php
     
     <?php
-    
-    echo "<h1>page de test de données de PosteGreSQL</h1>"
-    $connect = pg_connect("host=localhost dbname=dbtest user=user password=password");
+    echo "<h1>Page de test de la base de données de PostegreSQL</h1>"
+    $connect = pg_connect("host=localhost dbname=dbtest user=user password=password") or die("Echec connexion " . pg_last_error());
 
     if(pg_result_error()) 
     {
-        echo '<p>connexion au serveur PostgreSQL échouée: '.pg_result_error().'</p>';
+        echo '<p>connexion au serveur PostgreSQL échoué: ' . pg_result_error() . '</p>';
     }
     else
     {
-        $result = pgquery('SELECT * FROM test');
-            while($row=pg_fetch_array($result, nulln PGSQL_ASSOC)){
+        $result = pgquery('SELECT * FROM test') or die("Echec requete " . pg_last_error());
+            while($row = pg_fetch_array($result, null, PGSQL_ASSOC)){
                 foreach($row as $value)
                     echo $value . " ";
                 echo "<br />;
@@ -441,22 +436,9 @@ Installation du module PDO dans PHP :
      
     page -> informatique.agence.atlantide/testPDO.php
 
-Route et filtrage au démarrage :
-    cd /etc/init.d
-    touch demarrage
-    nano demarrage 
-        #!/bin/sh
-        iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
-        sudo ip route add 10.1.1.0/24 via 192.168.1.1
-        sudo ip route add 10.1.2.0/24 v
-        sudo ip route add default via 172.31.20.1
-        
-    nano /etc/firewall-rules.sh
-        iptables -t nat -A POSTROUTING -o eno1 -j MASQUERADE
-    ensuite dans interfaces on ajoute (apres la premiere interface):
-        pre-up /etc/firewall-rules.sh
-    
-        
+
+Route et filtrage au démarrage 
+ 
 Matrice de filtrage : 
     nano /etc/firewall-free.sh
     
@@ -511,6 +493,9 @@ Matrice de filtrage :
     
     //masquerade pour aller sur le net
     iptables -t nat -A POSTROUTING -s 10.1.2.0/24 -o eno1 -j MASQUERADE //translation d'address depuis le client
+        
+    ensuite dans interfaces on ajoute (apres la premiere interface):
+        pre-up /etc/firewall-rules.sh
     
     
 Sauvegarde MySQL et PostgreSQL :
@@ -521,7 +506,7 @@ Sauvegarde MySQL et PostgreSQL :
     cp /etc/default/automysqlbackup /etc/automysqlbackup/myserver.conf
     nano /etc/automysqlbackup/myserver.conf
     
-    automysqlbackup myserveur.conf
+    automysqlbackup myserver.conf
     
     posteGreSQL :
     
