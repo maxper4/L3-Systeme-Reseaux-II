@@ -23,15 +23,15 @@
 \tableofcontents
 
 \newpage
-Introduction : général
+Introduction : général 
 
-Introduction tp1 : dans un premier temps nous avons installation de Debian GNU/Linux via le réseaux pour avoir tout simplement un outil de travail, vien ensuite la répartition des adresses IP pour chaque groupe. Ensuite nous allons aborder le paramétrage des interfaces réseaux sur le routeur puis le client. L'étape suivante et évidemment la création de route afin de faire communiquer le client et le router. Vien ensuite la mise en place d'un service DHCP. Sauvegarde automatique avec rsync. Et finalement un approfonssidement de l'utilisation de packet sous Debian. Afin de mettre en place toutes cette architecture nous somme en possession d'un serveur fesant office de routeur et d'un client.
+Introduction tp1 : dans un premier temps nous avons installation de Debian GNU/Linux via le réseaux pour avoir tout simplement un outil de travail, vient ensuite la répartition des adresses IP pour chaque groupe. Ensuite nous allons aborder le paramétrage des interfaces réseaux sur le routeur puis le client. L'étape suivante et évidemment la création de route afin de faire communiquer le client et le router. Vient ensuite la mise en place d'un service DHCP. Sauvegarde automatique avec rsync. Et finalement un approfondissement de l'utilisation des paquets sous Debian. Afin de mettre en place toutes cette architecture nous somme en possession d'un serveur fessant office de routeur et d'un client.
 
 \section{Installation d'une distribution GNU/Linux sans interface graphique}
 
 \subsection{Installation via le réseau}
 
-La première étape pour commencer à travailler a tout simplement était d'installé une distribution Debian GNU/Linux sans interface graphique. En effet cette distribution est un système d'exploitation et va nous permettre pour la suite des manipulations d'avoir une base de travail. Afin d'installer cette distribution les administrateurs système et réseau nous on mit à disposition un boot via le réseau. En temps normal pour installer un système d'exploitation qu'elle qu'il soit, les utilisateurs lambda utilisent des clés USB ou disque dur qui permette de boot sur celle-ci. Le principe est le même sauf que cette installation se fait par le réseau IEM qui est le réseau de l'université de Bourgogne. Pour lancer l'installation nous devions brancher notre serveur sur le réseau et la démarrer depuis le bios en sélectionnant le bouton "PXE IEM". Une fois l'installation démarrée nous devions suivres les étapes d'installation, tel que le nom et mot de passe du root, la choix des partition du disque, le nom de domaine (sartre.iem)... 
+La première étape pour commencer à travailler a tout simplement était d'installer une distribution Debian GNU/Linux sans interface graphique. En effet cette distribution est un système d'exploitation et va nous permettre pour la suite des manipulations d'avoir une base de travail. Afin d'installer cette distribution les administrateurs système et réseau nous on mit à disposition un boot via le réseau. En temps normal pour installer un système d'exploitation qu'elle qu'il soit, les utilisateurs lambda utilisent des clés USB ou disque dur qui permette de boot sur celle-ci. Le principe est le même sauf que cette installation se fait par le réseau IEM qui est le réseau de l'université de Bourgogne. Pour lancer l'installation nous devions brancher notre serveur sur le réseau et la démarrer depuis le bios en sélectionnant le bouton "PXE IEM". Une fois l'installation démarrée nous devions suivre les étapes d'installation, tel que le nom et mot de passe du root, la choix des partition du disque, le nom de domaine (sartre.iem)... 
 Le disque est composé de 3 partitions, il est possible d'afficher les partitions et des détails supplémentaire avec la commande :
 
 \begin{lstlisting}[language=bash]
@@ -44,6 +44,7 @@ Le disque est composé de 3 partitions, il est possible d'afficher les partition
  \underline{Les 3 partitions d'un disque.}
 \end{center}
 
+Ici nous pouvons voir distinctement les différentes partition. Dont la partition général de 237.5 Go qui permet de stocker différentes chose tel que des paquets pour l'utilisation de Debian ou encore différents types de fichiers. De plus nous pouvons voir la partition qui permet l'échange entre Linux et Solaris, mais également un partition étendue qui est un conteneur de partition logiques.
 Maintenant que Debian est installé sur notre routeur il est prêt à être configuré et utilisé pour différentes taches. 
 
 \section{Paramétrage du réseau}
@@ -68,22 +69,31 @@ Nous allons mintenant éxpliquer comment nous avons paramétré les interfaces r
  \underline{Fichier de configuration des interfaces réseaux du routeur.}
 \end{center}
 
+Il est également possible d'afficher les interfaces réseaux dans le shell avec la commande :
+\begin{lstlisting}[language=bash] 
+    $ ip a 
+\end{lstlisting} 
+ce qui a pour intérêt de connaître rapidement les macs adresse et/ou IP de chacun, mais permet également de savoir si une interface est en route "UP" ou pas "DOWN". 
+Pour le fichier de configuration ci-dessus nous pouvons voire les 3 interfaces donc les 3 port Ethernet que possède notre routeur, ainsi que l'interface "lo" qui représente le loopback. Pour chacune d'entre elle leurs adresses (address), leurs masques (netmask) et leurs réseaux (network) sont indiqué. Pour l'inferface "eno1" qui est relié au réseau IEM, nous avont plusieurs information supplémentaire ; l'adresse de broadcast ainsi que la passerelle (gateway). Les informations "dns-nameservers" et "pre-up" seront expliqué ultérieurement. REDEMARAGE !
+
+
 \subsection{Interfaces réseau du client}
 
-Nous allons mintenant éxpliquer comment nous avons paramétré les interfaces réseau sur le client. Comme pour le routeur le fichier de configuration se trouve dans /etc/network/interfaces.
+Nous allons maintenant expliquer comment nous avons paramétré les interfaces réseau sur le client. Comme pour le routeur le fichier de configuration se trouve dans /etc/network/interfaces.
+Par conséquent la forme du fichier est similaire a celui du routeur. Voici les informations que nous retrouvons sur le fichier et qui renseigne l'adresse, le masque et le réseau de l'interface réseau de notre client. 
 
 \begin{lstlisting}[language=bash]
     auto eno1
-        iface eno1 inet static
-                address 172.31.20.112/24
-                netmask 255.255.255.0
-                network 172.31.20.1
+    iface eno1 inet static
+            address 172.31.20.112/24
+            netmask 255.255.255.0
+            network 172.31.20.1
 \end{lstlisting}
 
 
 \subsection{Communication sans table de routage}
 
-Par défaut le client et le routeur peuvent communiquer car il sont branché physiquement entre eux. Il en est de même pour tous les routeurs qui sont brancher sur le réseau IEM. Afin de tester les communication entre différentes machines, que se soit routeurs ou clients, il nous suffie simplement de ping la machine avec sont IP et avec cette commande : 
+Par défaut le client et le routeur peuvent communiquer car il sont branché physiquement entre eux. Il en est de même pour tous les routeurs qui sont brancher sur le réseau IEM. Afin de tester les communication entre différentes machines, que se soit routeurs ou clients, il nous suffit simplement de ping la machine avec sont IP et avec cette commande : 
 \begin{lstlisting}[language=bash]
   $ ping ip_machine
 \end{lstlisting}
@@ -92,23 +102,44 @@ Par exemple avec notre routeur nous allons ping le routeur d'un groupe d'amis vi
 \begin{center}
  \includegraphics[width=16cm, height=6cm]{images/routeurPingRouteur.png}
  % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
- \underline{Ping d'un routeur à un autre.}
+ \underline{Ping de notre routeur à un autre.}
 \end{center}
 
-Nous pouvons voir ici que les paquets sont bien envoyé et reçu par notre correspondant. Donc pas de soucis pour ping un autre routeur.
+Nous pouvons voir ici que les paquets sont bien envoyé et reçu par notre correspondant. Donc pas de soucis pour ping un autre routeur. Mais si notre routeur ou notre client veut ping ou plus couramment communiquer avec un client d'un autre groupe qui est donc sur un réseau privé, on va devoir lui indiquer le chemin pour aller jusqu'à celui-ci.
 
 \subsection{Mise en place de la table de routage}
 
-Dans la configuration actuelle il nous est impossible de ping le client qui passe par un autre routeur que le notre, en effet pour arriver a faire ceci il nous faut mettre en place une table de rootage.
-La table de routage permet de simplement d'indiquer les routes a prendre par tel ou tel machines. 
+Dans la configuration actuelle il nous est impossible de ping le client qui passe par un autre routeur que le notre, en effet pour arriver a faire ceci il nous faut mettre en place une table de routage.
+La table de routage permet d'indiquer les routes a prendre par tel ou tel machines. 
 \begin{center}
- %\includegraphics[width=16cm, height=6cm]{images/routeurPingRouteur.png}
+ %\includegraphics[width=16cm, height=6cm]{images/???.png}
  % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
- \underline{Route du routeur.}
+ \underline{Route de notre routeur.}
 \end{center}
 
+Il est également possible d'afficher les routes dans le shell avec la commande :
+\begin{lstlisting}[language=bash] 
+    $ ip route
+\end{lstlisting} 
+
+L'image nous dit que la route par défaut a empreunter si aucune des routes décrite ne convien est <IP>...
 
 \subsection{Règles iptables pour laisser accès a internet a une machine}
+
+L'architecture de notre réseau commence a prendre forme, mais il est maintenant temps de permettre au client de notre réseau privé d'avoir accès a internet. Car oui pour le moment seul le routeur est en possession d'une connexion internet car il est encore une fois connecté au réseau IEM. Pour réaliser cette manoeuvre appelé une translation d'adresse, nous allons utilisé les règles "iptables" :
+
+\begin{lstlisting}[language=bash] 
+    $ iptables -t nat -A POSTROUTING -s 10.1.2.0/24 -o eno1 -j MASQUERADE
+\end{lstlisting}
+
+Cette commande permet au routeur de filtrer et donc de laisser passer les clients qui arrivent du sous réseau 10.1.2.0/24.
+
+Afin de savoir si notre routeur était capable d'utiliser internet, nous avons installer "links2" et avec la commande : 
+\begin{lstlisting}[language=bash] 
+    $ links2 google.com
+\end{lstlisting}
+
+il nous étaient possible de surfer sur le web avec un affichage non graphique. 
 
 \section{Service DHCP}
 \subsection{Mise en place du DHCP}
@@ -118,7 +149,7 @@ La table de routage permet de simplement d'indiquer les routes a prendre par tel
 \subsection{Rsync}
 \subsection{Cron}
 
-\section{Manipulation packet de Debian}
+\section{Manipulation paquets de Debian}
 \subsection{Mise à jour du système}
 \subsection{Les paquets}
 
