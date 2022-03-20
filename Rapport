@@ -27,7 +27,7 @@
 
 \newpage
 \section{Introduction}
-L'objectif de ces Travaux Pratiques a été de réaliser un serveur complet pour une agence fictive. Pour cela, nous étions en possession de deux machines: un serveur/routeur ainsi qu'un client, une machine simulant la connexion d'un appareil au réseau de l'agence. Nous sommes partis de zéro et dans un premier temps nous avons installé Debian sur notre serveur, une distribution GNU/Linux, sans interface graphique via le réseau IEM pour avoir un outil de travail. Premièrement, nous avons défini et paramétré notre adressage et routage, c'est à dire la façon d'attribuer les adresses IP et comment communiquer sur les différents réseaux. Afin de s'affranchir des adresses IP et pour s'approcher d'un cadre plus réaliste, nous avons deuxièment mis en place sur le serveur un service de DNS, permettant d'utiliser des noms de domaines agissant comme des alias pour des adresses IP.  Troisièmement, nous avons mis en place ce qui pourrait servir pour héberger un site web pour notre agence grâce à une suite d'outils appelée un LAMP. Pour finir, nous avons mis en place un service d'authentification centralisé LDAP ainsi qu'un service de partage de fichiers Samba.
+L'objectif de ces Travaux Pratiques a été de réaliser un serveur complet pour une agence fictive. Pour cela, nous étions en possession de deux machines: un serveur/routeur ainsi qu'un client, une machine simulant la connexion d'un appareil au réseau de l'agence. Nous sommes partis de zéro et dans un premier temps nous avons installé Debian sur notre serveur, une distribution GNU/Linux, sans interface graphique via le réseau IEM pour avoir un outil de travail. Premièrement, nous avons défini et paramétré notre adressage et routage, c'est à dire la façon d'attribuer les adresses IP et comment communiquer sur les différents réseaux. Afin de s'affranchir des adresses IP et pour s'approcher d'un cadre plus réaliste, nous avons deuxièmement mis en place sur le serveur un service de DNS, permettant d'utiliser des noms de domaines agissant comme des alias pour des adresses IP.  Troisièmement, nous avons mis en place ce qui pourrait servir pour héberger un site web pour notre agence grâce à une suite d'outils appelée un LAMP. Pour finir, nous avons mis en place un service d'authentification centralisé LDAP ainsi qu'un service de partage de fichiers Samba.
 
 \section{Installation d'une distribution GNU/Linux sans interface graphique}
 
@@ -47,25 +47,24 @@ Le disque est composé de 3 partitions, il est possible d'afficher les partition
 \end{center}
 
 Ici nous pouvons voir distinctement les différentes partition. Dont la partition général de 237.5 Go qui permet de stocker différentes chose tel que des paquets pour l'utilisation de Debian ou encore différents types de fichiers. De plus nous pouvons voir la partition qui permet l'échange entre Linux et Solaris, mais également un partition étendue qui est un conteneur de partition logiques.
-Maintenant que Debian est installé sur notre routeur il est prêt à être configuré et utilisé pour différentes taches. 
+Maintenant que Debian est installé sur notre routeur il est prêt à être configuré et utilisé pour différentes tâches. 
 
 \section{Paramétrage du réseau}
 Nous avons ensuite définis la répartition des adresses IP pour chaque groupe (chaque agence) et paramétré en conséquences les différentes interfaces réseaux sur le routeur puis le client.
 Avant tout paramétrage il est important de préciser que nous avons branché le réseau IEM sur la carte réseau intégré à la carte mère sur routeur. La première carte réseau externe à était branchée au switch afin de permettre la communication avec les autres groupes. Dernièrement la deuxième carte réseau externe est branchée sur le client. Ici le but de la manipulation est de mettre en place un réseau d'entreprises et d'une infrastructure de services.
 
 \subsection{Répartition des adresse IP (réseau Interconnexion et réseau privé)}
-Chaque groupe de TP possède une IP et un masque de classe C pour le réseau d'intercommunication. Afin de mettre en place le réseau d'intercommunication nous avons pris une plage IP compris entre 192.168.1.1 et 192.168.1.5 avec ce masque 255.255.255.248, 248 car nous avions besoin de 3 bits pour définir l'ensemble des routeurs qui sont dans le sous-réseau. En effet nous voulions distribuer les IP pour 6 routeurs, 5 pour les groupes de TP et 1 pour le réseau d'intercommunication.
+Chaque groupe de TP possède une IP et un masque de classe C pour le réseau d’interconnexion. Afin de mettre en place le réseau d’interconnexion nous avons pris une plage IP compris entre 192.168.1.1 et 192.168.1.5 avec ce masque 255.255.255.248, 248 car nous avions besoin de 3 bits pour définir l'ensemble des routeurs qui sont dans le sous-réseau. En effet nous voulions distribuer les IP pour 6 routeurs, 5 pour les groupes de TP et 1 pour le réseau d’interconnexion.
 \begin{center}
  \includegraphics[width=16cm, height=6cm]{images/ReseauInterco&Prive.png}
  % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
- \underline{Tableau des adresse IP de chaque groupe.}
+ \underline{Tableau des adresses IP de chaque groupe.}
 \end{center}
 
-Ce petit tableau récapitule les adresses IP allouer pour chaque réseau et pour chaque groupe.
+Ce petit tableau récapitule les adresses IP allouer pour chaque réseau et pour chaque groupe. Pour notre cas nous sommes dans le groupe 2 ce qui veut dire que notre adresse sur le réseau d’interconnexion est le "192.168.1.2" et notre adresse de réseau privé est le "10.1.2.0".
 
 \subsection{Interfaces réseau du routeur}
-
-Nous allons mintenant éxpliquer comment nous avons paramétré les interfaces réseau sur le routeur. Pour cela il suffie simplement de se rendre dans le fichier /etc/network/interfaces et de modifier le fichier comme ceci : 
+Les adresses que nous venons de répartir entre chaque groupe doivent être utiliser par le routeur. C'est pour cela que nous allons maintenant expliquer comment nous avons paramétré les interfaces réseau sur le routeur. Pour cela il suffit simplement de se rendre dans le fichier /etc/network/interfaces et de modifier le fichier comme ceci : 
 \begin{center}
  \includegraphics[width=16cm, height=6cm]{images/interfacesRouteur.png}
  % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
@@ -76,9 +75,22 @@ Il est également possible d'afficher les interfaces réseaux dans le shell avec
 \begin{lstlisting}[language=bash] 
     $ ip a 
 \end{lstlisting} 
-ce qui a pour intérêt de connaître rapidement les macs adresse et/ou IP de chacun, mais permet également de savoir si une interface est en route "UP" ou pas "DOWN". 
-Pour le fichier de configuration ci-dessus nous pouvons voire les 3 interfaces donc les 3 port Ethernet que possède notre routeur, ainsi que l'interface "lo" qui représente le loopback. Pour chacune d'entre elle leurs adresses (address), leurs masques (netmask) et leurs réseaux (network) sont indiqué. Pour l'inferface "eno1" qui est relié au réseau IEM, nous avont plusieurs information supplémentaire ; l'adresse de broadcast ainsi que la passerelle (gateway). Les informations "dns-nameservers" et "pre-up" seront expliqué ultérieurement. REDEMARAGE !
+ce qui a pour intérêt de connaître rapidement les macs adresse et/ou IP de chacun, mais permet également de savoir si une interface est en route "UP" ou pas "DOWN". En effet durant les phases de test il était important de savoir qu'elle interfaces était allumée ou éteinte, il nous est arrivé de relancer une interface à la main via la commande 
 
+\begin{lstlisting}[language=bash] 
+    $ ip link set enp3s0 up
+\end{lstlisting}
+
+Pour le fichier de configuration ci-dessus nous pouvons voire les 3 interfaces donc les 3 port Ethernet que possède notre routeur, ainsi que l'interface "lo" qui représente le loopback. Pour chacune d'entre elle leurs adresses (address), leurs masques (netmask) et leurs réseaux (network) sont indiqué. Pour l'interface "eno1" qui est relié au réseau IEM, nous avons plusieurs information supplémentaire ; l'adresse de broadcast ainsi que la passerelle (gateway). De plus nous pouvons maintenant différencier clairement qu'elle interface fait référence a qu'elle utilisation. En effet l'interface "eno1" est relier au réseau IEM car pour le réseau nous avons indiqué l'adresse "172.31.20.1" qui est l'adresse du routeur du réseau IEM fournie par les intervenants de travaux pratiques. Le raisonnement est le même pour les interfaces "enp3s0" et "enp1s0", pour lesquels nous avons indiquer respectivement pour le réseau "10.1.2.0" et "192.158.1.0". Et qui sont donc les réseaux d'interconnexion et privé. Les informations "dns-nameservers" et "pre-up" seront expliqué ultérieurement. Le fichier de configuration des interfaces réseaux est actuellement écrit et prêt a l'emploie, mais ce n'est pas pour autant que les interfaces vont changer. En effet pour que les modifications soit prise en compte il faut redémarrer le service associer en tant que root ou alors avec sudo :
+
+\begin{lstlisting}[language=bash] 
+    $ service networking restart
+    ou
+    $ /etc/init.d/networking restart
+    ou
+    $ systemctl restart networking
+\end{lstlisting}
+Ces 3 commandes permette de redémarrer le service qui s'occupe des interfaces réseaux. 
 
 \subsection{Interfaces réseau du client}
 
@@ -86,17 +98,19 @@ Nous allons maintenant expliquer comment nous avons paramétré les interfaces r
 Par conséquent la forme du fichier est similaire a celui du routeur. Voici les informations que nous retrouvons sur le fichier et qui renseigne l'adresse, le masque et le réseau de l'interface réseau de notre client. 
 
 \begin{lstlisting}[language=bash]
-    auto eno1
-    iface eno1 inet static
-            address 172.31.20.112/24
-            netmask 255.255.255.0
-            network 172.31.20.1
+    auto enp11s0
+    iface enp11s0 inet static
+                address 10.1.2.2
+                netmask 255.255.255.0
+                network 10.1.2.0
+                gateway 10.1.2.1
 \end{lstlisting}
-
+On voit ici que l'IP renseigné pour le réseau donc le network pour l'interface "enp11s0" est "10.1.2.1", qui est l'adresse du de notre sous réseau. On connais désormais l'IP de notre client qui est "10.1.2.2".
+Comme pour le routeur afin d'appliquer les changements il faut redémarrer le service avec l'une des trois commande donnée pour le routeur. Par la suite toutes ces configuration vont permettre aux client et routeur de communiquer avec le reste des groupes. 
 
 \subsection{Communication sans table de routage}
 
-Par défaut le client et le routeur peuvent communiquer car il sont branché physiquement entre eux. Il en est de même pour tous les routeurs qui sont brancher sur le réseau IEM. Afin de tester les communication entre différentes machines, que se soit routeurs ou clients, il nous suffit simplement de ping la machine avec sont IP et avec cette commande : 
+Nous allons maintenant aborder la communication entre différente machine, car en effet nous avons pour but de simuler un réseau en entreprise, et par conséquent il faut que nos machines puisse communiquer, et que le routeur puis rediriger correctement les machines ou elle souhaite aller en fessant office de filtre. Par défaut le client et le routeur peuvent communiquer car il sont branché physiquement entre eux. Il en est de même pour tous les routeurs qui sont brancher sur le réseau IEM. Afin de tester les communication entre différentes machines, que se soit routeurs ou clients, il nous suffit simplement de ping la machine avec sont IP et avec cette commande : 
 \begin{lstlisting}[language=bash]
   $ ping ip_machine
 \end{lstlisting}
