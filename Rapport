@@ -3,10 +3,13 @@
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage{listings}
+\usepackage{hyperref}
 
-\title{Rapport système et réseaux II}
+\title{Rapport Systèmes et Réseaux II}
 \author{Perion Maxence, Pinon Alexandre}
 \date{}
+
+\renewcommand*\contentsname{Sommaire}
 
 \pdfinfo{%
   /Title    ()
@@ -23,9 +26,8 @@
 \tableofcontents
 
 \newpage
-Introduction : général 
-
-Introduction tp1 : dans un premier temps nous avons installation de Debian GNU/Linux via le réseaux pour avoir tout simplement un outil de travail, vient ensuite la répartition des adresses IP pour chaque groupe. Ensuite nous allons aborder le paramétrage des interfaces réseaux sur le routeur puis le client. L'étape suivante et évidemment la création de route afin de faire communiquer le client et le router. Vient ensuite la mise en place d'un service DHCP. Sauvegarde automatique avec rsync. Et finalement un approfondissement de l'utilisation des paquets sous Debian. Afin de mettre en place toutes cette architecture nous somme en possession d'un serveur fessant office de routeur et d'un client.
+\section{Introduction}
+L'objectif de ces Travaux Pratiques a été de réaliser un serveur complet pour une agence fictive. Pour cela, nous étions en possession de deux machines: un serveur/routeur ainsi qu'un client, une machine simulant la connexion d'un appareil au réseau de l'agence. Nous sommes partis de zéro et dans un premier temps nous avons installé Debian sur notre serveur, une distribution GNU/Linux, sans interface graphique via le réseau IEM pour avoir un outil de travail. Premièrement, nous avons défini et paramétré notre adressage et routage, c'est à dire la façon d'attribuer les adresses IP et comment communiquer sur les différents réseaux. Afin de s'affranchir des adresses IP et pour s'approcher d'un cadre plus réaliste, nous avons deuxièment mis en place sur le serveur un service de DNS, permettant d'utiliser des noms de domaines agissant comme des alias pour des adresses IP.  Troisièmement, nous avons mis en place ce qui pourrait servir pour héberger un site web pour notre agence grâce à une suite d'outils appelée un LAMP. Pour finir, nous avons mis en place un service d'authentification centralisé LDAP ainsi qu'un service de partage de fichiers Samba.
 
 \section{Installation d'une distribution GNU/Linux sans interface graphique}
 
@@ -48,6 +50,7 @@ Ici nous pouvons voir distinctement les différentes partition. Dont la partitio
 Maintenant que Debian est installé sur notre routeur il est prêt à être configuré et utilisé pour différentes taches. 
 
 \section{Paramétrage du réseau}
+Nous avons ensuite définis la répartition des adresses IP pour chaque groupe (chaque agence) et paramétré en conséquences les différentes interfaces réseaux sur le routeur puis le client.
 Avant tout paramétrage il est important de préciser que nous avons branché le réseau IEM sur la carte réseau intégré à la carte mère sur routeur. La première carte réseau externe à était branchée au switch afin de permettre la communication avec les autres groupes. Dernièrement la deuxième carte réseau externe est branchée sur le client. Ici le but de la manipulation est de mettre en place un réseau d'entreprises et d'une infrastructure de services.
 
 \subsection{Répartition des adresse IP (réseau Interconnexion et réseau privé)}
@@ -109,6 +112,7 @@ Nous pouvons voir ici que les paquets sont bien envoyé et reçu par notre corre
 
 \subsection{Mise en place de la table de routage}
 
+L'étape suivante est la création de routes afin de faire communiquer les différentes machines de la simulation: le client et le routeur, mais également entre chaque routeurs (les autres agences) et entre différents clients de différentes agences.
 Dans la configuration actuelle il nous est impossible de ping le client qui passe par un autre routeur que le notre, en effet pour arriver a faire ceci il nous faut mettre en place une table de routage.
 La table de routage permet d'indiquer les routes a prendre par tel ou tel machines. 
 \begin{center}
@@ -142,6 +146,7 @@ Afin de savoir si notre routeur était capable d'utiliser internet, nous avons i
 il nous étaient possible de surfer sur le web avec un affichage non graphique. 
 
 \section{Service DHCP}
+ Nous avons ensuite paramétré encore plus notre réseau avec la mise en place d'un service DHCP afin de définir les adresses à attribuer pour les machines (clients) se connectant sur notre réseau privé.
 \subsection{Mise en place du DHCP}
 \subsection{Fichier de log pour le DHCP}
 
