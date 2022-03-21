@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.30)  20 MAR 2022 15:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.30)  21 MAR 2022 01:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -355,67 +355,124 @@ Overfull \hbox (110.25826pt too wide) in paragraph at lines 69--72
  [] 
  []
 
-[5 <./images/ReseauInterco&Prive.png (PNG copy)> <./images/interfacesRouteur.PN
-G>] [6]
-<images/routeurPingRouteur.png, id=252, 834.11626pt x 148.30406pt>
+[5 <./images/ReseauInterco&Prive.png> <./images/interfacesRouteur.PNG>]
+[6]
+<images/routeurPingRouteur.png, id=254, 834.11626pt x 148.30406pt>
 File: images/routeurPingRouteur.png Graphic file (type png)
 <use images/routeurPingRouteur.png>
-Package pdftex.def Info: images/routeurPingRouteur.png  used on input line 118.
+Package pdftex.def Info: images/routeurPingRouteur.png  used on input line 120.
 
 (pdftex.def)             Requested size: 455.25255pt x 170.72256pt.
 
-Overfull \hbox (110.25255pt too wide) in paragraph at lines 118--121
+Overfull \hbox (110.25255pt too wide) in paragraph at lines 120--123
  [] 
  []
 
 
-Overfull \hbox (1.66719pt too wide) in paragraph at lines 127--130
+Overfull \hbox (1.66719pt too wide) in paragraph at lines 129--132
 \OT1/cmr/m/n/10 L'^^Setape suiv-ante est la cr^^Seation de routes afin de faire
  com-mu-ni-quer les diff^^Serentes
  []
 
 [7 <./images/routeurPingRouteur.PNG>]
-Overfull \hbox (93.00446pt too wide) in paragraph at lines 148--149
+<images/routeRouteur.png, id=263, 454.69875pt x 62.48344pt>
+File: images/routeRouteur.png Graphic file (type png)
+<use images/routeRouteur.png>
+Package pdftex.def Info: images/routeRouteur.png  used on input line 139.
+(pdftex.def)             Requested size: 455.25267pt x 170.75545pt.
+
+Overfull \hbox (110.25267pt too wide) in paragraph at lines 139--142
+ [] 
+ []
+
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 1
+48.
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 148.
+
+Overfull \hbox (4.47278pt too wide) in paragraph at lines 157--158
+\OT1/cmr/m/n/10 Cette com-mande per-met de dire que tous ce qui ar-rive sur le 
+rou-teur "192.168.1.1"
+ []
+
+[8 <./images/routeRouteur.PNG>]
+Overfull \hbox (93.00446pt too wide) in paragraph at lines 178--179
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[8]
-Overfull \hbox (59.69527pt too wide) in paragraph at lines 188--189
+
+Overfull \hbox (25.72285pt too wide) in paragraph at lines 197--198
+\OT1/cmr/m/n/10 Une fois l'installation ef-fectu^^Se nous nous somme rendu dans
+ le fichier "/etc/default/isc-
+ []
+
+[9]
+<images/dhcpServeur.png, id=291, 835.62187pt x 232.61906pt>
+File: images/dhcpServeur.png Graphic file (type png)
+<use images/dhcpServeur.png>
+Package pdftex.def Info: images/dhcpServeur.png  used on input line 200.
+(pdftex.def)             Requested size: 455.25826pt x 170.7227pt.
+
+Overfull \hbox (110.25826pt too wide) in paragraph at lines 200--203
+ [] 
+ []
+
+<images/dhcpdConfServeur.png, id=292, 837.1275pt x 253.69781pt>
+File: images/dhcpdConfServeur.png Graphic file (type png)
+<use images/dhcpdConfServeur.png>
+Package pdftex.def Info: images/dhcpdConfServeur.png  used on input line 209.
+(pdftex.def)             Requested size: 455.2355pt x 170.7199pt.
+
+Overfull \hbox (110.2355pt too wide) in paragraph at lines 209--212
+ [] 
+ []
+
+
+Overfull \hbox (17.02841pt too wide) in paragraph at lines 213--215
+\OT1/cmr/m/n/10 turelle-ment notre r^^Seseau priv^^Se avec l'adresse "10.1.2.0"
+ et le masque "255.255.255.0".
+ []
+
+[10 <./images/dhcpServeur.PNG> <./images/dhcpdConfServeur.PNG>] [11]
+Overfull \hbox (59.69527pt too wide) in paragraph at lines 266--268
 \OT1/cmr/m/n/10 du fichier "db.local" en "deb.agence.atlantide", copie de "db.1
 27" en "db.agence.atlantide.inv"
  []
 
 
-Overfull \hbox (11.49133pt too wide) in paragraph at lines 188--189
+Overfull \hbox (11.49133pt too wide) in paragraph at lines 266--268
 \OT1/cmr/m/n/10 pour la zone de recherche in-vers^^Se. Ajout des for-warders da
 ns "named.conf.options".
  []
 
 
-Overfull \hbox (16.27621pt too wide) in paragraph at lines 215--216
+Overfull \hbox (16.27621pt too wide) in paragraph at lines 294--295
 \OT1/cmr/m/n/10 Programme PHP qui se con-necte a Post-greSQL et af-fichage in-f
 os pour la v^^Serification. 
  []
 
-[9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 238.
- [10]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 238.
+[12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 317.
+ [13]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 317.
  (./Rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 238.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 238.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 317.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 317.
 Package rerunfilecheck Info: File `Rapport.out' has not changed.
-(rerunfilecheck)             Checksum: 1BD2FA50CE23575256AAC678F2BA2626;2872.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 238.
+(rerunfilecheck)             Checksum: 9D286D5B889A2EDE8B3A8F131829E5AA;2877.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 317.
  ) 
 Here is how much of TeX's memory you used:
- 7091 strings out of 481239
- 105376 string characters out of 5920377
+ 7174 strings out of 481239
+ 106706 string characters out of 5920377
  555190 words of memory out of 5000000
- 22183 multiletter control sequences out of 15000+600000
+ 22234 multiletter control sequences out of 15000+600000
  536928 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,6n,51p,1396b,1150s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,6n,51p,1416b,1264s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dis
@@ -424,10 +481,10 @@ t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts
 public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.p
 fb>
-Output written on Rapport.pdf (10 pages, 200239 bytes).
+Output written on Rapport.pdf (13 pages, 229181 bytes).
 PDF statistics:
- 324 PDF objects out of 1000 (max. 8388607)
- 295 compressed objects within 3 object streams
- 76 named destinations out of 1000 (max. 500000)
- 325 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 372 PDF objects out of 1000 (max. 8388607)
+ 332 compressed objects within 4 object streams
+ 102 named destinations out of 1000 (max. 500000)
+ 340 words of extra memory for PDF output out of 10000 (max. 10000000)
 

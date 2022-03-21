@@ -34,7 +34,7 @@ L'objectif de ces Travaux Pratiques a été de réaliser un serveur complet pour
 \subsection{Installation via le réseau}
 
 La première étape pour commencer à travailler a tout simplement était d'installer une distribution Debian GNU/Linux sans interface graphique. En effet cette distribution est un système d'exploitation et va nous permettre pour la suite des manipulations d'avoir une base de travail. Afin d'installer cette distribution les administrateurs système et réseau nous on mit à disposition un boot via le réseau. En temps normal pour installer un système d'exploitation qu'elle qu'il soit, les utilisateurs lambda utilisent des clés USB ou disque dur qui permette de boot sur celle-ci. Le principe est le même sauf que cette installation se fait par le réseau IEM qui est le réseau de l'université de Bourgogne. Pour lancer l'installation nous devions brancher notre serveur sur le réseau et la démarrer depuis le bios en sélectionnant le bouton "PXE IEM". Une fois l'installation démarrée nous devions suivre les étapes d'installation, tel que le nom et mot de passe du root, la choix des partition du disque, le nom de domaine (sartre.iem)... 
-Le disque est composé de 3 partitions, il est possible d'afficher les partitions et des détails supplémentaire avec la commande :
+Le disque est composé de 3 partitions, il est possible d'afficher les partitions et des détails supplémentaire avec la commande:
 
 \begin{lstlisting}[language=bash]
   $ sudo fdisk -l
@@ -64,14 +64,14 @@ Chaque groupe de TP possède une IP et un masque de classe C pour le réseau d�
 Ce petit tableau récapitule les adresses IP allouer pour chaque réseau et pour chaque groupe. Pour notre cas nous sommes dans le groupe 2 ce qui veut dire que notre adresse sur le réseau d’interconnexion est le "192.168.1.2" et notre adresse de réseau privé est le "10.1.2.0".
 
 \subsection{Interfaces réseau du routeur}
-Les adresses que nous venons de répartir entre chaque groupe doivent être utiliser par le routeur. C'est pour cela que nous allons maintenant expliquer comment nous avons paramétré les interfaces réseau sur le routeur. Pour cela il suffit simplement de se rendre dans le fichier /etc/network/interfaces et de modifier le fichier comme ceci : 
+Les adresses que nous venons de répartir entre chaque groupe doivent être utiliser par le routeur. C'est pour cela que nous allons maintenant expliquer comment nous avons paramétré les interfaces réseau sur le routeur. Pour cela il suffit simplement de se rendre dans le fichier /etc/network/interfaces et de modifier le fichier comme ceci: 
 \begin{center}
  \includegraphics[width=16cm, height=6cm]{images/interfacesRouteur.png}
  % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
  \underline{Fichier de configuration des interfaces réseaux du routeur.}
 \end{center}
 
-Il est également possible d'afficher les interfaces réseaux dans le shell avec la commande :
+Il est également possible d'afficher les interfaces réseaux dans le shell avec la commande:
 \begin{lstlisting}[language=bash] 
     $ ip a 
 \end{lstlisting} 
@@ -81,7 +81,7 @@ ce qui a pour intérêt de connaître rapidement les macs adresse et/ou IP de ch
     $ ip link set enp3s0 up
 \end{lstlisting}
 
-Pour le fichier de configuration ci-dessus nous pouvons voire les 3 interfaces donc les 3 port Ethernet que possède notre routeur, ainsi que l'interface "lo" qui représente le loopback. Pour chacune d'entre elle leurs adresses (address), leurs masques (netmask) et leurs réseaux (network) sont indiqué. Pour l'interface "eno1" qui est relié au réseau IEM, nous avons plusieurs information supplémentaire ; l'adresse de broadcast ainsi que la passerelle (gateway). De plus nous pouvons maintenant différencier clairement qu'elle interface fait référence a qu'elle utilisation. En effet l'interface "eno1" est relier au réseau IEM car pour le réseau nous avons indiqué l'adresse "172.31.20.1" qui est l'adresse du routeur du réseau IEM fournie par les intervenants de travaux pratiques. Le raisonnement est le même pour les interfaces "enp3s0" et "enp1s0", pour lesquels nous avons indiquer respectivement pour le réseau "10.1.2.0" et "192.158.1.0". Et qui sont donc les réseaux d'interconnexion et privé. Les informations "dns-nameservers" et "pre-up" seront expliqué ultérieurement. Le fichier de configuration des interfaces réseaux est actuellement écrit et prêt a l'emploie, mais ce n'est pas pour autant que les interfaces vont changer. En effet pour que les modifications soit prise en compte il faut redémarrer le service associer en tant que root ou alors avec sudo :
+Pour le fichier de configuration ci-dessus nous pouvons voire les 3 interfaces donc les 3 port Ethernet que possède notre routeur, ainsi que l'interface "lo" qui représente le loopback. Pour chacune d'entre elle leurs adresses (address), leurs masques (netmask) et leurs réseaux (network) sont indiqué. Pour l'interface "eno1" qui est relié au réseau IEM, nous avons plusieurs information supplémentaire ; l'adresse de broadcast ainsi que la passerelle (gateway). De plus nous pouvons maintenant différencier clairement qu'elle interface fait référence a qu'elle utilisation. En effet l'interface "eno1" est relier au réseau IEM car pour le réseau nous avons indiqué l'adresse "172.31.20.1" qui est l'adresse du routeur du réseau IEM fournie par les intervenants de travaux pratiques. Le raisonnement est le même pour les interfaces "enp3s0" et "enp1s0", pour lesquels nous avons indiquer respectivement pour le réseau "10.1.2.0" et "192.158.1.0". Et qui sont donc les réseaux d'interconnexion et privé. Les informations "dns-nameservers" et "pre-up" seront expliqué ultérieurement. Le fichier de configuration des interfaces réseaux est actuellement écrit et prêt a l'emploie, mais ce n'est pas pour autant que les interfaces vont changer. En effet pour que les modifications soit prise en compte il faut redémarrer le service associer en tant que root ou alors avec sudo:
 
 \begin{lstlisting}[language=bash] 
     $ service networking restart
@@ -110,12 +110,12 @@ Comme pour le routeur afin d'appliquer les changements il faut redémarrer le se
 
 \subsection{Communication sans table de routage}
 
-Nous allons maintenant aborder la communication entre différente machine, car en effet nous avons pour but de simuler un réseau en entreprise, et par conséquent il faut que nos machines puisse communiquer, et que le routeur puis rediriger correctement les machines ou elle souhaite aller en fessant office de filtre. Par défaut le client et le routeur peuvent communiquer car il sont branché physiquement entre eux. Il en est de même pour tous les routeurs qui sont brancher sur le réseau IEM. Afin de tester les communication entre différentes machines, que se soit routeurs ou clients, il nous suffit simplement de ping la machine avec sont IP et avec cette commande : 
+Nous allons maintenant aborder la communication entre différente machine, car en effet nous avons pour but de simuler un réseau en entreprise, et par conséquent il faut que nos machines puisse communiquer, et que le routeur sois en capacité de rediriger correctement les machines ou elle souhaite aller. Par défaut le client et le routeur peuvent communiquer car il sont branché physiquement entre eux. Il en est de même pour tous les routeurs qui sont brancher sur le réseau IEM car ils sont tous sur le même réseau. Afin de tester les communication entre différentes machines, que se soit routeurs ou clients, il nous suffit simplement de ping la machine avec sont IP et avec cette commande: 
 \begin{lstlisting}[language=bash]
   $ ping ip_machine
 \end{lstlisting}
 
-Par exemple avec notre routeur nous allons ping le routeur d'un groupe d'amis via le réseau IEM :
+Par exemple avec notre routeur nous allons ping le routeur d'un groupe d'amis via le réseau IEM:
 \begin{center}
  \includegraphics[width=16cm, height=6cm]{images/routeurPingRouteur.png}
  % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
@@ -129,46 +129,122 @@ Nous pouvons voir ici que les paquets sont bien envoyé et reçu par notre corre
 L'étape suivante est la création de routes afin de faire communiquer les différentes machines de la simulation: le client et le routeur, mais également entre chaque routeurs (les autres agences) et entre différents clients de différentes agences.
 Dans la configuration actuelle il nous est impossible de ping le client qui passe par un autre routeur que le notre, en effet pour arriver a faire ceci il nous faut mettre en place une table de routage.
 La table de routage permet d'indiquer les routes a prendre par tel ou tel machines. 
-\begin{center}
- %\includegraphics[width=16cm, height=6cm]{images/???.png}
- % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
- \underline{Route de notre routeur.}
-\end{center}
 
-Il est également possible d'afficher les routes dans le shell avec la commande :
+Il est possible d'afficher les routes dans le shell avec la commande:
 \begin{lstlisting}[language=bash] 
     $ ip route
 \end{lstlisting} 
 
-L'image nous dit que la route par défaut a empreunter si aucune des routes décrite ne convien est <IP>...
+\begin{center}
+ \includegraphics[width=16cm, height=6cm]{images/routeRouteur.png}
+ % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
+ \underline{Route de notre routeur.}
+\end{center}
 
-\subsection{Règles iptables pour laisser accès a internet a une machine}
+L'image nous dit que la route par défaut à emprunter pour toutes les machines qui arrive, si aucune des routes décrite ne conviens est la route par l'adresse "172.31.20.1". Ce qui redirige les machines au routeur du réseau IEM. Elle permet également de savoir que la machine avec l'IP "10.1.2.1" est redirigé sur le sous réseau "10.1.2.0/24", de même pour l'adresse "172.31.20.112" qui est redirigé sur le sous réseau "172.31.20.0/24", et "192.168.1.2" redirigé sur "192.168.1.0/29" qui est donc le réseau d'interconnexion.
 
-L'architecture de notre réseau commence a prendre forme, mais il est maintenant temps de permettre au client de notre réseau privé d'avoir accès a internet. Car oui pour le moment seul le routeur est en possession d'une connexion internet car il est encore une fois connecté au réseau IEM. Pour réaliser cette manoeuvre appelé une translation d'adresse, nous allons utilisé les règles "iptables" :
+Les routes statiques sont ajoutés via la commande en tant que root ou utiliser sudo dans le cas contraire: 
+\begin{lstlisting}[language=bash] 
+    $ ip route add {network} via {IP}
+\end{lstlisting}
+
+Maintenant nous cherchons le moyen de permettre la communication entre notre routeur et le client d'un autre groupe d'amis. Et dans un second temps permettre la communication entre notre client et le client de l'autre groupe. Le groupe avec qui nous effectuons les tests, on pour réseau d'interconnexion l'IP "192.168.1.1", pour réseau privé "10.1.1.0" et l'IP de leur client et la suivante "10.1.1.1".
+
+Donc sur notre routeur il faut appliquer la commande: 
+\begin{lstlisting}[language=bash] 
+    $ ip route add 10.1.1.0/24 via 192.168.1.1
+\end{lstlisting}
+Cette commande permet de dire que tous ce qui arrive sur le routeur "192.168.1.1" donc le routeur de notre groupe de test, est redirigé sur le réseau privé "10.1.1.0". Donc si avec notre routeur nous tapons la commande qui permet de ping leur client:
+\begin{lstlisting}[language=bash] 
+    $ ping 10.1.1.1
+\end{lstlisting}
+est bien ceci fonctionne, en effet nos paquets sont belle est bien envoyé et réceptionné. 
+
+Et dans un second temps sur notre client appliquer la commande: 
+\begin{lstlisting}[language=bash] 
+    $ ip route add 10.1.1.0/24 via 10.1.2.1
+\end{lstlisting}
+Cette commande permet de dire que tous ce qui part de notre client "10.1.2.1", est redirigé sur le réseau privé "10.1.1.0" de notre groupe d'amis. Donc si avec notre client nous tapons la commande qui permet de ping leur client:
+\begin{lstlisting}[language=bash] 
+    $ ping 10.1.1.1
+\end{lstlisting}
+est bien ceci fonctionne. Tous comme notre routeur nos paquets sont belle est bien envoyé et réceptionné. 
+
+\subsection{Règles iptables pour laisser l'accès a internet a une machine}
+
+L'architecture de notre réseau commence a prendre forme, mais il est maintenant temps de permettre au client de notre réseau privé d'avoir accès a internet. Car oui pour le moment seul le routeur est en possession d'une connexion internet car il est encore une fois connecté au réseau IEM. Pour réaliser cette manoeuvre appelé une translation d'adresse, nous allons utilisé les règles "iptables":
 
 \begin{lstlisting}[language=bash] 
     $ iptables -t nat -A POSTROUTING -s 10.1.2.0/24 -o eno1 -j MASQUERADE
 \end{lstlisting}
 
-Cette commande permet au routeur de filtrer et donc de laisser passer les clients qui arrivent du sous réseau 10.1.2.0/24.
+Cette commande permet au routeur d'accepter les paquets retransmis via le périphérique d'IP interne du pare-feu par l'interface "eno1", et donc de laisser passer les données qui sont destinée au clients qui sont dans le sous réseau "10.1.2.0/24".
 
-Afin de savoir si notre routeur était capable d'utiliser internet, nous avons installer "links2" et avec la commande : 
+Afin de vérifier si notre routeur était capable d'utiliser internet, nous avons installer "links2" qui a était auparavant installé via le gestionnaire de paquet "apt" et avec la commande: 
 \begin{lstlisting}[language=bash] 
     $ links2 google.com
 \end{lstlisting}
-
-il nous étaient possible de surfer sur le web avec un affichage non graphique. 
+Et en effet notre routeur était capable de surfer sur le web avec un affichage non graphique. Dans ce cas nous avons appliquer la même procedure pour notre client afin de vérifier si il possédais une connexion internet.
 
 \section{Service DHCP}
- Nous avons ensuite paramétré encore plus notre réseau avec la mise en place d'un service DHCP afin de définir les adresses à attribuer pour les machines (clients) se connectant sur notre réseau privé.
+Maintenant partons du principe que nous souhaitons posséder plusieurs clients sur notre réseau privé, il est alors important d'approfondir le paramétrage de notre réseau avec la mise en place d'un service DHCP afin de définir les adresses IP à attribuer pour les machines (clients) se connectant sur notre réseau privé.
 \subsection{Mise en place du DHCP}
-\subsection{Fichier de log pour le DHCP}
+
+Avant toute chose, nous avons cherché et installé le bon paquet pour l'utilisation du DHCP:
+\begin{lstlisting}[language=bash] 
+    $ apt-get install isc-dhcp-server
+\end{lstlisting}
+Une fois l'installation effectué nous nous somme rendu dans le fichier "/etc/default/isc-dhcp-server" qui à était installé grâce a la commande donné précédemment. Dans ce fichier il faut renseigner sur qu'elle interface réseau nous voulons travailler pour la suite de la mise du DHCP.
+
+\begin{center}
+ \includegraphics[width=16cm, height=6cm]{images/dhcpServeur.png}
+ % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
+ \underline{Interface du DHCP.}
+\end{center}
+
+Comme nous voulons allouer automatiquement les adresses IP de chaques clients connecté a notre réseau privé nous avons utilisé l'interface "enp3s0".
+Ceci étant fait nous voulons paramétré en détails le serveur DHCP, comme par example la plage d'adresse IP qui va être subneter, ou encore des adresses fixe pour des postes en particulier. La configuration du serveur DHCP se fait sur le fichier "/etc/dhcp/dhcpd.conf".
+
+\begin{center}
+ \includegraphics[width=16cm, height=6cm]{images/dhcpdConfServeur.png}
+ % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
+ \underline{Configuration du serveur DHCP.}
+\end{center}
+Sur cette capture d'écran nous pouvons voir que le réseau subneter est tout naturellement notre réseau privé avec l'adresse "10.1.2.0" et le masque "255.255.255.0". Nous attribuons une adresse fixe a plusieurs clients car durant nos test il est arrivé que nous ayons des clients différents. Afin d'attribuer une adresse fixe il suffit d'indiquer l'adresse qu'il va récupérer "fixed-address" ainsi que sa mac adresse "hardware ethernet".
+Nous avons également renseigné différente informations concernant le DNS mais nous aborderons le sujet plus tard.
+
+Tous comme les interfaces réseau quand une modification est apporté il faut redémarrer le service associer afin de prendre en compte les changement effectué, avec la commande:
+
+\begin{lstlisting}[language=bash] 
+    $ service isc-dhcp-server restart
+\end{lstlisting}
+
+Il est également possible de démarrer le service si il est arrêter avec:
+\begin{lstlisting}[language=bash] 
+    $ service isc-dhcp-server start
+\end{lstlisting}
+Ou a contrario le stopper si besoin avec:
+\begin{lstlisting}[language=bash] 
+    $ service isc-dhcp-server stop
+\end{lstlisting}
+Il est également possible d'afficher les erreurs en cas de soucis avec:
+\begin{lstlisting}[language=bash] 
+    $ cat /var/log/syslog
+\end{lstlisting}
+Et finalement on peut afficher l'interface d'écoute du démon avec:
+\begin{lstlisting}[language=bash] 
+    $ ps ax | grep dhcpd
+\end{lstlisting}
+Une fois que tout est mis en place et que tout est opérationnel, il nous faut une trace de ce qu'il va se passer. C'est pour cela que nous avons besoin de mettre un place un système de log pour serveur DHCP.
+
+\subsection{Système de log pour le DHCP}
 
 \section{Sauvegarde automatique}
 \subsection{Rsync}
 \subsection{Cron}
 
 \section{Manipulation paquets de Debian}
+Sous Debian il existe de multiple gestionnaire de paquets, mais le plus couramment utilisé est le gestionnaire "apt".
 \subsection{Mise à jour du système}
 \subsection{Les paquets}
 
@@ -183,11 +259,12 @@ Introduction tp 1bis
 
 \section{Installation d'un DNS}
 
-Pour la suite des explication il est important de préciser que nous avons choisie comme nom de domaine : agence.altantide.
+Pour la suite des explication il est important de préciser que nous avons choisie comme nom de domaine: agence.altantide.
 
 \subsection{Mise en place du DNS}
 
 Création des deux zones, (named.conf.local et named.conf.default-zone), copie du fichier "db.local" en "deb.agence.atlantide", copie de "db.127" en "db.agence.atlantide.inv" pour la zone de recherche inversé. Ajout des forwarders dans "named.conf.options". Redémarrage avec systemctl restart bind 9. Changement du dhcp pour prendre en compte le serveur DNS.
+"option domain-name "agence.atlantide" fournit le nom de domaine, dans ce cas il sert a faire référence aux ordinateurs du réseau par leurs nom sans ajouter le nom de domaine.
 
 \subsection{Test réaliser afin de valider le DNS}
 named-checkzone et named-checkconf pour vérifier la syntaxe
