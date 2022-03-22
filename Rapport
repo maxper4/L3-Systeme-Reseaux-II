@@ -55,6 +55,10 @@ Sur la figure \ref{fig1}, nous pouvons voir distinctement les différentes parti
 
 \subsection{TODO Synthèse des commandes du gestionnaire de paquets TODO}
 TODO
+Sous Debian il existe de multiple gestionnaire de paquets, mais le plus couramment utilisé est le gestionnaire "apt".
+\subsection{Mise à jour du système}
+\subsection{Les paquets}
+p
 \newline
 \newline
 \par
@@ -186,38 +190,45 @@ Le ping du client de leur réseau privé fonctionne désormais: nos paquets sont
 
 \subsection{Règles iptables pour laisser l'accès a internet a une machine}
 
-L'architecture de notre réseau commence a prendre forme, mais il est maintenant temps de permettre au client de notre réseau privé d'avoir accès a internet. Car oui pour le moment seul le routeur est en possession d'une connexion internet car il est encore une fois connecté au réseau IEM. Pour réaliser cette manoeuvre appelé une translation d'adresse, nous allons utilisé les règles "iptables":
+L'architecture de notre réseau commence à prendre forme, mais un client sur notre réseau privé ne peut toujours pas accéder à internet: pour le moment seul le routeur est connecté à internet à travers le réseau IEM. Pour réaliser cette manoeuvre appelée une translation d'adresse, nous allons utiliser les règles ``iptables":
 
 \begin{lstlisting}[language=bash] 
-    $ iptables -t nat -A POSTROUTING -s 10.1.2.0/24 -o eno1 -j MASQUERADE
+    $ iptables -t nat -A POSTROUTING -s 10.1.2.0/24 
+    -o eno1 -j MASQUERADE
 \end{lstlisting}
 
-Cette commande permet au routeur d'accepter les paquets retransmis via le périphérique d'IP interne du pare-feu par l'interface "eno1", et donc de laisser passer les données qui sont destinée au clients qui sont dans le sous réseau "10.1.2.0/24".
-
-Afin de vérifier si notre routeur était capable d'utiliser internet, nous avons installer "links2" qui a était auparavant installé via le gestionnaire de paquet "apt" et avec la commande: 
+Cette commande permet d'indiquer au routeur qu'il doit retransmettre les paquets reçus du réseau privé (source 10.1.2.0/24) sur le réseau IEM (interface de sortie``eno1"). L'option masquerade permet d'indiquer que le paquet sera retransmis par translation d'adresse, c'est à dire que le routeur va stocker dans son noyau les informations sur l'émetteur de ce paquet (adresse, port, ...) puis va l'émettre à nouveau en son nom. Lorsque le routeur recevra une réponse, il pourra consulter la table de translation dans son noyau pour trouver à qui il doit transférer le paquet.
+\newline
+\par
+Afin de vérifier si notre routeur était capable d'utiliser internet, nous avons installé ``links2" qui a été auparavant installé via le gestionnaire de paquet "apt". Il s'agit d'une commande qui permet de consulter des pages web avec un affichage non graphique, que nous utilisons avec la commande: 
 \begin{lstlisting}[language=bash] 
     $ links2 google.com
 \end{lstlisting}
-Et en effet notre routeur était capable de surfer sur le web avec un affichage non graphique. Dans ce cas nous avons appliquer la même procedure pour notre client afin de vérifier si il possédais une connexion internet.
+Et en effet, notre routeur était capable de surfer sur le web. Nous avons également appliqué cette procédure pour notre client afin de vérifier si il était connecté à internet.
+\newline\newline
+\par
+L'inconvénient de cette nouvelle règle iptable est que n'importe quel client qui arrive à se connecter au réseau privé peut avoir accès à toutes les ressources et se connecter au réseau IEM ou d'interconnexion. Nous pouvons restreindre l'accès à notre réseau privé en n'attribuant une adresse IP qu'à certaines adresses MAC connues, via le service DHCP.
 
 \section{Service DHCP}
-Maintenant partons du principe que nous souhaitons posséder plusieurs clients sur notre réseau privé, il est alors important d'approfondir le paramétrage de notre réseau avec la mise en place d'un service DHCP afin de définir les adresses IP à attribuer pour les machines (clients) se connectant sur notre réseau privé.
+Maintenant partons du principe que nous souhaitons connecter plusieurs clients sur notre réseau privé, il est alors important d'approfondir le paramétrage de notre réseau avec la mise en place d'un service DHCP afin de définir les adresses IP à attribuer pour les machines (clients) se connectant sur notre réseau privé.
 \subsection{Mise en place du DHCP}
 
 Avant toute chose, nous avons cherché et installé le bon paquet pour l'utilisation du DHCP:
 \begin{lstlisting}[language=bash] 
     $ apt-get install isc-dhcp-server
 \end{lstlisting}
-Une fois l'installation effectué nous nous somme rendu dans le fichier "/etc/default/isc-dhcp-server" qui à était installé grâce a la commande donné précédemment. Dans ce fichier il faut renseigner sur qu'elle interface réseau nous voulons travailler pour la suite de la mise du DHCP.
+Une fois l'installation effectuée, nous nous sommes rendu dans le fichier /etc/default/isc-dhcp-server qui a été installé avec le paquet via la commande décrite précedemment. Dans ce fichier de configuration, il faut renseigner avec quelle interface réseau nous voulons travailler pour la suite de la mise du DHCP.
 
 \begin{figure}[!h]
-\centerline{ \includegraphics[width=15cm]{images/dhcpServeur.png}}
+\centerline{\includegraphics[width=15cm]{images/dhcpServeur.png}}
 \caption{Interface du DHCP}
 \label{fig6}
 \end{figure}
 
-Comme nous voulons allouer automatiquement les adresses IP de chaques clients connecté a notre réseau privé nous avons utilisé l'interface "enp3s0".
-Ceci étant fait nous voulons paramétré en détails le serveur DHCP, comme par example la plage d'adresse IP qui va être subneter, ou encore des adresses fixe pour des postes en particulier. La configuration du serveur DHCP se fait sur le fichier "/etc/dhcp/dhcpd.conf".
+Puisque nous voulons allouer automatiquement l'adresse IP de chaque client connecté à notre réseau privé nous avons utilisé l'interface ``enp3s0", qui est celle utilisée pour notre réseau privé. Nous travaillons uniquement en IPv4 donc nous avons laissé vide les interfaces pour IPv6.
+\newline
+\par
+Ceci étant fait, nous pouvons désormais passer au paramétrage en détails du serveur DHCP, comme par example la plage d'adresse IP qui va être subnetée, ou encore fixer des adresses IP pour des postes ayant des adresses MAC définies. Cette configuration du serveur DHCP se fait sur le fichier ``/etc/dhcp/dhcpd.conf".
 
 \begin{figure}[!h]
 \centerline{ \includegraphics[width=15cm]{images/dhcpdConfServeur.png}}
@@ -225,20 +236,20 @@ Ceci étant fait nous voulons paramétré en détails le serveur DHCP, comme par
 \label{fig7}
 \end{figure}
 
-Sur cette capture d'écran nous pouvons voir que le réseau subneter est tout naturellement notre réseau privé avec l'adresse "10.1.2.0" et le masque "255.255.255.0". Nous attribuons une adresse fixe a plusieurs clients car durant nos test il est arrivé que nous ayons des clients différents. Afin d'attribuer une adresse fixe il suffit d'indiquer l'adresse qu'il va récupérer "fixed-address" ainsi que sa mac adresse "hardware ethernet".
-Nous avons également renseigné différente informations concernant le DNS mais nous aborderons le sujet plus tard.
+Sur la figure \ref{fig7} nous pouvons voir que le réseau subneté est notre réseau privé ayant comme adresse 10.1.2.0 et le masque 255.255.255.0. Nous attribuons une adresse fixe à plusieurs clients car durant nos tests il est arrivé que nous ayons des clients différents et sans cela, il aurait été impossible pour le cient de se connecter au réseau privé. Afin d'attribuer une adresse fixe, il suffit d'indiquer l'adresse qu'on lui fixe avec comme entrée ``fixed-address" ainsi que son adresse MAC ``hardware ethernet".
+Nous avons également renseigné différentes informations concernant le DNS mais nous aborderons le sujet plus tard.
 
-Tous comme les interfaces réseau quand une modification est apporté il faut redémarrer le service associer afin de prendre en compte les changement effectué, avec la commande:
+De la même façon que pour les interfaces réseaux, quand une modification est apportée il faut redémarrer le service correspondant afin de prendre en compte les changements effectués, avec la commande:
 
 \begin{lstlisting}[language=bash] 
     $ service isc-dhcp-server restart
 \end{lstlisting}
 
-Il est également possible de démarrer le service si il est arrêter avec:
+Il est également possible de démarrer le service, si il est arrêté, avec:
 \begin{lstlisting}[language=bash] 
     $ service isc-dhcp-server start
 \end{lstlisting}
-Ou a contrario le stopper si besoin avec:
+Ou a contrario nous pouvons le stopper si besoin avec:
 \begin{lstlisting}[language=bash] 
     $ service isc-dhcp-server stop
 \end{lstlisting}
@@ -246,11 +257,11 @@ Il est également possible d'afficher les erreurs en cas de soucis avec:
 \begin{lstlisting}[language=bash] 
     $ cat /var/log/syslog
 \end{lstlisting}
-Et finalement on peut afficher l'interface d'écoute du démon avec:
+Et finalement on peut afficher l'interface d'écoute du démon par l'intermédiaire de la commande:
 \begin{lstlisting}[language=bash] 
     $ ps ax | grep dhcpd
 \end{lstlisting}
-Une fois que tout est mis en place et que tout est opérationnel, il nous faut une trace de ce qu'il va se passer. C'est pour cela que nous avons besoin de mettre un place un système de log pour serveur DHCP.
+En cas de problème ou pour simplement monitorer ce qu'il se passe sur notre serveur, il peut être interessant de garder une trace de ce qu'il se passe avec le service. Pour cela, nous avons besoin de mettre un place un système de logs dans notre DHCP.
 
 \subsection{Système de log pour le DHCP}
 
@@ -258,12 +269,7 @@ Une fois que tout est mis en place et que tout est opérationnel, il nous faut u
 \subsection{Rsync}
 \subsection{Cron}
 
-\section{Manipulation paquets de Debian}
-Sous Debian il existe de multiple gestionnaire de paquets, mais le plus couramment utilisé est le gestionnaire "apt".
-\subsection{Mise à jour du système}
-\subsection{Les paquets}
-
-Conclusion tp 1 
+Conclusion tp 1
 
 Introduction tp 1bis
 
@@ -274,7 +280,7 @@ Introduction tp 1bis
 
 \section{Installation d'un DNS}
 
-Pour la suite des explication il est important de préciser que nous avons choisie comme nom de domaine: agence.altantide.
+Pour la suite des explications, il est important de préciser que nous avons choisi comme nom de domaine: agence.altantide.
 
 \subsection{Mise en place du DNS}
 
