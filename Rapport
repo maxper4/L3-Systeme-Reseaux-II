@@ -267,6 +267,27 @@ En cas de problème ou pour simplement monitorer ce qu'il se passe sur notre ser
 
 \section{Sauvegarde automatique}
 \subsection{Rsync}
+Les fichiers important tels que les fichiers contenue dans /etc ou /var sont souvent sauvegardé afin de les récuperer en cas de problèmes. Pour mettre en place une telle sauvegarde, nous avons utilisé un logiciel nommée "rsync" qui est un logiciel de synchronisation de fichier. De plus il est souvent utilisé pour mettre en place des systèmes de sauvegarde distante ou des points de restauration du système, ce qui est parfaitement ce que nous cherchons pour notre serveur.
+L'appel de base pour utiliser rsync se fait simplement par :
+\begin{lstlisting}[language=bash] 
+    $ rsync source/ destination/
+\end{lstlisting}
+Mais dans notre cas nous allons pousser un peu plus loin et utiliser SSH afin de synchroniser nos fichiers à distance sur une autre machine. Le protocol SSH permet d'établir une communication chiffrée, donc sécurisée, sur un réseau informatique entre une machine locale (le client) et une machine distante (le serveur). Pour utiliser SSH il est nécessaire de l'installer via le gestionnaire de paquets, et le paramétrer via les commandes :
+\begin{lstlisting}[language=bash] 
+    $ sudo apt install openssh-serveur
+    $ ssh-keygen
+    $ ssh-copy-id -i ~/.ssh/id_rsa.pub etudiant@10.1.2.2
+\end{lstlisting}   
+Comme expliqué précédemment une fois l'installation de SSH terminé, il nous faut générer une pair de clé public et privé d'authentification (2ème commande) qui vont être enregistré dans les fichiers "/.ssh/id\_rsa" pour la clé privé et "/.ssh/id\_rsa.pub" pour la clé public. Une fois les clés généré avec succès nous allons les utiliser pour se connecter en SSH a notre client. La commande ssh-copy-id facilite la connexion par clé SSH, ce qui supprime le besoin d'un mot de passe pour chaque connexion. Une fois la connexion au client correctement configuré, on peut l'utiliser avec rsync afin de sauvegarder les fichiers que nous voulons sur le client. Voici la manipulation de base à effectuer: 
+\begin{lstlisting}[language=bash] 
+    $ rsync -avz -e ssh chemin/source/ user@ip:"/chemin de destination/"
+\end{lstlisting}   
+Et dans notre cas nous utilisons précisement:
+\begin{lstlisting}[language=bash] 
+    $ rsync -avz -e ssh /etc etudiant@10.1.2.2:/home/etudiant/Bureau/backup/
+\end{lstlisting}   
+Le serveur est capable dorénavant de sauvegarder l'ensemble de sont répertoire "/etc" dans le répertoire "/home/etudiant/Bureau/backup/" de notre client. Mais il est alors intéressant de se demander comment automatiser totalement les sauvegardes. 
+
 \subsection{Cron}
 
 Conclusion tp 1
