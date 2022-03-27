@@ -54,16 +54,41 @@ Lors de l'installation du système d'exploitation il est nécessaire de réalise
 Sur la figure \ref{fig1}, nous pouvons voir distinctement les différentes partitions, dont la partition générale sda1 de 237.5 Go qui nous permet de stocker différents fichiers tels que des paquets pour l'utilisation de Debian ou encore différents fichiers de configuration par exemple. De plus, nous pouvons voir la partition qui permet le mécanisme de swap. Il s'agit d'un mécanisme du système d'exploitation qui va se servir du disque dur pour stocker des informations normalement stockées dans la RAM, lorsque celle-ci est saturée. Il y a également un partition étendue qui est un conteneur de partitions logiques: sda2.
 
 \subsection{TODO Synthèse des commandes du gestionnaire de paquets TODO}
-TODO
-Sous Debian il existe de multiple gestionnaire de paquets, mais le plus couramment utilisé est le gestionnaire "apt".
+Sous Debian il existe de multiple gestionnaire de paquets, tel que aptitude, apt et dpkg. Mais dans notre cas nous avons utilisé "apt-get".
+Il est important de comprendre que les outils de gestion des paquets Debian de plus haut niveau comme aptitude, apt-get ou synaptic reposent sur apt qui, lui-même, utilise dpkg pour la gestion des paquets sur le système.
 \subsection{Mise à jour du système}
-\subsection{Les paquets}
-p
+Il est possible de mettre a jour du système avec le gestionnaire de paquets "apt-get", en étant connecter en tant que root. Mais avant on utilise la commande "update" qui permet simplement d'actualiser la liste des paquets disponibles pour votre système. On lance cette commande avant d'installer un nouveau paquet ou avant d'installer les mises à jour du système. Elle ne modifie pas le système, elle demande simplement s'il existe de nouveaux paquets ou des nouvelles versions de paquets. On utilise cette commande de cette façons: 
+\begin{lstlisting}[language=bash] 
+    $ apt-get update
+\end{lstlisting} 
+Ou pour un utilisateur qui na pas tous les droits:
+\begin{lstlisting}[language=bash] 
+    $ sudo apt-get update
+\end{lstlisting} 
+Cette étapes n'est nécessaire mais c'est un bon réflexe à avoir avant de mettre à jours tous les paquets.
+
+Si il y a des paquets a installer, alors on peut La commande "upgrade" pour installer les mises à jour disponibles de tous les paquets présents sur le système en utilisant les sources énumérées. De nouveaux paquets seront installés si cela est nécessaire, mais les paquets installés ne seront jamais supprimés.
+\begin{lstlisting}[language=bash] 
+    $ apt-get upgrade
+        ou
+    $ sudo apt-get upgrade
+\end{lstlisting}
+Il est recommandé d'installer les dernières versions de paquets disponibles pour le système utilisé que se soit Linux, Windows ou autres. Cela permet de corriger des bugs et d'installer les correctifs de sécurité.
+
+\subsection{TODO Les paquets}
+
 \newline
-\newline
-\par
 Maintenant que Debian est installé sur notre routeur, il est prêt à être configuré et utilisé pour différentes tâches. 
 \newline
+apt-cache search <expression rationnelle> = Rechercher un logiciel
+apt-cache show <Logiciel> = Afficher des informations détaillées concernant le paquet <Logiciel>
+apt-cache policy <Logiciel>	 = Afficher les versions disponibles d'un logiciel
+apt-get install <Logiciel>	= Installation d'un Logiciel disponible sur les serveurs
+apt-get remove <Logiciel> = Désinstallation d'un logiciel
+apt-get purge <Logiciel> = Désinstallation d'un logiciel avec les fichiers de configurations
+apt-get autoremove	= Supprimer les paquets installés automatiquement lorsqu'ils ne sont plus nécessaires
+apt-get clean = Nettoyer complètement le dépôt local des fichiers de paquets récupérés
+apt-get autoclean = Nettoyer le dépôt local des fichiers des paquets périmés
 
 \section{Paramétrage du réseau}
 Pour pouvoir commencer à communiquer entre différentes machines, nous avons ensuite défini la répartition des adresses IP pour chaque groupe (chaque agence) et paramétré en conséquences les différentes interfaces réseaux sur le routeur puis le client. Pour cela, nous nous sommes connectés au réseau IEM via la carte réseau intégré à la carte mère sur routeur, la première carte réseau externe a été branchée au switch afin de permettre la communication avec les autres groupes, donc le réseau d'interconnexion et dernièrement la deuxième carte réseau externe est utilisée pour le réseau privé mais puisque nous n'avons qu'un client, nous l'avons directement connecté. Toutes les connexions ont étés effectuées via des câbles Ethernet standard. Ici le but de la manipulation est de mettre en place un réseau d'entreprises et d'une infrastructure de services.
@@ -197,7 +222,7 @@ L'architecture de notre réseau commence à prendre forme, mais un client sur no
     -o eno1 -j MASQUERADE
 \end{lstlisting}
 
-Cette commande permet d'indiquer au routeur qu'il doit retransmettre les paquets reçus du réseau privé (source 10.1.2.0/24) sur le réseau IEM (interface de sortie``eno1"). L'option masquerade permet d'indiquer que le paquet sera retransmis par translation d'adresse, c'est à dire que le routeur va stocker dans son noyau les informations sur l'émetteur de ce paquet (adresse, port, ...) puis va l'émettre à nouveau en son nom. Lorsque le routeur recevra une réponse, il pourra consulter la table de translation dans son noyau pour trouver à qui il doit transférer le paquet.
+Cette commande permet d'indiquer au routeur qu'il doit retransmettre les paquets reçus du réseau privé (source 10.1.2.0/24) sur le réseau IEM (interface de sortie "eno1"). L'option masquerade permet d'indiquer que le paquet sera retransmis par translation d'adresse, c'est à dire que le routeur va stocker dans son noyau les informations sur l'émetteur de ce paquet (adresse, port, ...) puis va l'émettre à nouveau en son nom. Lorsque le routeur recevra une réponse, il pourra consulter la table de translation dans son noyau pour trouver à qui il doit transférer le paquet.
 \newline
 \par
 Afin de vérifier si notre routeur était capable d'utiliser internet, nous avons installé ``links2" qui a été auparavant installé via le gestionnaire de paquet "apt". Il s'agit d'une commande qui permet de consulter des pages web avec un affichage non graphique, que nous utilisons avec la commande: 
@@ -278,17 +303,36 @@ Mais dans notre cas nous allons pousser un peu plus loin et utiliser SSH afin de
     $ ssh-keygen
     $ ssh-copy-id -i ~/.ssh/id_rsa.pub etudiant@10.1.2.2
 \end{lstlisting}   
-Comme expliqué précédemment une fois l'installation de SSH terminé, il nous faut générer une pair de clé public et privé d'authentification (2ème commande) qui vont être enregistré dans les fichiers "/.ssh/id\_rsa" pour la clé privé et "/.ssh/id\_rsa.pub" pour la clé public. Une fois les clés généré avec succès nous allons les utiliser pour se connecter en SSH a notre client. La commande ssh-copy-id facilite la connexion par clé SSH, ce qui supprime le besoin d'un mot de passe pour chaque connexion. Une fois la connexion au client correctement configuré, on peut l'utiliser avec rsync afin de sauvegarder les fichiers que nous voulons sur le client. Voici la manipulation de base à effectuer: 
+Comme expliqué précédemment une fois l'installation de SSH terminé, il nous faut générer une pair de clé public et privé d'authentification (2ème commande) qui vont être enregistré dans les fichiers "/.ssh/id\_rsa" pour la clé privé et "/.ssh/id\_rsa.pub" pour la clé public. Une fois les clés généré avec succès nous allons les utiliser pour se connecter en SSH à notre client. La commande ssh-copy-id facilite la connexion par clé SSH, ce qui supprime le besoin d'un mot de passe pour chaque connexion. Une fois la connexion au client correctement configuré, on peut l'utiliser avec rsync afin de sauvegarder les fichiers que nous voulons sur le client. Voici la manipulation de base à effectuer: 
 \begin{lstlisting}[language=bash] 
-    $ rsync -avz -e ssh chemin/source/ user@ip:"/chemin de destination/"
+    $ rsync -avz -e ssh chemin/source/ 
+        user@ip:"/chemin de destination/"
 \end{lstlisting}   
 Et dans notre cas nous utilisons précisement:
 \begin{lstlisting}[language=bash] 
-    $ rsync -avz -e ssh /etc etudiant@10.1.2.2:/home/etudiant/Bureau/backup/
+    $ rsync -avz -e ssh /etc 
+        etudiant@10.1.2.2:/home/etudiant/Bureau/backup/
 \end{lstlisting}   
-Le serveur est capable dorénavant de sauvegarder l'ensemble de sont répertoire "/etc" dans le répertoire "/home/etudiant/Bureau/backup/" de notre client. Mais il est alors intéressant de se demander comment automatiser totalement les sauvegardes. 
+Le serveur est capable dorénavant de sauvegarder l'ensemble de sont répertoire "/etc" dans le répertoire "/home/etudiant/Bureau/backup/" de notre client, simplement via l'automatisation de rsync par SSH. Mais il est alors intéressant de se demander comment automatiser totalement les sauvegardes. 
 
 \subsection{Cron}
+Dans le monde de l'informatique, l'automatisation de tâches est très souvent recherché pour gagner du temps et ne plus s'occuper des tâches automatisées. C'est pour cette raison que nous allons utilisé en plus de rsync et SSH un programme nommé "cron". Cron est un programme qui permet de d'exécuter automatiquement des scripts, des commandes ou des logiciels à une date et une heure spécifiée précise, ou selon un cycle défini à l’avance. Cron est parfois appelé "gestionnaire de tâches planifiées" ou "planificateur de tâches". Chaque utilisateur a un fichier crontab, lui permettant d'indiquer les actions à exécuter. Dans notre cas nous allons utiliser le fichier crontab de l'utilisateur "root".
+La commande : 
+\begin{lstlisting}[language=bash] 
+    $ crontab -e 
+\end{lstlisting}   
+est utiliser afin d'éditer les action du fichier crontab.
+Dans le fichier crontab nous allons renseigner cette ligne qui reprend ce qui a était expliqué précédemment avec rsync et SSH : 
+\begin{lstlisting}[language=bash] 
+        0 15 * * * rsync -avz -e ssh /etc 
+            etudiant@10.1.2.2:/home/etudiant/Bureau/backup/
+\end{lstlisting}   
+Mais nous y ajoutons cette fois "0 15 * * *", qui veut dire que nous allons appliquer le principe de rsync et SSH tous les jours de tous les mois à 15h et 0 minute. En effet le premier paramètre indique les minutes comprises entre 1 et 60, le second indique les heures de 1 à 24, le troisième est pour les jours dans le mois donc de 1 à 31. Et les deux derniers sont pour les mois et jours de la semaines compris entre 1 à 12 pour les mois et 1 (lundi) et 7 (dimanche) pour les jours.
+
+Pour examiner les tâches planifiées de l'utilisateur courant (le contenu du fichier crontab), on peut utiliser:
+\begin{lstlisting}[language=bash] 
+    $ crontab -l
+\end{lstlisting} 
 
 Conclusion tp 1
 

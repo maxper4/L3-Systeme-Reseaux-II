@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.30)  24 MAR 2022 08:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.30)  27 MAR 2022 17:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -318,173 +318,193 @@ File: images/partitionDisque.PNG Graphic file (type png)
 <use images/partitionDisque.PNG>
 Package pdftex.def Info: images/partitionDisque.PNG  used on input line 49.
 (pdftex.def)             Requested size: 426.79134pt x 126.74236pt.
+ [4 <./images/partitionDisque.PNG>]
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--64
+! LaTeX Error: There's no line here to end.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.80 \newline
+             
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 81--83
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 61--64
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 65--67
-
- []
-
-[4 <./images/partitionDisque.PNG>]
-<images/ReseauInterco&Prive.png, id=243, 542.025pt x 233.37187pt>
+<images/ReseauInterco&Prive.png, id=247, 542.025pt x 233.37187pt>
 File: images/ReseauInterco&Prive.png Graphic file (type png)
 <use images/ReseauInterco&Prive.png>
-Package pdftex.def Info: images/ReseauInterco&Prive.png  used on input line 76.
+Package pdftex.def Info: images/ReseauInterco&Prive.png  used on input line 94.
 
 (pdftex.def)             Requested size: 426.79134pt x 183.7635pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 82--84
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 100--102
 
  []
 
-[5 <./images/ReseauInterco&Prive.png>]
-<images/interfacesRouteur.png, id=253, 511.9125pt x 387.69844pt>
+[5]
+<images/interfacesRouteur.png, id=260, 511.9125pt x 387.69844pt>
 File: images/interfacesRouteur.png Graphic file (type png)
 <use images/interfacesRouteur.png>
-Package pdftex.def Info: images/interfacesRouteur.png  used on input line 91.
+Package pdftex.def Info: images/interfacesRouteur.png  used on input line 109.
 (pdftex.def)             Requested size: 426.79134pt x 323.23306pt.
- [6 <./images/interfacesRouteur.PNG (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 116--118
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[6 <./images/ReseauInterco&Prive.png>] [7 <./images/interfacesRouteur.PNG (PNG 
+copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 134--136
 
  []
 
-[7]
-<images/routeurPingRouteur.png, id=276, 834.11626pt x 148.30406pt>
+[8]
+<images/routeurPingRouteur.png, id=295, 834.11626pt x 148.30406pt>
 File: images/routeurPingRouteur.png Graphic file (type png)
 <use images/routeurPingRouteur.png>
-Package pdftex.def Info: images/routeurPingRouteur.png  used on input line 146.
+Package pdftex.def Info: images/routeurPingRouteur.png  used on input line 164.
 
 (pdftex.def)             Requested size: 426.79134pt x 75.88298pt.
- [8 <./images/routeurPingRouteur.PNG>]
-<images/routeRouteur.png, id=293, 454.69875pt x 62.48344pt>
+<images/routeRouteur.png, id=297, 454.69875pt x 62.48344pt>
 File: images/routeRouteur.png Graphic file (type png)
 <use images/routeRouteur.png>
-Package pdftex.def Info: images/routeRouteur.png  used on input line 166.
+Package pdftex.def Info: images/routeRouteur.png  used on input line 184.
 (pdftex.def)             Requested size: 426.79134pt x 58.64957pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 171--173
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 189--191
 
  []
 
-
-Overfull \hbox (25.5005pt too wide) in paragraph at lines 174--175
+[9 <./images/routeurPingRouteur.PNG>]
+Overfull \hbox (25.5005pt too wide) in paragraph at lines 192--193
 []\OT1/cmr/m/n/10 Les routes sta-tiques sont ajout^^Sees dans le noyau de notre
  serveur par l'interm^^Sediaire
  []
 
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 1
-76.
+94.
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 176.
- [9 <./images/routeRouteur.PNG>]
-Underfull \hbox (badness 10000) in paragraph at lines 200--202
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 194.
+ [10 <./images/routeRouteur.PNG>]
+Underfull \hbox (badness 10000) in paragraph at lines 218--220
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--209
+Underfull \hbox (badness 10000) in paragraph at lines 225--227
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 207--209
+Underfull \hbox (badness 10000) in paragraph at lines 225--227
 
  []
 
-[10]
-Overfull \hbox (11.1117pt too wide) in paragraph at lines 216--217
+
+Overfull \hbox (11.1117pt too wide) in paragraph at lines 234--235
 []\OT1/cmr/m/n/10 Avant toute chose, nous avons cherch^^Se et in-stall^^Se le b
 on pa-quet pour l'utilisation
  []
 
 
-Overfull \hbox (32.11174pt too wide) in paragraph at lines 220--221
+Overfull \hbox (32.11174pt too wide) in paragraph at lines 238--239
 \OT1/cmr/m/n/10 Une fois l'installation ef-fectu^^See, nous nous sommes rendu d
 ans le fichier /etc/default/isc-
  []
 
 
-Overfull \hbox (12.72273pt too wide) in paragraph at lines 220--221
+Overfull \hbox (12.72273pt too wide) in paragraph at lines 238--239
 \OT1/cmr/m/n/10 dhcp-server qui a ^^Set^^Se in-stall^^Se avec le pa-quet via la
  com-mande d^^Secrite pr^^Secedemment.
  []
 
-<images/dhcpServeur.png, id=319, 835.62187pt x 232.61906pt>
+<images/dhcpServeur.png, id=322, 835.62187pt x 232.61906pt>
 File: images/dhcpServeur.png Graphic file (type png)
 <use images/dhcpServeur.png>
-Package pdftex.def Info: images/dhcpServeur.png  used on input line 223.
+Package pdftex.def Info: images/dhcpServeur.png  used on input line 241.
 (pdftex.def)             Requested size: 426.79134pt x 118.81161pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 228--230
-
- []
-
-<images/dhcpdConfServeur.png, id=320, 837.1275pt x 253.69781pt>
-File: images/dhcpdConfServeur.png Graphic file (type png)
-<use images/dhcpdConfServeur.png>
-Package pdftex.def Info: images/dhcpdConfServeur.png  used on input line 234.
-(pdftex.def)             Requested size: 426.79134pt x 129.34158pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[11 <./images/dhcpServeur.PNG>] [12 <./images/dhcpdConfServeur.PNG>]
-Overfull \hbox (87.0044pt too wide) in paragraph at lines 283--284
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+Underfull \hbox (badness 10000) in paragraph at lines 246--248
+
  []
 
-
-Overfull \hbox (111.00464pt too wide) in paragraph at lines 287--288
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+[11]
+<images/dhcpdConfServeur.png, id=334, 837.1275pt x 253.69781pt>
+File: images/dhcpdConfServeur.png Graphic file (type png)
+<use images/dhcpdConfServeur.png>
+Package pdftex.def Info: images/dhcpdConfServeur.png  used on input line 252.
+(pdftex.def)             Requested size: 426.79134pt x 129.34158pt.
+ [12 <./images/dhcpServeur.PNG> <./images/dhcpdConfServeur.PNG>] [13]
+Overfull \hbox (9.0036pt too wide) in paragraph at lines 321--322
+[][][][][][][][][][][][][][] 
  []
 
-[13]
-Overfull \hbox (4.1951pt too wide) in paragraph at lines 308--310
+[14]
+Overfull \hbox (4.1951pt too wide) in paragraph at lines 345--347
 []\OT1/cmr/m/n/10 Cr^^Seation des deux zones, (named.conf.local et named.conf.d
 efault-zone), copie
  []
 
 
-Overfull \hbox (59.69527pt too wide) in paragraph at lines 308--310
+Overfull \hbox (59.69527pt too wide) in paragraph at lines 345--347
 \OT1/cmr/m/n/10 du fichier "db.local" en "deb.agence.atlantide", copie de "db.1
 27" en "db.agence.atlantide.inv"
  []
 
 
-Overfull \hbox (11.49133pt too wide) in paragraph at lines 308--310
+Overfull \hbox (11.49133pt too wide) in paragraph at lines 345--347
 \OT1/cmr/m/n/10 pour la zone de recherche in-vers^^Se. Ajout des for-warders da
 ns "named.conf.options".
  []
 
-[14] (./Rapport.lof)
+[15] (./Rapport.lof)
 \tf@lof=\write5
 \openout5 = `Rapport.lof'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 362.
- [15]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 362.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 399.
+ [16]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 399.
  (./Rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 362.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 362.
-Package rerunfilecheck Info: File `Rapport.out' has not changed.
-(rerunfilecheck)             Checksum: 21AB5D7E9E3127B16361F1A1A40F45D6;3124.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 362.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 399.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 399.
+
+
+Package rerunfilecheck Warning: File `Rapport.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Rapport.out':
+(rerunfilecheck)             Before: 21AB5D7E9E3127B16361F1A1A40F45D6;3124
+(rerunfilecheck)             After:  32F205638193327614E854AA3D69B7C2;3129.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 399.
  ) 
 Here is how much of TeX's memory you used:
- 7242 strings out of 481239
- 107591 string characters out of 5920377
- 556418 words of memory out of 5000000
- 22274 multiletter control sequences out of 15000+600000
+ 7264 strings out of 481239
+ 107904 string characters out of 5920377
+ 557418 words of memory out of 5000000
+ 22278 multiletter control sequences out of 15000+600000
  536928 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  34i,6n,51p,1638b,1265s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -496,10 +516,10 @@ t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts
 public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on Rapport.pdf (15 pages, 268550 bytes).
+Output written on Rapport.pdf (16 pages, 276877 bytes).
 PDF statistics:
- 434 PDF objects out of 1000 (max. 8388607)
- 392 compressed objects within 4 object streams
- 123 named destinations out of 1000 (max. 500000)
+ 459 PDF objects out of 1000 (max. 8388607)
+ 415 compressed objects within 5 object streams
+ 141 named destinations out of 1000 (max. 500000)
  364 words of extra memory for PDF output out of 10000 (max. 10000000)
 
