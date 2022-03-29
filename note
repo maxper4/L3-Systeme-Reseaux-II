@@ -139,6 +139,8 @@ Pour la suite :
 
 10) Manipulation de packet debian, une partie des réponse a la page suivante
 
+/etc/dhcpd.conf définie les adresses du réseaux privée comme le loopback (localhost) 127.0.0.1
+service isc-dhcp-server restart
 
 NOTE DEUXIEME SEANCE DE TP:
 
@@ -162,9 +164,6 @@ dig +trace www.u-bourgogne.fr : nous donne toutes les redirection / les routes p
 254 pour le e
 
 fichier système qui renseigne le serveur dns : /etc/network/interfaces
-
-/etc/dhcpd.conf définie les adresses du réseaux privée comme le loopback (localhost) 127.0.0.1
-service isc-dhcp-server restart
 
 subnet 10.1.2.0 netmask 255.255.255.0 {
         option routers 10.1.2.1;

@@ -35,7 +35,7 @@ L'objectif de ces Travaux Pratiques a été de réaliser un serveur complet pour
 
 \subsection{Installation via le réseau}
 
-Pour commencer à travailler, la première étape a été d'installer un système d'exploitation: une distribution GNU/Linux sans interface graphique, à savoir Debian dans sa version ``Bullseye'' (Debian 11). Sans celui-ci, il nous serait impossible de réaliser la moindre tâche avec notre serveur. Le fait qu'il s'agisse d'une distribution Linux va nous permettre de pouvoir manipuler les différents services autant que nous le souhaitons, avec un système de paquets très pratiques. Afin d'installer cette distribution, les administrateurs Systèmes et Réseaux nous ont mit à disposition un boot via le réseau. En temps normal pour installer un système d'exploitation, quel qu'il soit, les utilisateurs utilisent des clés USB ou un disque dur qui permette de démarrer sur celui-ci et d'installer le système d'exploitation à partir de la. Le principe est le même dans notre cas sauf que cette installation se fait par le réseau IEM qui est le réseau de l'université de Bourgogne. Pour lancer l'installation nous devions brancher notre serveur sur le réseau et le démarrer depuis le bios en sélectionnant le bouton "PXE IEM". Une fois l'installation démarrée nous devions suivre les étapes d'installation, telles que définir le nom et mot de passe du root, choisir/créer des partition du disque dur, donner un nom à la machine, ... 
+Pour commencer à travailler, la première étape a été d'installer un système d'exploitation: une distribution GNU/Linux sans interface graphique, à savoir Debian dans sa version "Bullseye" (Debian 11). Sans celui-ci, il nous serait impossible de réaliser la moindre tâche avec notre serveur. Le fait qu'il s'agisse d'une distribution Linux va nous permettre de pouvoir manipuler les différents services autant que nous le souhaitons, avec un système de paquets très pratiques. Afin d'installer cette distribution, les administrateurs Systèmes et Réseaux nous ont mit à disposition un boot via le réseau. En temps normal pour installer un système d'exploitation, quel qu'il soit, les utilisateurs utilisent des clés USB ou un disque dur qui permette de démarrer sur celui-ci et d'installer le système d'exploitation à partir de la. Le principe est le même dans notre cas sauf que cette installation se fait par le réseau IEM qui est le réseau de l'université de Bourgogne. Pour lancer l'installation nous devions brancher notre serveur sur le réseau et le démarrer depuis le bios en sélectionnant le bouton "PXE IEM". Une fois l'installation démarrée nous devions suivre les étapes d'installation, telles que définir le nom et mot de passe du root, choisir/créer des partition du disque dur, donner un nom à la machine, ... 
 
 \subsection{Partitions du disque}
 
@@ -77,7 +77,6 @@ Il est recommandé d'installer les dernières versions de paquets disponibles po
 
 \subsection{TODO Les paquets}
 
-\newline
 Maintenant que Debian est installé sur notre routeur, il est prêt à être configuré et utilisé pour différentes tâches. 
 \newline
 apt-cache search <expression rationnelle> = Rechercher un logiciel
@@ -110,7 +109,7 @@ Le tableau de la figure \ref{fig2} récapitule les adresses IP allouées pour ch
 Après avoir défini ces adresses et ces réseaux sur le papier, il est désormais temps de configurer les machines afin de les implémenter concrètement.
 
 \subsection{Les interfaces réseaux du routeur}
-Les adresses que nous venons de répartir entre chaque groupe et réseaux doivent être utilisées par le routeur. Nous allons donc maintenant expliquer comment nous avons paramétré les interfaces réseaux sur le routeur. Pour cela, nous avons travailler avec le fichier /etc/network/interfaces qui régis le fonctionnement des interfaces réseaux de la machine au niveau du noyau du système d'exploitation. Une interface réseau correspond à une carte réseau (en général) et il est possible à partir de son de la configurer (adresse statique, adresse du réseau, masque, gateway, ...). La gateway d'une telle configuration est la machine qui doit être utilisé pour passer d'un réseau à un autre. En d'autres termes, il s'agit de la ``porte d'accès'' à utiliser. Par exemple si une machine du réseau privé veut communiquer avec une autre machine située sur le réseau IEM, elle devra utiliser le serveur pour router ses paquets. Nous avons modifié le fichier pour obtenir le résultat de la figure \ref{fig3}. 
+Les adresses que nous venons de répartir entre chaque groupe et réseaux doivent être utilisées par le routeur. Nous allons donc maintenant expliquer comment nous avons paramétré les interfaces réseaux sur le routeur. Pour cela, nous avons travailler avec le fichier /etc/network/interfaces qui régis le fonctionnement des interfaces réseaux de la machine au niveau du noyau du système d'exploitation. Une interface réseau correspond à une carte réseau (en général) et il est possible à partir de son de la configurer (adresse statique, adresse du réseau, masque, gateway, ...). La gateway d'une telle configuration est la machine qui doit être utilisé pour passer d'un réseau à un autre. En d'autres termes, il s'agit de la "porte d'accès" à utiliser. Par exemple si une machine du réseau privé veut communiquer avec une autre machine située sur le réseau IEM, elle devra utiliser le serveur pour router ses paquets. Nous avons modifié le fichier pour obtenir le résultat de la figure \ref{fig3}. 
 
 \begin{figure}[!h]
 \centerline{ \includegraphics[width=15cm]{images/interfacesRouteur.png}}
@@ -122,7 +121,7 @@ Il est possible d'afficher les interfaces réseaux disponibles sur la machine da
 \begin{lstlisting}[language=bash] 
     $ ip a 
 \end{lstlisting} 
-Cette commande a pour intérêt de nous faire connaître rapidement les adresses MAC et/ou IP de chaque interface. Elle nous a permit de connaître le nom des interfaces à utiliser dans notre fichier de configuration mais elle permet également de savoir si une interface est active ``UP'' ou pas ``DOWN''. En effet, durant les phases de tests il était important de savoir quelles interfaces étaient allumées ou éteintes. Il est possible qu'après une mauvaise configuration ou un problème, une interface soit éteinte. Il existe des commandes utilitaires pour les manipuler, l'une allumant l'interface nommée ``interface'' et l'autre l'éteignant. 
+Cette commande a pour intérêt de nous faire connaître rapidement les adresses MAC et/ou IP de chaque interface. Elle nous a permit de connaître le nom des interfaces à utiliser dans notre fichier de configuration mais elle permet également de savoir si une interface est active "UP" ou pas "DOWN". En effet, durant les phases de tests il était important de savoir quelles interfaces étaient allumées ou éteintes. Il est possible qu'après une mauvaise configuration ou un problème, une interface soit éteinte. Il existe des commandes utilitaires pour les manipuler, l'une allumant l'interface nommée ``interface'' et l'autre l'éteignant. 
 
 \begin{lstlisting}[language=bash] 
     $ ifup interface
@@ -215,7 +214,7 @@ Le ping du client de leur réseau privé fonctionne désormais: nos paquets sont
 
 \subsection{Règles iptables pour laisser l'accès a internet a une machine}
 
-L'architecture de notre réseau commence à prendre forme, mais un client sur notre réseau privé ne peut toujours pas accéder à internet: pour le moment seul le routeur est connecté à internet à travers le réseau IEM. Pour réaliser cette manoeuvre appelée une translation d'adresse, nous allons utiliser les règles ``iptables":
+L'architecture de notre réseau commence à prendre forme, mais un client sur notre réseau privé ne peut toujours pas accéder à internet: pour le moment seul le routeur est connecté à internet à travers le réseau IEM. Pour réaliser cette manoeuvre appelée une translation d'adresse, nous allons utiliser les règles "iptables":
 
 \begin{lstlisting}[language=bash] 
     $ iptables -t nat -A POSTROUTING -s 10.1.2.0/24 
@@ -225,7 +224,7 @@ L'architecture de notre réseau commence à prendre forme, mais un client sur no
 Cette commande permet d'indiquer au routeur qu'il doit retransmettre les paquets reçus du réseau privé (source 10.1.2.0/24) sur le réseau IEM (interface de sortie "eno1"). L'option masquerade permet d'indiquer que le paquet sera retransmis par translation d'adresse, c'est à dire que le routeur va stocker dans son noyau les informations sur l'émetteur de ce paquet (adresse, port, ...) puis va l'émettre à nouveau en son nom. Lorsque le routeur recevra une réponse, il pourra consulter la table de translation dans son noyau pour trouver à qui il doit transférer le paquet.
 \newline
 \par
-Afin de vérifier si notre routeur était capable d'utiliser internet, nous avons installé ``links2" qui a été auparavant installé via le gestionnaire de paquet "apt". Il s'agit d'une commande qui permet de consulter des pages web avec un affichage non graphique, que nous utilisons avec la commande: 
+Afin de vérifier si notre routeur était capable d'utiliser internet, nous avons installé "links2" qui a été auparavant installé via le gestionnaire de paquet "apt". Il s'agit d'une commande qui permet de consulter des pages web avec un affichage non graphique, que nous utilisons avec la commande: 
 \begin{lstlisting}[language=bash] 
     $ links2 google.com
 \end{lstlisting}
@@ -333,15 +332,100 @@ Pour examiner les tâches planifiées de l'utilisateur courant (le contenu du fi
 \begin{lstlisting}[language=bash] 
     $ crontab -l
 \end{lstlisting} 
+Ce qui nous affiche :
+\begin{figure}[!h]
+\centerline{ \includegraphics[width=15cm]{images/rsync&crontab.png}}
+\caption{Contenue du fichier crontab.}
+\label{fig8}
+\end{figure}
+\\\\
 
-Conclusion tp 1
-
-Introduction tp 1bis
+La mise en place de notre réseau d'entreprise et d'infrastructure est terminé. Pour rappel nous avons installé une distribution Linux, puis paramétré les bases de notre réseau, ensuite nous avons mis en place un service DHCP et finalement une sauvegarde automatique. Nous allons désormais étendre notre réseau et mettre en place un serveur de nom de domaine. Mais avant de mettre en place le DNS, il faut regarder comment il fonctionne.
 
 \section{Interrogation d'un serveur DNS}
+Avant toutes installation nous avons commencer par comprendre le fonctionnement du DNS. En effet le DNS pour Domain Name Serveur en anglais est un service informatique distribué. Il est utilisé pour traduire les noms de domaine sur Internet avec leurs adresse IP ou autres enregistrements. Le DNS est un composant important de notre réseau. Il est important de rappeler que tous les équipements connectés à un réseau IP, comme Internet, possèdent une adresse IP qui les identifie sur le réseau.
+
 \subsection{Les commandes host, dig et nslookup}
+Les serveurs DNS que l'on a interrogé durant nos tests, sont interrogé via les commandes : host, dig et nslookup.
+
+La commande host renvoie l’IP associée au nom de domaine, on l'utilise comme ceci
+\begin{lstlisting}[language=bash] 
+    $ host {nom}
+\end{lstlisting} 
+
+Nous l'avons testé avec:
+\begin{lstlisting}[language=bash] 
+    $ host www.debian.org
+\end{lstlisting} 
+
+Qui nous a retourné ceci:
+\begin{figure}[!h]
+\centerline{ \includegraphics[width=15cm]{images/hostDebian.png}}
+\caption{Exemple d'interrogation d'un DNS avec host.}
+\label{fig9}
+\end{figure}
+
+Sur l'image \ref{fig9}, 2 informations importantes sont donné. C'est à dire l'IP du DNS sur la première ligne et la mac adresse sur la second. Voila ce que nous ressort la commande host. Voyons maintenant avec dig.
+
+
+Dig est quand à lui est un utilitaire en ligne de commande qui effectue une recherche DNS en interrogeant des serveurs de noms, et on l'utilise de cette façon: 
+\begin{lstlisting}[language=bash] 
+    $ dig {nom}
+\end{lstlisting} 
+
+Nous l'avons testé avec:
+\begin{lstlisting}[language=bash] 
+    $ dig www.debian.org
+\end{lstlisting} 
+
+Qui nous a indiqué:
+\begin{figure}[!h]
+\centerline{ \includegraphics[width=15cm]{images/digDebian.png}}
+\caption{Exemple d'interrogation d'un DNS avec dig.}
+\label{fig10}
+\end{figure}
+
+Cette fois sur l'image \ref{fig10}, nous obtenons d'avantages d'informations sur le DNS interrogé. En effet la commande dig nous donne le cookie utilisé, ou encore qui a répondue afin de vérifier si c'est le bon DNS. Évidement on connais également l'adresse IP, mais également d'autre informations comme la date par example.
+
+L’utilitaire nslookup (Name System Look Up) est un outil qui permet d’interroger directement un serveur de noms et d’en obtenir les informations concernant un domaine, on peut l'utiliser comme ceci: 
+\begin{lstlisting}[language=bash] 
+    $ nslookup {nom}
+\end{lstlisting} 
+
+Nous l'avons testé avec: 
+\begin{lstlisting}[language=bash] 
+    $ nslookup www.debian.org
+\end{lstlisting} 
+
+Qui nous a donc retourné:
+\begin{figure}[!h]
+\centerline{ \includegraphics[width=15cm]{images/nslookupDebian.png}}
+\caption{Exemple d'interrogation d'un DNS avec nslookup.}
+\label{fig11}
+\end{figure}
+
+Finalement on observe sur l'image \ref{fig11}, que nslookup est a mis chemin entre dig et host. En effet il nous affiche le serveur qui à interrogé le DNS, et la réponse du DNS en question avec sont nom, sont adresse et sa mac adresse. Tous comme dig mais en plus synthétique. En règles général avec nslookup nous avons toutes les informations nécessaire.
+
+Que se soit pour host, dig ou encore nslookup, l'indication "{nom}" indique l’adresse IP ou le nom d’hôte du serveur à interroger. Mais ils sont utilisable avec d'autres paramètres, comme nous allons le voir juste après. 
+
+host -t ns www.debian.org
+dig www.debian.org ns
+dig debian.org ns
+dig org ns
+dig . ns
+
+
+Entre dig et host on peut observer que...
+
 \subsection{Fichier de renseignement du serveur DNS}
+fichier système qui renseigne le serveur dns : /etc/network/interfaces
+
 \subsection{Rôle du fichier /etc/hosts}
+Ce fichier, existant depuis le début des années 80, a pour rôle d'associer une adresse IP à un nom d'hôte (un nom de domaine n'étant qu'une forme structurée de nom d'hôte). Il est donc présent dans le répertoire etc et est consulté par votre système à chaque fois que vous tenter d'accéder à un nom d'hôte spécifique.
+
+Notons qu'il est consulté avant qu'une requête soit envoyée à un DNS. Ce fichier n'a de valeur que sur notre propre machine. Aucune autre machine de notre réseau (même local) ne prendra en compte ce qui y est inscrit.
+A l'origine, on se partageait le fichier après l'avoir mis à jour mais très vite le fichier devint trop volumineux et il fallut trouver une solution : le Domain Name System. Il permet donc de centraliser le système de noms d'hôtes. Cependant, le système nécessite une structure (permettant une hiérarchisation des noms) qui fut trouvée dans les noms de domaines.
+Ce fichier existe toujours et son utilisation est restreinte à de petits réseaux locaux ainsi qu'à quelques autres cas particuliers.
 
 \section{Installation d'un DNS}
 
@@ -351,6 +435,27 @@ Pour la suite des explications, il est important de préciser que nous avons cho
 
 Création des deux zones, (named.conf.local et named.conf.default-zone), copie du fichier "db.local" en "deb.agence.atlantide", copie de "db.127" en "db.agence.atlantide.inv" pour la zone de recherche inversé. Ajout des forwarders dans "named.conf.options". Redémarrage avec systemctl restart bind 9. Changement du dhcp pour prendre en compte le serveur DNS.
 "option domain-name "agence.atlantide" fournit le nom de domaine, dans ce cas il sert a faire référence aux ordinateurs du réseau par leurs nom sans ajouter le nom de domaine.
+
+Dans /etc/resolv.conf
+\begin{figure}[!h]
+\centerline{ \includegraphics[width=15cm]{images/resolvConf.png}}
+\caption{Contenue du fichier de configuration de resolv.}
+\label{fig12}
+\end{figure}
+
+Dans /etc/bind/named.conf.local
+\begin{figure}[!h]
+\centerline{ \includegraphics[width=15cm]{images/namedConfLocal.png}}
+\caption{Contenue du fichier de configuration local de named.}
+\label{fig13}
+\end{figure}
+
+Dans /etc/bind/named.conf.options
+\begin{figure}[!h]
+\centerline{ \includegraphics[width=15cm]{images/namedConfOptions.png}}
+\caption{Contenue du fichier de configuration des options de named.}
+\label{fig14}
+\end{figure}
 
 \subsection{Test réaliser afin de valider le DNS}
 named-checkzone et named-checkconf pour vérifier la syntaxe
