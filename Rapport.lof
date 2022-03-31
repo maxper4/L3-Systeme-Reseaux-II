@@ -1,14 +1,14 @@
 \contentsline {figure}{\numberline {1}{\ignorespaces Les 3 partitions d'un disque}}{4}{figure.1}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Tableau des adresses IP de chaque groupe}}{6}{figure.2}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Fichier de configuration des interfaces réseaux du routeur}}{7}{figure.3}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Ping de notre routeur à un autre}}{9}{figure.4}%
-\contentsline {figure}{\numberline {5}{\ignorespaces Route de notre routeur}}{10}{figure.5}%
-\contentsline {figure}{\numberline {6}{\ignorespaces Interface du DHCP}}{12}{figure.6}%
-\contentsline {figure}{\numberline {7}{\ignorespaces Configuration du serveur DHCP}}{12}{figure.7}%
-\contentsline {figure}{\numberline {8}{\ignorespaces Contenue du fichier crontab.}}{15}{figure.8}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Exemple d'interrogation d'un DNS avec host.}}{16}{figure.9}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Exemple d'interrogation d'un DNS avec dig.}}{16}{figure.10}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Exemple d'interrogation d'un DNS avec nslookup.}}{17}{figure.11}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Contenue du fichier de configuration de resolv.}}{18}{figure.12}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Contenue du fichier de configuration local de named.}}{18}{figure.13}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Contenue du fichier de configuration des options de named.}}{19}{figure.14}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Tableau des adresses IP de chaque groupe}}{7}{figure.2}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Fichier de configuration des interfaces réseaux du routeur}}{8}{figure.3}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Ping de notre routeur à un autre}}{10}{figure.4}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Route de notre routeur}}{11}{figure.5}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Interface du DHCP}}{13}{figure.6}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Configuration du serveur DHCP}}{13}{figure.7}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Contenue du fichier crontab.}}{16}{figure.8}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Exemple d'interrogation d'un DNS avec host.}}{17}{figure.9}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Exemple d'interrogation d'un DNS avec dig.}}{17}{figure.10}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Exemple d'interrogation d'un DNS avec nslookup.}}{18}{figure.11}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Contenue du fichier de configuration de resolv.}}{19}{figure.12}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Contenue du fichier de configuration local de named.}}{19}{figure.13}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Contenue du fichier de configuration des options de named.}}{20}{figure.14}%
