@@ -151,6 +151,7 @@ mise en place du dns :
 www.u-bourgogne.fr : nom du serveur : tokyo.dmz.u-bourgogne.fr -> 193.52.234.14
 Serveur dns qui répond : 172.31.21.35
 Pour changer de dns : dig nom domaine @ip : par exemple -> dig www.u-bourgogne.fr @8.8.8.8 (pour google)
+
 host -t ns u-bourgogne.fr (dig u-bourgogne.fr ns) renvoi : name server dnsi1.u-bourgogne.fr (193.50.50.2)
                                                            name server dnsi2.u-bourgogne.fr (193.50.50.6) 
                                                            
@@ -165,6 +166,7 @@ dig +trace www.u-bourgogne.fr : nous donne toutes les redirection / les routes p
 
 fichier système qui renseigne le serveur dns : /etc/network/interfaces
 
+dhcpd.conf
 subnet 10.1.2.0 netmask 255.255.255.0 {
         option routers 10.1.2.1;
         options domain-name "agence.altlantide";

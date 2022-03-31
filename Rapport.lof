@@ -7,8 +7,10 @@
 \contentsline {figure}{\numberline {7}{\ignorespaces Configuration du serveur DHCP}}{13}{figure.7}%
 \contentsline {figure}{\numberline {8}{\ignorespaces Contenue du fichier crontab.}}{16}{figure.8}%
 \contentsline {figure}{\numberline {9}{\ignorespaces Exemple d'interrogation d'un DNS avec host.}}{17}{figure.9}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Exemple d'interrogation d'un DNS avec dig.}}{17}{figure.10}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Exemple d'interrogation d'un DNS avec nslookup.}}{18}{figure.11}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Contenue du fichier de configuration de resolv.}}{19}{figure.12}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Contenue du fichier de configuration local de named.}}{19}{figure.13}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Contenue du fichier de configuration des options de named.}}{20}{figure.14}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Exemple d'interrogation d'un DNS avec dig.}}{18}{figure.10}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Exemple d'interrogation d'un DNS avec nslookup.}}{19}{figure.11}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Requête de nameserveur pour un DNS avec host.}}{20}{figure.12}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Requête de nameserveur pour un DNS avec dig.}}{20}{figure.13}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Contenue du fichier de configuration de resolv.}}{22}{figure.14}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Contenue du fichier de configuration local de named.}}{22}{figure.15}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Contenue du fichier de configuration des options de named.}}{22}{figure.16}%

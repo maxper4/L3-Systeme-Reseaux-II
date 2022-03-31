@@ -5,6 +5,7 @@
 \usepackage{listings}
 \usepackage{hyperref}
 \usepackage{indentfirst}
+\usepackage{float}
 
 \title{Rapport Systèmes et Réseaux II}
 \author{Perion Maxence, Pinon Alexandre}
@@ -188,7 +189,7 @@ Cette commande a pour intérêt de nous faire connaître rapidement les adresses
     $ ifdown interface
 \end{lstlisting}
 
-Pour le fichier de configuration (figure \ref{fig3} ci-dessus) , nous pouvons voir que nous avons configur'' les 3 interfaces (donc les 3 ports Ethernet que possède notre routeur), ainsi que l'interface ``lo" qui représente le loopback. Le loopback est la ``boucle'' locale: c'est une interface virtuelle qui permet de définir à une machine ``elle même'', notamment lors de l'utilisation de l'adresse ``localhost''.  Pour chacune des interfaces, nous avons donc défini leur adresse (address), leur masque (netmask) et leur réseau (network). Pour l'interface ``eno1" qui est relié au réseau IEM, nous avons plusieurs informations supplémentaire: l'adresse de broadcast (adresse utilisée pour transmettre un message à toutes les autres machines d'un réseau), la passerelle (gateway), les dns, ... Nous pouvons voir que l'interface ``eno1" est relier au réseau IEM car pour le réseau nous avons indiqué l'adresse 172.31.20.1 qui est l'adresse du routeur du réseau IEM fournie par les intervenants des travaux pratiques. Le raisonnement est le même pour les interfaces ``enp3s0" et ``enp1s0", pour lesquels nous avons indiqué respectivement pour le réseau les adresses 10.1.2.0 et 192.158.1.0. Il s'agit donc des réseaux d'interconnexion et privé. Les entrées "dns-nameservers" et "pre-up" seront expliquées plus en détail ultérieurement. Une fois le fichier de configuration des interfaces réseaux édité à notre souhait, ses informations ne sont pas prises en compte immédiatement: il est nécessaire de redémarrer le service réseau associé, en tant que root ou alors avec sudo:
+Pour le fichier de configuration (figure \ref{fig3} ci-dessus) , nous pouvons voir que nous avons configuré les 3 interfaces (donc les 3 ports Ethernet que possède notre routeur), ainsi que l'interface ``lo" qui représente le loopback. Le loopback est la ``boucle'' locale: c'est une interface virtuelle qui permet de définir à une machine ``elle même'', notamment lors de l'utilisation de l'adresse ``localhost''.  Pour chacune des interfaces, nous avons donc défini leur adresse (address), leur masque (netmask) et leur réseau (network). Pour l'interface ``eno1" qui est relié au réseau IEM, nous avons plusieurs informations supplémentaire: l'adresse de broadcast (adresse utilisée pour transmettre un message à toutes les autres machines d'un réseau), la passerelle (gateway), les dns, ... Nous pouvons voir que l'interface ``eno1" est relier au réseau IEM car pour le réseau nous avons indiqué l'adresse 172.31.20.1 qui est l'adresse du routeur du réseau IEM fournie par les intervenants des travaux pratiques. Le raisonnement est le même pour les interfaces ``enp3s0" et ``enp1s0", pour lesquels nous avons indiqué respectivement pour le réseau les adresses 10.1.2.0 et 192.158.1.0. Il s'agit donc des réseaux d'interconnexion et privé. Les entrées "dns-nameservers" et "pre-up" seront expliquées plus en détail ultérieurement. Une fois le fichier de configuration des interfaces réseaux édité à notre souhait, ses informations ne sont pas prises en compte immédiatement: il est nécessaire de redémarrer le service réseau associé, en tant que root ou alors avec sudo:
 
 \begin{lstlisting}[language=bash] 
     $ service networking restart
@@ -403,12 +404,12 @@ Ce qui nous affiche :
 La mise en place de notre réseau d'entreprise et d'infrastructure est terminé. Pour rappel nous avons installé une distribution Linux, puis paramétré les bases de notre réseau, ensuite nous avons mis en place un service DHCP et finalement une sauvegarde automatique. Nous allons désormais étendre notre réseau et mettre en place un serveur de nom de domaine. Mais avant de mettre en place le DNS, il faut regarder comment il fonctionne.
 
 \section{Interrogation d'un serveur DNS}
-Avant toutes installation nous avons commencer par comprendre le fonctionnement du DNS. En effet le DNS pour Domain Name Serveur en anglais est un service informatique distribué. Il est utilisé pour traduire les noms de domaine sur Internet avec leurs adresse IP ou autres enregistrements. Le DNS est un composant important de notre réseau. Il est important de rappeler que tous les équipements connectés à un réseau IP, comme Internet, possèdent une adresse IP qui les identifie sur le réseau.
+Avant toutes installation nous avons commencer par comprendre le fonctionnement du DNS. En effet le DNS pour Domain Name Serveur en anglais est un service informatique distribué. Il est utilisé pour traduire les noms de domaine sur Internet avec leurs adresse IP ou autres enregistrements. Pour faire simple le serveur DNS est un service qui permet d'associer à un site web (ou un ordinateur connecté ou un serveur) une adresse IP. Pour la suite de notre installation le DNS va être un composant important de notre réseau. Il est important de rappeler que tous les équipements connectés à un réseau IP, comme Internet, possèdent une adresse IP qui les identifie sur le réseau.
 
 \subsection{Les commandes host, dig et nslookup}
-Les serveurs DNS que l'on a interrogé durant nos tests, sont interrogé via les commandes : host, dig et nslookup.
+Les serveurs DNS que nous allons interroger on pour but de montrer les informations qu'il contiennent et ainsi comprendre les bases. Les serveurs DNS que l'on a interrogé durant nos tests, sont interrogé via les commandes : host, dig et nslookup.
 
-La commande host renvoie l’IP associée au nom de domaine, on l'utilise comme ceci
+La commande host renvoie l’IP et la mac adresse associée au nom de domaine, on l'utilise comme ceci
 \begin{lstlisting}[language=bash] 
     $ host {nom}
 \end{lstlisting} 
@@ -419,14 +420,13 @@ Nous l'avons testé avec:
 \end{lstlisting} 
 
 Qui nous a retourné ceci:
-\begin{figure}[!h]
+\begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/hostDebian.png}}
 \caption{Exemple d'interrogation d'un DNS avec host.}
 \label{fig9}
 \end{figure}
 
-Sur l'image \ref{fig9}, 2 informations importantes sont donné. C'est à dire l'IP du DNS sur la première ligne et la mac adresse sur la second. Voila ce que nous ressort la commande host. Voyons maintenant avec dig.
-
+Sur l'image \ref{fig9}, 2 informations importantes sont donné. C'est à dire l'IP du DNS sur la première ligne avec comme IP la suivante : "130.89.148.77", et la mac adresse sur la second tel que : "2001:67c:2564:a119::77". Voila ce que nous ressort la commande host. Voyons maintenant avec dig.
 
 Dig est quand à lui est un utilitaire en ligne de commande qui effectue une recherche DNS en interrogeant des serveurs de noms, et on l'utilise de cette façon: 
 \begin{lstlisting}[language=bash] 
@@ -439,13 +439,13 @@ Nous l'avons testé avec:
 \end{lstlisting} 
 
 Qui nous a indiqué:
-\begin{figure}[!h]
+\begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/digDebian.png}}
 \caption{Exemple d'interrogation d'un DNS avec dig.}
 \label{fig10}
 \end{figure}
 
-Cette fois sur l'image \ref{fig10}, nous obtenons d'avantages d'informations sur le DNS interrogé. En effet la commande dig nous donne le cookie utilisé, ou encore qui a répondue afin de vérifier si c'est le bon DNS. Évidement on connais également l'adresse IP, mais également d'autre informations comme la date par example.
+Cette fois sur l'image \ref{fig10}, nous obtenons d'avantages d'informations sur le DNS interrogé. Les lignes commençant par ";" sont des commentaires. La première ligne nous indique la version de la commande dig (9.16.22). Dans l’en-tête nous pouvons savoir si une réponse à était reçu (ANSWER: 1), afin de savoir si le DNS est fonctionnel ou non. Ensuite la section "QUESTION", nous indique simplement la requête, qui dans ce cas est une requête pour l’enregistrement "A" de www.debian.org. IN signifie qu’il s’agit d’une recherche Internet. La section "ANSWER" nous indique que www.debian.org a l’adresse IP "130.89.148.77". Enfin, il y a quelques statistiques supplémentaire sur la requête, comme la date ou la taille du paquets qui contenais le message.
 
 L’utilitaire nslookup (Name System Look Up) est un outil qui permet d’interroger directement un serveur de noms et d’en obtenir les informations concernant un domaine, on peut l'utiliser comme ceci: 
 \begin{lstlisting}[language=bash] 
@@ -458,7 +458,7 @@ Nous l'avons testé avec:
 \end{lstlisting} 
 
 Qui nous a donc retourné:
-\begin{figure}[!h]
+\begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/nslookupDebian.png}}
 \caption{Exemple d'interrogation d'un DNS avec nslookup.}
 \label{fig11}
@@ -466,26 +466,46 @@ Qui nous a donc retourné:
 
 Finalement on observe sur l'image \ref{fig11}, que nslookup est a mis chemin entre dig et host. En effet il nous affiche le serveur qui à interrogé le DNS, et la réponse du DNS en question avec sont nom, sont adresse et sa mac adresse. Tous comme dig mais en plus synthétique. En règles général avec nslookup nous avons toutes les informations nécessaire.
 
-Que se soit pour host, dig ou encore nslookup, l'indication "{nom}" indique l’adresse IP ou le nom d’hôte du serveur à interroger. Mais ils sont utilisable avec d'autres paramètres, comme nous allons le voir juste après. 
+Que se soit pour host, dig ou encore nslookup, l'indication "{nom}" indique l’adresse IP ou le nom d’hôte du serveur à interroger. Mais ils sont utilisable avec d'autres paramètres, comme nous allons le voir juste après.\\\\
 
-host -t ns www.debian.org
-dig www.debian.org ns
-dig debian.org ns
-dig org ns
-dig . ns
+L'option "ns" est pour "nameserveur", cela permet d'indiquer à Internet où aller pour trouver l' adresse IP d'un domaine. En effet le mécanisme consistant à trouver l'adresse IP correspondant au nom d'un hôte est appelé "résolution de nom de domaine". L'application permettant de réaliser cette opération est appelée en anglais "resolver". Lorsqu'une application souhaite se connecter à un hôte connu par son nom de domaine (par exemple "www.debian.org"), celle-ci va interroger un serveur de noms défini dans sa configuration réseau.\\
 
+Voici les différentes requête que nous avons essayé: 
+\begin{lstlisting}[language=bash] 
+    $ host -t ns www.debian.org
+    $ dig www.debian.org ns
+    $ dig debian.org ns
+    $ dig org ns
+    $ dig . ns
+\end{lstlisting} 
 
-Entre dig et host on peut observer que...
+Voyons en détails les réponse renvoyé par la ligne 1 et 2. 
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/hostDebianNS.png}}
+\caption{Requête de nameserveur pour un DNS avec host.}
+\label{fig12}
+\end{figure}
+
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/digDebianNS.png}}
+\caption{Requête de nameserveur pour un DNS avec dig.}
+\label{fig13}
+\end{figure}
+Première constatation évidente, nous avons interrogé le même DNS afin de comparé les réponses. Tous comme expliqué précèdent dig renvoient beaucoup plus de détails sur la requête que host. On observe principalement que la réponse des 2 commandes est identique, mais pour une requête qui aurais besoin de passer par beaucoup plus de nom de domaine, la commande dig serait plus intéressante. En effet avec dig il est possible d'avoir le nombre de réponses obtenues; ici "ANSWER: 3" pour "geo1.debian.org", "geo2.debian.org" et "geo3.debian.org". 
+
+Pour conclure une requête est ainsi envoyée au premier serveur de noms (appelé "serveur de nom primaire"). Si celui-ci possède l'enregistrement dans son cache, il l'envoie à l'application, dans le cas contraire il interroge un serveur racine. Le serveur de nom racine renvoie une liste de serveurs de noms faisant autorité sur le domaine. Le serveur de noms primaire faisant autorité sur le domaine va alors être interrogé et retourner l'enregistrement correspondant à l'hôte sur le domaine dans le cas présent les serveurs "geo1.debian.org", "geo2.debian.org" et "geo3.debian.org". 
+
+Finalement nous pouvons conclure que dig et host renvoie les informations nécessaires identiques, host reste tous de même limité en informations tandis que dig est davantage détaillé. Les 2 commandes peuvent servir, tous depend du degré de détails dont on a besoin. 
 
 \subsection{Fichier de renseignement du serveur DNS}
-fichier système qui renseigne le serveur dns : /etc/network/interfaces
+Sur notre serveur, le serveur DNS doit être indiqué dans le fichier système: "/etc/network/interfaces". C'est le même fichier qui renseigne les interfaces réseau. Ce fichier a déjà était évoquer précédemment, mais pas dans sa totalité, en effet il est temps d'expliquer la ligne suivante: 
+\begin{lstlisting}[language=bash] 
+    $ dns-nameserveur 172.31.21.35 193.50.50.6
+\end{lstlisting}
+Cette ligne indique les 2 serveurs de noms de domaine que le système doit utiliser. En réalité le DNS avec l'adresse "172.31.21.35" est le serveur DNS primaire du réseau IEM, et le DNS avec l'adresse "193.50.50.5" est le serveur DNS secondaire du réseau IEM. Ces informations sont traité par le "resolver" qui a était évoquer dans la partie précédente. 
 
 \subsection{Rôle du fichier /etc/hosts}
-Ce fichier, existant depuis le début des années 80, a pour rôle d'associer une adresse IP à un nom d'hôte (un nom de domaine n'étant qu'une forme structurée de nom d'hôte). Il est donc présent dans le répertoire etc et est consulté par votre système à chaque fois que vous tenter d'accéder à un nom d'hôte spécifique.
-
-Notons qu'il est consulté avant qu'une requête soit envoyée à un DNS. Ce fichier n'a de valeur que sur notre propre machine. Aucune autre machine de notre réseau (même local) ne prendra en compte ce qui y est inscrit.
-A l'origine, on se partageait le fichier après l'avoir mis à jour mais très vite le fichier devint trop volumineux et il fallut trouver une solution : le Domain Name System. Il permet donc de centraliser le système de noms d'hôtes. Cependant, le système nécessite une structure (permettant une hiérarchisation des noms) qui fut trouvée dans les noms de domaines.
-Ce fichier existe toujours et son utilisation est restreinte à de petits réseaux locaux ainsi qu'à quelques autres cas particuliers.
+Ce fichier, existant depuis le début des années 80, a pour rôle d'associer une adresse IP à un nom d'hôte (un nom de domaine n'étant qu'une forme structurée de nom d'hôte). Il est donc présent dans le répertoire "/etc" et est consulté par le système à chaque fois qu'il accède à un nom d'hôte spécifique. Notons qu'il est consulté avant qu'une requête soit envoyée à un DNS. Aucune autre machine de notre réseau (même local) ne prendra en compte ce qui y est écrit dans celui-ci. Son utilisation est restreinte à de petits réseaux locaux ainsi qu'à quelques autres cas particuliers.
 
 \section{Installation d'un DNS}
 
@@ -493,6 +513,7 @@ Pour la suite des explications, il est important de préciser que nous avons cho
 
 \subsection{Mise en place du DNS}
 
+Reparler du "dhcpd.conf".
 Création des deux zones, (named.conf.local et named.conf.default-zone), copie du fichier "db.local" en "deb.agence.atlantide", copie de "db.127" en "db.agence.atlantide.inv" pour la zone de recherche inversé. Ajout des forwarders dans "named.conf.options". Redémarrage avec systemctl restart bind 9. Changement du dhcp pour prendre en compte le serveur DNS.
 "option domain-name "agence.atlantide" fournit le nom de domaine, dans ce cas il sert a faire référence aux ordinateurs du réseau par leurs nom sans ajouter le nom de domaine.
 
@@ -500,21 +521,21 @@ Dans /etc/resolv.conf
 \begin{figure}[!h]
 \centerline{ \includegraphics[width=15cm]{images/resolvConf.png}}
 \caption{Contenue du fichier de configuration de resolv.}
-\label{fig12}
+\label{fig100}
 \end{figure}
 
 Dans /etc/bind/named.conf.local
 \begin{figure}[!h]
 \centerline{ \includegraphics[width=15cm]{images/namedConfLocal.png}}
 \caption{Contenue du fichier de configuration local de named.}
-\label{fig13}
+\label{fig101}
 \end{figure}
 
 Dans /etc/bind/named.conf.options
 \begin{figure}[!h]
 \centerline{ \includegraphics[width=15cm]{images/namedConfOptions.png}}
 \caption{Contenue du fichier de configuration des options de named.}
-\label{fig14}
+\label{fig102}
 \end{figure}
 
 \subsection{Test réaliser afin de valider le DNS}
