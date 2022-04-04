@@ -55,11 +55,11 @@ Lors de l'installation du système d'exploitation il est nécessaire de réalise
 Sur la figure \ref{fig1}, nous pouvons voir distinctement les différentes partitions, dont la partition générale sda1 de 237.5 Go qui nous permet de stocker différents fichiers tels que des paquets pour l'utilisation de Debian ou encore différents fichiers de configuration par exemple. De plus, nous pouvons voir la partition qui permet le mécanisme de swap. Il s'agit d'un mécanisme du système d'exploitation qui va se servir du disque dur pour stocker des informations normalement stockées dans la RAM, lorsque celle-ci est saturée. Il y a également un partition étendue qui est un conteneur de partitions logiques: sda2. Maintenant que Debian est installé sur notre routeur, il est prêt à être configuré et utilisé pour différentes tâches. 
 
 \subsection{Synthèse des commandes du gestionnaire de paquets}
-Sous Debian il existe de multiple gestionnaire de paquets, tel que aptitude, apt et dpkg. Mais dans notre cas nous avons utilisé "apt-get".
+Sous Debian il existe de multiple gestionnaires de paquets, tels que aptitude, apt et dpkg. Dans notre cas, nous avons utilisé ``apt-get".
 Il est important de comprendre que les outils de gestion des paquets Debian de plus haut niveau comme aptitude, apt-get ou synaptic reposent sur apt qui, lui-même, utilise dpkg pour la gestion des paquets sur le système.
 
 \subsubsection{Mise à jour du système}
-Il est possible de mettre a jour du système avec le gestionnaire de paquets "apt-get", en étant connecté en tant que root. Mais avant on utilise la commande "update" qui permet simplement d'actualiser la liste des paquets disponibles pour votre système. On lance cette commande avant d'installer un nouveau paquet ou avant d'installer les mises à jour du système. Elle ne modifie pas le système, elle demande simplement s'il existe de nouveaux paquets ou des nouvelles versions de paquets. On utilise cette commande de cette façons: 
+Il est possible de mettre à jour le système avec le gestionnaire de paquets ``apt-get", en étant connecté en tant que root ou en préfixant les commandes avec sudo. Auparavant, on utilise la commande ``update" qui permet d'actualiser la liste des paquets disponibles pour le système, à partir du dépôt de paquets. Le dépot de paquet est un service sur un serveur distant, contenant les fichiers des paquets à mettre à jour ou à installer. On lance la commande avant d'installer un nouveau paquet ou avant d'installer les mises à jour du système. Elle ne modifie pas le système, elle demande simplement s'il existe de nouveaux paquets ou des nouvelles versions de paquets. On utilise cette commande de cette façon en tant que root: 
 \begin{lstlisting}[language=bash] 
     $ apt-get update
 \end{lstlisting} 
@@ -67,20 +67,20 @@ Ou pour un utilisateur qui n'a pas tous les droits:
 \begin{lstlisting}[language=bash] 
     $ sudo apt-get update
 \end{lstlisting} 
-Cette étape n'est pas nécessaire mais c'est un bon réflexe à avoir avant de mettre à jours tous les paquets.
+Cette étape n'est pas nécessaire mais c'est un bon réflexe à avoir avant de mettre à jour tous les paquets.
 
-S'il y a des paquets à installer, alors on peut La commande "upgrade" pour installer les mises à jour disponibles de tous les paquets présents sur le système en utilisant les sources énumérées. De nouveaux paquets seront installés si cela est nécessaire, mais les paquets installés ne seront jamais supprimés.
+S'il y a des paquets à mettre à jour, alors on peut utiliser la commande ``upgrade" pour les installer à partir des fichiers stockés sur les sources énumérées. De nouveaux paquets seront installés si cela est nécessaire, mais les paquets installés ne seront jamais supprimés.
 \begin{lstlisting}[language=bash] 
     $ apt-get upgrade
         ou
     $ sudo apt-get upgrade
 \end{lstlisting}
 
-Afin de mettre l'ensemble du système, il est possible d'utiliser ceci:
+Afin de mettre à jour l'ensemble du système, il est possible d'utiliser ceci:
 \begin{lstlisting}[language=bash] 
     $ apt-get dist-upgrade
 \end{lstlisting}
-Il est recommandé d'installer les dernières versions de paquets disponibles pour le système utilisé que se soient Linux, Windows ou autres. Cela permet de corriger des bugs et d'installer les correctifs de sécurité.
+Il est recommandé d'installer les dernières versions de paquets disponibles pour le système utilisé que ce soit Linux, Windows ou autres. Cela permet de corriger des bugs et d'installer des correctifs de sécurité.
 
 \subsubsection{Les paquets}
 Afin d'administrer correctement un système GNU/Linux Debian, voici une liste non exhaustive des commandes de gestion de paquets de Debian à connaître.
@@ -94,33 +94,33 @@ Pour rechercher un paquet il est possible d’utiliser la commande "search", cet
  
 \item
 \begin{lstlisting}[language=bash] 
-    $ apt-cache show <Logiciel> 
+    $ apt-cache show <paquet> 
 \end{lstlisting}
-Pour afficher des informations détaillées concernant un logiciel.
+Pour afficher des informations détaillées concernant un paquet.
 
 \item
 \begin{lstlisting}[language=bash] 
-    $ apt-cache policy <Logiciel>
+    $ apt-cache policy <paquet>
 \end{lstlisting}
-Pour afficher les versions disponibles d'un logiciel.
+Pour afficher les versions disponibles d'un paquet.
 
 \item
 \begin{lstlisting}[language=bash] 
-    $ apt-get install <Logiciel>
+    $ apt-get install <paquet>
 \end{lstlisting}
-L'installation d'un logiciel disponible sur les serveurs, qui sera couramment utilisé durant nos installations.
+L'installation d'un paquet disponible sur les serveurs, qui sera couramment utilisé durant nos installations.
 
 \item
 \begin{lstlisting}[language=bash] 
-    $ apt-get remove <Logiciel>
+    $ apt-get remove <paquet>
 \end{lstlisting}
-Si nous avons besoin de désinstaller un logiciel, on peut utiliser ceci. En effet la désinstallation d'un logiciel avec cette commande ne supprime pas le fichier de configuration.
+Si nous avons besoin de désinstaller un paquet, on peut utiliser ceci. De plus, la désinstallation d'un paquet avec cette commande ne supprime pas les fichiers de configuration éventuel, ce qui permet de ne pas perdre sa configuration si on est amené à le réinstaller plus tard.
 
 \item
 \begin{lstlisting}[language=bash] 
-    $ apt-get purge <Logiciel>
+    $ apt-get purge <paquet>
 \end{lstlisting}
-A contrario ici le logiciel est désinstallé avec les tous les fichiers de configuration.
+A contrario ici le paquet est désinstallé avec tous les fichiers de configuration.
 
 \item
 \begin{lstlisting}[language=bash] 
@@ -140,7 +140,7 @@ Nettoyer complètement le dépôt local des fichiers de paquets récupérés.
 \end{lstlisting}
 Nettoyer le dépôt local des fichiers des paquets périmés.\\
  
-Et il y a évidemment les différentes mises à jour vue précédemment.
+Et il y a évidemment les différentes mises à jour vues précédemment.
 \item
 \begin{lstlisting}[language=bash] 
     $ apt-get update
@@ -148,7 +148,7 @@ Et il y a évidemment les différentes mises à jour vue précédemment.
     $ apt-get dist-upgrade
 \end{lstlisting} 
 \end{itemize}
-Avec toutes ces commandes nous sommes fin prêt à mettre en place tous un tas de service divers et varié tel qu'un DNS ou encore un serveur LAMP par exemple.
+Avec toutes ces commandes, nous sommes fin prêt à mettre en place tout un tas de service divers et variés tel qu'un DNS ou encore un serveur LAMP par exemple.
 
 \section{Paramétrage du réseau}
 Pour pouvoir commencer à communiquer entre différentes machines, nous avons ensuite défini la répartition des adresses IP pour chaque groupe (chaque agence) et paramétré en conséquences les différentes interfaces réseaux sur le routeur puis le client. Pour cela, nous nous sommes connectés au réseau IEM via la carte réseau intégré à la carte mère sur routeur, la première carte réseau externe a été branchée au switch afin de permettre la communication avec les autres groupes, donc le réseau d'interconnexion et dernièrement la deuxième carte réseau externe est utilisée pour le réseau privé mais puisque nous n'avons qu'un client, nous l'avons directement connecté. Toutes les connexions ont étés effectuées via des câbles Ethernet standard. Ici le but de la manipulation est de mettre en place un réseau d'entreprises et d'une infrastructure de services.
@@ -348,22 +348,23 @@ Et finalement on peut afficher l'interface d'écoute du démon par l'intermédia
 \end{lstlisting}
 En cas de problème ou pour simplement monitorer ce qu'il se passe sur notre serveur, il peut être intéressant de garder une trace de ce qu'il se passe avec le service. Pour cela, nous avons besoin de mettre un place un système de logs dans notre DHCP.
 
-\subsection{Système de log pour le DHCP}
-
+\subsection{Système de logs pour le DHCP}
+TODO
 \section{Sauvegarde automatique}
 \subsection{Rsync}
-Les fichiers important tels que les fichiers contenue dans /etc ou /var sont souvent sauvegardé afin de les récuperer en cas de problèmes. Pour mettre en place une telle sauvegarde, nous avons utilisé un logiciel nommée "rsync" qui est un logiciel de synchronisation de fichier. De plus il est souvent utilisé pour mettre en place des systèmes de sauvegarde distante ou des points de restauration du système, ce qui est parfaitement ce que nous cherchons pour notre serveur.
-L'appel de base pour utiliser rsync se fait simplement par :
+Les fichiers importants tels que les logs ou les données sont souvent sauvegardés afin de pouvoir les récuperer en cas de problèmes. Pour mettre en place une telle sauvegarde, nous avons utilisé un paquet nommé ``rsync" qui permet la synchronisation de fichiers. De plus, il est utilisé pour mettre en place des systèmes de sauvegardes distantes ou de points de restauration du système, ce qui est parfaitement ce que nous cherchons pour notre serveur.
+La commande de base pour utiliser rsync se fait par :
 \begin{lstlisting}[language=bash] 
     $ rsync source/ destination/
 \end{lstlisting}
-Mais dans notre cas nous allons pousser un peu plus loin et utiliser SSH afin de synchroniser nos fichiers à distance sur une autre machine. Le protocol SSH permet d'établir une communication chiffrée, donc sécurisée, sur un réseau informatique entre une machine locale (le client) et une machine distante (le serveur). Pour utiliser SSH il est nécessaire de l'installer via le gestionnaire de paquets, et le paramétrer via les commandes :
+Cette commande va sauvegarder tous les fichiers d'un répertoire source dans un autre répertoire destination.
+Cependant, dans notre cas nous allons pousser un peu plus loin et utiliser SSH afin de synchroniser nos fichiers à distance sur une autre machine. Le protocole SSH permet d'établir une communication chiffrée entre une machine locale (le client) et une machine distante (le serveur). Pour utiliser SSH, il est nécessaire de l'installer via le gestionnaire de paquets, et le paramétrer via les commandes :
 \begin{lstlisting}[language=bash] 
     $ sudo apt install openssh-serveur
     $ ssh-keygen
     $ ssh-copy-id -i ~/.ssh/id_rsa.pub etudiant@10.1.2.2
 \end{lstlisting}   
-Comme expliqué précédemment une fois l'installation de SSH terminé, il nous faut générer une pair de clé public et privé d'authentification (2ème commande) qui vont être enregistré dans les fichiers "/.ssh/id\_rsa" pour la clé privé et "/.ssh/id\_rsa.pub" pour la clé public. Une fois les clés généré avec succès nous allons les utiliser pour se connecter en SSH à notre client. La commande ssh-copy-id facilite la connexion par clé SSH, ce qui supprime le besoin d'un mot de passe pour chaque connexion. Une fois la connexion au client correctement configuré, on peut l'utiliser avec rsync afin de sauvegarder les fichiers que nous voulons sur le client. Voici la manipulation de base à effectuer: 
+Comme expliqué précédemment, une fois l'installation de SSH terminée, il nous faut générer une paire de clé public et privée d'authentification (ssh-keygen) qui vont être enregistrés dans les fichiers ``/.ssh/id\_rsa" pour la clé privée et "/.ssh/id\_rsa.pub" pour la clé public. Une fois les clés générées avec succès, nous allons les utiliser pour se connecter en SSH à notre client. La commande ssh-copy-id facilite la connexion par clé SSH, ce qui supprime le besoin d'un mot de passe pour chaque connexion. Une fois la connexion au client correctement configuré, on peut l'utiliser avec rsync afin de sauvegarder les fichiers que nous voulons sur le client. Voici la manipulation de base à effectuer: 
 \begin{lstlisting}[language=bash] 
     $ rsync -avz -e ssh chemin/source/ 
         user@ip:"/chemin de destination/"
@@ -373,21 +374,21 @@ Et dans notre cas nous utilisons précisement:
     $ rsync -avz -e ssh /etc 
         etudiant@10.1.2.2:/home/etudiant/Bureau/backup/
 \end{lstlisting}   
-Le serveur est capable dorénavant de sauvegarder l'ensemble de sont répertoire "/etc" dans le répertoire "/home/etudiant/Bureau/backup/" de notre client, simplement via l'automatisation de rsync par SSH. Mais il est alors intéressant de se demander comment automatiser totalement les sauvegardes. 
+Le serveur est capable dorénavant de sauvegarder l'ensemble de sont répertoire "/etc" dans le répertoire "/home/etudiant/Bureau/backup/" de notre client, simplement via l'utilisation de rsync par SSH. Mais il est encore plus intéressant de se demander comment automatiser totalement cette sauvegarde. 
 
 \subsection{Cron}
-Dans le monde de l'informatique, l'automatisation de tâches est très souvent recherché pour gagner du temps et ne plus s'occuper des tâches automatisées. C'est pour cette raison que nous allons utilisé en plus de rsync et SSH un programme nommé "cron". Cron est un programme qui permet de d'exécuter automatiquement des scripts, des commandes ou des logiciels à une date et une heure spécifiée précise, ou selon un cycle défini à l’avance. Cron est parfois appelé "gestionnaire de tâches planifiées" ou "planificateur de tâches". Chaque utilisateur a un fichier crontab, lui permettant d'indiquer les actions à exécuter. Dans notre cas nous allons utiliser le fichier crontab de l'utilisateur "root".
+Dans le monde de l'informatique, l'automatisation de tâches est très souvent recherchée pour gagner du temps et ne plus s'occuper des tâches automatisées. C'est pour cette raison que nous allons utiliser en plus de rsync et SSH un programme nommé ``cron". Cron est un programme qui permet d'exécuter automatiquement des scripts, des commandes ou des services à une date et une heure spécifiée précise, ou selon un cycle défini à l’avance. Cron est parfois appelé ``gestionnaire de tâches planifiées" ou ``planificateur de tâches". Chaque utilisateur à un fichier crontab, lui permettant d'indiquer les actions à exécuter et leur fréquence. Dans notre cas nous allons utiliser le fichier crontab de l'utilisateur ``root".
 La commande : 
 \begin{lstlisting}[language=bash] 
     $ crontab -e 
 \end{lstlisting}   
-est utiliser afin d'éditer les action du fichier crontab.
-Dans le fichier crontab nous allons renseigner cette ligne qui reprend ce qui a était expliqué précédemment avec rsync et SSH : 
+est utilisée afin d'éditer les actions grâce au fichier crontab, qui s'ouvre après avoir défini un éditeur de texte à utiliser la première fois qu'on lance cette commande.
+Dans le fichier crontab, nous allons renseigner cette ligne qui reprend ce qui a été expliqué précédemment avec rsync et SSH : 
 \begin{lstlisting}[language=bash] 
         0 15 * * * rsync -avz -e ssh /etc 
             etudiant@10.1.2.2:/home/etudiant/Bureau/backup/
 \end{lstlisting}   
-Mais nous y ajoutons cette fois "0 15 * * *", qui veut dire que nous allons appliquer le principe de rsync et SSH tous les jours de tous les mois à 15h et 0 minute. En effet le premier paramètre indique les minutes comprises entre 1 et 60, le second indique les heures de 1 à 24, le troisième est pour les jours dans le mois donc de 1 à 31. Et les deux derniers sont pour les mois et jours de la semaines compris entre 1 à 12 pour les mois et 1 (lundi) et 7 (dimanche) pour les jours.
+Mais nous y ajoutons cette fois ``0 15 * * *", qui veut dire que nous allons appliquer le principe de rsync et SSH tous les jours de tous les mois à 15h et 0 minute. En effet, le premier paramètre indique les minutes comprises entre 1 et 60, le second indique les heures de 1 à 24, le troisième est pour les jours dans le mois donc de 1 à 31. Et les deux derniers sont pour les mois et jours de la semaines compris entre 1 à 12 pour les mois et 1 (lundi) et 7 (dimanche) pour les jours.
 
 Pour examiner les tâches planifiées de l'utilisateur courant (le contenu du fichier crontab), on peut utiliser:
 \begin{lstlisting}[language=bash] 
@@ -401,15 +402,15 @@ Ce qui nous affiche :
 \end{figure}
 \\\\
 
-La mise en place de notre réseau d'entreprise et d'infrastructure est terminé. Pour rappel nous avons installé une distribution Linux, puis paramétré les bases de notre réseau, ensuite nous avons mis en place un service DHCP et finalement une sauvegarde automatique. Nous allons désormais étendre notre réseau et mettre en place un serveur de nom de domaine. Mais avant de mettre en place le DNS, il faut regarder comment il fonctionne.
+La mise en place de notre réseau d'entreprise et d'infrastructure est terminée. Pour rappel, nous avons installé une distribution Linux, puis paramétré les bases de notre réseau. Ensuite, nous avons mis en place un service DHCP et finalement une sauvegarde automatique. Nous allons désormais étendre notre réseau et mettre en place un serveur de nom de domaine (DNS). Mais avant de mettre en place le DNS, il faut regarder comment il fonctionne.
 
 \section{Interrogation d'un serveur DNS}
-Avant toutes installation nous avons commencer par comprendre le fonctionnement du DNS. En effet le DNS pour Domain Name Serveur en anglais est un service informatique distribué. Il est utilisé pour traduire les noms de domaine sur Internet avec leurs adresse IP ou autres enregistrements. Pour faire simple le serveur DNS est un service qui permet d'associer à un site web (ou un ordinateur connecté ou un serveur) une adresse IP. Pour la suite de notre installation le DNS va être un composant important de notre réseau. Il est important de rappeler que tous les équipements connectés à un réseau IP, comme Internet, possèdent une adresse IP qui les identifie sur le réseau.
+Avant toute installation, nous avons commencé par comprendre le fonctionnement du DNS. En effet, le DNS (pour Domain Name Serveur en anglais) est un service informatique distribué. Il est utilisé pour traduire les noms de domaine sur Internet avec leurs adresse IP ou autres enregistrements. Pour faire simple, le serveur DNS est un service qui permet d'associer à un site web (ou un ordinateur connecté ou un serveur) une adresse IP. Cette traduction peut se faire dans les 2 sens: trouver une IP à partir d'un nom de domaine mais également de retrouver le nom de domaine à partir de l'IP. Pour la suite de notre installation le DNS va être un composant important de notre réseau. Il est important de rappeler que tous les équipements connectés à un réseau IP, comme Internet, possèdent une adresse IP qui les identifie sur le réseau.
 
 \subsection{Les commandes host, dig et nslookup}
-Les serveurs DNS que nous allons interroger on pour but de montrer les informations qu'il contiennent et ainsi comprendre les bases. Les serveurs DNS que l'on a interrogé durant nos tests, sont interrogé via les commandes : host, dig et nslookup.
+Les serveurs DNS que nous allons interroger ont pour but de montrer les informations qu'il contiennent et ainsi comprendre les bases. Les serveurs DNS que l'on a interrogé durant nos tests, sont interrogés via les commandes : host, dig et nslookup.
 
-La commande host renvoie l’IP et la mac adresse associée au nom de domaine, on l'utilise comme ceci
+La commande host renvoie l’adresse IP et l'adresse MAC associées au nom de domaine, on l'utilise comme ceci
 \begin{lstlisting}[language=bash] 
     $ host {nom}
 \end{lstlisting} 
@@ -426,9 +427,10 @@ Qui nous a retourné ceci:
 \label{fig9}
 \end{figure}
 
-Sur l'image \ref{fig9}, 2 informations importantes sont donné. C'est à dire l'IP du DNS sur la première ligne avec comme IP la suivante : "130.89.148.77", et la mac adresse sur la second tel que : "2001:67c:2564:a119::77". Voila ce que nous ressort la commande host. Voyons maintenant avec dig.
-
-Dig est quand à lui est un utilitaire en ligne de commande qui effectue une recherche DNS en interrogeant des serveurs de noms, et on l'utilise de cette façon: 
+Sur l'image \ref{fig9}, 2 informations importantes sont données: l'adresse IP du site sur la première ligne avec comme valeur: ``130.89.148.77", et l'adresse MAC sur la seconde: ``2001:67c:2564:a119::77". Voila ce que nous ressort la commande host, voyons maintenant avec dig.
+\newline
+\par
+Dig est également un utilitaire en ligne de commande qui effectue une recherche DNS en interrogeant des serveurs de noms, et on l'utilise de cette façon: 
 \begin{lstlisting}[language=bash] 
     $ dig {nom}
 \end{lstlisting} 
@@ -445,9 +447,9 @@ Qui nous a indiqué:
 \label{fig10}
 \end{figure}
 
-Cette fois sur l'image \ref{fig10}, nous obtenons d'avantages d'informations sur le DNS interrogé. Les lignes commençant par ";" sont des commentaires. La première ligne nous indique la version de la commande dig (9.16.22). Dans l’en-tête nous pouvons savoir si une réponse à était reçu (ANSWER: 1), afin de savoir si le DNS est fonctionnel ou non. Ensuite la section "QUESTION", nous indique simplement la requête, qui dans ce cas est une requête pour l’enregistrement "A" de www.debian.org. IN signifie qu’il s’agit d’une recherche Internet. La section "ANSWER" nous indique que www.debian.org a l’adresse IP "130.89.148.77". Enfin, il y a quelques statistiques supplémentaire sur la requête, comme la date ou la taille du paquets qui contenais le message.
+Cette fois sur l'image \ref{fig10}, nous obtenons d'avantages d'informations sur le DNS interrogé. Les lignes commençant par ";" sont des commentaires. La première ligne nous indique la version de la commande dig (9.16.22). Dans l’en-tête nous pouvons voir si une réponse a été reçue (ANSWER: 1), afin de savoir si le DNS a répondu ou non. Ensuite la section "QUESTION", nous indique simplement la requête, qui dans ce cas est une requête pour l’enregistrement ``A" de www.debian.org. IN signifie qu’il s’agit d’une recherche Internet. La section "ANSWER" nous indique que www.debian.org a l’adresse IP ``130.89.148.77". Enfin, il y a quelques statistiques supplémentaires sur la requête, comme la date ou la taille du paquets qui contenait le message.
 
-L’utilitaire nslookup (Name System Look Up) est un outil qui permet d’interroger directement un serveur de noms et d’en obtenir les informations concernant un domaine, on peut l'utiliser comme ceci: 
+L’utilitaire nslookup (Name System Look Up) est, tout comme les deux autres, un outil qui permet d’interroger directement un serveur de noms et d’en obtenir les informations concernant un domaine. On peut l'utiliser comme ceci: 
 \begin{lstlisting}[language=bash] 
     $ nslookup {nom}
 \end{lstlisting} 
@@ -464,13 +466,13 @@ Qui nous a donc retourné:
 \label{fig11}
 \end{figure}
 
-Finalement on observe sur l'image \ref{fig11}, que nslookup est a mis chemin entre dig et host. En effet il nous affiche le serveur qui à interrogé le DNS, et la réponse du DNS en question avec sont nom, sont adresse et sa mac adresse. Tous comme dig mais en plus synthétique. En règles général avec nslookup nous avons toutes les informations nécessaire.
+Finalement on observe sur l'image \ref{fig11}, que nslookup est à mis chemin entre dig et host. En effet, il nous affiche le serveur qui à interrogé le DNS, et la réponse du DNS en question avec son nom, son adresse IP et son adresse MAC, comme dig mais en plus synthétique. En règle générale avec nslookup nous avons toutes les informations nécessaire.
 
-Que se soit pour host, dig ou encore nslookup, l'indication "{nom}" indique l’adresse IP ou le nom d’hôte du serveur à interroger. Mais ils sont utilisable avec d'autres paramètres, comme nous allons le voir juste après.\\\\
+Que se soit pour host, dig ou encore nslookup, l'indication "{nom}" indique l’adresse IP ou le nom d’hôte du serveur à interroger. Cependant, ils sont utilisables avec d'autres paramètres, comme nous allons le voir juste après.\\\\
 
-L'option "ns" est pour "nameserveur", cela permet d'indiquer à Internet où aller pour trouver l' adresse IP d'un domaine. En effet le mécanisme consistant à trouver l'adresse IP correspondant au nom d'un hôte est appelé "résolution de nom de domaine". L'application permettant de réaliser cette opération est appelée en anglais "resolver". Lorsqu'une application souhaite se connecter à un hôte connu par son nom de domaine (par exemple "www.debian.org"), celle-ci va interroger un serveur de noms défini dans sa configuration réseau.\\
+L'option "ns" est pour "nameserveur", cela permet d'indiquer où aller (à qui demander) pour trouver l'adresse IP d'un domaine. En effet, le mécanisme consistant à trouver l'adresse IP correspondant au nom d'un hôte est appelé "résolution de nom de domaine". L'application permettant de réaliser cette opération est appelée en anglais "resolver". Lorsqu'une application souhaite se connecter à un hôte connu par son nom de domaine (par exemple "www.debian.org"), celle-ci va interroger un serveur de noms défini dans sa configuration réseau.\\
 
-Voici les différentes requête que nous avons essayé: 
+Voici les différentes requêtes que nous avons essayé: 
 \begin{lstlisting}[language=bash] 
     $ host -t ns www.debian.org
     $ dig www.debian.org ns
@@ -491,25 +493,25 @@ Voyons en détails les réponse renvoyé par la ligne 1 et 2.
 \caption{Requête de nameserveur pour un DNS avec dig.}
 \label{fig13}
 \end{figure}
-Première constatation évidente, nous avons interrogé le même DNS afin de comparé les réponses. Tous comme expliqué précèdent dig renvoient beaucoup plus de détails sur la requête que host. On observe principalement que la réponse des 2 commandes est identique, mais pour une requête qui aurais besoin de passer par beaucoup plus de nom de domaine, la commande dig serait plus intéressante. En effet avec dig il est possible d'avoir le nombre de réponses obtenues; ici "ANSWER: 3" pour "geo1.debian.org", "geo2.debian.org" et "geo3.debian.org". 
+Nous pouvons immédiatement constater que nous avons interrogé le même DNS afin de comparer les réponses. Comme expliqué précèdement, dig renvoient beaucoup plus de détails sur la requête que host. On observe principalement que la réponse des 2 commandes est identique, mais pour une requête qui aurait besoin de passer par beaucoup plus de nom de domaine, la commande dig serait plus intéressante. En effet, avec dig il est possible d'avoir le nombre de réponses obtenues; ici ``ANSWER: 3" pour ``geo1.debian.org", ``geo2.debian.org" et ``geo3.debian.org". 
 
-Pour conclure une requête est ainsi envoyée au premier serveur de noms (appelé "serveur de nom primaire"). Si celui-ci possède l'enregistrement dans son cache, il l'envoie à l'application, dans le cas contraire il interroge un serveur racine. Le serveur de nom racine renvoie une liste de serveurs de noms faisant autorité sur le domaine. Le serveur de noms primaire faisant autorité sur le domaine va alors être interrogé et retourner l'enregistrement correspondant à l'hôte sur le domaine dans le cas présent les serveurs "geo1.debian.org", "geo2.debian.org" et "geo3.debian.org". 
+Pour conclure, une requête est ainsi envoyée au premier serveur de noms (appelé "serveur de nom primaire"). Si celui-ci possède l'enregistrement dans son cache, il l'envoie à l'application. Dans le cas contraire, il interroge un serveur racine. Le serveur de nom racine renvoie une liste de serveurs de noms faisant autorité sur le domaine. Le serveur de noms primaire faisant autorité sur le domaine va alors être interrogé et retourner l'enregistrement correspondant à l'hôte sur le domaine: dans le cas présent les serveurs ``geo1.debian.org", ``geo2.debian.org" et ``geo3.debian.org". 
 
-Finalement nous pouvons conclure que dig et host renvoie les informations nécessaires identiques, host reste tous de même limité en informations tandis que dig est davantage détaillé. Les 2 commandes peuvent servir, tous depend du degré de détails dont on a besoin. 
+Finalement, nous pouvons conclure que dig et host renvoie les informations nécessaires identiques, host reste tout de même limité en informations tandis que dig est davantage détaillé. Les 2 commandes peuvent servir, tout dépend du niveau de détails dont on a besoin. 
 
 \subsection{Fichier de renseignement du serveur DNS}
-Sur notre serveur, le serveur DNS doit être indiqué dans le fichier système: "/etc/network/interfaces". C'est le même fichier qui renseigne les interfaces réseau. Ce fichier a déjà était évoquer précédemment, mais pas dans sa totalité, en effet il est temps d'expliquer la ligne suivante: 
+Sur notre serveur, le serveur DNS à utiliser doit être indiqué dans le fichier système: ``/etc/network/interfaces". C'est le même fichier qui renseigne les interfaces réseau. Ce fichier a déjà été évoqué précédemment, mais pas dans sa totalité. En effet, il est temps d'expliquer la ligne suivante: 
 \begin{lstlisting}[language=bash] 
     $ dns-nameserveur 172.31.21.35 193.50.50.6
 \end{lstlisting}
-Cette ligne indique les 2 serveurs de noms de domaine que le système doit utiliser. En réalité le DNS avec l'adresse "172.31.21.35" est le serveur DNS primaire du réseau IEM, et le DNS avec l'adresse "193.50.50.5" est le serveur DNS secondaire du réseau IEM. Ces informations sont traité par le "resolver" qui a était évoquer dans la partie précédente. 
+Cette ligne indique les 2 serveurs de noms de domaine que le système doit utiliser. En réalité le DNS avec l'adresse ``172.31.21.35" est le serveur DNS primaire du réseau IEM, et le DNS avec l'adresse ``193.50.50.5" est le serveur DNS secondaire du réseau IEM. Ces informations sont traités par le ``resolver" qui a été évoqué dans la partie précédente. 
 
 \subsection{Rôle du fichier /etc/hosts}
-Ce fichier, existant depuis le début des années 80, a pour rôle d'associer une adresse IP à un nom d'hôte (un nom de domaine n'étant qu'une forme structurée de nom d'hôte). Il est donc présent dans le répertoire "/etc" et est consulté par le système à chaque fois qu'il accède à un nom d'hôte spécifique. Notons qu'il est consulté avant qu'une requête soit envoyée à un DNS. Aucune autre machine de notre réseau (même local) ne prendra en compte ce qui y est écrit dans celui-ci. Son utilisation est restreinte à de petits réseaux locaux ainsi qu'à quelques autres cas particuliers.
+Ce fichier, existant depuis le début des années 80, a pour rôle d'associer une adresse IP à un nom d'hôte (un nom de domaine n'étant qu'une forme structurée de nom d'hôte). Il est donc présent dans le répertoire ``/etc" et est consulté par le système à chaque fois qu'il accède à un nom d'hôte spécifique. Notons qu'il est consulté avant qu'une requête soit envoyée à un DNS. Aucune autre machine de notre réseau (même local) ne prendra en compte ce qui y est écrit dans celui-ci. Son utilisation est restreinte à de petits réseaux locaux ainsi qu'à quelques autres cas particuliers.
 
 \section{Installation d'un DNS}
 
-Pour la suite des explications, il est important de préciser que nous avons choisi comme nom de domaine: agence.altantide.
+Pour la suite des explications, il est important de préciser que nous avons choisi comme nom de domaine: agence.atlantide.
 
 \subsection{Mise en place du DNS}
 
