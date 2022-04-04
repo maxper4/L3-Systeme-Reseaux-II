@@ -349,7 +349,30 @@ Et finalement on peut afficher l'interface d'écoute du démon par l'intermédia
 En cas de problème ou pour simplement monitorer ce qu'il se passe sur notre serveur, il peut être intéressant de garder une trace de ce qu'il se passe avec le service. Pour cela, nous avons besoin de mettre un place un système de logs dans notre DHCP.
 
 \subsection{Système de logs pour le DHCP}
-TODO
+En réalité, notre service DHCP écrit déjà des logs et ce sont que nous n'ayons rien à configurer. Cependant, ces logs sont écrits avec ceux d'autres services dans les logs du système: syslog. Pour les obtenir dans un fichier spécialement dédié, nous devons modifier, ou plutôt ajouter une configuration à syslog.
+\begin{figure}[H]
+\centerline{ \includegraphics[width=13cm]{images/dhcpLogsConf.png}}
+\caption{Fichier de configuration de syslog}
+\label{fig14}
+\end{figure}
+Pour cela, nous avons modifié le fichier de configuration /etc/rsyslog.conf pour y ajouter ``local7.*   -/var/log/dhcpd.log" comme nous le motnre la figure \ref{fig14}. Le tiret avant le chemin du fichier n'est pas la par hasard: il sert à indiquer à syslog d'effectuer une écriture asynchrone: mettre en pause le processus à chaque fois que nous devons effectuer une écriture pour les logs peut se révéler très gourmand sur les performances de la machine et le tiret indique que ce n'est pas nécessaire.\\\\
+
+Nous pouvons voir sur la figure \ref{fig7} que lors de la configuration initiale du serveur DHCP, nous avions ajouté ``log-facility local7;" afin de définir les logs sur l'entrée 7, qui est par défaut pour les logs du réseau. C'est grâce à cela que nous avons pu le mettre en correspondance dans syslog, qui lui définit le fichier dans lequel écrire.\\\\
+
+Pour finir cette configuration, nous avons créé le fichier dans lequel nous souhaitons écrire nos logs, en tant que  ``/var/log/dhcpd.log". Nous lui avons donné le propriétaire ainsi que les droits nécessaires avec les commandes : 
+\begin{lstlisting}[language=bash] 
+    $ sudo touch /var/log/dhcpd.log
+    $ sudo chown syslog:adm /var/log/dhcpd.log
+    $ sudo chmod 0640 /var/log/dhcpd.log
+\end{lstlisting}
+
+Il a finalement été nécessaire de vérifier que tout fonctionnait bien en regardant si des informations étaient effectivement écrites dans ce fichier. La figure \ref{fig15} en montre un petit extrait. On peut d'ailleurs y voir le client tenter de se connecter (DHCPDISCOVER) et que l'adresse 10.1.2.2 lui est proposée (DHCPOFFER).
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/dhcpLogsExample.png}}
+\caption{Fichier de configuration de syslog}
+\label{fig15}
+\end{figure}
+
 \section{Sauvegarde automatique}
 \subsection{Rsync}
 Les fichiers importants tels que les logs ou les données sont souvent sauvegardés afin de pouvoir les récuperer en cas de problèmes. Pour mettre en place une telle sauvegarde, nous avons utilisé un paquet nommé ``rsync" qui permet la synchronisation de fichiers. De plus, il est utilisé pour mettre en place des systèmes de sauvegardes distantes ou de points de restauration du système, ce qui est parfaitement ce que nous cherchons pour notre serveur.
@@ -400,8 +423,6 @@ Ce qui nous affiche :
 \caption{Contenue du fichier crontab.}
 \label{fig8}
 \end{figure}
-\\\\
-
 La mise en place de notre réseau d'entreprise et d'infrastructure est terminée. Pour rappel, nous avons installé une distribution Linux, puis paramétré les bases de notre réseau. Ensuite, nous avons mis en place un service DHCP et finalement une sauvegarde automatique. Nous allons désormais étendre notre réseau et mettre en place un serveur de nom de domaine (DNS). Mais avant de mettre en place le DNS, il faut regarder comment il fonctionne.
 
 \section{Interrogation d'un serveur DNS}

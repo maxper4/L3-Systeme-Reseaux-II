@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.3)  4 APR 2022 19:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.3)  4 APR 2022 22:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -495,169 +495,206 @@ l.326
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
 l.326 
-       <./images/dhcpServeur.PNG> <./images/dhcpdConfServeur.PNG>] [14]
-Overfull \hbox (9.0036pt too wide) in paragraph at lines 389--390
+       <./images/dhcpServeur.PNG> <./images/dhcpdConfServeur.PNG>]
+<images/dhcpLogsConf.png, id=374, 360.59718pt x 214.55156pt>
+File: images/dhcpLogsConf.png Graphic file (type png)
+<use images/dhcpLogsConf.png>
+Package pdftex.def Info: images/dhcpLogsConf.png  used on input line 354.
+(pdftex.def)             Requested size: 369.88582pt x 220.07718pt.
+ [14]
+Underfull \hbox (badness 10000) in paragraph at lines 358--359
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--359
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 360--361
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 360--361
+
+ []
+
+<images/dhcpLogsExample.png, id=392, 815.29594pt x 405.76593pt>
+File: images/dhcpLogsExample.png Graphic file (type png)
+<use images/dhcpLogsExample.png>
+Package pdftex.def Info: images/dhcpLogsExample.png  used on input line 371.
+(pdftex.def)             Requested size: 426.79134pt x 212.41115pt.
+[15pdfTeX warning (ext4): destination with the same identifier (name{figure.8})
+ has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.375 
+       <./images/dhcpLogsConf.png>] [16pdfTeX warning (ext4): destination with 
+the same identifier (name{figure.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.391 \begin{lstlisting}[language=bash]
+                                        <./images/dhcpLogsExample.png>]
+Overfull \hbox (9.0036pt too wide) in paragraph at lines 412--413
 [][][][][][][][][][][][][][] 
  []
 
-[15]
-<images/rsync&crontab.png, id=410, 834.86906pt x 306.39468pt>
+<images/rsync&crontab.png, id=416, 834.86906pt x 306.39468pt>
 File: images/rsync&crontab.png Graphic file (type png)
 <use images/rsync&crontab.png>
-Package pdftex.def Info: images/rsync&crontab.png  used on input line 399.
+Package pdftex.def Info: images/rsync&crontab.png  used on input line 422.
 (pdftex.def)             Requested size: 426.79134pt x 156.63324pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 397--404
-
+Overfull \hbox (13.94492pt too wide) in paragraph at lines 420--427
+\OT1/cmr/m/n/10 Ce qui nous af-fiche : La mise en place de notre r^^Seseau d'en
+treprise et d'infrastructure
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 397--404
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
- []
-
-[16pdfTeX warning (ext4): destination with the same identifier (name{figure.8})
- has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  
-l.412 
-       <./images/rsync&crontab.PNG>]
-<images/hostDebian.png, id=419, 335.00156pt x 36.88782pt>
+[17]
+<images/hostDebian.png, id=434, 335.00156pt x 36.88782pt>
 File: images/hostDebian.png Graphic file (type png)
 <use images/hostDebian.png>
-Package pdftex.def Info: images/hostDebian.png  used on input line 425.
+Package pdftex.def Info: images/hostDebian.png  used on input line 446.
 (pdftex.def)             Requested size: 426.79134pt x 46.99501pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 430--432
-
- []
-
-
-Overfull \hbox (6.94492pt too wide) in paragraph at lines 433--434
-[]\OT1/cmr/m/n/10 Dig est ^^Segalement un util-i-taire en ligne de com-mande qu
-i ef-fectue une recherche
- []
-
-<images/digDebian.png, id=421, 419.31656pt x 258.9675pt>
-File: images/digDebian.png Graphic file (type png)
-<use images/digDebian.png>
-Package pdftex.def Info: images/digDebian.png  used on input line 445.
-(pdftex.def)             Requested size: 426.79134pt x 263.58221pt.
-[17pdfTeX warning (ext4): destination with the same identifier (name{figure.9})
- has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  
-l.449 
-       <./images/hostDebian.PNG>]
-<images/nslookupDebian.png, id=437, 298.86656pt x 113.67468pt>
-File: images/nslookupDebian.png Graphic file (type png)
-<use images/nslookupDebian.png>
-Package pdftex.def Info: images/nslookupDebian.png  used on input line 464.
-(pdftex.def)             Requested size: 426.79134pt x 162.34193pt.
  [18pdfTeX warning (ext4): destination with the same identifier (name{figure.10
 }) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.468 
-       <./images/digDebian.PNG>]
-Underfull \hbox (badness 10000) in paragraph at lines 471--472
+l.450 
+       <./images/rsync&crontab.PNG>]
+Underfull \hbox (badness 10000) in paragraph at lines 451--453
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 471--472
+Overfull \hbox (6.94492pt too wide) in paragraph at lines 454--455
+[]\OT1/cmr/m/n/10 Dig est ^^Segalement un util-i-taire en ligne de com-mande qu
+i ef-fectue une recherche
+ []
+
+<images/digDebian.png, id=446, 419.31656pt x 258.9675pt>
+File: images/digDebian.png Graphic file (type png)
+<use images/digDebian.png>
+Package pdftex.def Info: images/digDebian.png  used on input line 466.
+(pdftex.def)             Requested size: 426.79134pt x 263.58221pt.
+[19pdfTeX warning (ext4): destination with the same identifier (name{figure.11}
+) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.472 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+12}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.472 
+       <./images/hostDebian.PNG> <./images/digDebian.PNG>]
+<images/nslookupDebian.png, id=461, 298.86656pt x 113.67468pt>
+File: images/nslookupDebian.png Graphic file (type png)
+<use images/nslookupDebian.png>
+Package pdftex.def Info: images/nslookupDebian.png  used on input line 485.
+(pdftex.def)             Requested size: 426.79134pt x 162.34193pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 492--493
 
  []
 
 
-Overfull \hbox (19.05621pt too wide) in paragraph at lines 473--474
+Underfull \hbox (badness 10000) in paragraph at lines 492--493
+
+ []
+
+
+Overfull \hbox (19.05621pt too wide) in paragraph at lines 494--495
 \OT1/cmr/m/n/10 con-necter ^^Ra un h^ote connu par son nom de do-maine (par ex-
 em-ple "www.debian.org"),
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 473--474
+Underfull \hbox (badness 10000) in paragraph at lines 494--495
 
  []
 
-<images/hostDebianNS.png, id=449, 310.15875pt x 50.43843pt>
-File: images/hostDebianNS.png Graphic file (type png)
-<use images/hostDebianNS.png>
-Package pdftex.def Info: images/hostDebianNS.png  used on input line 486.
-(pdftex.def)             Requested size: 426.79134pt x 69.40498pt.
-[19pdfTeX warning (ext4): destination with the same identifier (name{figure.11}
+[20pdfTeX warning (ext4): destination with the same identifier (name{figure.13}
 ) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.490 
+l.495 
        <./images/nslookupDebian.PNG>]
-<images/digDebianNS.png, id=463, 426.09187pt x 283.81032pt>
+<images/hostDebianNS.png, id=473, 310.15875pt x 50.43843pt>
+File: images/hostDebianNS.png Graphic file (type png)
+<use images/hostDebianNS.png>
+Package pdftex.def Info: images/hostDebianNS.png  used on input line 507.
+(pdftex.def)             Requested size: 426.79134pt x 69.40498pt.
+<images/digDebianNS.png, id=474, 426.09187pt x 283.81032pt>
 File: images/digDebianNS.png Graphic file (type png)
 <use images/digDebianNS.png>
-Package pdftex.def Info: images/digDebianNS.png  used on input line 492.
+Package pdftex.def Info: images/digDebianNS.png  used on input line 513.
 (pdftex.def)             Requested size: 426.79134pt x 284.29463pt.
- [20pdfTeX warning (ext4): destination with the same identifier (name{figure.12
+ [21pdfTeX warning (ext4): destination with the same identifier (name{figure.14
 }) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.499 
-      pdfTeX warning (ext4): destination with the same identifier (name{figure.
-13}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  
-l.499 
-       <./images/hostDebianNS.PNG> <./images/digDebianNS.PNG>]
-<images/resolvConf.png, id=472, 833.36343pt x 36.135pt>
-File: images/resolvConf.png Graphic file (type png)
-<use images/resolvConf.png>
-Package pdftex.def Info: images/resolvConf.png  used on input line 524.
-(pdftex.def)             Requested size: 426.79134pt x 18.50578pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<images/namedConfLocal.png, id=473, 830.35219pt x 272.51813pt>
-File: images/namedConfLocal.png Graphic file (type png)
-<use images/namedConfLocal.png>
-Package pdftex.def Info: images/namedConfLocal.png  used on input line 531.
-(pdftex.def)             Requested size: 426.79134pt x 140.07187pt.
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<images/namedConfOptions.png, id=474, 834.86906pt x 309.40594pt>
-File: images/namedConfOptions.png Graphic file (type png)
-<use images/namedConfOptions.png>
-Package pdftex.def Info: images/namedConfOptions.png  used on input line 538.
-(pdftex.def)             Requested size: 426.79134pt x 158.17262pt.
-[21] [22pdfTeX warning (ext4): destination with the same identifier (name{figur
-e.14}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  
-l.561 
+l.518 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 15}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.561 
-      pdfTeX warning (ext4): destination with the same identifier (name{figure.
-16}) has been already used, duplicate ignored
+l.518 
+       <./images/hostDebianNS.PNG> <./images/digDebianNS.PNG>] [22]
+<images/resolvConf.png, id=495, 833.36343pt x 36.135pt>
+File: images/resolvConf.png Graphic file (type png)
+<use images/resolvConf.png>
+Package pdftex.def Info: images/resolvConf.png  used on input line 545.
+(pdftex.def)             Requested size: 426.79134pt x 18.50578pt.
+<images/namedConfLocal.png, id=496, 830.35219pt x 272.51813pt>
+File: images/namedConfLocal.png Graphic file (type png)
+<use images/namedConfLocal.png>
+Package pdftex.def Info: images/namedConfLocal.png  used on input line 552.
+(pdftex.def)             Requested size: 426.79134pt x 140.07187pt.
+<images/namedConfOptions.png, id=497, 834.86906pt x 309.40594pt>
+File: images/namedConfOptions.png Graphic file (type png)
+<use images/namedConfOptions.png>
+Package pdftex.def Info: images/namedConfOptions.png  used on input line 559.
+(pdftex.def)             Requested size: 426.79134pt x 158.17262pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[23pdfTeX warning (ext4): destination with the same identifier (name{figure.16}
+) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.561 
-       <./images/resolvConf.PNG> <./images/namedConfLocal.PNG> <./images/namedC
-onfOptions.PNG>] (./Rapport.lof [23])
+l.582 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+17}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.582 
+       <./images/resolvConf.PNG> <./images/namedConfLocal.PNG>] [24pdfTeX warni
+ng (ext4): destination with the same identifier (name{figure.18}) has been alre
+ady used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.612 \section
+              {Conclusion} <./images/namedConfOptions.PNG>] (./Rapport.lof)
 \tf@lof=\write5
 \openout5 = `Rapport.lof'.
 
- [24] (./Rapport.aux)
+
+[25] (./Rapport.aux)
 Package rerunfilecheck Info: File `Rapport.out' has not changed.
 (rerunfilecheck)             Checksum: 50D52E63F1FF8E659C720C327FD2848B;8603.
  ) 
 Here is how much of TeX's memory you used:
- 10047 strings out of 478994
- 145690 string characters out of 5862208
- 644077 words of memory out of 5000000
- 27198 multiletter control sequences out of 15000+600000
+ 10072 strings out of 478994
+ 146144 string characters out of 5862208
+ 642195 words of memory out of 5000000
+ 27214 multiletter control sequences out of 15000+600000
  408020 words of font info for 42 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  71i,6n,74p,1638b,1343s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -670,10 +707,10 @@ ic/amsfonts/cm/cmr12.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr17.pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.
 pfb><d:/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/t
 exlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on Rapport.pdf (24 pages, 386664 bytes).
+Output written on Rapport.pdf (25 pages, 456928 bytes).
 PDF statistics:
- 592 PDF objects out of 1000 (max. 8388607)
- 520 compressed objects within 6 object streams
- 202 named destinations out of 1000 (max. 500000)
- 409 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 613 PDF objects out of 1000 (max. 8388607)
+ 536 compressed objects within 6 object streams
+ 209 named destinations out of 1000 (max. 500000)
+ 419 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -5,12 +5,14 @@
 \contentsline {figure}{\numberline {5}{\ignorespaces Route de notre routeur}}{11}{figure.5}%
 \contentsline {figure}{\numberline {6}{\ignorespaces Interface du DHCP}}{13}{figure.6}%
 \contentsline {figure}{\numberline {7}{\ignorespaces Configuration du serveur DHCP}}{13}{figure.7}%
-\contentsline {figure}{\numberline {8}{\ignorespaces Contenue du fichier crontab.}}{16}{figure.8}%
-\contentsline {figure}{\numberline {9}{\ignorespaces Exemple d'interrogation d'un DNS avec host.}}{17}{figure.9}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Exemple d'interrogation d'un DNS avec dig.}}{18}{figure.10}%
-\contentsline {figure}{\numberline {11}{\ignorespaces Exemple d'interrogation d'un DNS avec nslookup.}}{19}{figure.11}%
-\contentsline {figure}{\numberline {12}{\ignorespaces Requête de nameserveur pour un DNS avec host.}}{20}{figure.12}%
-\contentsline {figure}{\numberline {13}{\ignorespaces Requête de nameserveur pour un DNS avec dig.}}{20}{figure.13}%
-\contentsline {figure}{\numberline {14}{\ignorespaces Contenue du fichier de configuration de resolv.}}{22}{figure.14}%
-\contentsline {figure}{\numberline {15}{\ignorespaces Contenue du fichier de configuration local de named.}}{22}{figure.15}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Contenue du fichier de configuration des options de named.}}{22}{figure.16}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Fichier de configuration de syslog}}{15}{figure.8}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Fichier de configuration de syslog}}{16}{figure.9}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Contenue du fichier crontab.}}{18}{figure.10}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Exemple d'interrogation d'un DNS avec host.}}{19}{figure.11}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Exemple d'interrogation d'un DNS avec dig.}}{19}{figure.12}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Exemple d'interrogation d'un DNS avec nslookup.}}{20}{figure.13}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Requête de nameserveur pour un DNS avec host.}}{21}{figure.14}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Requête de nameserveur pour un DNS avec dig.}}{21}{figure.15}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Contenue du fichier de configuration de resolv.}}{23}{figure.16}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Contenue du fichier de configuration local de named.}}{23}{figure.17}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Contenue du fichier de configuration des options de named.}}{24}{figure.18}%
