@@ -238,7 +238,7 @@ Installation de Apache 2.4 :
     systemcl enable apache2 -> starting apache2 au boot
     la page web se trouve dans le fichier : /var/www/html/index.html
     
-Avec un clien connecté a internet et au réseau on peut aller sur : http://agence.atlantide/
+Avec un client connecté a internet et au réseau on peut aller sur : http://agence.atlantide/
      
 Création compte pour un dev web :
     adduser dev1

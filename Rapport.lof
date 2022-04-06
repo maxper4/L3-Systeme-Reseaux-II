@@ -13,6 +13,8 @@
 \contentsline {figure}{\numberline {13}{\ignorespaces Exemple d'interrogation d'un DNS avec nslookup.}}{20}{figure.13}%
 \contentsline {figure}{\numberline {14}{\ignorespaces Requête de nameserveur pour un DNS avec host.}}{21}{figure.14}%
 \contentsline {figure}{\numberline {15}{\ignorespaces Requête de nameserveur pour un DNS avec dig.}}{21}{figure.15}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Contenue du fichier de configuration de resolv.}}{23}{figure.16}%
-\contentsline {figure}{\numberline {17}{\ignorespaces Contenue du fichier de configuration local de named.}}{23}{figure.17}%
-\contentsline {figure}{\numberline {18}{\ignorespaces Contenue du fichier de configuration des options de named.}}{24}{figure.18}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Contenue du fichier de configuration de named.conf.local.}}{25}{figure.16}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Contenue du fichier de configuration du DNS normal.}}{26}{figure.17}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Contenue du fichier de configuration du DNS inversé.}}{26}{figure.18}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Contenue du fichier de configuration de resolv.conf.}}{26}{figure.19}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Contenue du fichier de configuration de named.conf.options.}}{27}{figure.20}%

@@ -355,7 +355,7 @@ En réalité, notre service DHCP écrit déjà des logs et ce sont que nous n'ay
 \caption{Fichier de configuration de syslog}
 \label{fig14}
 \end{figure}
-Pour cela, nous avons modifié le fichier de configuration /etc/rsyslog.conf pour y ajouter ``local7.*   -/var/log/dhcpd.log" comme nous le motnre la figure \ref{fig14}. Le tiret avant le chemin du fichier n'est pas la par hasard: il sert à indiquer à syslog d'effectuer une écriture asynchrone: mettre en pause le processus à chaque fois que nous devons effectuer une écriture pour les logs peut se révéler très gourmand sur les performances de la machine et le tiret indique que ce n'est pas nécessaire.\\\\
+Pour cela, nous avons modifié le fichier de configuration /etc/rsyslog.conf pour y ajouter ``local7.*   -/var/log/dhcpd.log" comme nous le montre la figure \ref{fig14}. Le tiret avant le chemin du fichier n'est pas la par hasard: il sert à indiquer à syslog d'effectuer une écriture asynchrone: mettre en pause le processus à chaque fois que nous devons effectuer une écriture pour les logs peut se révéler très gourmand sur les performances de la machine et le tiret indique que ce n'est pas nécessaire.\\\\
 
 Nous pouvons voir sur la figure \ref{fig7} que lors de la configuration initiale du serveur DHCP, nous avions ajouté ``log-facility local7;" afin de définir les logs sur l'entrée 7, qui est par défaut pour les logs du réseau. C'est grâce à cela que nous avons pu le mettre en correspondance dans syslog, qui lui définit le fichier dans lequel écrire.\\\\
 
@@ -536,30 +536,90 @@ Pour la suite des explications, il est important de préciser que nous avons cho
 
 \subsection{Mise en place du DNS}
 
-Reparler du "dhcpd.conf".
-Création des deux zones, (named.conf.local et named.conf.default-zone), copie du fichier "db.local" en "deb.agence.atlantide", copie de "db.127" en "db.agence.atlantide.inv" pour la zone de recherche inversé. Ajout des forwarders dans "named.conf.options". Redémarrage avec systemctl restart bind 9. Changement du dhcp pour prendre en compte le serveur DNS.
-"option domain-name "agence.atlantide" fournit le nom de domaine, dans ce cas il sert a faire référence aux ordinateurs du réseau par leurs nom sans ajouter le nom de domaine.
+La partie de ce rapport est consacré à la mise en œuvre d'un serveur DNS en utilisant ISC BIND (Berkeley Internet Name Domain). Un DNS est une base de données repartie dont la structure est similaire à une arborescence inversée. Le nœud racine est représenté par le ".". Une branche complète du style mail.yahoo.fr est appelé FQDN ( Fully Qualified Domain Name) pour nom totalement qualifié. La partie la plus à droite est appelé TLD ( Top Level Domain) et celui le plus à gauche représente l’hôte. Au milieu c’est le domaine. Un serveur de noms définit une zone avec des enregistrements appelés RR pour Ressources Records. Elles constituent les informations fondamentales du DNS. Mais il existe plusieurs types d’enregistrements, chacun possède sa propre fonction: 
 
-Dans /etc/resolv.conf
-\begin{figure}[!h]
-\centerline{ \includegraphics[width=15cm]{images/resolvConf.png}}
-\caption{Contenue du fichier de configuration de resolv.}
-\label{fig100}
-\end{figure}
+\begin{itemize}
+\item Enregistrement SOA
 
-Dans /etc/bind/named.conf.local
-\begin{figure}[!h]
+L'enregistrement SOA (Start Of Authority) retourne des informations officielles sur la zone DNS, incluant la référence du serveur DNS principal (primaire), l'e-mail de l'administrateur, un numéro de série ainsi que divers timers définissant la fréquence de renouvellement et la durée de validité pour certains éléments. Le service de gestion DNS ne propose qu'un seul enregistrement SOA.
+
+\item Enregistrement NS
+
+Les enregistrements NS indiquent quels sont les serveurs qui vont gérer la zone du serveur DNS. Lorsque l'on créez un nom de domaine, pour le relier aux différents services pour lesquels vous allez l’utiliser, vous devez indiquer quels seront les serveurs DNS qui vont héberger les paramétrages de votre zone DNS. Généralement, l’on utilise 2 ou 3 noms de serveurs DNS : le serveur primaire, mais également un ou deux serveurs secondaires qui peuvent prendre le relais en cas d’indisponibilité du serveur DNS primaire.
+
+\item Enregistrement PTR
+
+Les enregistrements de type PTR sont quasiment le contraire des enregistrements A. Au lieu d’assigner une adresse IP à un nom de domaine, ces enregistrements font le contraire. Les enregistrements PTR permettent ainsi un DNS inversé. 
+
+\item Enregistrement MX
+
+MX est l’abréviation de Mail Exchange. Cet enregistrement DNS est différent des autres. L’enregistrement MX est utilisé pour diriger les emails envoyés aux adresses personnalisées associées à un nom de domaine.
+
+\item Enregistrement A
+
+Les enregistrements DNS de type A (également appelés enregistrements d’hôte) permettent de relier un nom de domaine ou un sous-domaine à l’adresse IP d’un serveur.
+
+\item Enregistrement CNAME
+
+Les enregistrements DNS de type CNAME, appelé aussi enregistrements de noms canoniques, ne résolvent que les domaines et les sous-domaines. Contrairement aux enregistrements A, ils ne peuvent pas être nus (c’est-à-dire qu’il doit y avoir www. devant eux pour que l’URL résolve correctement). 
+
+\end{itemize}
+
+Passons à la mise en pratique avec l'installation du serveur DNS. Dans un premier temps il faut installer les paquets "bind9" et "dnsutils" toujours via la même commande et le même gestionnaire de paquets (apt-get).\\
+
+BIND9 peut être utilisé de différentes façons, les plus fréquentes sont :\\
+
+Un serveur cache, dans cette configuration, BIND9 va effectuer les requêtes DNS et se rappeler de la réponse pour la prochaine requête. Cette méthode peut être utile pour une connexion internet lente. En mettant les réponses DNS en cache, on diminue l'utilisation de la bande passante et (encore plus important) on réduit également le temps de latence.\\
+
+Un serveur primaire qui est utilisé pour contenir les enregistrements DNS d'un nom de domaine enregistré. Un ensemble d'enregistrements DNS pour un nom de domaine est appelé une "zone". (Le nom de domaine peut être imaginaire si on est dans le cas d'un réseau local fermé).\\
+
+Et finalement un serveur secondaire, qui est un serveur utilisé en complément d'un serveur primaire, en servant de copie à la ou les zones configurées sur le serveur primaire. Les serveurs secondaires sont recommandés sur des gros réseaux. Ceux-ci assurent la disponibilité de la zone DNS, même si le serveur primaire est hors ligne.\\
+
+La première étape à passer est de créé 2 zones, une zone dite "normal" dans le fichier de configuration "/etc/bind/named.conf.local". Il est possible d'utiliser le fichier "/etc/bind/named.conf.default-zones" comme base de travail. Puis une seconde zone dite "inverse" toujours dans le même fichier de configuration. Voici le contenue du fichier "/etc/bind/named.conf.local" qui va être expliqué:
+\begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/namedConfLocal.png}}
-\caption{Contenue du fichier de configuration local de named.}
-\label{fig101}
+\caption{Contenue du fichier de configuration de named.conf.local.}
+\label{fig16}
 \end{figure}
 
-Dans /etc/bind/named.conf.options
-\begin{figure}[!h]
+Sur l'image \ref{fig16}, les 2 zones sont identifiables par l'identificateur "zone". La première zone décrite est la zone "inverse" elle a pour nom l’adresse ip "10.1.2." inversée accompagnée de ".in-addr.arpa". La seconde zone étant la zone "normal" et que l'on a décrit par le nom de domaine, à savoir "agence.atlantide". Que se soi pour la zone "normal" ou la zone "inverse" nous indiquons 2 informations: le "type" pour le type de zone et le fichier de configuration associer avec le mot clé "file".\\
+Afin de mettre en place les 2 fichiers de configuration des 2 zones, nous sommes partie d'un fichier existant qui est "/etc/bind/db.local". Celui-ci nous a fournis toutes les informations nécessaires et nous n'avions plus qu'a remplacer les lignes dont nous avions besoin. Par exemple le "localhost" a était changé en "agence.atlantide", l'adresse IP de loopback donc le "127.0.0.1", changé en "10.1.2.1". 
+Pour le fichier de la zone "normal" nous avons utilisé des enregistrements de type "A" afin de relier IP et nom de domaine. Ci dessous le fichier de configuration de la zone "normal":
+\begin{figure}[H]
+\centerline{ \includegraphics[width=12cm]{images/dbAgenceAtlantide.png}}
+\caption{Contenue du fichier de configuration du DNS normal.}
+\label{fig17}
+\end{figure}
+
+Pour la zone inverse il faut utiliser des enregistrements de type "PTR" qui permette la mise en place du DNS inversé. Et ici le fichier de configuration de la zone "inverse":
+\begin{figure}[H]
+\centerline{ \includegraphics[width=12cm]{images/dbAgenceAtlantideInv.png}}
+\caption{Contenue du fichier de configuration du DNS inversé.}
+\label{fig18}
+\end{figure}
+
+Sur les images \ref{fig17} et \ref{fig18}, la première ligne débutant avec un ”@” permet de définir les informations relatives à la zone. Les ”@” suivants pourront remplacer des noms de machines ou le dernier octet ”hostid” de notre IP.
+
+De plus 2 autres fichiers on était modifié, le fichier "/etc/resolv.conf" et "/etc/bind/named.conf.options". Pour le fichier "/etc/resolv.conf", afin que toutes les requêtes passent par BIND. Ce fichier doit donc contenir:
+\begin{figure}[H]
+\centerline{ \includegraphics[width=10cm]{images/resolvConf.png}}
+\caption{Contenue du fichier de configuration de resolv.conf.}
+\label{fig19}
+\end{figure}
+
+Et dans le fichier "/etc/bind/named.conf.options", ajout des forwarders, ici ce sera notre fournisseur DNS (172.31.21.35) et changement du paramètre "dnssec-validation" a "no". Le fichier "/etc/bind/named.conf.options" contient désormais ces informations:
+\begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/namedConfOptions.png}}
-\caption{Contenue du fichier de configuration des options de named.}
+\caption{Contenue du fichier de configuration de named.conf.options.}
 \label{fig102}
 \end{figure}
+
+Pour redemarrer le service BIND, il faut lancer la commande: 
+\begin{lstlisting}[language=bash] 
+    $ systemctl restart bind9
+\end{lstlisting} 
+
+Pour le DHCP (image \ref{fig7}) nous avons pris en compte le serveur DNS avec l'option "option domain-name "agence.atlantide"", en effet elle fournit le nom de domaine, dans ce cas il sert à faire référence aux ordinateurs du réseau par leurs noms sans ajouter le nom de domaine. Pour faire simple c'est un suffixe DNS. Et l'option "option domain-name-servers 192.168.1.2" indique un serveur DNS à l'adresse "192.168.1.2". 
 
 \subsection{Test réaliser afin de valider le DNS}
 named-checkzone et named-checkconf pour vérifier la syntaxe
@@ -571,14 +631,19 @@ depuis un client connecté en filaire au routeur : nslookup nom-client
 vers le serveur d'une autre agence : 
 vers le client d'une autre agence :
 
-Conclusion tp 1bis
-
-Introduction tp 2
 
 \section{Installation d'un serveur LAMP}
 \subsection{Installation et mise en place d'Apache}
 
-Test, localisation de la page web, création du compte utilisateur développeur, modification du serveur pour que www soit associé au dev web (crée dabs /srv), les bon droits, mise en place du virtuals hosts pointant sur /srv/www 
+Test, localisation de la page web, création du compte utilisateur développeur, modification du serveur pour que www soit associé au dev web (crée dans /srv), les bon droits, mise en place du virtuals hosts pointant sur /srv/www 
+
+Dans le fichier /etc/bind/db.agence.atlantide  
+on a rajouter la ligne :
+    informatique IN A 10.1.2.1
+    
+Redemarer avec systemctl restart bind9
+    
+    on accede a la page avec : "informatique.agence.atlantide"
 
 \subsection{Installation et mise en place de PostgreSQL}
 
