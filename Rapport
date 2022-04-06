@@ -411,7 +411,7 @@ Dans le fichier crontab, nous allons renseigner cette ligne qui reprend ce qui a
         0 15 * * * rsync -avz -e ssh /etc 
             etudiant@10.1.2.2:/home/etudiant/Bureau/backup/
 \end{lstlisting}   
-Mais nous y ajoutons cette fois ``0 15 * * *", qui veut dire que nous allons appliquer le principe de rsync et SSH tous les jours de tous les mois à 15h et 0 minute. En effet, le premier paramètre indique les minutes comprises entre 1 et 60, le second indique les heures de 1 à 24, le troisième est pour les jours dans le mois donc de 1 à 31. Et les deux derniers sont pour les mois et jours de la semaines compris entre 1 à 12 pour les mois et 1 (lundi) et 7 (dimanche) pour les jours.
+Mais nous y ajoutons cette fois ``0 15 * * *", qui indique que nous allons appliquer le principe de rsync et SSH tous les jours de tous les mois à 15h et 0 minute. En effet, le premier paramètre indique les minutes comprises entre 1 et 60, le second indique les heures de 1 à 24, le troisième est pour les jours dans le mois donc de 1 à 31. Et les deux derniers sont pour les mois et jours de la semaines compris entre 1 à 12 pour les mois et 1 (lundi) et 7 (dimanche) pour les jours.
 
 Pour examiner les tâches planifiées de l'utilisateur courant (le contenu du fichier crontab), on peut utiliser:
 \begin{lstlisting}[language=bash] 
@@ -420,10 +420,10 @@ Pour examiner les tâches planifiées de l'utilisateur courant (le contenu du fi
 Ce qui nous affiche :
 \begin{figure}[!h]
 \centerline{ \includegraphics[width=15cm]{images/rsync&crontab.png}}
-\caption{Contenue du fichier crontab.}
+\caption{Contenu du fichier crontab.}
 \label{fig8}
 \end{figure}
-La mise en place de notre réseau d'entreprise et d'infrastructure est terminée. Pour rappel, nous avons installé une distribution Linux, puis paramétré les bases de notre réseau. Ensuite, nous avons mis en place un service DHCP et finalement une sauvegarde automatique. Nous allons désormais étendre notre réseau et mettre en place un serveur de nom de domaine (DNS). Mais avant de mettre en place le DNS, il faut regarder comment il fonctionne.
+La mise en place de notre réseau d'entreprise et d'infrastructure est terminée. Pour rappel, nous avons installé une distribution Linux, puis paramétré les bases de notre réseau. Ensuite, nous avons mis en place un service DHCP et finalement une sauvegarde automatique. Nous allons désormais étendre notre réseau et mettre en place un serveur de nom de domaine (DNS). Mais avant de mettre en place le DNS, nous allons regarder comment il fonctionne.
 
 \section{Interrogation d'un serveur DNS}
 Avant toute installation, nous avons commencé par comprendre le fonctionnement du DNS. En effet, le DNS (pour Domain Name Serveur en anglais) est un service informatique distribué. Il est utilisé pour traduire les noms de domaine sur Internet avec leurs adresse IP ou autres enregistrements. Pour faire simple, le serveur DNS est un service qui permet d'associer à un site web (ou un ordinateur connecté ou un serveur) une adresse IP. Cette traduction peut se faire dans les 2 sens: trouver une IP à partir d'un nom de domaine mais également de retrouver le nom de domaine à partir de l'IP. Pour la suite de notre installation le DNS va être un composant important de notre réseau. Il est important de rappeler que tous les équipements connectés à un réseau IP, comme Internet, possèdent une adresse IP qui les identifie sur le réseau.
@@ -535,8 +535,9 @@ Ce fichier, existant depuis le début des années 80, a pour rôle d'associer un
 Pour la suite des explications, il est important de préciser que nous avons choisi comme nom de domaine: agence.atlantide.
 
 \subsection{Mise en place du DNS}
+\subsubsection{Théorie}
 
-La partie de ce rapport est consacré à la mise en œuvre d'un serveur DNS en utilisant ISC BIND (Berkeley Internet Name Domain). Un DNS est une base de données repartie dont la structure est similaire à une arborescence inversée. Le nœud racine est représenté par le ".". Une branche complète du style mail.yahoo.fr est appelé FQDN ( Fully Qualified Domain Name) pour nom totalement qualifié. La partie la plus à droite est appelé TLD ( Top Level Domain) et celui le plus à gauche représente l’hôte. Au milieu c’est le domaine. Un serveur de noms définit une zone avec des enregistrements appelés RR pour Ressources Records. Elles constituent les informations fondamentales du DNS. Mais il existe plusieurs types d’enregistrements, chacun possède sa propre fonction: 
+Cette partie du rapport est consacré à la mise en œuvre d'un serveur DNS en utilisant ISC BIND (Berkeley Internet Name Domain). Un DNS est une base de données repartie dont la structure est similaire à une arborescence inversée. Le nœud racine est représenté par le ``.''. Une branche complète du type mail.yahoo.fr est appelée FQDN ( Fully Qualified Domain Name) pour nom totalement qualifié. La partie la plus à droite est appelé TLD ( Top Level Domain) et celui le plus à gauche représente l’hôte. Au milieu c’est le domaine. Un serveur de noms définit une zone avec des enregistrements appelés RR pour Ressources Records. Elles constituent les informations fondamentales du DNS. Mais il existe plusieurs types d’enregistrements, chacun possèdant sa propre fonction: 
 
 \begin{itemize}
 \item Enregistrement SOA
@@ -545,7 +546,11 @@ L'enregistrement SOA (Start Of Authority) retourne des informations officielles 
 
 \item Enregistrement NS
 
-Les enregistrements NS indiquent quels sont les serveurs qui vont gérer la zone du serveur DNS. Lorsque l'on créez un nom de domaine, pour le relier aux différents services pour lesquels vous allez l’utiliser, vous devez indiquer quels seront les serveurs DNS qui vont héberger les paramétrages de votre zone DNS. Généralement, l’on utilise 2 ou 3 noms de serveurs DNS : le serveur primaire, mais également un ou deux serveurs secondaires qui peuvent prendre le relais en cas d’indisponibilité du serveur DNS primaire.
+Les enregistrements NS indiquent quels sont les serveurs qui vont gérer la zone du serveur DNS. Lorsque l'on crée un nom de domaine, pour le relier aux différents services pour lesquels nous allons l’utiliser, nous devons indiquer quels seront les serveurs DNS qui vont héberger les paramétrages de notre zone DNS. Généralement, on utilise 2 ou 3 noms de serveurs DNS : le serveur primaire, mais également un ou deux serveurs secondaires qui peuvent prendre le relais en cas d’indisponibilité du serveur DNS primaire.
+
+\item Enregistrement A
+
+Les enregistrements DNS de type A (également appelés enregistrements d’hôte) permettent de relier un nom de domaine ou un sous-domaine à l’adresse IP d’un serveur.
 
 \item Enregistrement PTR
 
@@ -555,73 +560,72 @@ Les enregistrements de type PTR sont quasiment le contraire des enregistrements 
 
 MX est l’abréviation de Mail Exchange. Cet enregistrement DNS est différent des autres. L’enregistrement MX est utilisé pour diriger les emails envoyés aux adresses personnalisées associées à un nom de domaine.
 
-\item Enregistrement A
-
-Les enregistrements DNS de type A (également appelés enregistrements d’hôte) permettent de relier un nom de domaine ou un sous-domaine à l’adresse IP d’un serveur.
-
 \item Enregistrement CNAME
 
-Les enregistrements DNS de type CNAME, appelé aussi enregistrements de noms canoniques, ne résolvent que les domaines et les sous-domaines. Contrairement aux enregistrements A, ils ne peuvent pas être nus (c’est-à-dire qu’il doit y avoir www. devant eux pour que l’URL résolve correctement). 
+Les enregistrements DNS de type CNAME, appelés aussi enregistrements de noms canoniques, ne résolvent que les domaines et les sous-domaines. Contrairement aux enregistrements A, ils ne peuvent pas être nus (c’est-à-dire qu’il doit y avoir www. devant eux pour que l’URL résolve correctement). 
 
 \end{itemize}
 
-Passons à la mise en pratique avec l'installation du serveur DNS. Dans un premier temps il faut installer les paquets "bind9" et "dnsutils" toujours via la même commande et le même gestionnaire de paquets (apt-get).\\
+\subsubsection{Pratique}
+Passons à la mise en pratique avec l'installation de notre serveur DNS. Dans un premier temps, il faut installer les paquets ``bind9" et ``dnsutils" toujours via la même commande et le même gestionnaire de paquets (apt-get).\\
 
 BIND9 peut être utilisé de différentes façons, les plus fréquentes sont :\\
 
 Un serveur cache, dans cette configuration, BIND9 va effectuer les requêtes DNS et se rappeler de la réponse pour la prochaine requête. Cette méthode peut être utile pour une connexion internet lente. En mettant les réponses DNS en cache, on diminue l'utilisation de la bande passante et (encore plus important) on réduit également le temps de latence.\\
 
-Un serveur primaire qui est utilisé pour contenir les enregistrements DNS d'un nom de domaine enregistré. Un ensemble d'enregistrements DNS pour un nom de domaine est appelé une "zone". (Le nom de domaine peut être imaginaire si on est dans le cas d'un réseau local fermé).\\
+Un serveur primaire qui est utilisé pour contenir les enregistrements DNS d'un nom de domaine enregistré. Un ensemble d'enregistrements DNS pour un nom de domaine est appelé une ``zone". (Le nom de domaine peut être imaginaire si on est dans le cas d'un réseau local fermé). Il s'agit du cas d'utilisations que nous allons implémenter.\\
 
 Et finalement un serveur secondaire, qui est un serveur utilisé en complément d'un serveur primaire, en servant de copie à la ou les zones configurées sur le serveur primaire. Les serveurs secondaires sont recommandés sur des gros réseaux. Ceux-ci assurent la disponibilité de la zone DNS, même si le serveur primaire est hors ligne.\\
 
-La première étape à passer est de créé 2 zones, une zone dite "normal" dans le fichier de configuration "/etc/bind/named.conf.local". Il est possible d'utiliser le fichier "/etc/bind/named.conf.default-zones" comme base de travail. Puis une seconde zone dite "inverse" toujours dans le même fichier de configuration. Voici le contenue du fichier "/etc/bind/named.conf.local" qui va être expliqué:
+La première étape consiste à créer 2 zones, une zone dite ``normal" et une zone dite ``inversée'' dans le fichier de configuration ``/etc/bind/named.conf.local". Il est possible d'utiliser le fichier ``/etc/bind/named.conf.default-zones" comme base de travail, que nous copions en notre propre configuration.
 \begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/namedConfLocal.png}}
-\caption{Contenue du fichier de configuration de named.conf.local.}
+\caption{Contenu du fichier de configuration named.conf.local.}
 \label{fig16}
 \end{figure}
 
-Sur l'image \ref{fig16}, les 2 zones sont identifiables par l'identificateur "zone". La première zone décrite est la zone "inverse" elle a pour nom l’adresse ip "10.1.2." inversée accompagnée de ".in-addr.arpa". La seconde zone étant la zone "normal" et que l'on a décrit par le nom de domaine, à savoir "agence.atlantide". Que se soi pour la zone "normal" ou la zone "inverse" nous indiquons 2 informations: le "type" pour le type de zone et le fichier de configuration associer avec le mot clé "file".\\
-Afin de mettre en place les 2 fichiers de configuration des 2 zones, nous sommes partie d'un fichier existant qui est "/etc/bind/db.local". Celui-ci nous a fournis toutes les informations nécessaires et nous n'avions plus qu'a remplacer les lignes dont nous avions besoin. Par exemple le "localhost" a était changé en "agence.atlantide", l'adresse IP de loopback donc le "127.0.0.1", changé en "10.1.2.1". 
-Pour le fichier de la zone "normal" nous avons utilisé des enregistrements de type "A" afin de relier IP et nom de domaine. Ci dessous le fichier de configuration de la zone "normal":
+Sur l'image \ref{fig16}, les 2 zones sont identifiables par l'identificateur ``zone". La première zone décrite est la zone ``inverse''. Elle a pour nom l’adresse ip ``10.1.2." inversée accompagnée de ``.in-addr.arpa". L'inversion de l'adresse IP est le standard pour décrire une zone ``inverseé''. La seconde zone est la zone ``normale" et que l'on a décrit par le nom de domaine, à savoir ``agence.atlantide". Que ce soit pour la zone ``normale" ou la zone ``inverse" nous indiquons 2 informations: le ``type" pour le type de zone et le fichier de configuration associé avec le mot clé ``file".\\
+
+Afin de mettre en place les 2 fichiers de configuration des 2 zones, nous sommes partis du fichier existant ``/etc/bind/db.local". Celui-ci nous a fournis toutes les informations nécessaires et nous n'avions plus qu'a remplacer les lignes dont nous avions besoin. Par exemple le ``localhost" a été changé en "agence.atlantide", l'adresse IP de loopback (le ``127.0.0.1"), a été changé en ``10.1.2.1".  Nous indiquons ainsi que le nom de domaine agence.atlantide décrit l'adresse ``10.1.2.1'', donc notre serveur.
+Pour le fichier de la zone ``normale" nous avons utilisé des enregistrements de type ``A" afin de relier IP et nom de domaine. Nous avons donc un champ A qui définit que le sous domaine client.agence.atlantide décrit l'adresse ``10.1.2.2'', donc notre client.
+Voici ci-dessous le fichier de configuration de la zone ``normale":
 \begin{figure}[H]
 \centerline{ \includegraphics[width=12cm]{images/dbAgenceAtlantide.png}}
-\caption{Contenue du fichier de configuration du DNS normal.}
+\caption{Contenu du fichier de configuration du DNS normal.}
 \label{fig17}
 \end{figure}
 
-Pour la zone inverse il faut utiliser des enregistrements de type "PTR" qui permette la mise en place du DNS inversé. Et ici le fichier de configuration de la zone "inverse":
+Pour la zone inverse il faut utiliser des enregistrements de type ``PTR" qui permettent la mise en place du DNS inversé. Et voici ici le fichier de configuration de la zone ``inverse":
 \begin{figure}[H]
 \centerline{ \includegraphics[width=12cm]{images/dbAgenceAtlantideInv.png}}
-\caption{Contenue du fichier de configuration du DNS inversé.}
+\caption{Contenu du fichier de configuration du DNS inversé.}
 \label{fig18}
 \end{figure}
 
-Sur les images \ref{fig17} et \ref{fig18}, la première ligne débutant avec un ”@” permet de définir les informations relatives à la zone. Les ”@” suivants pourront remplacer des noms de machines ou le dernier octet ”hostid” de notre IP.
+Sur les images \ref{fig17} et \ref{fig18}, la première ligne débutant avec un ``@” permet de définir les informations relatives à la zone (champ SOA). Les ``@” suivants pourront remplacer des noms de machines ou le dernier octet ``host-id” de nos adresses IP.\\
 
-De plus 2 autres fichiers on était modifié, le fichier "/etc/resolv.conf" et "/etc/bind/named.conf.options". Pour le fichier "/etc/resolv.conf", afin que toutes les requêtes passent par BIND. Ce fichier doit donc contenir:
+De plus, 2 autres fichiers ont été modifié: le fichier ``/etc/resolv.conf" et ``/etc/bind/named.conf.options". Pour le fichier ``/etc/resolv.conf", afin que les requêtes de résolution des noms passent par BIND. Ce fichier doit donc contenir:
 \begin{figure}[H]
 \centerline{ \includegraphics[width=10cm]{images/resolvConf.png}}
-\caption{Contenue du fichier de configuration de resolv.conf.}
+\caption{Contenu du fichier de configuration de resolv.conf.}
 \label{fig19}
 \end{figure}
 
-Et dans le fichier "/etc/bind/named.conf.options", ajout des forwarders, ici ce sera notre fournisseur DNS (172.31.21.35) et changement du paramètre "dnssec-validation" a "no". Le fichier "/etc/bind/named.conf.options" contient désormais ces informations:
+Dans le fichier ``/etc/bind/named.conf.options", nous avons ajouter des forwarders. Dans notre cas, ce sera notre fournisseur DNS (172.31.21.35) du réseau IEM et nous avons changer du paramètre ``dnssec-validation" a ``no". Les forwarders sont les adresses d'autres serveurs DNS qui seront consultés si celui local ne connait pas la réponse. En effet, notre propre serveur DNS ne connait que notre nom de domaine et n'en connaît aucun autre.  Le fichier ``/etc/bind/named.conf.options" contient désormais ces informations:
 \begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/namedConfOptions.png}}
-\caption{Contenue du fichier de configuration de named.conf.options.}
+\caption{Contenu du fichier de configuration de named.conf.options.}
 \label{fig102}
 \end{figure}
 
-Pour redemarrer le service BIND, il faut lancer la commande: 
+Après avoir fait toutes ces modifications, il est nécessaire de redémarrer le service BIND, en lançant la commande: 
 \begin{lstlisting}[language=bash] 
     $ systemctl restart bind9
 \end{lstlisting} 
 
-Pour le DHCP (image \ref{fig7}) nous avons pris en compte le serveur DNS avec l'option "option domain-name "agence.atlantide"", en effet elle fournit le nom de domaine, dans ce cas il sert à faire référence aux ordinateurs du réseau par leurs noms sans ajouter le nom de domaine. Pour faire simple c'est un suffixe DNS. Et l'option "option domain-name-servers 192.168.1.2" indique un serveur DNS à l'adresse "192.168.1.2". 
+Pour le DHCP (figure \ref{fig7}), nous avons pris en compte notre nom de domaine  avec l'option ``option domain-name ``agence.atlantide"". Dans ce cas, il sert à faire référence aux ordinateurs du réseau par leurs noms sans ajouter le nom de domaine. Pour faire simple c'est un suffixe DNS. L'option ``option domain-name-servers 192.168.1.2" indique un serveur DNS à l'adresse ``192.168.1.2" (notre serveur sur le réseau d'interconnexion). 
 
-\subsection{Test réaliser afin de valider le DNS}
+\subsection{Tests réalisés afin de valider le DNS}
 named-checkzone et named-checkconf pour vérifier la syntaxe
 /var/log/syslog pour voir les erreurs si présente au démarrage
 depuis le serveur : nslookup ip-client

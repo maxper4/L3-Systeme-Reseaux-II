@@ -24,7 +24,9 @@
 \contentsline {subsection}{\numberline {6.3}Rôle du fichier /etc/hosts}{22}{subsection.6.3}%
 \contentsline {section}{\numberline {7}Installation d'un DNS}{22}{section.7}%
 \contentsline {subsection}{\numberline {7.1}Mise en place du DNS}{23}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Test réaliser afin de valider le DNS}{27}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.1.1}Théorie}{23}{subsubsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}Pratique}{24}{subsubsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.2}Tests réalisés afin de valider le DNS}{28}{subsection.7.2}%
 \contentsline {section}{\numberline {8}Installation d'un serveur LAMP}{28}{section.8}%
 \contentsline {subsection}{\numberline {8.1}Installation et mise en place d'Apache}{28}{subsection.8.1}%
 \contentsline {subsection}{\numberline {8.2}Installation et mise en place de PostgreSQL}{28}{subsection.8.2}%
@@ -34,8 +36,8 @@
 \contentsline {section}{\numberline {9}Script de routage et matrice de filtrage}{28}{section.9}%
 \contentsline {subsection}{\numberline {9.1}Scripts de routage au démarrage}{28}{subsection.9.1}%
 \contentsline {subsection}{\numberline {9.2}Règles iptables de la matrice de filtrage}{28}{subsection.9.2}%
-\contentsline {section}{\numberline {10}}{28}{section.10}%
-\contentsline {subsection}{\numberline {10.1}}{28}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}}{28}{subsection.10.2}%
+\contentsline {section}{\numberline {10}}{29}{section.10}%
+\contentsline {subsection}{\numberline {10.1}}{29}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}}{29}{subsection.10.2}%
 \contentsline {section}{\numberline {11}Conclusion}{29}{section.11}%
 \contentsline {section}{\numberline {12}Annexe}{29}{section.12}%

@@ -7,14 +7,14 @@
 \contentsline {figure}{\numberline {7}{\ignorespaces Configuration du serveur DHCP}}{13}{figure.7}%
 \contentsline {figure}{\numberline {8}{\ignorespaces Fichier de configuration de syslog}}{15}{figure.8}%
 \contentsline {figure}{\numberline {9}{\ignorespaces Fichier de configuration de syslog}}{16}{figure.9}%
-\contentsline {figure}{\numberline {10}{\ignorespaces Contenue du fichier crontab.}}{18}{figure.10}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Contenu du fichier crontab.}}{18}{figure.10}%
 \contentsline {figure}{\numberline {11}{\ignorespaces Exemple d'interrogation d'un DNS avec host.}}{19}{figure.11}%
 \contentsline {figure}{\numberline {12}{\ignorespaces Exemple d'interrogation d'un DNS avec dig.}}{19}{figure.12}%
 \contentsline {figure}{\numberline {13}{\ignorespaces Exemple d'interrogation d'un DNS avec nslookup.}}{20}{figure.13}%
 \contentsline {figure}{\numberline {14}{\ignorespaces Requête de nameserveur pour un DNS avec host.}}{21}{figure.14}%
 \contentsline {figure}{\numberline {15}{\ignorespaces Requête de nameserveur pour un DNS avec dig.}}{21}{figure.15}%
-\contentsline {figure}{\numberline {16}{\ignorespaces Contenue du fichier de configuration de named.conf.local.}}{25}{figure.16}%
-\contentsline {figure}{\numberline {17}{\ignorespaces Contenue du fichier de configuration du DNS normal.}}{26}{figure.17}%
-\contentsline {figure}{\numberline {18}{\ignorespaces Contenue du fichier de configuration du DNS inversé.}}{26}{figure.18}%
-\contentsline {figure}{\numberline {19}{\ignorespaces Contenue du fichier de configuration de resolv.conf.}}{26}{figure.19}%
-\contentsline {figure}{\numberline {20}{\ignorespaces Contenue du fichier de configuration de named.conf.options.}}{27}{figure.20}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Contenu du fichier de configuration named.conf.local.}}{25}{figure.16}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Contenu du fichier de configuration du DNS normal.}}{26}{figure.17}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Contenu du fichier de configuration du DNS inversé.}}{26}{figure.18}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Contenu du fichier de configuration de resolv.conf.}}{27}{figure.19}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Contenu du fichier de configuration de named.conf.options.}}{27}{figure.20}%
