@@ -810,65 +810,94 @@ Le serveur configuré et fonctionnel, on peut brancher un client à notre routeu
 \end{lstlisting} 
 Et si un mot de passe à était renseigné à la création alors il sera demandé pour se connecter.\\\\
 
-Pour rappel un serveur LAMP est fait à partir de l'acronyme Linux Apache MariaDB PHP. Il est donc temps de passer a l'installation de MariaDB.
+Pour la suite il est important de rappeler qu'un serveur LAMP est fait à partir de l'acronyme Linux Apache MariaDB PHP. Il est donc temps de passer a l'installation de MariaDB.
 
+MariaDB est un système de gestion de base de données open source (SGBD). Pour installer MariaDb avec notre gestionnaire de paquet, il suffis d'utiliser:
 \begin{lstlisting}[language=bash] 
-sudo apt install mariadb-server
-mysql -u root -p
-    CREATE DATABASE dbtest
-mysql -u root -p dbtest
-    CREATE TABLE test (nom TEXT, prenom TEXT);
-    INSERT INTO test(nom,prenom) VALUES ("NomTest","PrenomTest");
-    SELECT * from test;
-    
-ajout d'un utilisateur a la base de donnée pour l'utilisé dans le script php :
-mysql
-    CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
-    GRANT ALL PRIVILEGES ON * . * TO user; 
+    $ apt install mariadb-server
 \end{lstlisting} 
+Toujours en étant root ou alors en utilisant "sudo".
 
-        
-Une fois MariaDB installé et fonctionnel, ils ne nous reste plus que PHP.
-
+Nous allons utiliser l'utilisateur root qui possède tous les droits pour créer et gérer la base de données. Afin d'utiliser MariaDB c'est-à-dire d'utiliser l'invite MariaDB depuis votre terminal:
 \begin{lstlisting}[language=bash] 
-touch /srv/dev2/www/testMariaDb.php
-apt install php 7.4
-dans /srv/dev2/www/testMariaDb.php
-<?php
-echo "<h1>Page de test de la base de données de MariaDB</h1>"
+    $ mysql -u root 
+\end{lstlisting} 
+Une fois dans l'invite de MariaDB on peut alors dans un premier temps créer la base de donnée, simplement par:
+\begin{lstlisting}[language=bash] 
+    mysql> CREATE DATABASE dbtest;
+\end{lstlisting} 
+Nous voila en possession d'une base de données MariaDB, avec comme nom "dbtest".
 
-$host_name = "localhost";
-$database = "dbtest";
-$user_name = "user";
-$password = "password";
+Pour être certain qu'elle à était crée nous avons taper:
+\begin{lstlisting}[language=bash] 
+    mysql> SHOW DATABASE;
+\end{lstlisting} 
+Il est facile de voir notre base de données "dbtest", dans la liste des table renvoyé par MariaDB. Une fois la base de donnée établie, il est alors possible de l'utiliser et d'insérer des tables et des données comme une base de données classique. Nous avons essayer ceci:
+\begin{lstlisting}[language=bash] 
+    mysql> use dbtest;
+    mysql> CREATE TABLE test (nom TEXT, prenom TEXT);
+    mysql> INSERT INTO test(nom,prenom) VALUES ("NomTest","PrenomTest");
+    mysql> SELECT * from test;
+\end{lstlisting} 
+La première ligne indique à MariaDB que nous changeons de base de données, si cela est possible il nous indique "Database changed". Pour la suite la table de test est nommée "test" et contient 2 informations, un nom et un prénom. La dernière ligne nous renvoie les lignes de la table si il y en a, dans notre cas oui (ajout d'une ligne à la ligne précédente).
 
-$connect = new  mysqli($host_name, $user_name, $password, $database);
+Afin que PHP puisse interagir avec la base de donnée nous avons crée un utilisateur propre a celui-ci. En effet MariaDB propose la création des utilisateur au sein même de son environnement. Avec la simple commande:
+\begin{lstlisting}[language=bash] 
+    mysql> CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
+\end{lstlisting}
 
-if($connect->connect_error)
-{
-    echo '<p>connexion au serveur MySQL  échouée: ' . $connect->connect_error . '</p>';
-}
-else
-{
-    $result =  $connect->query("SELECT * FROM test;");
-    if($result->num_rows > 0){
-        while($row = $result->fetch_assoc()){
-            echo "NOM : " . $row["nom"] . "PRENOM : " . $row["prenom"]; 
+L'utilisateur est crée avec comme nom "user" et mot de passe "password", mais il ne possède pas les bon droit et c'est pour cela que nous lui avons donnée tous les droits avec:
+\begin{lstlisting}[language=bash] 
+    mysql> GRANT ALL PRIVILEGES ON * . * TO user; 
+\end{lstlisting}
+        
+Une fois MariaDB installé et fonctionnel, ils ne nous reste plus que PHP. PHP (acronyme récursif de PHP : Hypertext Preprocessor) est un langage de script open source à usage général largement utilisé, particulièrement adapté au développement Web et pouvant être intégré au HTML.
+Toujours dans le même démarche d'installation, il faut  cette fois-ci installer PHP:
+\begin{lstlisting}[language=bash] 
+    $ apt install php 7.4
+\end{lstlisting}
+Une fois l'installation terminé, la page de test est crée dans le répertoire "/srv/dev2/www/testMariaDb.php", cette page est éditer avec l'éditeur de texte nano. Dans "/srv/dev2/www/testMariaDb.php" voici ce que l'on retrouve:
+
+\begin{lstlisting}[language=PHP] 
+    <?php
+    echo "<h1>Page de test de la base de données de MariaDB</h1>"
+
+    $host_name = "localhost";
+    $database = "dbtest";
+    $user_name = "user";
+    $password = "password";
+
+    $connect = new  mysqli($host_name, $user_name, $password, $database);
+
+    if($connect->connect_error)
+    {
+        echo '<p>connexion au serveur MySQL  échouée: ' . $connect->connect_error . '</p>';
+    }
+    else
+    {
+        $result =  $connect->query("SELECT * FROM test;");
+        if($result->num_rows > 0){
+            while($row = $result->fetch_assoc()){
+                echo "NOM : " . $row["nom"] . "PRENOM : " . $row["prenom"]; 
+            }
+        }
+        else{   
+            echo '<p>0 result</p>';
         }
     }
-    else{   
-        echo '<p>0 result</p>';
-    }
-}
-?>
-
-page -> informatique.agence.atlantide/testMariaDb.php
+    ?>
 \end{lstlisting} 
-
+Ce petit script php permet de se connecté à la base de données MariaDB avec les différent identifiant (Nom de l'hôte, nom de la base de données, nom de l'utilisateur et le mot de passe). Dans le cas ou la connexion n'est pas possible alors une erreur est affiché, et dans le cas contraire on affiche sur la page le contenue de la base de données.
+La page web est accessible via "http://informatique.agence.atlantide/testMariaDb.php", si sur cette page le contenue de base de données MariaDB est affiché alors le trio Apache MariaDB PHP est fonctionnelle. MariaDB n'est pas la seul alternative, il en existe d'autres comme nous allons le voir prochainement.
+TODO - changer le script écrit par une image, et rajouter des images des pages web de test - TODO
 
 \subsection{Installation et mise en place de PostgreSQL}
-
-Déroulement...
+PostgreSQL est un système de gestion de base de données relationnelle et objet.
+Ce système est comparable à d'autres systèmes de gestion de base de données, qu'ils soient libres (comme MariaDB et Firebird), ou propriétaires (comme Oracle, MySQL, Sybase, DB2, Informix et Microsoft SQL Server). Dans cette partie PostgreSQL prendra la place de MariaDB. L'installation de PostgreSQL et des paquets PHP compatible avec PostgreSQL est la première étape:
+\begin{lstlisting}[language=bash] 
+    $ apt install postgresql postgresql-client
+    $ apt-get install php-pgsql
+\end{lstlisting}
 
 \subsection{Installation et mise en place de PHP}
 
