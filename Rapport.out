@@ -32,11 +32,12 @@
 \BOOKMARK [2][-]{subsection.8.2}{Installation et mise d'un autre LAMP avec PostgreSQL}{section.8}% 32
 \BOOKMARK [2][-]{subsection.8.3}{Installation et mise en place d'un PDO}{section.8}% 33
 \BOOKMARK [1][-]{section.9}{Script de routage et matrice de filtrage}{}% 34
-\BOOKMARK [2][-]{subsection.9.1}{Scripts de routage au d\351marrage}{section.9}% 35
-\BOOKMARK [2][-]{subsection.9.2}{Sauvegarde des bases MySQL et PostgreSQL}{section.9}% 36
-\BOOKMARK [2][-]{subsection.9.3}{Les sudoers}{section.9}% 37
-\BOOKMARK [1][-]{section.10}{}{}% 38
-\BOOKMARK [2][-]{subsection.10.1}{}{section.10}% 39
-\BOOKMARK [2][-]{subsection.10.2}{}{section.10}% 40
-\BOOKMARK [1][-]{section.11}{Conclusion}{}% 41
-\BOOKMARK [1][-]{section.12}{Annexe}{}% 42
+\BOOKMARK [2][-]{subsection.9.1}{Sauvegarde des bases MySQL et PostgreSQL}{section.9}% 35
+\BOOKMARK [2][-]{subsection.9.2}{Les sudoers}{section.9}% 36
+\BOOKMARK [1][-]{section.10}{Mise en place d'un domaine Samba/LDAP}{}% 37
+\BOOKMARK [2][-]{subsection.10.1}{D\351finition du DIT}{section.10}% 38
+\BOOKMARK [2][-]{subsection.10.2}{Mise en place de LDAP}{section.10}% 39
+\BOOKMARK [2][-]{subsection.10.3}{Mise en place de Samba}{section.10}% 40
+\BOOKMARK [2][-]{subsection.10.4}{Sauvegarde automatique de l'annuaire}{section.10}% 41
+\BOOKMARK [1][-]{section.11}{Conclusion}{}% 42
+\BOOKMARK [1][-]{section.12}{Annexe}{}% 43

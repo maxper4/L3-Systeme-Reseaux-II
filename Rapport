@@ -170,7 +170,7 @@ Le tableau de la figure \ref{fig2} récapitule les adresses IP allouées pour ch
 Après avoir défini ces adresses et ces réseaux sur le papier, il est désormais temps de configurer les machines afin de les implémenter concrètement.
 
 \subsection{Les interfaces réseaux du routeur}
-Les adresses que nous venons de répartir entre chaque groupe et réseaux doivent être utilisées par le routeur. Nous allons donc maintenant expliquer comment nous avons paramétré les interfaces réseaux sur le routeur. Pour cela, nous avons travailler avec le fichier /etc/network/interfaces qui régis le fonctionnement des interfaces réseaux de la machine au niveau du noyau du système d'exploitation. Une interface réseau correspond à une carte réseau (en général) et il est possible à partir de son de la configurer (adresse statique, adresse du réseau, masque, gateway, ...). La gateway d'une telle configuration est la machine qui doit être utilisé pour passer d'un réseau à un autre. En d'autres termes, il s'agit de la "porte d'accès" à utiliser. Par exemple si une machine du réseau privé veut communiquer avec une autre machine située sur le réseau IEM, elle devra utiliser le serveur pour router ses paquets. Nous avons modifié le fichier pour obtenir le résultat de la figure \ref{fig3}. 
+Les adresses que nous venons de répartir entre chaque groupe et réseaux doivent être utilisées par le routeur. Nous allons donc maintenant expliquer comment nous avons paramétré les interfaces réseaux sur le routeur. Pour cela, nous avons travailler avec le fichier "/etc/network/interfaces" qui régis le fonctionnement des interfaces réseaux de la machine au niveau du noyau du système d'exploitation. Une interface réseau correspond à une carte réseau (en général) et il est possible à partir de son de la configurer (adresse statique, adresse du réseau, masque, gateway, ...). La gateway d'une telle configuration est la machine qui doit être utilisé pour passer d'un réseau à un autre. En d'autres termes, il s'agit de la "porte d'accès" à utiliser. Par exemple si une machine du réseau privé veut communiquer avec une autre machine située sur le réseau IEM, elle devra utiliser le serveur pour router ses paquets. Nous avons modifié le fichier pour obtenir le résultat de la figure \ref{fig3}. 
 
 \begin{figure}[!h]
 \centerline{ \includegraphics[width=15cm]{images/interfacesRouteur.png}}
@@ -628,23 +628,22 @@ Après avoir fait toutes ces modifications, il est nécessaire de redémarrer le
 Pour le DHCP (figure \ref{fig7}), nous avons pris en compte notre nom de domaine  avec l'option ``option domain-name ``agence.atlantide"". Dans ce cas, il sert à faire référence aux ordinateurs du réseau par leurs noms sans ajouter le nom de domaine. Pour faire simple c'est un suffixe DNS. L'option ``option domain-name-servers 192.168.1.2" indique un serveur DNS à l'adresse ``192.168.1.2" (notre serveur sur le réseau d'interconnexion). 
 
 \subsection{Tests réalisés afin de valider le DNS}
-L'installation suivie de la configuration global du DNS est effectué, mais avant de l'utiliser sur d'autre machines il est important de vérifier sont fonctionnement.
+L'installation suivie de la configuration globale du DNS est effectuée, mais avant de l'utiliser sur d'autres machines il est important de vérifier son fonctionnement.
 
-Tout d'abord il faut vérifier la syntaxe des fichier, en effet avant de chercher quelconque erreur, la syntaxe des fichiers modifié est la première étape de vérification. Pour vérifier la syntaxe des fichiers de configuration on peut utiliser 2 commandes:
-
+Tout d'abord il faut vérifier la syntaxe des fichiers, en effet avant de chercher quelconque erreur, la syntaxe des fichiers modifiés est la première étape de vérification. Pour vérifier la syntaxe des fichiers de configuration on peut utiliser 2 commandes:
 \begin{lstlisting}[language=bash] 
     $ named-checkzone 
     $ named-checkconf
 \end{lstlisting} 
 
-Les fichiers étant syntaxiquement correct, le serveur DNS peut être démarré (en root) avec ceci:
+Les fichiers étant syntaxiquement corrects, le serveur DNS peut être démarré (en root) avec ceci:
 \begin{lstlisting}[language=bash] 
     $ systemctl start bind9
 \end{lstlisting} 
 
-Au moment du démarrage si le serveur DNS renvoie une erreur et ne démarre donc pas, il est possible de voir le détails des erreurs dans le fichier "/var/log/syslog".
+Au moment du démarrage si le serveur DNS renvoie une erreur et ne démarre donc pas, il est possible de voir les détails des erreurs dans le fichier "/var/log/syslog".
 
-Et finalement voici un liste de test effectué afin de tester le DNS:
+Et finalement voici une liste de test effectué afin de tester le DNS:
 Depuis notre serveur: 
 \begin{lstlisting}[language=bash] 
     $ nslookup ip-client
@@ -657,13 +656,13 @@ Depuis notre serveur:
     $ nslookup client.agence.atlantide
 \end{lstlisting} 
 
-Depuis un client connecté en filaire a notre routeur: 
+Depuis un client connecté en filaire à notre routeur: 
 \begin{lstlisting}[language=bash] 
     $ nslookup ip-client
     $ nslookup 10.1.2.1
 \end{lstlisting} 
 
-Depuis un client connecté en filaire a notre routeur : 
+Depuis un client connecté en filaire à notre routeur : 
 \begin{lstlisting}[language=bash] 
     $ nslookup nom-client
     $ nslookup client.agence.atlantide
@@ -681,7 +680,7 @@ Vers le client d'une autre agence :
     $ nslookup client.agence.pekin
 \end{lstlisting} 
 
-Le serveur DNS est fonctionnel, et donc prêt à être utilisé sur d'autre machine, et autres projet.
+Le serveur DNS est fonctionnel, et donc prêt à être utilisé sur d'autres machines, et autres projets.
 
 TODO Photo test(quand on aura accès au serveur) TODO
 
@@ -956,16 +955,131 @@ Avec ceci il est possible de se connecter à la base de données MariaDB avec le
 TODO - Comme pour MariaDB changer le script par une image - TODO
 
 \subsection{Installation et mise en place d'un PDO}
+Désormais nous allons installer et mettre en place PDO qui est l'acronyme de PHP Data Objects: c'est une extension PHP permettant d'interagir avec des bases de données via l'utilisation d'objets. L'une de ses forces réside dans le fait qu'il n'est pas strictement lié à une base de données en particulier: son interface offre un moyen commun d'accéder à plusieurs environnements différents, parmi lesquels: MySQL et PostgreSQL. En résumer PDO va nous permettre d'avoir une abstraction des SGBD, et avec ce principe nous avons écrit un script PHP permettant d'afficher le contenue des 2 bases de données précédemment crée. La première étape est l'installation du paquet PDO dans PHP:
+\begin{lstlisting}[language=bash] 
+    $ apt-get install php-pdo
+\end{lstlisting}
+Et voici donc le script qui est contenue dans "/srv/dev2/www/testPDO.php", permettant de se connecter aux bases de données et afficher les informations contenue dans celle-ci:
+\begin{lstlisting}[language=PHP] 
+<?php
+echo "<h1>page de test des bases de données de PDO</h1>"
+echo "<h1>MariaDb</h1>"
+try {
+        $conn = new PDO("mysql:host=local;dbname=dbtest;charset=utf8", "user", "password");
+        $query = $conn->prepare("SELECT * FROM test;");
+        $query->execute();
+        $result=$query->fetchAll();
+        foreach($results as $r)
+            echo $r["nom"] . " " . $["prenom"]; 
+    }catch (Exception $e) {
+        echo "Maria db error : " . $e->getMessage();
+    }
+    
+echo "<h1>PostegreSQL</h1>"
+try{
+        $conn2 = new PDO("psql:host=local;dbname=dbtest;charset=utf8", "user", "password");
+        $query2 = $conn->prepare("SELECT * FROM test;");
+        $query2->execute();
+        $result2=$query->fetchAll();
+        foreach($results as $r2)
+            echo $r2["nom"] . " " . $r2["prenom"]; 
+    }catch (Exception $e){
+        echo "PosteGreSQL error : " . $e->getMessage();
+    }
 
+?>
+\end{lstlisting}
+Ce script se connecte à la base de données MariaDB et affiche le contenue de la table test dans un premier temps puis à la base PostegreSQL dans un second temps pour afficher les informations de la table test. Le script se connecte avec les différent identifiant (Nom de l'hôte, nom de la base de données, nom de l'utilisateur et le mot de passe). Encore une fois c'est le même principe que la base de données vue précédemment. Dans le cas ou la connexion n'est pas possible alors une erreur est affiché, et dans le cas contraire on affiche sur la page le contenue de la base de données. La page web est accessible via "http://informatique.agence.atlantide/testPDO.php".
 
+TODO - Comme pour MariaDB changer le script par une image - TODO
 
 \section{Script de routage et matrice de filtrage}
-Règles iptables de la matrice de filtrage
+Maintenant que nous avons différents services, tel qu'un serveur web, un serveur DNS et autres fonctionnalité. Il nous faut réguler le trafic pour sécuriser notre réseau et que seul les personnes qui le peuvent se connecte aux différent serveurs. Alors les règles de filtrage avec "iptables" sont parfaitement adapter pour cette tache. Afin de gérer notre script de filtrage, nous avons crée deux fichiers qui sont: "/etc/firewall-free.sh" pour et "/etc/firewall-rules.sh". Le script "/etc/firewall-free.sh" permet de supprimer les règles pré-existantes, il contient seulement:
+\begin{lstlisting}[language=bash] 
+    #!/bin/sh
+    iptables -F //supprimer les règles
+\end{lstlisting}
+Mais le script "/etc/firewall-rules.sh" contient: 
+\begin{lstlisting}[language=bash] 
+    #!/bin/sh
+    ./etc/firewall-free.sh
+    
+    //autoriser l'interface loopback
+    iptables -t filter -A INPUT -i lo -j ACCEPT
+    iptables -t filter -A OUTPUT -o lo -j ACCEPT   
+    
+    //définir la politique par défaut
+    iptables -P INPUT DROP
+    iptables -P OUTPUT DROP
+    iptables -P FORWARD DROP
+    
+    //accepter le ping pour les tests
+    iptables -A INPUT -p icmp -j ACCEPT
+    iptables -A OUTPUT -p icmp -j ACCEPT
+    
+    //régles serveur local
+    iptables -A OUTPUT -p tcp --dport 80 -j ACCEPT //http out 
+    iptables -A OUTPUT -p tcp --dport 53 -j ACCEPT //DNS out, tcp
+    iptables -A OUTPUT -p udp --dport 53 -j ACCEPT //DNS out, udp
+    iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT//https out
+    iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT //ssh out
+    
+    iptables -A INPUT -p tcp --dport 22 -j ACCEPT  //ssh in
+    iptables -A INPUT -p tcp -m state --state ESTABLISHED,RELATED -j ACCEPT //paquets en retour
+    iptables -A INPUT -p udp -m state --state ESTABLISHED,RELATED -j ACCEPT //paquets en retour
+    iptables -A OUTPUT -p tcp -m state --state ESTABLISHED/RELATED -j ACCEPT //paquets en retour
+    iptables -A OUTPUT -p udp -m state --state ESTABLISHED/RELATED -j ACCEPT //paquets en retour
 
-\subsection{Scripts de routage au démarrage}
+    //régles réseaux clients
+    iptables -A FORWARD tcp --dport 80 -s 10.1.2.0/24 -o eno1 -j ACCEPT //http
+    iptables -A FORWARD tcp --dport 53 -s 10.1.2.0/24 -o eno1 -j ACCEPT //dns
+    iptables -A FORWARD udp --dport 53 -s 10.1.2.0/24 -o eno1 -j ACCEPT //dns
+    iptables -A FORWARD tcp --dport 443 -s 10.1.2.0/24 -o eno1 -j ACCEPT //https
+    iptables -A FORWARD tcp --dport 22 -s 10.1.2.0/24 -o eno1 -j ACCEPT //ssh
+    iptables -A FORWARD -p tcp -m state --state ESTABLISHED/RELATED -j ACCEPT //paquets en retour
+    iptables -A FORWARD -p udp -m state --state ESTABLISHED/RELATED -j ACCEPT //paquets en retour
+    
+    //dialogue entre client et serveur
+    iptables -A INPUT -s 10.1.2.0/24 -i enp3s0 -j ACCEPT
+    
+    //masquerade pour aller sur le net
+    iptables -t nat -A POSTROUTING -s 10.1.2.0/24 -o eno1 -j MASQUERADE //translation d'adresse depuis le client
+\end{lstlisting}
+Ce scrip appel le script qui supprime les règles décrit auparavant, mais permet également d'autoriser l'interface loopback, de définir la politique par défaut, de bloquer l'accès d'un autre groupe à notre serveur. De plus on sécurise le serveur en ouvrant les bon ports, le port 80 fait référence au protocole http. Le port 443 fait référence au protocole https, le port 53 pour le DNS et le port 22 pour SSH. On sécurise de la même façons pour le client avec l'ouverture des port adéquat. Finalement on permet le dialogue entre notre client et le serveur, et on permet au client d'aller sur internet.
 
+TODO - changer le texte par des images - TODO
+
+Dans la configuration actuelle les scripts crées ne sont jamais utilisé, c'est pour cela que dans "/etc/network/interfaces" on ajoute la ligne suivante:
+\begin{lstlisting}[language=bash] 
+    pre-up /etc/firewall-rules.sh
+\end{lstlisting}
+Cette ligne permet de dire qu'au démarrage des interfaces réseau le fichier "/etc/firewall-rules.sh" est executé. Et permet donc d'ajouter nos scripts de filtrage dans les scripts de démarrage.
 
 \subsection{Sauvegarde des bases MySQL et PostgreSQL}
+Les bases de données que se soit avec MariaDB ou PostegreSQL peuvent être modifier ou supprimé par des utilisateurs malveillant, c'est pour cette raison qu'une sauvegarde de ces bases de données est un élément important de notre architecture.
+Pour les sauvegarde de MariaDB donc de MySQL il existe un logiciel qui permet de le faire automatiquement, mais celui-ci est téléchargable uniquement avec le gestionnaire de paquet "aptitude". 
+Il faut donc l'installer avec:
+\begin{lstlisting}[language=bash] 
+    $ apt-get install aptitude
+\end{lstlisting}
+
+Une fois le gestionnaire aptitude installé on peut alors installé le paquet "automysqlbackup":
+\begin{lstlisting}[language=bash] 
+    $ aptitude install automysqlbackup 
+\end{lstlisting}
+TODO - finir d'expliquer la configuration avec les photos - TODO
+
+TODO - ajouter des images pour automysql - TODO
+
+Pour ce qui est de la sauvegarde de la base de données PostegreSQL, nous avons simplement utilisé crontab et zip afin d'économiser de la place sur le disque dur. Voici l'ensemble des commandes que nous avons tapés:
+\begin{lstlisting}[language=bash] 
+    $ mkdir -p /backups/postgresql
+    $ chown postgre /backups/postsresql/
+    $ su - postgre
+    postgres=# crontab -e 
+        0 0 * * 0 pg_dumpall -U postgres | gzip > /backups/postgresql/save.gz
+\end{lstlisting}
+Pour les sauvegardes nous avons simplement crée le dossier "/backups/postgresql", et donnée les droits de ce dossier a l'utilisateur de PostegreSQL. Finalement nous n'avions plus qu'a crée le fichier crontab sur le compte de l'utilisateur et indiquer dans celui-ci que la sauvegarde sera effectué tous les dimanches à minuit et de compresser la sauvegarde pour l'envoyé dans le fichier "save.gz".
 
 \subsection{Les sudoers}
 Sudo est un utilitaire de ligne de commande qui permet aux utilisateurs de confiance d'exécuter des commandes en tant qu'un autre utilisateur, par défaut root. Il faut également savoir que root possède l'entièreté des droits sur une machine.

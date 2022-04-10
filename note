@@ -494,7 +494,7 @@ Matrice de filtrage :
     iptables -A INPUT -s 10.1.2.0/24 -i enp3s0 -j ACCEPT
     
     //masquerade pour aller sur le net
-    iptables -t nat -A POSTROUTING -s 10.1.2.0/24 -o eno1 -j MASQUERADE //translation d'adress depuis le client
+    iptables -t nat -A POSTROUTING -s 10.1.2.0/24 -o eno1 -j MASQUERADE //translation d'adresse depuis le client
         
     ensuite dans interfaces on ajoute (apres la premiere interface):
         pre-up /etc/firewall-rules.sh
@@ -502,6 +502,7 @@ Matrice de filtrage :
     
 Sauvegarde MySQL et PostgreSQL :
     MySQL :
+    
     apt-get install aptitude
     aptitude install automysqlbackup 
     
