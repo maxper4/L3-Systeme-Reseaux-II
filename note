@@ -301,12 +301,13 @@ Mise en place d'un public html :
     nano index.html
         <html>
             <head>
-            <title> PUBLIC HTMl </title>
+            <title> PUBLIC HTML </title>
             </head>
             <body>
             <h1>public html succès</h1>
             </body>
         </html>
+        
     on accede a la page avec : "agence.altlantide/~dev1/"
     
     

@@ -518,6 +518,8 @@ Nous pouvons immédiatement constater que nous avons interrogé le même DNS afi
 
 Pour conclure, une requête est ainsi envoyée au premier serveur de noms (appelé "serveur de nom primaire"). Si celui-ci possède l'enregistrement dans son cache, il l'envoie à l'application. Dans le cas contraire, il interroge un serveur racine. Le serveur de nom racine renvoie une liste de serveurs de noms faisant autorité sur le domaine. Le serveur de noms primaire faisant autorité sur le domaine va alors être interrogé et retourner l'enregistrement correspondant à l'hôte sur le domaine: dans le cas présent les serveurs ``geo1.debian.org", ``geo2.debian.org" et ``geo3.debian.org". 
 
+L'utilitaire dig avec l'option "+trace" nous donne toutes les redirection, c'est-à-dire les routes par lesquels il est passé. Ce qui nous permet de savoir que 16 serveurs gèrent le ".". Et grâce au site "https://root-servers.org/" on peut savoir que 254 serveurs gèrent le "e".
+
 Finalement, nous pouvons conclure que dig et host renvoie les informations nécessaires identiques, host reste tout de même limité en informations tandis que dig est davantage détaillé. Les 2 commandes peuvent servir, tout dépend du niveau de détails dont on a besoin. 
 
 \subsection{Fichier de renseignement du serveur DNS}
@@ -588,14 +590,14 @@ Sur l'image \ref{fig16}, les 2 zones sont identifiables par l'identificateur ``z
 
 Afin de mettre en place les 2 fichiers de configuration des 2 zones, nous sommes partis du fichier existant ``/etc/bind/db.local". Celui-ci nous a fournis toutes les informations nécessaires et nous n'avions plus qu'a remplacer les lignes dont nous avions besoin. Par exemple le ``localhost" a été changé en "agence.atlantide", l'adresse IP de loopback (le ``127.0.0.1"), a été changé en ``10.1.2.1".  Nous indiquons ainsi que le nom de domaine agence.atlantide décrit l'adresse ``10.1.2.1'', donc notre serveur.
 Pour le fichier de la zone ``normale" nous avons utilisé des enregistrements de type ``A" afin de relier IP et nom de domaine. Nous avons donc un champ A qui définit que le sous domaine client.agence.atlantide décrit l'adresse ``10.1.2.2'', donc notre client.
-Voici ci-dessous le fichier de configuration de la zone ``normale":
+Voici ci-dessous le fichier "/etc/bind/db.agence.atlantide" de configuration de la zone ``normale":
 \begin{figure}[H]
 \centerline{ \includegraphics[width=12cm]{images/dbAgenceAtlantide.png}}
 \caption{Contenu du fichier de configuration du DNS normal.}
 \label{fig17}
 \end{figure}
 
-Pour la zone inverse il faut utiliser des enregistrements de type ``PTR" qui permettent la mise en place du DNS inversé. Et voici ici le fichier de configuration de la zone ``inverse":
+Pour la zone inverse il faut utiliser des enregistrements de type ``PTR" qui permettent la mise en place du DNS inversé. Et voici ici le fichier "/etc/bind/db.agence.atlantide.inv" de configuration de la zone ``inverse":
 \begin{figure}[H]
 \centerline{ \includegraphics[width=12cm]{images/dbAgenceAtlantideInv.png}}
 \caption{Contenu du fichier de configuration du DNS inversé.}
@@ -615,7 +617,7 @@ Dans le fichier ``/etc/bind/named.conf.options", nous avons ajouter des forwarde
 \begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/namedConfOptions.png}}
 \caption{Contenu du fichier de configuration de named.conf.options.}
-\label{fig102}
+\label{fig20}
 \end{figure}
 
 Après avoir fait toutes ces modifications, il est nécessaire de redémarrer le service BIND, en lançant la commande: 
@@ -626,28 +628,243 @@ Après avoir fait toutes ces modifications, il est nécessaire de redémarrer le
 Pour le DHCP (figure \ref{fig7}), nous avons pris en compte notre nom de domaine  avec l'option ``option domain-name ``agence.atlantide"". Dans ce cas, il sert à faire référence aux ordinateurs du réseau par leurs noms sans ajouter le nom de domaine. Pour faire simple c'est un suffixe DNS. L'option ``option domain-name-servers 192.168.1.2" indique un serveur DNS à l'adresse ``192.168.1.2" (notre serveur sur le réseau d'interconnexion). 
 
 \subsection{Tests réalisés afin de valider le DNS}
-named-checkzone et named-checkconf pour vérifier la syntaxe
-/var/log/syslog pour voir les erreurs si présente au démarrage
-depuis le serveur : nslookup ip-client
-depuis le serveur : nslookup nom-client
-depuis un client connecté en filaire au routeur : nslookup ip-client
-depuis un client connecté en filaire au routeur : nslookup nom-client
-vers le serveur d'une autre agence : 
-vers le client d'une autre agence :
+L'installation suivie de la configuration global du DNS est effectué, mais avant de l'utiliser sur d'autre machines il est important de vérifier sont fonctionnement.
 
+Tout d'abord il faut vérifier la syntaxe des fichier, en effet avant de chercher quelconque erreur, la syntaxe des fichiers modifié est la première étape de vérification. Pour vérifier la syntaxe des fichiers de configuration on peut utiliser 2 commandes:
+
+\begin{lstlisting}[language=bash] 
+    $ named-checkzone 
+    $ named-checkconf
+\end{lstlisting} 
+
+Les fichiers étant syntaxiquement correct, le serveur DNS peut être démarré (en root) avec ceci:
+\begin{lstlisting}[language=bash] 
+    $ systemctl start bind9
+\end{lstlisting} 
+
+Au moment du démarrage si le serveur DNS renvoie une erreur et ne démarre donc pas, il est possible de voir le détails des erreurs dans le fichier "/var/log/syslog".
+
+Et finalement voici un liste de test effectué afin de tester le DNS:
+Depuis notre serveur: 
+\begin{lstlisting}[language=bash] 
+    $ nslookup ip-client
+    $ nslookup 10.1.2.1
+\end{lstlisting} 
+
+Depuis notre serveur: 
+\begin{lstlisting}[language=bash] 
+    $ nslookup nom-client
+    $ nslookup client.agence.atlantide
+\end{lstlisting} 
+
+Depuis un client connecté en filaire a notre routeur: 
+\begin{lstlisting}[language=bash] 
+    $ nslookup ip-client
+    $ nslookup 10.1.2.1
+\end{lstlisting} 
+
+Depuis un client connecté en filaire a notre routeur : 
+\begin{lstlisting}[language=bash] 
+    $ nslookup nom-client
+    $ nslookup client.agence.atlantide
+\end{lstlisting} 
+
+Vers le serveur d'une autre agence : 
+\begin{lstlisting}[language=bash] 
+    $ nslookup nom-serveur
+    $ nslookup agence.pekin
+\end{lstlisting} 
+
+Vers le client d'une autre agence :
+\begin{lstlisting}[language=bash] 
+    $ nslookup nom-client
+    $ nslookup client.agence.pekin
+\end{lstlisting} 
+
+Le serveur DNS est fonctionnel, et donc prêt à être utilisé sur d'autre machine, et autres projet.
+
+TODO Photo test(quand on aura accès au serveur) TODO
 
 \section{Installation d'un serveur LAMP}
+LAMP est un acronyme, en effet le "L" désigne Linux: le système d'exploitation, le "A" désigne Apache: le serveur Web, le "M" est pour MySQL ou MariaDB: le serveur de Base de données, et le "P" pour PHP: le langage de script.
+
+Avec LAMP, on peut donc mettre en place un serveur Web, hébergeant un site web dynamique écrit en PHP, tout en allant chercher des données dans une base MySQL ou MariaDB, mais également PostgreSQL.
+
 \subsection{Installation et mise en place d'Apache}
+Installation du serveur web apache et son module permettant de gérer PHP plus tard:
+\begin{lstlisting}[language=bash] 
+    $ apt install apache2 libapache2-mod-php
+\end{lstlisting} 
 
-Test, localisation de la page web, création du compte utilisateur développeur, modification du serveur pour que www soit associé au dev web (crée dans /srv), les bon droits, mise en place du virtuals hosts pointant sur /srv/www 
+Nous avons également utilisé la commande:
+\begin{lstlisting}[language=bash] 
+    $ systemcl enable apache2
+\end{lstlisting} 
+Qui permet de démarrer le serveur Apache au boot de notre routeur.
 
-Dans le fichier /etc/bind/db.agence.atlantide  
-on a rajouter la ligne :
-    informatique IN A 10.1.2.1
+Après l'installation donc par défaut, la page web de notre serveur se trouve dans le fichier: "/var/www/html/index.html". Et par conséquent à ce moment de la configuration nous pouvons visiter la page en allant sur le lien "http://localhost/index.html" sur notre serveur.
+
+Pour la suite nous avons crée un compte pour un utilisateur qui développe des applications web. Cette utilisateur a était crée avec la commande:
+\begin{lstlisting}[language=bash] 
+    $ adduser dev1
+\end{lstlisting} 
+Qui est une commande intégré nativement à Linux permettant de crée des utilisateur. Ensuite nous avons crée le dossier ou l'utilisateur va pouvoir ajouter ces fichiers. Le dossier se trouve dans "/srv/dev1". Mais par défaut l'utilisateur "dev1" n'a les bons droits. C'est pour cela que nous avons également changé les droits et changé le propriétaire du dossier via les commandes:
+\begin{lstlisting}[language=bash] 
+    $ chown utilisateur nom(s)_de_fichier
+    $ chown -R dev1 dev1
+    $ chmod -R 755 dev1
+\end{lstlisting} 
+Le changement de droit avec "chmod 755" est équivalent au "chmod u=rwx,go=rx".
+
+Ensuite nous avons fait pointer un alias sur la page "/srv/dev1/www", pour cela nous avons utilisé le mot clé "Alias" dans le fichier de configuration "/etc/apache2/apache2.conf".
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/apache2Conf.png}}
+\caption{Contenu du fichier de configuration de apache.}
+\label{fig20}
+\end{figure}
+La ligne qui nous intéresse est la suivante: "Alias "/dev1" "/srv/dev1/www"". Cette ligne permet de dire au navigateur sur laquelle nous allons afficher la page que nous n'avons pas besoin de taper "http://localhost/srv/dev1/www/index.html" mais simplement "http://localhost/dev1".
+
+Pour tester notre alias nous avons écrit un petit "index.html" dans le dossier "/srv/dev1/www". Nous sommes donc passé par c'est différentes commandes:
+\begin{lstlisting}[language=bash] 
+    $ touche /srv/dev1/www/index.html
+    $ nano /srv/dev1/www/index.html
+\end{lstlisting} 
+Contenue du fichier "/srv/dev1/www/index.html":
+\begin{lstlisting}[language=HTML] 
+    <html>
+        <head>
+        <title> DEV 1 WEBSITE </title>
+        </head>
+        <body>
+        <h1>Succes</h1>
+        </body>
+    </html>
+\end{lstlisting} 
+Cette petite page HTML nous permet simplement d'avoir un affichage en cas de réussite.
+
+Un second utilisateur semblable au premier est crée. Tout comme pour le développeur web, nous avons crée un utilisateur "dev2", ajouter tous les dossiers et fichiers nécessaire et changé les droits. Ce qui nous donne ceci:
+\begin{lstlisting}[language=bash] 
+    $ adduser dev2
+    $ mkdir /srv/dev2
+    $ mkdir /srv/dev2/www
+    $ touche /srv/dev2/www/index.html
+    $ nano /srv/dev2/www/index.html
+    $ chown -R dev2 dev2
+    $ chmod -R 755 dev2
+\end{lstlisting} 
+Contenue du fichier "/srv/dev2/www/index.html":
+\begin{lstlisting}[language=HTML] 
+    <html>
+        <head>
+        <title> DEV 2 WEBSITE </title>
+        </head>
+        <body>
+        <h1>Encore un succes</h1>
+        </body>
+    </html>
+\end{lstlisting} 
+Dans la même dynamique que la première page, elle est destiner à avoir un affichage de succès pour les phases de test. Mais nous avons également trouvé le besoin d'utiliser un VirtualHost pour cette utilisateur, en effet les serveurs virtuels, ou VirtualHost, permettent de faire cohabiter plusieurs serveurs web sur une même machine. Pour crée un VirtualHost il faut le renseigner dans le fichier "/etc/apache2/sites-available/dev2.conf". Voici donc la configuration du VirtualHost de dev2:
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/virtualHostDev2Conf.png}}
+\caption{Contenu du fichier de configuration de dev2.}
+\label{fig20}
+\end{figure}
+Dans ce fichier de configuration nous y retrouvons le chemin du dossier ou l'on va mettre nos pages web, ainsi que le nom du serveur qui est "informatique.agence.dijon".
+
+Pour des utilisateurs occasionnels, nous avons mis en place un public\_html afin de publier des
+pages personnelles. La première étape à était de crée le fichier "/var/www/html/public\_html". Nous avons ensuite activé le module "userdir" d'apache, qui permet d'accéder à des répertoires spécifiques à l'utilisateur en utilisant la syntaxe http://example.com/~user/". Voici la commande qui à permis d'activer ce module:
+\begin{lstlisting}[language=bash] 
+    $ a2enmod userdir
+\end{lstlisting} 
+Et pour la suite des manipulation, c'est le même principe que les 2 premiers utilisateurs.
+\begin{lstlisting}[language=bash] 
+    $ mkdir ~/public_html
+    $ touch index.html
+    $ nano index.html
+\end{lstlisting} 
+Contenue du fichier "/var/www/html/public\_html/index.html":
+\begin{lstlisting}[language=HTML] 
+    <html>
+        <head>
+        <title> PUBLIC HTML </title>
+        </head>
+        <body>
+        <h1>public html succes</h1>
+        </body>
+    </html>
+\end{lstlisting} 
+
+Le DNS configuré dans la sections précedente va est utilisé, c'est pour cela que dans le fichier "/etc/bind/db.agence.atlantide" on a rajouter la ligne :
+\begin{lstlisting}[language=bash] 
+    $ informatique IN A 10.1.2.1
+\end{lstlisting} 
+
+Une fois toutes l'installation terminé, avec les utilisateurs, les droits, les VirtualHost, les alias et le DNS. Alors seulement on peut redémarrer le serveur apache avec la commande:
+\begin{lstlisting}[language=bash] 
+    $ systemctl restart bind9
+\end{lstlisting} 
+
+Le serveur configuré et fonctionnel, on peut brancher un client à notre routeur et utiliser les 2 pages suivantes sur un navigateur (firefox, chrome, ...): "http://agence.atlantide/dev1" pour visiter la page du premier utilisateur, "http://informatique.agence.atlantide/" pour le deuxième utilisateur, et finalement la page des utilisateurs occasionnels est disponible sous "http://agence.atlantide/~dev1/". Pour naviguer entre les différent utilisateur il faut utiliser cette commande:
+\begin{lstlisting}[language=bash] 
+    $ su nom_Utilisateur
+\end{lstlisting} 
+Et si un mot de passe à était renseigné à la création alors il sera demandé pour se connecter.\\\\
+
+Pour rappel un serveur LAMP est fait à partir de l'acronyme Linux Apache MariaDB PHP. Il est donc temps de passer a l'installation de MariaDB.
+
+\begin{lstlisting}[language=bash] 
+sudo apt install mariadb-server
+mysql -u root -p
+    CREATE DATABASE dbtest
+mysql -u root -p dbtest
+    CREATE TABLE test (nom TEXT, prenom TEXT);
+    INSERT INTO test(nom,prenom) VALUES ("NomTest","PrenomTest");
+    SELECT * from test;
     
-Redemarer avec systemctl restart bind9
-    
-    on accede a la page avec : "informatique.agence.atlantide"
+ajout d'un utilisateur a la base de donnée pour l'utilisé dans le script php :
+mysql
+    CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
+    GRANT ALL PRIVILEGES ON * . * TO user; 
+\end{lstlisting} 
+
+        
+Une fois MariaDB installé et fonctionnel, ils ne nous reste plus que PHP.
+
+\begin{lstlisting}[language=bash] 
+touch /srv/dev2/www/testMariaDb.php
+apt install php 7.4
+dans /srv/dev2/www/testMariaDb.php
+<?php
+echo "<h1>Page de test de la base de données de MariaDB</h1>"
+
+$host_name = "localhost";
+$database = "dbtest";
+$user_name = "user";
+$password = "password";
+
+$connect = new  mysqli($host_name, $user_name, $password, $database);
+
+if($connect->connect_error)
+{
+    echo '<p>connexion au serveur MySQL  échouée: ' . $connect->connect_error . '</p>';
+}
+else
+{
+    $result =  $connect->query("SELECT * FROM test;");
+    if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){
+            echo "NOM : " . $row["nom"] . "PRENOM : " . $row["prenom"]; 
+        }
+    }
+    else{   
+        echo '<p>0 result</p>';
+    }
+}
+?>
+
+page -> informatique.agence.atlantide/testMariaDb.php
+\end{lstlisting} 
+
 
 \subsection{Installation et mise en place de PostgreSQL}
 
