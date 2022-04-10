@@ -978,11 +978,16 @@ Pour cela il faut ajouter cette utilisateurs dans le fichier des sudoers, on peu
 \end{figure}
 Cette ligne nous indique que l'utilisateur "dev1" à tous les droits pour les fichiers "/usr/bin/nano" qui est l'éditeur de texte pour modifier le contenue de ces fichier, mais il possède également les droits sur "/etc/apache2/*", "etc/init.d/apache2 restart" et "/usr/sbin/service apache2 restart". Dorénavant il peut ajouter/supprimer tous ce qu'il souhaite dans "/etc/apache2/" et peut redemarrer le serveur apache.
 
-\section{}
-\subsection{}
-\subsection{}
+\section{Mise en place d'un domaine Samba/LDAP}
+\subsection{Définition du DIT}
 
-Conclusion tp 3
+\subsection{Mise en place de LDAP}
+Paramétrage service LDAP, rendre opérationel fichier LDAP, machine exploite données de l'annuaire.
+
+\subsection{Mise en place de Samba}
+groupe, utilisateurs, politique de sécurité, adapter matrice de filtrage.
+
+\subsection{Sauvegarde automatique de l'annuaire}
 
 \section{Conclusion}
 \section{Annexe}
