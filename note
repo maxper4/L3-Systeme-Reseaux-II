@@ -363,7 +363,7 @@ Installation PostgreSQL :
     apt install postgresql postgresql-client
     apt-get install php-pgsql
     systemctl enable --now postgresql
-    su -postgres
+    su - postgres
     createuser --interactive --pwprompt
     su postgres
     psql

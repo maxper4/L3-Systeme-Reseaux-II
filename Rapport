@@ -690,7 +690,7 @@ LAMP est un acronyme, en effet le "L" désigne Linux: le système d'exploitation
 
 Avec LAMP, on peut donc mettre en place un serveur Web, hébergeant un site web dynamique écrit en PHP, tout en allant chercher des données dans une base MySQL ou MariaDB, mais également PostgreSQL.
 
-\subsection{Installation et mise en place d'Apache}
+\subsection{Installation et mise du LAMP avec MariaDB}
 Installation du serveur web apache et son module permettant de gérer PHP plus tard:
 \begin{lstlisting}[language=bash] 
     $ apt install apache2 libapache2-mod-php
@@ -851,13 +851,12 @@ L'utilisateur est crée avec comme nom "user" et mot de passe "password", mais i
     mysql> GRANT ALL PRIVILEGES ON * . * TO user; 
 \end{lstlisting}
         
-Une fois MariaDB installé et fonctionnel, ils ne nous reste plus que PHP. PHP (acronyme récursif de PHP : Hypertext Preprocessor) est un langage de script open source à usage général largement utilisé, particulièrement adapté au développement Web et pouvant être intégré au HTML.
+Une fois MariaDB installé et fonctionnel, ils ne nous reste plus que PHP. PHP (acronyme récursif de PHP: Hypertext Preprocessor) est un langage de script open source à usage général largement utilisé, particulièrement adapté au développement Web et pouvant être intégré au HTML.
 Toujours dans le même démarche d'installation, il faut  cette fois-ci installer PHP:
 \begin{lstlisting}[language=bash] 
     $ apt install php 7.4
 \end{lstlisting}
 Une fois l'installation terminé, la page de test est crée dans le répertoire "/srv/dev2/www/testMariaDb.php", cette page est éditer avec l'éditeur de texte nano. Dans "/srv/dev2/www/testMariaDb.php" voici ce que l'on retrouve:
-
 \begin{lstlisting}[language=PHP] 
     <?php
     echo "<h1>Page de test de la base de données de MariaDB</h1>"
@@ -887,11 +886,11 @@ Une fois l'installation terminé, la page de test est crée dans le répertoire 
     }
     ?>
 \end{lstlisting} 
-Ce petit script php permet de se connecté à la base de données MariaDB avec les différent identifiant (Nom de l'hôte, nom de la base de données, nom de l'utilisateur et le mot de passe). Dans le cas ou la connexion n'est pas possible alors une erreur est affiché, et dans le cas contraire on affiche sur la page le contenue de la base de données.
+Ce petit script php permet de se connecter à la base de données MariaDB avec les différent identifiant (Nom de l'hôte, nom de la base de données, nom de l'utilisateur et le mot de passe). Dans le cas ou la connexion n'est pas possible alors une erreur est affiché, et dans le cas contraire on affiche sur la page le contenue de la base de données.
 La page web est accessible via "http://informatique.agence.atlantide/testMariaDb.php", si sur cette page le contenue de base de données MariaDB est affiché alors le trio Apache MariaDB PHP est fonctionnelle. MariaDB n'est pas la seul alternative, il en existe d'autres comme nous allons le voir prochainement.
 TODO - changer le script écrit par une image, et rajouter des images des pages web de test - TODO
 
-\subsection{Installation et mise en place de PostgreSQL}
+\subsection{Installation et mise d'un autre LAMP avec PostgreSQL}
 PostgreSQL est un système de gestion de base de données relationnelle et objet.
 Ce système est comparable à d'autres systèmes de gestion de base de données, qu'ils soient libres (comme MariaDB et Firebird), ou propriétaires (comme Oracle, MySQL, Sybase, DB2, Informix et Microsoft SQL Server). Dans cette partie PostgreSQL prendra la place de MariaDB. L'installation de PostgreSQL et des paquets PHP compatible avec PostgreSQL est la première étape:
 \begin{lstlisting}[language=bash] 
@@ -899,18 +898,66 @@ Ce système est comparable à d'autres systèmes de gestion de base de données,
     $ apt-get install php-pgsql
 \end{lstlisting}
 
-\subsection{Installation et mise en place de PHP}
+Pour ce qui est du serveur web Apache pas besoin de le réinstaller ou de changer la configuration, de même pour Linux.
 
-Programme PHP qui se connecte a PostgreSQL et affichage infos pour la vérification.
+Pour démarrer la base de données au boot du routeur, il existe cette commande:
+\begin{lstlisting}[language=bash] 
+    $ systemctl enable --now postgresql
+\end{lstlisting}
 
-\subsection{Installation et mise en place de MySQL}
+Toutes les modifications doivent se faire avec l'utilisateur "postgres" qui est crée avec l'installation de PostgreSQL. On se connecte (depuis root) à cet utilisateur avec la commande:
+\begin{lstlisting}[language=bash] 
+    $ su - postgres
+\end{lstlisting}
 
-Comme pour PostgreSQL et php
+La base de données PostgreSQL ne possède pas de données à cette étape. C'est à partir de maintenant que nous allons crée la base de donnée pour nos test, ainsi que l'utilisateur et la table dans la base. Tous ceci est fait à partir des commandes:
+\begin{lstlisting}[language=bash] 
+    $ su - postgres
+    $ psql
+    postgres=# createuser user
+    postgres=# createdb dbtest -O user
+    postgres=# psql dbtest
+    postgres=# CREATE TABLE test (nom TEXT, prenom TEXT);
+    postgres=# INSERT INTO test(nom,prenom) VALUES ('Postgre','SQL');
+    postgres=# SELECT * FROM test;
+\end{lstlisting}
+Le principe des commandes précèdent et le suivante: premièrement on passe sur l'utilisateur "postgres", puis on ouvre le terminal de PostgreSQL. Une fois dans l'invite de PostgreSQL on peut alors crée un utilisateur "user", une base de données "dbtest" puis une table "test". Finalement le fonctionnement est similaire à celui de la base de données MariaDB, le seul changement se trouve dans les valeurs de la table "dbtest".
+
+Le script suivant permet d'afficher le contenue dans la base de données de PostegreSQL, ce script PHP se situe dans "/srv/dev2/www/testPostgreSQL.php".
+\begin{lstlisting}[language=PHP] 
+    <?php
+    echo "<h1>Page de test de la base de données de PostegreSQL</h1>"
+    $connect = pg_connect("host=localhost dbname=dbtest user=user password=password") or die("Echec connexion " . pg_last_error());
+
+    if(pg_result_error()) 
+    {
+        echo '<p>connexion au serveur PostgreSQL échoué: ' . pg_result_error() . '</p>';
+    }
+    else
+    {
+        $result = pgquery('SELECT * FROM test') or die("Echec requete " . pg_last_error());
+            while($row = pg_fetch_array($result, null, PGSQL_ASSOC)){
+                foreach($row as $value)
+                    echo $value . " ";
+                echo "<br />;
+            }
+        pg_free_result($result);
+    }
+
+    pg_close($connect);
+    ?>
+\end{lstlisting}
+
+Avec ceci il est possible de se connecter à la base de données MariaDB avec les différent identifiant (Nom de l'hôte, nom de la base de données, nom de l'utilisateur et le mot de passe). Encore une fois c'est le même principe que la base de données MariaDB mais avec une syntaxe différente. Dans le cas ou la connexion n'est pas possible alors une erreur est affiché, et dans le cas contraire on affiche sur la page le contenue de la base de données. La page web est accessible via "http://informatique.agence.atlantide/testPostgreSQL.php".
 
 \subsection{Installation et mise en place d'un PDO}
 
 \section{Script de routage et matrice de filtrage}
+
+
 \subsection{Scripts de routage au démarrage}
+
+
 \subsection{Règles iptables de la matrice de filtrage}
 
 
