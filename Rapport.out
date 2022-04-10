@@ -28,16 +28,15 @@
 \BOOKMARK [3][-]{subsubsection.7.1.2}{Pratique}{subsection.7.1}% 28
 \BOOKMARK [2][-]{subsection.7.2}{Tests r\351alis\351s afin de valider le DNS}{section.7}% 29
 \BOOKMARK [1][-]{section.8}{Installation d'un serveur LAMP}{}% 30
-\BOOKMARK [2][-]{subsection.8.1}{Installation et mise en place d'Apache}{section.8}% 31
-\BOOKMARK [2][-]{subsection.8.2}{Installation et mise en place de PostgreSQL}{section.8}% 32
-\BOOKMARK [2][-]{subsection.8.3}{Installation et mise en place de PHP}{section.8}% 33
-\BOOKMARK [2][-]{subsection.8.4}{Installation et mise en place de MySQL}{section.8}% 34
-\BOOKMARK [2][-]{subsection.8.5}{Installation et mise en place d'un PDO}{section.8}% 35
-\BOOKMARK [1][-]{section.9}{Script de routage et matrice de filtrage}{}% 36
-\BOOKMARK [2][-]{subsection.9.1}{Scripts de routage au d\351marrage}{section.9}% 37
-\BOOKMARK [2][-]{subsection.9.2}{R\350gles iptables de la matrice de filtrage}{section.9}% 38
-\BOOKMARK [1][-]{section.10}{}{}% 39
-\BOOKMARK [2][-]{subsection.10.1}{}{section.10}% 40
-\BOOKMARK [2][-]{subsection.10.2}{}{section.10}% 41
-\BOOKMARK [1][-]{section.11}{Conclusion}{}% 42
-\BOOKMARK [1][-]{section.12}{Annexe}{}% 43
+\BOOKMARK [2][-]{subsection.8.1}{Installation et mise du LAMP avec MariaDB}{section.8}% 31
+\BOOKMARK [2][-]{subsection.8.2}{Installation et mise d'un autre LAMP avec PostgreSQL}{section.8}% 32
+\BOOKMARK [2][-]{subsection.8.3}{Installation et mise en place d'un PDO}{section.8}% 33
+\BOOKMARK [1][-]{section.9}{Script de routage et matrice de filtrage}{}% 34
+\BOOKMARK [2][-]{subsection.9.1}{Scripts de routage au d\351marrage}{section.9}% 35
+\BOOKMARK [2][-]{subsection.9.2}{Sauvegarde des bases MySQL et PostgreSQL}{section.9}% 36
+\BOOKMARK [2][-]{subsection.9.3}{Les sudoers}{section.9}% 37
+\BOOKMARK [1][-]{section.10}{}{}% 38
+\BOOKMARK [2][-]{subsection.10.1}{}{section.10}% 39
+\BOOKMARK [2][-]{subsection.10.2}{}{section.10}% 40
+\BOOKMARK [1][-]{section.11}{Conclusion}{}% 41
+\BOOKMARK [1][-]{section.12}{Annexe}{}% 42

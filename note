@@ -523,7 +523,7 @@ Sauvegarde MySQL et PostgreSQL :
 Configuration apache et relancer le serveur :    
     visudo ou /etc/sudoers
     a la fin du fichier:
-        dev1 ALL=(ALL:ALl) /usr/bin/nano /etc/apache2/*, etc/init.d/apache2 restart, /usr/sbin/service apache2 restart
+        dev1 ALL=(ALL:ALL) /usr/bin/nano /etc/apache2/*, etc/init.d/apache2 restart, /usr/sbin/service apache2 restart
      
 TP3 :
 

@@ -767,7 +767,7 @@ Dans la même dynamique que la première page, elle est destiner à avoir un aff
 \begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/virtualHostDev2Conf.png}}
 \caption{Contenu du fichier de configuration de dev2.}
-\label{fig20}
+\label{fig21}
 \end{figure}
 Dans ce fichier de configuration nous y retrouvons le chemin du dossier ou l'on va mettre nos pages web, ainsi que le nom du serveur qui est "informatique.agence.dijon".
 
@@ -858,33 +858,34 @@ Toujours dans le même démarche d'installation, il faut  cette fois-ci installe
 \end{lstlisting}
 Une fois l'installation terminé, la page de test est crée dans le répertoire "/srv/dev2/www/testMariaDb.php", cette page est éditer avec l'éditeur de texte nano. Dans "/srv/dev2/www/testMariaDb.php" voici ce que l'on retrouve:
 \begin{lstlisting}[language=PHP] 
-    <?php
-    echo "<h1>Page de test de la base de données de MariaDB</h1>"
+<?php
+echo "<h1>Page de test de la base de donnees de MariaDB</h1>"
 
-    $host_name = "localhost";
-    $database = "dbtest";
-    $user_name = "user";
-    $password = "password";
+$host_name = "localhost";
+$database = "dbtest";
+$user_name = "user";
+$password = "password";
 
-    $connect = new  mysqli($host_name, $user_name, $password, $database);
+$connect = new  mysqli($host_name, $user_name, $password, $database);
 
-    if($connect->connect_error)
-    {
-        echo '<p>connexion au serveur MySQL  échouée: ' . $connect->connect_error . '</p>';
-    }
-    else
-    {
-        $result =  $connect->query("SELECT * FROM test;");
-        if($result->num_rows > 0){
-            while($row = $result->fetch_assoc()){
-                echo "NOM : " . $row["nom"] . "PRENOM : " . $row["prenom"]; 
-            }
-        }
-        else{   
-            echo '<p>0 result</p>';
+if($connect->connect_error)
+{
+    echo '<p>connexion au serveur MySQL  échouée: ' . 
+    $connect->connect_error . '</p>';
+}
+else
+{
+    $result =  $connect->query("SELECT * FROM test;");
+    if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){
+            echo "NOM : " . $row["nom"] . "PRENOM : " . $row["prenom"]; 
         }
     }
-    ?>
+    else{   
+        echo '<p>0 result</p>';
+    }
+}
+?>
 \end{lstlisting} 
 Ce petit script php permet de se connecter à la base de données MariaDB avec les différent identifiant (Nom de l'hôte, nom de la base de données, nom de l'utilisateur et le mot de passe). Dans le cas ou la connexion n'est pas possible alors une erreur est affiché, et dans le cas contraire on affiche sur la page le contenue de la base de données.
 La page web est accessible via "http://informatique.agence.atlantide/testMariaDb.php", si sur cette page le contenue de base de données MariaDB est affiché alors le trio Apache MariaDB PHP est fonctionnelle. MariaDB n'est pas la seul alternative, il en existe d'autres comme nous allons le voir prochainement.
@@ -925,45 +926,57 @@ Le principe des commandes précèdent et le suivante: premièrement on passe sur
 
 Le script suivant permet d'afficher le contenue dans la base de données de PostegreSQL, ce script PHP se situe dans "/srv/dev2/www/testPostgreSQL.php".
 \begin{lstlisting}[language=PHP] 
-    <?php
-    echo "<h1>Page de test de la base de données de PostegreSQL</h1>"
-    $connect = pg_connect("host=localhost dbname=dbtest user=user password=password") or die("Echec connexion " . pg_last_error());
+<?php
+echo "<h1>Page de test de la base de données de PostegreSQL</h1>"
+$connect = pg_connect("host=localhost dbname=dbtest user=user password=password") or die("Echec connexion " . pg_last_error());
 
-    if(pg_result_error()) 
-    {
-        echo '<p>connexion au serveur PostgreSQL échoué: ' . pg_result_error() . '</p>';
-    }
-    else
-    {
-        $result = pgquery('SELECT * FROM test') or die("Echec requete " . pg_last_error());
-            while($row = pg_fetch_array($result, null, PGSQL_ASSOC)){
-                foreach($row as $value)
-                    echo $value . " ";
-                echo "<br />;
-            }
-        pg_free_result($result);
-    }
+if(pg_result_error()) 
+{
+    echo '<p>Echec connexion au serveur PostgreSQL: '
+    . pg_result_error() . '</p>';
+}
+else
+{
+    $result = pgquery('SELECT * FROM test') or die("Echec requete " . pg_last_error());
+        while($row = pg_fetch_array($result, null, PGSQL_ASSOC))
+        {
+            foreach($row as $value)
+                echo $value . " ";
+            echo "<br />;
+        }
+    pg_free_result($result);
+}
 
-    pg_close($connect);
-    ?>
+pg_close($connect);
+?>
 \end{lstlisting}
 
 Avec ceci il est possible de se connecter à la base de données MariaDB avec les différent identifiant (Nom de l'hôte, nom de la base de données, nom de l'utilisateur et le mot de passe). Encore une fois c'est le même principe que la base de données MariaDB mais avec une syntaxe différente. Dans le cas ou la connexion n'est pas possible alors une erreur est affiché, et dans le cas contraire on affiche sur la page le contenue de la base de données. La page web est accessible via "http://informatique.agence.atlantide/testPostgreSQL.php".
 
+TODO - Comme pour MariaDB changer le script par une image - TODO
+
 \subsection{Installation et mise en place d'un PDO}
 
-\section{Script de routage et matrice de filtrage}
 
+
+\section{Script de routage et matrice de filtrage}
+Règles iptables de la matrice de filtrage
 
 \subsection{Scripts de routage au démarrage}
 
 
-\subsection{Règles iptables de la matrice de filtrage}
+\subsection{Sauvegarde des bases MySQL et PostgreSQL}
 
-
-Conclusion tp 2
-
-Introduction 3
+\subsection{Les sudoers}
+Sudo est un utilitaire de ligne de commande qui permet aux utilisateurs de confiance d'exécuter des commandes en tant qu'un autre utilisateur, par défaut root. Il faut également savoir que root possède l'entièreté des droits sur une machine.
+Dans la continuité de notre serveur nous souhaitons permettre au webmaster de modifier la configuration de apache et qu'il puisse relancer le serveur en cas de panne.
+Pour cela il faut ajouter cette utilisateurs dans le fichier des sudoers, on peut se rendre dans ce fichier de 2 façons différente: avec la commande "visudo" ou  directement dans le fichier en question "/etc/sudoers". Pour rappel l'utilisateur qui représente notre webmaster est "dev1". Dans le fichier des sudoers nous avons rajouté une ligne, qui est la dernière de ce fichier.
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/sudoers.png}}
+\caption{Contenu du fichier pour les sudoers.}
+\label{fig25}
+\end{figure}
+Cette ligne nous indique que l'utilisateur "dev1" à tous les droits pour les fichiers "/usr/bin/nano" qui est l'éditeur de texte pour modifier le contenue de ces fichier, mais il possède également les droits sur "/etc/apache2/*", "etc/init.d/apache2 restart" et "/usr/sbin/service apache2 restart". Dorénavant il peut ajouter/supprimer tous ce qu'il souhaite dans "/etc/apache2/" et peut redemarrer le serveur apache.
 
 \section{}
 \subsection{}

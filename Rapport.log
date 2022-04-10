@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.30)  10 APR 2022 12:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.30)  10 APR 2022 16:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -327,7 +327,7 @@ File: lstlang1.sty 2019/09/10 1.8c listings language file
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2019/09/10 1.8c listings language file
 ) [3]
-<images/partitionDisque.PNG, id=240, 593.21625pt x 176.15813pt>
+<images/partitionDisque.PNG, id=230, 593.21625pt x 176.15813pt>
 File: images/partitionDisque.PNG Graphic file (type png)
 <use images/partitionDisque.PNG>
 Package pdftex.def Info: images/partitionDisque.PNG  used on input line 50.
@@ -352,7 +352,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 141--142
 
  []
 
-<images/ReseauInterco&Prive.png, id=278, 542.025pt x 233.37187pt>
+<images/ReseauInterco&Prive.png, id=268, 542.025pt x 233.37187pt>
 File: images/ReseauInterco&Prive.png Graphic file (type png)
 <use images/ReseauInterco&Prive.png>
 Package pdftex.def Info: images/ReseauInterco&Prive.png  used on input line 161
@@ -363,7 +363,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 167--169
 
  []
 
-<images/interfacesRouteur.png, id=297, 511.9125pt x 387.69844pt>
+<images/interfacesRouteur.png, id=287, 511.9125pt x 387.69844pt>
 File: images/interfacesRouteur.png Graphic file (type png)
 <use images/interfacesRouteur.png>
 Package pdftex.def Info: images/interfacesRouteur.png  used on input line 176.
@@ -390,13 +390,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 201--203
  []
 
 [9]
-<images/routeurPingRouteur.png, id=335, 834.11626pt x 148.30406pt>
+<images/routeurPingRouteur.png, id=325, 834.11626pt x 148.30406pt>
 File: images/routeurPingRouteur.png Graphic file (type png)
 <use images/routeurPingRouteur.png>
 Package pdftex.def Info: images/routeurPingRouteur.png  used on input line 231.
 
 (pdftex.def)             Requested size: 426.79134pt x 75.88298pt.
-<images/routeRouteur.png, id=337, 454.69875pt x 62.48344pt>
+<images/routeRouteur.png, id=327, 454.69875pt x 62.48344pt>
 File: images/routeRouteur.png Graphic file (type png)
 <use images/routeRouteur.png>
 Package pdftex.def Info: images/routeRouteur.png  used on input line 251.
@@ -469,7 +469,7 @@ Overfull \hbox (12.72273pt too wide) in paragraph at lines 305--306
  []
 
 [12]
-<images/dhcpServeur.png, id=370, 835.62187pt x 232.61906pt>
+<images/dhcpServeur.png, id=360, 835.62187pt x 232.61906pt>
 File: images/dhcpServeur.png Graphic file (type png)
 <use images/dhcpServeur.png>
 Package pdftex.def Info: images/dhcpServeur.png  used on input line 308.
@@ -479,7 +479,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 313--315
 
  []
 
-<images/dhcpdConfServeur.png, id=371, 837.1275pt x 253.69781pt>
+<images/dhcpdConfServeur.png, id=361, 837.1275pt x 253.69781pt>
 File: images/dhcpdConfServeur.png Graphic file (type png)
 <use images/dhcpdConfServeur.png>
 Package pdftex.def Info: images/dhcpdConfServeur.png  used on input line 319.
@@ -497,7 +497,7 @@ l.326
                                                   \fi \fi 
 l.326 
        <./images/dhcpServeur.PNG> <./images/dhcpdConfServeur.PNG>]
-<images/dhcpLogsConf.png, id=384, 360.59718pt x 214.55156pt>
+<images/dhcpLogsConf.png, id=374, 360.59718pt x 214.55156pt>
 File: images/dhcpLogsConf.png Graphic file (type png)
 <use images/dhcpLogsConf.png>
 Package pdftex.def Info: images/dhcpLogsConf.png  used on input line 354.
@@ -522,7 +522,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 360--361
 
  []
 
-<images/dhcpLogsExample.png, id=402, 815.29594pt x 405.76593pt>
+<images/dhcpLogsExample.png, id=392, 815.29594pt x 405.76593pt>
 File: images/dhcpLogsExample.png Graphic file (type png)
 <use images/dhcpLogsExample.png>
 Package pdftex.def Info: images/dhcpLogsExample.png  used on input line 371.
@@ -544,7 +544,7 @@ Overfull \hbox (9.0036pt too wide) in paragraph at lines 412--413
 [][][][][][][][][][][][][][] 
  []
 
-<images/rsync&crontab.png, id=426, 834.86906pt x 306.39468pt>
+<images/rsync&crontab.png, id=416, 834.86906pt x 306.39468pt>
 File: images/rsync&crontab.png Graphic file (type png)
 <use images/rsync&crontab.png>
 Package pdftex.def Info: images/rsync&crontab.png  used on input line 422.
@@ -559,7 +559,7 @@ treprise et d'infrastructure
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [17]
-<images/hostDebian.png, id=444, 335.00156pt x 36.88782pt>
+<images/hostDebian.png, id=434, 335.00156pt x 36.88782pt>
 File: images/hostDebian.png Graphic file (type png)
 <use images/hostDebian.png>
 Package pdftex.def Info: images/hostDebian.png  used on input line 446.
@@ -581,7 +581,7 @@ Overfull \hbox (6.94492pt too wide) in paragraph at lines 454--455
 i ef-fectue une recherche
  []
 
-<images/digDebian.png, id=456, 419.31656pt x 258.9675pt>
+<images/digDebian.png, id=446, 419.31656pt x 258.9675pt>
 File: images/digDebian.png Graphic file (type png)
 <use images/digDebian.png>
 Package pdftex.def Info: images/digDebian.png  used on input line 466.
@@ -599,7 +599,7 @@ l.472
                                                   \fi \fi 
 l.472 
        <./images/hostDebian.PNG> <./images/digDebian.PNG>]
-<images/nslookupDebian.png, id=471, 298.86656pt x 113.67468pt>
+<images/nslookupDebian.png, id=461, 298.86656pt x 113.67468pt>
 File: images/nslookupDebian.png Graphic file (type png)
 <use images/nslookupDebian.png>
 Package pdftex.def Info: images/nslookupDebian.png  used on input line 485.
@@ -632,12 +632,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 494--495
                                                   \fi \fi 
 l.495 
        <./images/nslookupDebian.PNG>]
-<images/hostDebianNS.png, id=483, 310.15875pt x 50.43843pt>
+<images/hostDebianNS.png, id=473, 310.15875pt x 50.43843pt>
 File: images/hostDebianNS.png Graphic file (type png)
 <use images/hostDebianNS.png>
 Package pdftex.def Info: images/hostDebianNS.png  used on input line 507.
 (pdftex.def)             Requested size: 426.79134pt x 69.40498pt.
-<images/digDebianNS.png, id=484, 426.09187pt x 283.81032pt>
+<images/digDebianNS.png, id=474, 426.09187pt x 283.81032pt>
 File: images/digDebianNS.png Graphic file (type png)
 <use images/digDebianNS.png>
 Package pdftex.def Info: images/digDebianNS.png  used on input line 513.
@@ -679,7 +679,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 580--581
 
  []
 
-<images/namedConfLocal.png, id=509, 458.46281pt x 272.51813pt>
+<images/namedConfLocal.png, id=499, 458.46281pt x 272.51813pt>
 File: images/namedConfLocal.png Graphic file (type png)
 <use images/namedConfLocal.png>
 Package pdftex.def Info: images/namedConfLocal.png  used on input line 584.
@@ -695,7 +695,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 589--590
 
  []
 
-<images/dbAgenceAtlantide.png, id=515, 367.3725pt x 169.38281pt>
+<images/dbAgenceAtlantide.png, id=505, 367.3725pt x 169.38281pt>
 File: images/dbAgenceAtlantide.png Graphic file (type png)
 <use images/dbAgenceAtlantide.png>
 Package pdftex.def Info: images/dbAgenceAtlantide.png  used on input line 595.
@@ -707,7 +707,7 @@ Package pdftex.def Info: images/dbAgenceAtlantide.png  used on input line 595.
                                                   \fi \fi 
 l.599 
        <./images/namedConfLocal.PNG>]
-<images/dbAgenceAtlantideInv.png, id=523, 363.60844pt x 152.06813pt>
+<images/dbAgenceAtlantideInv.png, id=513, 363.60844pt x 152.06813pt>
 File: images/dbAgenceAtlantideInv.png Graphic file (type png)
 <use images/dbAgenceAtlantideInv.png>
 Package pdftex.def Info: images/dbAgenceAtlantideInv.png  used on input line 60
@@ -724,7 +724,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 607--608
 
  []
 
-<images/resolvConf.png, id=526, 222.07968pt x 43.66313pt>
+<images/resolvConf.png, id=516, 222.07968pt x 43.66313pt>
 File: images/resolvConf.png Graphic file (type png)
 <use images/resolvConf.png>
 Package pdftex.def Info: images/resolvConf.png  used on input line 611.
@@ -743,7 +743,7 @@ l.615
 l.615 
        <./images/dbAgenceAtlantide.png (PNG copy)> <./images/dbAgenceAtlantideI
 nv.png (PNG copy)>]
-<images/namedConfOptions.png, id=533, 545.03625pt x 309.40594pt>
+<images/namedConfOptions.png, id=523, 545.03625pt x 309.40594pt>
 File: images/namedConfOptions.png Graphic file (type png)
 <use images/namedConfOptions.png>
 Package pdftex.def Info: images/namedConfOptions.png  used on input line 618.
@@ -772,7 +772,7 @@ Overfull \hbox (13.61179pt too wide) in paragraph at lines 717--718
 chmod u=rwx,go=rx". 
  []
 
-<images/apache2Conf.png, id=572, 835.62187pt x 615.80063pt>
+<images/apache2Conf.png, id=562, 835.62187pt x 615.80063pt>
 File: images/apache2Conf.png Graphic file (type png)
 <use images/apache2Conf.png>
 Package pdftex.def Info: images/apache2Conf.png  used on input line 721.
@@ -801,7 +801,7 @@ File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
                                                   \fi \fi 
 l.746 \begin{lstlisting}[language=bash]
                                         <./images/apache2Conf.PNG>]
-<images/virtualHostDev2Conf.png, id=605, 835.62187pt x 430.60875pt>
+<images/virtualHostDev2Conf.png, id=595, 835.62187pt x 430.60875pt>
 File: images/virtualHostDev2Conf.png Graphic file (type png)
 <use images/virtualHostDev2Conf.png>
 Package pdftex.def Info: images/virtualHostDev2Conf.png  used on input line 768
@@ -845,6 +845,15 @@ File: lstlang1.sty 2019/09/10 1.8c listings language file
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang2.sty
 File: lstlang2.sty 2019/09/10 1.8c listings language file
 ) [33]
+Overfull \hbox (21.00372pt too wide) in paragraph at lines 862--864
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (69.00421pt too wide) in paragraph at lines 869--871
+[][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
 
 ! Package inputenc Error: Invalid UTF-8 byte sequence.
 
@@ -852,8 +861,8 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.863 ..."<h1>Page de test de la base de données 
-                                                  de MariaDB</h1>"
+l.873 ...<p>connexion au serveur MySQL  échouée:
+                                                   ' .
 The document does not appear to be in UTF-8 encoding.
 Try adding \UseRawInputEncoding as the first line of the file
 or specify an encoding such as \usepackage [latin1]{inputenc}
@@ -867,50 +876,8 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.863 ..."<h1>Page de test de la base de données 
-                                                  de MariaDB</h1>"
-The document does not appear to be in UTF-8 encoding.
-Try adding \UseRawInputEncoding as the first line of the file
-or specify an encoding such as \usepackage [latin1]{inputenc}
-in the document preamble.
-Alternatively, save the file in UTF-8 using your editor or another tool
-
-
-Overfull \hbox (51.00403pt too wide) in paragraph at lines 863--865
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (93.00446pt too wide) in paragraph at lines 870--872
-[][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-! Package inputenc Error: Invalid UTF-8 byte sequence.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.874 ...<p>connexion au serveur MySQL  échouée:
-                                                   ' . $connect->connect_err...
-
-The document does not appear to be in UTF-8 encoding.
-Try adding \UseRawInputEncoding as the first line of the file
-or specify an encoding such as \usepackage [latin1]{inputenc}
-in the document preamble.
-Alternatively, save the file in UTF-8 using your editor or another tool
-
-
-! Package inputenc Error: Invalid UTF-8 byte "A9.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.874 ...<p>connexion au serveur MySQL  échouée:
-                                                   ' . $connect->connect_err...
-
+l.873 ...<p>connexion au serveur MySQL  échouée:
+                                                   ' .
 The document does not appear to be in UTF-8 encoding.
 Try adding \UseRawInputEncoding as the first line of the file
 or specify an encoding such as \usepackage [latin1]{inputenc}
@@ -924,9 +891,8 @@ See the inputenc package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.874 ...<p>connexion au serveur MySQL  échouée:
-                                                   ' . $connect->connect_err...
-
+l.873 ...<p>connexion au serveur MySQL  échouée:
+                                                   ' .
 The document does not appear to be in UTF-8 encoding.
 Try adding \UseRawInputEncoding as the first line of the file
 or specify an encoding such as \usepackage [latin1]{inputenc}
@@ -934,47 +900,123 @@ in the document preamble.
 Alternatively, save the file in UTF-8 using your editor or another tool
 
 
-Overfull \hbox (213.00568pt too wide) in paragraph at lines 874--875
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (3.00354pt too wide) in paragraph at lines 878--879
-[][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (105.00458pt too wide) in paragraph at lines 881--882
+Overfull \hbox (81.00433pt too wide) in paragraph at lines 881--882
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
 
  []
 
-[34] (./Rapport.lof [35])
+
+Overfull \hbox (4.63327pt too wide) in paragraph at lines 894--894
+[]\OT1/cmr/bx/n/12 Installation et mise d'un autre LAMP avec Post-greSQL 
+ []
+
+[34]
+Overfull \hbox (69.00421pt too wide) in paragraph at lines 922--923
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (9.44395pt too wide) in paragraph at lines 927--928
+\OT1/cmr/m/n/10 Poste-greSQL, ce script PHP se situe dans "/s-rv/dev2/www/testP
+ostgreSQL.php". 
+ []
+
+
+! Package inputenc Error: Invalid UTF-8 byte sequence.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.930 ..."<h1>Page de test de la base de données 
+                                                  de PostegreSQL</h1>"
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+! Package inputenc Error: Invalid UTF-8 byte "A9.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.930 ..."<h1>Page de test de la base de données 
+                                                  de PostegreSQL</h1>"
+The document does not appear to be in UTF-8 encoding.
+Try adding \UseRawInputEncoding as the first line of the file
+or specify an encoding such as \usepackage [latin1]{inputenc}
+in the document preamble.
+Alternatively, save the file in UTF-8 using your editor or another tool
+
+
+Overfull \hbox (51.00403pt too wide) in paragraph at lines 930--931
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (417.00775pt too wide) in paragraph at lines 931--933
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][] 
+ []
+
+
+Overfull \hbox (177.00531pt too wide) in paragraph at lines 940--941
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Overfull \hbox (39.0039pt too wide) in paragraph at lines 941--942
+[][][][][][][][][][][][][][][][][][][][] 
+ []
+
+[35]
+<images/sudoers.png, id=737, 837.1275pt x 354.57469pt>
+File: images/sudoers.png Graphic file (type png)
+<use images/sudoers.png>
+Package pdftex.def Info: images/sudoers.png  used on input line 976.
+(pdftex.def)             Requested size: 426.79134pt x 180.77118pt.
+ [36] (./Rapport.lof [37pdfTeX warning (ext4): destination with the same identi
+fier (name{figure.23}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.13 ...n d'un DNS avec nslookup.}}{20}{figure.13}
+                                                  % <./images/sudoers.PNG>])
 \tf@lof=\write5
 \openout5 = `Rapport.lof'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 930.
- [36]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 930.
- (./Rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 930.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 930.
-Package rerunfilecheck Info: File `Rapport.out' has not changed.
-(rerunfilecheck)             Checksum: F47D7A57FEA32AADA4D9D9963231EED2;3277.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 996.
 
+[38]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 996.
+ (./Rapport.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 996.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 996.
+
+
+Package rerunfilecheck Warning: File `Rapport.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Rapport.out':
+(rerunfilecheck)             Before: F0A0533815139E402C3C21F86F0E25F6;3115
+(rerunfilecheck)             After:  66726B4C09AEA7BAB43B965152C53355;3172.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 930.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 996.
  ) 
 Here is how much of TeX's memory you used:
- 9790 strings out of 481239
- 150528 string characters out of 5920377
- 646316 words of memory out of 5000000
- 24553 multiletter control sequences out of 15000+600000
- 536928 words of font info for 39 fonts, out of 8000000 for 9000
+ 9850 strings out of 481239
+ 151374 string characters out of 5920377
+ 650330 words of memory out of 5000000
+ 24570 multiletter control sequences out of 15000+600000
+ 537651 words of font info for 41 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,6n,53p,1638b,2887s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 34i,6n,53p,1638b,2889s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dis
@@ -983,11 +1025,13 @@ s/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-sy10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on Rapport.pdf (36 pages, 580354 bytes).
+sy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.p
+fb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf
+/fonts/type1/public/cm-super/sfti1000.pfb>
+Output written on Rapport.pdf (38 pages, 624892 bytes).
 PDF statistics:
- 855 PDF objects out of 1000 (max. 8388607)
- 760 compressed objects within 8 object streams
- 361 named destinations out of 1000 (max. 500000)
- 455 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 914 PDF objects out of 1000 (max. 8388607)
+ 812 compressed objects within 9 object streams
+ 401 named destinations out of 1000 (max. 500000)
+ 444 words of extra memory for PDF output out of 10000 (max. 10000000)
 
