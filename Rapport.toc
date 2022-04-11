@@ -18,26 +18,26 @@
 \contentsline {section}{\numberline {5}Sauvegarde automatique}{16}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Rsync}{16}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Cron}{17}{subsection.5.2}%
-\contentsline {section}{\numberline {6}Interrogation d'un serveur DNS}{18}{section.6}%
+\contentsline {section}{\numberline {6}Interrogation d'un DNS}{18}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Les commandes host, dig et nslookup}{18}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Fichier de renseignement du serveur DNS}{22}{subsection.6.2}%
 \contentsline {subsection}{\numberline {6.3}Rôle du fichier /etc/hosts}{22}{subsection.6.3}%
-\contentsline {section}{\numberline {7}Installation d'un DNS}{23}{section.7}%
+\contentsline {section}{\numberline {7}Installation d'un serveur DNS}{23}{section.7}%
 \contentsline {subsection}{\numberline {7.1}Mise en place du DNS}{23}{subsection.7.1}%
 \contentsline {subsubsection}{\numberline {7.1.1}Théorie}{23}{subsubsection.7.1.1}%
 \contentsline {subsubsection}{\numberline {7.1.2}Pratique}{24}{subsubsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.2}Tests réalisés afin de valider le DNS}{28}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.2}Tests réalisés afin de valider le fonctionnement du DNS}{28}{subsection.7.2}%
 \contentsline {section}{\numberline {8}Installation d'un serveur LAMP}{29}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Installation et mise du LAMP avec MariaDB}{29}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Installation et mise d'un autre LAMP avec PostgreSQL}{34}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.1}Installation et mise en place du LAMP avec MariaDB}{29}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Installation et mise d'un autre LAMP avec PostgreSQL}{35}{subsection.8.2}%
 \contentsline {subsection}{\numberline {8.3}Installation et mise en place d'un PDO}{36}{subsection.8.3}%
 \contentsline {section}{\numberline {9}Script de routage et matrice de filtrage}{37}{section.9}%
 \contentsline {subsection}{\numberline {9.1}Sauvegarde des bases MySQL et PostgreSQL}{39}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Les sudoers}{39}{subsection.9.2}%
-\contentsline {section}{\numberline {10}Mise en place d'un domaine Samba/LDAP}{40}{section.10}%
-\contentsline {subsection}{\numberline {10.1}Définition du DIT}{40}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}Mise en place de LDAP}{40}{subsection.10.2}%
-\contentsline {subsection}{\numberline {10.3}Mise en place de Samba}{40}{subsection.10.3}%
-\contentsline {subsection}{\numberline {10.4}Sauvegarde automatique de l'annuaire}{40}{subsection.10.4}%
-\contentsline {section}{\numberline {11}Conclusion}{40}{section.11}%
-\contentsline {section}{\numberline {12}Annexe}{40}{section.12}%
+\contentsline {subsection}{\numberline {9.2}Les sudoers}{40}{subsection.9.2}%
+\contentsline {section}{\numberline {10}Mise en place d'un domaine Samba/LDAP}{41}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Définition du DIT}{41}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Mise en place de LDAP}{41}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Mise en place de Samba}{41}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Sauvegarde automatique de l'annuaire}{41}{subsection.10.4}%
+\contentsline {section}{\numberline {11}Conclusion}{41}{section.11}%
+\contentsline {section}{\numberline {12}Annexe}{41}{section.12}%
