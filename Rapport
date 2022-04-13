@@ -680,9 +680,14 @@ Vers le client d'une autre agence :
     $ nslookup client.agence.pekin
 \end{lstlisting} 
 
-Le serveur DNS est fonctionnel et est donc prêt à être utilisé sur d'autres machines, et autres projets.
+Voici différent exemple qui illustre les commandes donné ci-dessus: 
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/exempleNsLookUpDNS.png}}
+\caption{Test effectué sur notre DNS avec nslookup.}
+\label{fig21}
+\end{figure}
 
-TODO Photo test(quand on aura accès au serveur) TODO
+Le serveur DNS est fonctionnel et est donc prêt à être utilisé sur d'autres machines, et autres projets.
 
 \section{Installation d'un serveur LAMP}
 LAMP est un acronyme: le ``L" désigne Linux: le système d'exploitation, le ``A" désigne Apache: le serveur Web, le ``M" est pour MySQL ou MariaDB: le serveur de base de données, et le ``P" pour PHP: le langage de script.\\
@@ -714,7 +719,7 @@ Il s'agit d'une commande intégrée nativement à Linux permettant de créer des
     $ chmod -R 755 dev1
 \end{lstlisting} 
 
-Ensuite nous avons fait pointer un alias (apache) sur le dossier ``/srv/dev1/www".Ppour cela nous avons utilisé le mot clé ``Alias" dans le fichier de configuration d'apache ``/etc/apache2/apache2.conf".
+Ensuite nous avons fait pointer un alias (apache) sur le dossier ``/srv/dev1/www". Pour cela nous avons utilisé le mot clé ``Alias" dans le fichier de configuration d'apache ``/etc/apache2/apache2.conf".
 \begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/apache2Conf.png}}
 \caption{Contenu du fichier de configuration de apache.}
@@ -857,40 +862,16 @@ Toujours dans le même démarche d'installation, il faut cette fois-ci installer
     $ apt-get install php 7.4
 \end{lstlisting}
 Une fois l'installation terminée, nous avons créé une page de test dans le répertoire ``/srv/dev2/www/testMariaDb.php". Cette page est éditée avec l'éditeur de texte nano pour contenir ceci:
-\begin{lstlisting}[language=PHP] 
-<?php
-echo "<h1>Page de test de la base de donnees de MariaDB</h1>"
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/testMariaDbPhp.png}}
+\caption{Page php de test pour la base de données MariaDb.}
+\label{fig}
+\end{figure}
 
-\$host_name = ``localhost";
-\$database = ``dbtest";
-\$user_name = ``user";
-\$password = ``password";
-
-\$connect = new  mysqli(\$host_name, \$user_name, \$password, \$database);
-
-if(\$connect->connect_error)
-{
-    echo `<p>connexion au serveur MySQL  echouee: ' .  \$connect->connect_error . `</p>';
-}
-else
-{
-    \$result =  \$connect->query(``SELECT * FROM test;");
-    if($result->num_rows > 0){
-        while(\$row = \$result->fetch_assoc()){
-            echo ``NOM : " . \$row[``nom"] . ``PRENOM : " . \$row[``prenom"]; 
-        }
-    }
-    else{   
-        echo `<p>0 result</p>';
-    }
-}
-?>
-\end{lstlisting} 
 Ce petit script php permet de se connecter à la base de données MariaDB avec les identifiants appropriés (Nom de l'hôte, nom de la base de données, nom de l'utilisateur et son mot de passe). Dans le cas où la connexion n'est pas possible alors une erreur est affichée et dans le cas contraire on affiche sur la page le contenu de la base de données.\\\\
 La page web est accessible via ``http://informatique.agence.atlantide/testMariaDb.php". Si sur cette page le contenu de base de données MariaDB est affiché (le nom et le prenom de test entrés lors de la configuration) alors le trio Apache MariaDB PHP est fonctionnel. MariaDB n'est pas le seul SGBD utilisable avec PHP et Apache, il en existe d'autres comme nous allons le voir prochainement.
-TODO - changer le script écrit par une image, et rajouter des images des pages web de test - TODO
 
-\subsection{Installation et mise d'un autre LAMP avec PostgreSQL}
+\subsection{Installation et mise en place d'un autre LAMP avec PostgreSQL}
 PostgreSQL est un système de gestion de base de données relationnelle et objet.
 Ce système est comparable à d'autres systèmes de gestion de base de données, qu'ils soient libres (comme MariaDB ou Firebird) ou propriétaires (comme Oracle, MySQL, Sybase, DB2, Informix ou Microsoft SQL Server). Dans cette partie, PostgreSQL prendra la place de MariaDB. \\
 
@@ -925,36 +906,14 @@ PostgreSQL ne possède pas de données à cette étape. Nous allons alors créer
 \end{lstlisting}
 Le principe des commandes précèdentes est le suivant: premièrement on passe sur l'utilisateur ``postgres", puis on ouvre le terminal de PostgreSQL. Une fois dans l'invite de commandes de PostgreSQL, on peut alors créer un utilisateur ``user", une base de données ``dbtest" puis une table ``test". Finalement, le fonctionnement est similaire à celui de la base de données MariaDB, le seul changement se trouve dans les valeurs de la table ``dbtest" (afin de pouvoir être sur que c'est à PostregreSQL que nous nous sommes connecté lors de nos tests).\\
 
-Le script suivant permet d'afficher le contenu de la base de données de PostegreSQL et il se situe dans ``/srv/dev2/www/testPostgreSQL.php".
-\begin{lstlisting}[language=PHP] 
-<?php
-echo ``<h1>Page de test de la base de donnees de PostegreSQL</h1>"
-$connect = pg_connect(``host=localhost dbname=dbtest user=user password=password") or die(``Echec connexion " . pg_last_error());
-
-if(pg_result_error()) 
-{
-    echo `<p>Echec connexion au serveur PostgreSQL: '
-    . pg_result_error() . `</p>';
-}
-else
-{
-    $result = pgquery(`SELECT * FROM test') or die(``Echec requete " . pg_last_error());
-        while($row = pg_fetch_array($result, null, PGSQL_ASSOC))
-        {
-            foreach($row as $value)
-                echo $value . `` ";
-            echo ``<br />'';
-        }
-    pg_free_result($result);
-}
-
-pg_close($connect);
-?>
-\end{lstlisting}
+Le script suivant permet d'afficher le contenu de la base de données de PostegreSQL et il se situe dans ``/srv/dev2/www/testPostgreSQL.php":
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/testPostgreSQLPhp.png}}
+\caption{Page php de test pour la base de données PostegreSQL.}
+\label{fig}
+\end{figure}
 
 Avec ceci, il est possible de se connecter à la base de données PostegreSQL avec les identifiants appropriés. Encore une fois, c'est le même principe que la base de données MariaDB mais avec une syntaxe différente. Dans le cas où la connexion n'est pas possible alors une erreur est afficheé et dans le cas contraire on affiche sur la page le contenu de la base de données, qui avait été créé lors de la configuration de PostegreSQL. La page web est accessible via ``http://informatique.agence.atlantide/testPostgreSQL.php".
-
-TODO - Comme pour MariaDB changer le script par une image - TODO
 
 \subsection{Installation et mise en place d'un PDO}
 Désormais nous allons installer et mettre en place PDO qui est l'acronyme de PHP Data Objects: c'est une extension PHP permettant d'interagir avec des bases de données via l'utilisation d'objets. L'une de ses forces réside dans le fait qu'il n'est pas strictement lié à une base de données en particulier: son interface offre un moyen commun d'accéder à plusieurs environnements différents, parmi lesquels MySQL et PostgreSQL. En résumé, PDO va nous permettre d'avoir une abstraction des SGBD, et avec ce principe nous avons écrit un script PHP permettant d'afficher le contenu des 2 bases de données précédemment créées. La première étape est l'installation du paquet PDO dans PHP:
@@ -962,96 +921,31 @@ Désormais nous allons installer et mettre en place PDO qui est l'acronyme de PH
     $ apt-get install php-pdo
 \end{lstlisting}
 Voici donc le script qui est contenu dans ``/srv/dev2/www/testPDO.php", permettant de se connecter aux bases de données et afficher les informations contenues dans celle-ci:
-\begin{lstlisting}[language=PHP] 
-<?php
-echo ``<h1>page de test des bases de donnees de PDO</h1>"
-echo ``<h2>MariaDb</h2>"
-try {
-        $conn = new PDO(``mysql:host=local;dbname=dbtest;charset=utf8", ``user", ``password");
-        $query = $conn->prepare(``SELECT * FROM test;");
-        $query->execute();
-        $result=$query->fetchAll();
-        foreach($results as $r)
-            echo $r[``nom"] . `` " . $[``prenom"]; 
-    }catch (Exception $e) {
-        echo ``Maria db error : " . $e->getMessage();
-    }
-    
-echo ``<h2>PostegreSQL</h2>"
-try{
-        $conn2 = new PDO(``psql:host=local;dbname=dbtest;charset=utf8", ``user", ``password");
-        $query2 = $conn->prepare(``SELECT * FROM test;");
-        $query2->execute();
-        $result2=$query->fetchAll();
-        foreach($results as $r2)
-            echo $r2[``nom"] . `` " . $r2[``prenom"]; 
-    }catch (Exception $e){
-        echo ``PosteGreSQL error : " . $e->getMessage();
-    }
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/testPDOPhp.png}}
+\caption{Page de test avec PDO.}
+\label{fig}
+\end{figure}
 
-?>
-\end{lstlisting}
 Ce script se connecte à la base de données MariaDB et affiche le contenu de la table test dans un premier temps puis à la base PostegreSQL dans un second temps pour afficher les informations de la table test. Le script se connecte avec les différents identifiants (Nom de l'hôte, nom de la base de données, nom de l'utilisateur et le mot de passe) aux SGBD. Encore une fois c'est le même principe que les base de données vues précédemment. Dans le cas où la connexion n'est pas possible alors une erreur est affichée, et dans le cas contraire on affiche sur la page le contenue de la base de données en question. La page web est accessible via ``http://informatique.agence.atlantide/testPDO.php".
-
-TODO - Comme pour MariaDB changer le script par une image - TODO
 
 \section{Script de routage et matrice de filtrage}
 Maintenant que nous avons différents services tournant sur notre machine, tels qu'un serveur web, un serveur DNS ou un serveur DHCP. Il nous faut désormais réguler le trafic pour sécuriser notre réseau et que seul les personnes qui le doivent peuvent se connectent aux différents services. Les règles de filtrage avec ``iptables" sont parfaitement adaptées pour cette tache. Afin de gérer notre filtrage, nous avons créé deux scripts qui sont ``/etc/firewall-free.sh" et ``/etc/firewall-rules.sh". Le script ``/etc/firewall-free.sh" permet de supprimer les règles pré-existantes (en cas d'erreur ou de problème), il contient seulement:
-\begin{lstlisting}[language=bash] 
-    #!/bin/sh
-    iptables -F //supprimer les regles
-\end{lstlisting}
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/firewallFree.png}}
+\caption{Contenu du fichier de configuration de dev2.}
+\label{fig}
+\end{figure}
+
 Le script ``/etc/firewall-rules.sh" quant à lui contient: 
-\begin{lstlisting}[language=bash] 
-    #!/bin/sh
-    ./etc/firewall-free.sh
-    
-    //autoriser l'interface loopback
-    iptables -t filter -A INPUT -i lo -j ACCEPT
-    iptables -t filter -A OUTPUT -o lo -j ACCEPT   
-    
-    //definir la politique par defaut
-    iptables -P INPUT DROP
-    iptables -P OUTPUT DROP
-    iptables -P FORWARD DROP
-    
-    //accepter le ping pour les tests
-    iptables -A INPUT -p icmp -j ACCEPT
-    iptables -A OUTPUT -p icmp -j ACCEPT
-    
-    //regles serveur local
-    iptables -A OUTPUT -p tcp --dport 80 -j ACCEPT //http out 
-    iptables -A OUTPUT -p tcp --dport 53 -j ACCEPT //DNS out, tcp
-    iptables -A OUTPUT -p udp --dport 53 -j ACCEPT //DNS out, udp
-    iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT//https out
-    iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT //ssh out
-    
-    iptables -A INPUT -p tcp --dport 22 -j ACCEPT  //ssh in
-    iptables -A INPUT -p tcp -m state --state ESTABLISHED,RELATED -j ACCEPT //paquets en retour
-    iptables -A INPUT -p udp -m state --state ESTABLISHED,RELATED -j ACCEPT //paquets en retour
-    iptables -A OUTPUT -p tcp -m state --state ESTABLISHED/RELATED -j ACCEPT //paquets en retour
-    iptables -A OUTPUT -p udp -m state --state ESTABLISHED/RELATED -j ACCEPT //paquets en retour
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/firewallRules.png}}
+\caption{Contenu du fichier de configuration de dev2.}
+\label{fig}
+\end{figure}
+Ce script appelle le script qui supprime les règles décrit auparavant, mais permet également d'autoriser l'interface loopback, de définir la politique par défaut pour toutes les chaînes, de bloquer l'accès d'un autre groupe à notre serveur. De plus, on filtre l'accès au serveur en ouvrant les bon ports, le port 80 fait référence au protocole http. Le port 443 fait référence au protocole https, le port 53 pour le DNS et le port 22 pour SSH. On filtre de la même façon pour le réseau privé avec l'ouverture des ports adéquats. Finalement, on permet le dialogue entre notre client et le serveur, et on permet au client d'aller sur internet.
 
-    //regles reseaux clients
-    iptables -A FORWARD tcp --dport 80 -s 10.1.2.0/24 -o eno1 -j ACCEPT //http
-    iptables -A FORWARD tcp --dport 53 -s 10.1.2.0/24 -o eno1 -j ACCEPT //dns
-    iptables -A FORWARD udp --dport 53 -s 10.1.2.0/24 -o eno1 -j ACCEPT //dns
-    iptables -A FORWARD tcp --dport 443 -s 10.1.2.0/24 -o eno1 -j ACCEPT //https
-    iptables -A FORWARD tcp --dport 22 -s 10.1.2.0/24 -o eno1 -j ACCEPT //ssh
-    iptables -A FORWARD -p tcp -m state --state ESTABLISHED/RELATED -j ACCEPT //paquets en retour
-    iptables -A FORWARD -p udp -m state --state ESTABLISHED/RELATED -j ACCEPT //paquets en retour
-    
-    //dialogue entre client et serveur
-    iptables -A INPUT -s 10.1.2.0/24 -i enp3s0 -j ACCEPT
-    
-    //masquerade pour aller sur le net
-    iptables -t nat -A POSTROUTING -s 10.1.2.0/24 -o eno1 -j MASQUERADE //translation d'adresse depuis le client
-\end{lstlisting}
-Ce script appelle le script qui supprime les règles décrit auparavant, mais permet également d'autoriser l'interface loopback, de définir la politique par défaut pour toutes les chaines, de bloquer l'accès d'un autre groupe à notre serveur. De plus, on filtre l'accès au serveur en ouvrant les bon ports, le port 80 fait référence au protocole http. Le port 443 fait référence au protocole https, le port 53 pour le DNS et le port 22 pour SSH. On filtre de la même façon pour le réseau privé avec l'ouverture des ports adéquats. Finalement ,on permet le dialogue entre notre client et le serveur, et on permet au client d'aller sur internet.
-
-TODO - changer le texte par des images - TODO\\
-
-Nous n'avons pas oublié de rendre ces scripts executables à l'aide de la commande
+Nous n'avons pas oublié de rendre ces scripts exécutables à l'aide de la commande:
 \begin{lstlisting}[language=bash] 
     $ chmod +x script.sh
 \end{lstlisting}
@@ -1074,9 +968,19 @@ Une fois le gestionnaire aptitude installé on peut alors installer le paquet ``
 \begin{lstlisting}[language=bash] 
     $ aptitude install automysqlbackup 
 \end{lstlisting}
-TODO - finir d'expliquer la configuration avec les photos - TODO
 
-TODO - ajouter des images pour automysql - TODO
+Par défaut automysqlbackup crée un fichier "/etc/default/automysqlbackup", qui est le fichier de configuration. Nous avons coupé ce fichier et avons mis le notre dans "/etc/automysqlbackup/myserver.conf". Une fois cette étape passé, il suffis de démarrer la sauvegarde automatique avec automysqlbackup:
+\begin{lstlisting}[language=bash] 
+    $ automysqlbackup myserver.conf
+\end{lstlisting}
+
+Après avoir laisser le temps aux sauvegardes de s'effectuer sur les différents jours de la semaine, on peut alors voir les sauvegarde au format "gz" donc compressé sous "/var/lib/automysqlbackup/(daily, weekly, monthly)/dbtest":
+\begin{figure}[H]
+\centerline{ \includegraphics[width=18cm]{images/automysqlbackup.png}}
+\caption{Sauvegarde de MySQL.}
+\label{fig}
+\end{figure}
+On voit que chaque jour possède un sauvegarde, de même pour les semaines et le mois.
 
 Pour ce qui est de la sauvegarde de la base de données PostegreSQL, nous avons utilisé crontab (pour la réaliser périodiquement), pg\_dumpall permettant de sortir en script le contenu intégrale des bases de données (l'exécution du script restore l'état des bases) et zip afin de compreser le fichier produit par pg\_dumpall dans le but d'économiser de la place sur le disque dur. Voici l'ensemble des commandes que nous avons tapé:
 \begin{lstlisting}[language=bash] 
@@ -1102,7 +1006,7 @@ Une fois installé, il faut ajouter l'utilisateur ou le groupe dans le fichier d
 \caption{Contenu du fichier pour les sudoers.}
 \label{fig25}
 \end{figure}
-Cette ligne nous indique que l'utilisateur ``dev1" à tous les droits pour executer ``/usr/bin/nano" sur ``/etc/apache2/*" (modifier la configuration), ``etc/init.d/apache2 restart" et ``/usr/sbin/service apache2 restart" (redémarrer le service). Dorénavant il peut donc ajouter/supprimer tous ce qu'il souhaite dans ``/etc/apache2/" et peut redemarrer le serveur apache. Nous avons du utiliser le chemin absolu pour nano par exemple car sudo ne prends pas en compte le PATH lors de l'exécution des commandes.
+Cette ligne nous indique que l'utilisateur ``dev1" à tous les droits pour exécuter ``/usr/bin/nano" sur ``/etc/apache2/*" (modifier la configuration), ``etc/init.d/apache2 restart" et ``/usr/sbin/service apache2 restart" (redémarrer le service). Dorénavant il peut donc ajouter/supprimer tous ce qu'il souhaite dans ``/etc/apache2/" et peut redemarrer le serveur apache. Nous avons du utiliser le chemin absolu pour nano par exemple car sudo ne prends pas en compte le PATH lors de l'exécution des commandes.
 
 \section{Mise en place d'un domaine Samba/LDAP}
 \subsection{Définition du DIT}
@@ -1111,7 +1015,7 @@ Cette ligne nous indique que l'utilisateur ``dev1" à tous les droits pour execu
 Paramétrage service LDAP, rendre opérationel fichier LDAP, machine exploite données de l'annuaire.
 
 \subsection{Mise en place de Samba}
-groupe, utilisateurs, politique de sécurité, adapter matrice de filtrage.
+groupe, utilisateurs, politique de sécurité, adapter matrice de filtrage (les ports).
 
 \subsection{Sauvegarde automatique de l'annuaire}
 

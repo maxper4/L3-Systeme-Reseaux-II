@@ -18,6 +18,13 @@
 \contentsline {figure}{\numberline {18}{\ignorespaces Contenu du fichier de configuration du DNS inversé.}}{26}{figure.18}%
 \contentsline {figure}{\numberline {19}{\ignorespaces Contenu du fichier de configuration de resolv.conf.}}{27}{figure.19}%
 \contentsline {figure}{\numberline {20}{\ignorespaces Contenu du fichier de configuration de named.conf.options.}}{27}{figure.20}%
-\contentsline {figure}{\numberline {21}{\ignorespaces Contenu du fichier de configuration de apache.}}{30}{figure.21}%
-\contentsline {figure}{\numberline {22}{\ignorespaces Contenu du fichier de configuration de dev2.}}{31}{figure.22}%
-\contentsline {figure}{\numberline {23}{\ignorespaces Contenu du fichier pour les sudoers.}}{40}{figure.23}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Test effectué sur notre DNS avec nslookup.}}{29}{figure.21}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Contenu du fichier de configuration de apache.}}{30}{figure.22}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Contenu du fichier de configuration de dev2.}}{32}{figure.23}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Page php de test pour la base de données MariaDb.}}{35}{figure.24}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Page php de test pour la base de données PostegreSQL.}}{36}{figure.25}%
+\contentsline {figure}{\numberline {26}{\ignorespaces Page de test avec PDO.}}{37}{figure.26}%
+\contentsline {figure}{\numberline {27}{\ignorespaces Contenu du fichier de configuration de dev2.}}{38}{figure.27}%
+\contentsline {figure}{\numberline {28}{\ignorespaces Contenu du fichier de configuration de dev2.}}{39}{figure.28}%
+\contentsline {figure}{\numberline {29}{\ignorespaces Sauvegarde de MySQL.}}{40}{figure.29}%
+\contentsline {figure}{\numberline {30}{\ignorespaces Contenu du fichier pour les sudoers.}}{41}{figure.30}%

@@ -29,15 +29,15 @@
 \contentsline {subsection}{\numberline {7.2}Tests réalisés afin de valider le fonctionnement du DNS}{28}{subsection.7.2}%
 \contentsline {section}{\numberline {8}Installation d'un serveur LAMP}{29}{section.8}%
 \contentsline {subsection}{\numberline {8.1}Installation et mise en place du LAMP avec MariaDB}{29}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Installation et mise d'un autre LAMP avec PostgreSQL}{35}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}Installation et mise en place d'un PDO}{36}{subsection.8.3}%
-\contentsline {section}{\numberline {9}Script de routage et matrice de filtrage}{37}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Sauvegarde des bases MySQL et PostgreSQL}{39}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Les sudoers}{40}{subsection.9.2}%
-\contentsline {section}{\numberline {10}Mise en place d'un domaine Samba/LDAP}{41}{section.10}%
-\contentsline {subsection}{\numberline {10.1}Définition du DIT}{41}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}Mise en place de LDAP}{41}{subsection.10.2}%
-\contentsline {subsection}{\numberline {10.3}Mise en place de Samba}{41}{subsection.10.3}%
-\contentsline {subsection}{\numberline {10.4}Sauvegarde automatique de l'annuaire}{41}{subsection.10.4}%
-\contentsline {section}{\numberline {11}Conclusion}{41}{section.11}%
-\contentsline {section}{\numberline {12}Annexe}{41}{section.12}%
+\contentsline {subsection}{\numberline {8.2}Installation et mise en place d'un autre LAMP avec PostgreSQL}{35}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Installation et mise en place d'un PDO}{37}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Script de routage et matrice de filtrage}{38}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Sauvegarde des bases MySQL et PostgreSQL}{40}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Les sudoers}{41}{subsection.9.2}%
+\contentsline {section}{\numberline {10}Mise en place d'un domaine Samba/LDAP}{42}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Définition du DIT}{42}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Mise en place de LDAP}{42}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Mise en place de Samba}{42}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Sauvegarde automatique de l'annuaire}{42}{subsection.10.4}%
+\contentsline {section}{\numberline {11}Conclusion}{42}{section.11}%
+\contentsline {section}{\numberline {12}Annexe}{42}{section.12}%
