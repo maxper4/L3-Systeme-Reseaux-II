@@ -943,7 +943,7 @@ Le script ``/etc/firewall-rules.sh" quant à lui contient:
 \caption{Contenu du fichier de configuration de dev2.}
 \label{fig}
 \end{figure}
-Ce script appelle le script qui supprime les règles décrit auparavant, mais permet également d'autoriser l'interface loopback, de définir la politique par défaut pour toutes les chaînes, de bloquer l'accès d'un autre groupe à notre serveur. De plus, on filtre l'accès au serveur en ouvrant les bon ports, le port 80 fait référence au protocole http. Le port 443 fait référence au protocole https, le port 53 pour le DNS et le port 22 pour SSH. On filtre de la même façon pour le réseau privé avec l'ouverture des ports adéquats. Finalement, on permet le dialogue entre notre client et le serveur, et on permet au client d'aller sur internet.
+Ce script appelle le script qui supprime les règles décrit auparavant, mais permet également d'autoriser l'interface loopback, de définir la politique par défaut pour toutes les chaines, de bloquer l'accès d'un autre groupe à notre serveur. De plus, on filtre l'accès au serveur en ouvrant les bon ports, le port 80 fait référence au protocole http. Le port 443 fait référence au protocole https, le port 53 pour le DNS et le port 22 pour SSH. On filtre de la même façon pour le réseau privé avec l'ouverture des ports adéquats. Finalement, on permet le dialogue entre notre client et le serveur, et on permet au client d'aller sur internet.
 
 Nous n'avons pas oublié de rendre ces scripts exécutables à l'aide de la commande:
 \begin{lstlisting}[language=bash] 
@@ -974,7 +974,7 @@ Par défaut automysqlbackup crée un fichier "/etc/default/automysqlbackup", qui
     $ automysqlbackup myserver.conf
 \end{lstlisting}
 
-Après avoir laisser le temps aux sauvegardes de s'effectuer sur les différents jours de la semaine, on peut alors voir les sauvegarde au format "gz" donc compressé sous "/var/lib/automysqlbackup/(daily, weekly, monthly)/dbtest":
+Après avoir laissé le temps aux sauvegardes de s'effectuer sur les différents jours de la semaine, on peut alors voir les sauvegardes au format "gz" donc compressé sous "/var/lib/automysqlbackup/(daily, weekly, monthly)/dbtest":
 \begin{figure}[H]
 \centerline{ \includegraphics[width=18cm]{images/automysqlbackup.png}}
 \caption{Sauvegarde de MySQL.}
@@ -1009,17 +1009,185 @@ Une fois installé, il faut ajouter l'utilisateur ou le groupe dans le fichier d
 Cette ligne nous indique que l'utilisateur ``dev1" à tous les droits pour exécuter ``/usr/bin/nano" sur ``/etc/apache2/*" (modifier la configuration), ``etc/init.d/apache2 restart" et ``/usr/sbin/service apache2 restart" (redémarrer le service). Dorénavant il peut donc ajouter/supprimer tous ce qu'il souhaite dans ``/etc/apache2/" et peut redemarrer le serveur apache. Nous avons du utiliser le chemin absolu pour nano par exemple car sudo ne prends pas en compte le PATH lors de l'exécution des commandes.
 
 \section{Mise en place d'un domaine Samba/LDAP}
-\subsection{Définition du DIT}
+Dans cette section nous allons éxpliquer les différentes étapes de mise en place d'un domaine Samba/LDAP, pour constituer l'annuaire de notre entreprise. L'annuaire sera composé d'information comme le nom, le prénom et le mail. Mais il va également permettre de partager des ressources entres les utilisateurs. Pour l'ensemble de la configuration du domaine Samba/LDAP nous avons utilisé un fichier zip qui était à notre disposition: \\"http://kundera/licence3/SystemesEtReseaux2/TP/FichiersconfTp3.zip".
 
 \subsection{Mise en place de LDAP}
-Paramétrage service LDAP, rendre opérationel fichier LDAP, machine exploite données de l'annuaire.
+LDAP ou Lightweight Directory Access Protocol est un protocole d'accès à un annuaire (tcp/ip), il existe également OpenLDAP qui est la version libre du protocole. C'est un structure arborescente constituée d'entrées nommée D.I.T. Chaque entrée est un ensemble d'attributs, un attribut est un type, c'est-à-dire un nom, une description et une ou plusieurs valeurs. Les attributs sont définis dans des schémas. Pour débuter la mise en place de LDAP, il faut l'installer avec:
+\begin{lstlisting}[language=bash] 
+    $ apt-get install slapd
+\end{lstlisting}
+Après l'installation un affichage en mode texte se lance, et nous demande différente information tel que: le DNS, le nom de l'organisation et le mot de passe du root. Après les informations renseigné on a copié le fichier de configuration "slapd.conf" qui était mis à notre disposition dans: "/etc/ldap/slapd.conf":
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/slapdConf1.png}}
+\caption{Contenu du fichier de configuration slapd partie 1.}
+\label{fig}
+\end{figure}
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/slapdConf2.png}}
+\caption{Contenu du fichier de configuration slapd partie 2.}
+\label{fig}
+\end{figure}
+Dans la partie 1 du fichier de configuration nous avons inclus le schéma de Samba "/etc/ldap/schema/samba.schema" mais nous en reparlerons plus tard. Dans la partie 1 et 2 du fichier de configuration nous avons remplacé les informations "dc=dijon" par "dc=atlantide", et dans la partie 2 nous avons autorisé l'accès à l'annuaire et définie une politique de sécurité vis-à-vis du DIT. Il est important de savoir que l'élément "c" est pour country afin de définir un rayonnement international, "dc" pour une Domain Component et est suffisant pour une entreprise à caractère régional. Les branches seront définies par l'élément "ou" Organizational Unit pour classer les variables.
+
+Afin de rendre ce fichier de configuration opérationnel il faut stopper le service LDAP, supprimer le fichier "/etc/ldap/slapd.d" et redémarrer le service:
+\begin{lstlisting}[language=bash] 
+    $ systemctl stop slapd
+    $ rm /etc/ldap/slapd.d
+    $ systemctl start slapd
+\end{lstlisting}
+
+Nous allons paramétrer notre machine afin qu'elle exploite les données notre annuaire, on a donc installé le paquet qui permet de gérer ceci:
+\begin{lstlisting}[language=bash] 
+    $ apt-get install libnss-ldap
+\end{lstlisting}
+Et voici le contenue du fichier de configuration associé ("/etc/libnss-ldap.conf"):
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/libnssldap.png}}
+\caption{Contenu du fichier de configuration libnss.}
+\label{fig}
+\end{figure}
 
 \subsection{Mise en place de Samba}
-groupe, utilisateurs, politique de sécurité, adapter matrice de filtrage (les ports).
+Samba est une application libre qui tourne sous Linux et qui permet de créer un serveur de fichiers en s'appuyant sur l'implémentation du protocole SMB. Installation de samba via la commande: 
+\begin{lstlisting}[language=bash] 
+    $ apt-get install smbldap-tools
+\end{lstlisting}
+Comme pour LDAP, nous sommes repartie des éléments que nous avions en notre possession pour configurer Samba:
+\begin{lstlisting}[language=bash] 
+    $ mv smbldap.conf /etc/smbldap-tools/smbldap_bind.conf
+\end{lstlisting}
+Le fichier contient:
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/smbldapBindConf.png}}
+\caption{Contenu du fichier de configuration smbldap bind.}
+\label{fig}
+\end{figure}
+Dans cette configuration nous indiquons les informations relatives au DIT déterminé précédemment avec LDAP. 
+
+Viens ensuite la configuration d'un second fichier de configuration bien plus conséquent, le fichier "/etc/smbldap-tools/smbldap.conf". Dans ce fichier il faut encore une fois renseigné les Domain Component, c'est-à-dire les "dc=agence" et "dc=atlantide". De plus nous avons également renseigné le nom de domaine "agenceatlantide". Mais surtout nous avons renseigné le SID, le SID est un identifiant de sécurité utilisé pour identifier les ressources et les personnes sur un réseau. Nous avons pu le récupérer avec la commande:
+\begin{lstlisting}[language=bash] 
+    $ net getlocalsid
+\end{lstlisting}
+Et finalement voici à quoi ressemble la partie sur la configuration général avec le SID et le nom de domaine renseigné:
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/smbldapSID.png}}
+\caption{Contenu du fichier de configuration smbldap.}
+\label{fig}
+\end{figure}
+
+Nous allons aborder la notion de ressources partager ainsi que le paramétrage du service Samba. Que soit pour la configuration du service samba en ou pour la configuration des ressources à partager, tout est dans le fichier "/etc/samba/smb.conf".
+Dans un premier temps expliquons le début du fichier, en particulier la configuration du service Samba:
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/smbConf.png}}
+\caption{Configuration du service Samba.}
+\label{fig}
+\end{figure}
+Nous voyons au début l'authentification avec LDAP crée et paramétrer auparavant, l'authentification est mise en place avec différents paramètres tels que: le suffix LDAP "dc=agence,dc=atlantide", les suffix des utilisateurs et des groupes ("ou=Users et ou=Groups"). De plus nous avons rajouté une synchronisation automatique de tous les pass d'un utilisateur. Mais également ajouté une table d'encodage des caractères qui sont les mêmes que Windows, et ajouter le nom de domaine "agenceatlantide" dans le workgroup. Et pour terminer avec cette partie le "netbios name" qui définit le nom du serveur a été définie a "agenceatlantide", et le chemin des pass a été défini à "/usr/local/sbin/smbldap-useradd.pl". Pour l'authentification via ldap il faut installer le paquet: "libpam-ldapd" avec le gestionnaire de paquets "apt-get" que nous avons déjà utilisé à de nombreuses reprises. 
+
+Dans un second temps concentrons-nous sur le partage des ressources:
+Les lignes dans la partie "Share Definitions" déclarent notre partage:
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/smbRessourcePartager.png}}
+\caption{Partage des ressources samba.}
+\label{fig}
+\end{figure}
+Pour expliquer: [homes/public] spécifie le nom du partage entre "[]", c'est le nom qui devra être utilisé pour accéder au partage. Le paramètre comment est une description du partage, path est le chemin vers le dossier à partager, sur le serveur. Le "read only = no" nous dit que le partage n'est pas accessible pour la lecture seule. Cependant les fichier sont éditable: "writable = yes". Le fait que "browsable" ne soit pas activé rend le partage masqué si on liste les partages du serveur avec un hôte distant. Pour le partage "homes" le directory mask et create mask on tous les 2 la valeur 0700 qui représente les permissions pour les groupes et les répertoires. 
+
+Une fois la configuration terminée, il fait sauvegardez le fichier et redémarrez le service Samba:
+\begin{lstlisting}[language=bash] 
+    $ systemctl restart smbd
+\end{lstlisting}
+
+On souhaite dorénavant peupler notre annuaire Samba avec "smbldap-populate". La commande smbldap-populate aide à remplir un serveur LDAP en ajoutant les entrées nécessaires: suffixe de base, unités d'organisation pour les utilisateurs, les groupes et les ordinateurs, les utilisateurs intégrés: administrateur et invité et les groupes intégrés. Ce paquet est utilisable via la commande:
+\begin{lstlisting}[language=bash] 
+    $ smbldap-populate
+\end{lstlisting}
+
+Samba et LDAP sont configurés, nous avons peuplé l'annuaire Samba. Il est temps de créer nos groupes et nos utilisateurs. Dans sa configuration par défaut, Samba dispose d'un partage nommé [homes]. En fait, il ne s'agit pas réellement d'un partage nommé "homes" mais cette configuration spécifique permet de créer un partage personnel pour chaque utilisateur qui se connecte sur notre machine Linux. Le groupe "public" que nous avons déclaré dans la configuration n'existe pas. Nous allons créer le groupe, ainsi que 2 utilisateurs nommés "smbtest" et "smbtest2" et qui seront membres de ce groupe. 
+Les groupes sur Samba sont créé via la commande:
+\begin{lstlisting}[language=bash] 
+    $ groupadd nom_groupe
+    $ groupadd public
+\end{lstlisting}
+Le partage "public" est le partage de Samba qui permet de partager les fichiers entre les utilisateurs.
+
+Pour samba il faut d'abord ajouter l'utilisateur dans ldap avec la commande:
+\begin{lstlisting}[language=bash] 
+    $ smbldap-useradd -a -m user
+    $ smbldap-useradd -a -m smbtest
+    $ smbldap-useradd -a -m smbtest2
+\end{lstlisting}
+Puis dans unix avec:
+\begin{lstlisting}[language=bash] 
+    $ useradd user
+    $ useradd smbtest
+    $ useradd smbtest2
+\end{lstlisting}
+
+Il ne faut également pas oublier de mettre le mot de passe de l'utilisateur en question, le mot de passe de samba est configurable via: 
+\begin{lstlisting}[language=bash] 
+    $ smbldap-passwd
+\end{lstlisting}
+Et pour unix simplement via:
+\begin{lstlisting}[language=bash] 
+    $ useradd user
+\end{lstlisting}
+Les mots de passe peuvent être les mêmes ou non cela dépend du bon vouloir de chacun et du niveau de sécurité que vous souhaitez instaurer. 
+
+Finalement il suffit de mettre les bons droits au nouveau home créé, afin de définir le propriétaire du répertoire:
+\begin{lstlisting}[language=bash] 
+    $ chown user /home/smb
+    $ chown smbtest /home/smbtest
+    $ chown smbtest2 /home/smbtest2
+\end{lstlisting}
+
+Le partage "public" va être hébergé à l'emplacement "/srv/smbshared" de notre serveur. Commençons par créer le dossier:
+\begin{lstlisting}[language=bash] 
+    $ mkdir /srv/smbshared
+\end{lstlisting}
+Ensuite, on va attribuer le groupe "public" comme groupe propriétaire de ce dossiers:
+\begin{lstlisting}[language=bash] 
+    $ chgrp -R public /srv/smbshared/
+\end{lstlisting}
+Puis, nous allons ajouter les droits de lecture/écriture à ce groupe sur ce dossier:
+\begin{lstlisting}[language=bash] 
+    $ chmod -R g+rw /srv/smbshared/
+\end{lstlisting}
+
+Les groupes et utilisateurs une fois crée sont visible via les commandes:
+\begin{lstlisting}[language=bash] 
+    $ nano /etc/group
+    $ nano /etc/passwd
+\end{lstlisting}
+Via la première commande nous n'avons seulement accès aux groupes sur le serveur local, si des groupes sont créés uniquement sur LDAP où Samba alors on peut les afficher avec:
+\begin{lstlisting}[language=bash] 
+    $ getent group
+\end{lstlisting}
+
+Si l'on souhaite afficher toutes les informations concernant Samba et LDAP un commande existe:
+\begin{lstlisting}[language=bash] 
+    $ slapcat
+\end{lstlisting}
+
+Dans "/etc/ldap/schema/samba.schema" nous avons eu besoin d'ajouter le schéma de Samba dans LDAP.
+Mais également de réadapter notre matrice de filtrage en rajoutant les lignes qui traite Samba, c'est-à-dire les ports: 139 (authentification), et 389 (active directory).
+
+Finalement pour vérifier que les utilisateurs "smbtest" et "smbtest2" peuvent accéder au fichier partagé, on a essayé ceci:
+\begin{figure}[H]
+\centerline{ \includegraphics[width=15cm]{images/testSmbShared.png}}
+\caption{Accès aux ressources partagé de samba.}
+\label{fig}
+\end{figure}
 
 \subsection{Sauvegarde automatique de l'annuaire}
+Pour ce qui est de la sauvegarde automatique de notre annuaire, nous avons utilisé crontab (pour la réaliser périodiquement), "slapcat" permettant d'avoir le contenu intégral de Samba et LDAP puis encore une fois zip afin de compresser le fichier produit dans le but d'économiser de la place sur le disque dur. Pour la sauvegarde nous avons simplement créé le dossier ``/backups/smbsldap". Finalement, nous avons ajouté dans le fichier crontab que le cron sera effectuée tous les dimanches à minuit, afin de compresser les informations pour les envoyer dans le fichier ``save.gz". 
+\begin{lstlisting}[language=bash] 
+    $ crontab -e 0 0 * * 0 slapcat | gzip  > /backups/smbsldap/save.gz
+\end{lstlisting}
 
 \section{Conclusion}
+Pour conclure sur l'ensemble de notre installation, nous avons installé Linux sans interface graphique, puis paramétré le réseau global, ensuite mis en place un DNS, ainsi qu'un serveur LAMP et finalement le duo LDAP/Samba. Tout ceci ne sait pas fait en 1 jour et n'a pas été de tout repos mais nous avons acquis une grande quantité de connaissance. Comme nous avons pu le montrer durant les différente étapes, chaque partie a été minutieusement traiter dans le but d'avoir un ensemble fonctionnel. Pour finir on pourrait facilement imaginer de compléter nos services actuels avec des options supplémentaires, comme par exemple pour notre annuaire: d'avoir une authentification par SSH. Mais pour aller encore plus loin, on pourrait imaginer l'installation d'un serveur FTP par exemple.
+
 \section{Annexe}
 \listoffigures  
 \end{document}
