@@ -151,10 +151,10 @@ Et il y a évidemment les différentes mises à jour vues précédemment.
 Avec toutes ces commandes, nous sommes fin prêt à mettre en place tout un tas de service divers et variés tel qu'un DNS ou encore un serveur LAMP par exemple.
 
 \section{Paramétrage du réseau}
-Pour pouvoir commencer à communiquer entre différentes machines, nous avons ensuite défini la répartition des adresses IP pour chaque groupe (chaque agence) et paramétré en conséquences les différentes interfaces réseaux sur le routeur puis le client. Pour cela, nous nous sommes connectés au réseau IEM via la carte réseau intégré à la carte mère sur routeur, la première carte réseau externe a été branchée au switch afin de permettre la communication avec les autres groupes, donc le réseau d'interconnexion et dernièrement la deuxième carte réseau externe est utilisée pour le réseau privé mais puisque nous n'avons qu'un client, nous l'avons directement connecté. Toutes les connexions ont étés effectuées via des câbles Ethernet standard. Ici le but de la manipulation est de mettre en place un réseau d'entreprises et d'une infrastructure de services.
+Pour pouvoir commencer à communiquer entre différentes machines, nous avons ensuite défini la répartition des adresses IP pour chaque groupe (chaque agence) et paramétré en conséquences les différentes interfaces réseaux sur le routeur puis le client. Pour cela, nous nous sommes connectés au réseau IEM via la carte réseau intégrée à la carte mère sur routeur, la première carte réseau externe a été branché au switch afin de permettre la communication avec les autres groupes, donc le réseau d'interconnexion et dernièrement la deuxième carte réseau externe est utilisée pour le réseau privé mais puisque nous n'avons qu'un client, nous l'avons directement connecté. Toutes les connexions ont étés effectuées via des câbles Ethernet standard. Ici le but de la manipulation est de mettre en place un réseau d'entreprise et d'une infrastructure de services.
 
 \subsection{Répartition des adresse IP (réseau d'Interconnexion entre agences et réseau privé de l'agence)}
-Chaque binôme du groupe de TP s'est vu attribué une adresse IP de classe C et un masque qui sera utilisé pour le réseau d’interconnexion. Puisqu'il y a 5 binômes dans notre groupe de TP, nous avons pris une adresse dans la plage allant de 192.168.1.1 à 192.168.1.5. Pour la même raison, nous avons défini le masque du réseau d'Interconnexion à 255.255.255.248, résultat que nous avons obtenu en ajoutant 3 bits à 1 le plus à gauche possible au masque standard de classe C (255.255.255.0). Ces 3 bits supplémentaires nous permettent de coder 2\textsuperscript{3}=8  sous réseaux, ce qui suffit pour nos 5 groupes.
+Chaque binôme du groupe de TP s'est vu attribuer une adresse IP de classe C et un masque qui sera utilisé pour le réseau d’interconnexion. Puisqu'il y a 5 binômes dans notre groupe de TP, nous avons pris une adresse dans la plage allant de 192.168.1.1 à 192.168.1.5. Pour la même raison, nous avons défini le masque du réseau d'Interconnexion à 255.255.255.248, résultat que nous avons obtenu en ajoutant 3 bits à 1 le plus à gauche possible au masque standard de classe C (255.255.255.0). Ces 3 bits supplémentaires nous permettent de coder 2\textsuperscript{3}=8  sous réseaux, ce qui suffit pour nos 5 groupes.
 \newline
  % ReseauInterco&Prive.png: 720x310 px, 96dpi, 19.05x8.20 cm, bb=0 0 540 232
 \begin{figure}[!h]
@@ -170,7 +170,7 @@ Le tableau de la figure \ref{fig2} récapitule les adresses IP allouées pour ch
 Après avoir défini ces adresses et ces réseaux sur le papier, il est désormais temps de configurer les machines afin de les implémenter concrètement.
 
 \subsection{Les interfaces réseaux du routeur}
-Les adresses que nous venons de répartir entre chaque groupe et réseaux doivent être utilisées par le routeur. Nous allons donc maintenant expliquer comment nous avons paramétré les interfaces réseaux sur le routeur. Pour cela, nous avons travailler avec le fichier "/etc/network/interfaces" qui régis le fonctionnement des interfaces réseaux de la machine au niveau du noyau du système d'exploitation. Une interface réseau correspond à une carte réseau (en général) et il est possible à partir de son de la configurer (adresse statique, adresse du réseau, masque, gateway, ...). La gateway d'une telle configuration est la machine qui doit être utilisé pour passer d'un réseau à un autre. En d'autres termes, il s'agit de la "porte d'accès" à utiliser. Par exemple si une machine du réseau privé veut communiquer avec une autre machine située sur le réseau IEM, elle devra utiliser le serveur pour router ses paquets. Nous avons modifié le fichier pour obtenir le résultat de la figure \ref{fig3}. 
+Les adresses que nous venons de répartir entre chaque groupe et réseaux doivent être utilisées par le routeur. Nous allons donc maintenant expliquer comment nous avons paramétré les interfaces réseaux sur le routeur. Pour cela, nous avons travaillé avec le fichier ``/etc/network/interfaces" qui régit le fonctionnement des interfaces réseaux de la machine au niveau du noyau du système d'exploitation. Une interface réseau correspond à une carte réseau (en général) et il est possible à partir de son nom de la configurer (adresse statique, adresse du réseau, masque, gateway, ...). La gateway d'une telle configuration est la machine qui doit être utilisée pour passer d'un réseau à un autre. En d'autres termes, il s'agit de la ``porte d'accès" à utiliser. Par exemple si une machine du réseau privé veut communiquer avec une autre machine située sur le réseau IEM, elle devra utiliser le serveur pour router ses paquets. Nous avons modifié le fichier pour obtenir le résultat de la figure \ref{fig3}. 
 
 \begin{figure}[!h]
 \centerline{ \includegraphics[width=15cm]{images/interfacesRouteur.png}}
@@ -182,14 +182,14 @@ Il est possible d'afficher les interfaces réseaux disponibles sur la machine da
 \begin{lstlisting}[language=bash] 
     $ ip a 
 \end{lstlisting} 
-Cette commande a pour intérêt de nous faire connaître rapidement les adresses MAC et/ou IP de chaque interface. Elle nous a permit de connaître le nom des interfaces à utiliser dans notre fichier de configuration mais elle permet également de savoir si une interface est active "UP" ou pas "DOWN". En effet, durant les phases de tests il était important de savoir quelles interfaces étaient allumées ou éteintes. Il est possible qu'après une mauvaise configuration ou un problème, une interface soit éteinte. Il existe des commandes utilitaires pour les manipuler, l'une allumant l'interface nommée ``interface'' et l'autre l'éteignant. 
+Cette commande a pour intérêt de connaître rapidement les adresses MAC et/ou IP de chaque interface. Elle nous a permit de connaître le nom des interfaces à utiliser dans notre fichier de configuration mais elle permet également de savoir si une interface est active ``UP" ou non ``DOWN". En effet, durant les phases de tests il était important de savoir quelles interfaces étaient allumées ou éteintes. Il est possible qu'après une mauvaise configuration ou un problème de branchement, une interface soit éteinte. Il existe des commandes utilitaires pour les manipuler, l'une allumant l'interface nommée ``interface'' et l'autre l'éteignant. 
 
 \begin{lstlisting}[language=bash] 
     $ ifup interface
     $ ifdown interface
 \end{lstlisting}
 
-Pour le fichier de configuration (figure \ref{fig3} ci-dessus) , nous pouvons voir que nous avons configuré les 3 interfaces (donc les 3 ports Ethernet que possède notre routeur), ainsi que l'interface ``lo" qui représente le loopback. Le loopback est la ``boucle'' locale: c'est une interface virtuelle qui permet de définir à une machine ``elle même'', notamment lors de l'utilisation de l'adresse ``localhost''.  Pour chacune des interfaces, nous avons donc défini leur adresse (address), leur masque (netmask) et leur réseau (network). Pour l'interface ``eno1" qui est relié au réseau IEM, nous avons plusieurs informations supplémentaire: l'adresse de broadcast (adresse utilisée pour transmettre un message à toutes les autres machines d'un réseau), la passerelle (gateway), les dns, ... Nous pouvons voir que l'interface ``eno1" est relier au réseau IEM car pour le réseau nous avons indiqué l'adresse 172.31.20.1 qui est l'adresse du routeur du réseau IEM fournie par les intervenants des travaux pratiques. Le raisonnement est le même pour les interfaces ``enp3s0" et ``enp1s0", pour lesquels nous avons indiqué respectivement pour le réseau les adresses 10.1.2.0 et 192.158.1.0. Il s'agit donc des réseaux d'interconnexion et privé. Les entrées "dns-nameservers" et "pre-up" seront expliquées plus en détail ultérieurement. Une fois le fichier de configuration des interfaces réseaux édité à notre souhait, ses informations ne sont pas prises en compte immédiatement: il est nécessaire de redémarrer le service réseau associé, en tant que root ou alors avec sudo:
+Pour le fichier de configuration (figure \ref{fig3} ci-dessus) , nous pouvons voir que nous avons configuré les 3 interfaces (donc les 3 ports Ethernet que possède notre routeur), ainsi que l'interface ``lo" qui représente le loopback. Le loopback est la ``boucle'' locale: c'est une interface virtuelle qui permet de définir à une machine ``elle même'', notamment lors de l'utilisation de l'adresse ``localhost''.  Pour chacune des interfaces, nous avons donc défini leur adresse (address), leur masque (netmask) et leur réseau (network). Pour l'interface ``eno1" qui est relié au réseau IEM, nous avons plusieurs informations supplémentaire: l'adresse de broadcast (adresse utilisée pour transmettre un message à toutes les autres machines d'un réseau), la passerelle (gateway), les dns, ... Nous pouvons voir que l'interface ``eno1" est relier au réseau IEM car pour le réseau nous avons indiqué l'adresse 172.31.20.1 qui est l'adresse du routeur du réseau IEM fournie par les intervenants des travaux pratiques. Le raisonnement est le même pour les interfaces ``enp3s0" et ``enp1s0", pour lesquels nous avons indiqué respectivement pour le réseau les adresses 10.1.2.0 et 192.158.1.0. Il s'agit donc des réseaux d'interconnexion et privé. Les entrées ``dns-nameservers" et ``pre-up" seront expliquées plus en détail ultérieurement. Une fois le fichier de configuration des interfaces réseaux édité à notre souhait, ses informations ne sont pas prises en compte immédiatement: il est nécessaire de redémarrer le service réseau associé, en tant que root ou alors avec sudo:
 
 \begin{lstlisting}[language=bash] 
     $ service networking restart
@@ -1009,14 +1009,14 @@ Une fois installé, il faut ajouter l'utilisateur ou le groupe dans le fichier d
 Cette ligne nous indique que l'utilisateur ``dev1" à tous les droits pour exécuter ``/usr/bin/nano" sur ``/etc/apache2/*" (modifier la configuration), ``etc/init.d/apache2 restart" et ``/usr/sbin/service apache2 restart" (redémarrer le service). Dorénavant il peut donc ajouter/supprimer tous ce qu'il souhaite dans ``/etc/apache2/" et peut redemarrer le serveur apache. Nous avons du utiliser le chemin absolu pour nano par exemple car sudo ne prends pas en compte le PATH lors de l'exécution des commandes.
 
 \section{Mise en place d'un domaine Samba/LDAP}
-Dans cette section nous allons éxpliquer les différentes étapes de mise en place d'un domaine Samba/LDAP, pour constituer l'annuaire de notre entreprise. L'annuaire sera composé d'information comme le nom, le prénom et le mail. Mais il va également permettre de partager des ressources entres les utilisateurs. Pour l'ensemble de la configuration du domaine Samba/LDAP nous avons utilisé un fichier zip qui était à notre disposition: \\"http://kundera/licence3/SystemesEtReseaux2/TP/FichiersconfTp3.zip".
+Dans cette section nous allons expliquer les différentes étapes de mise en place d'un domaine Samba/LDAP, pour constituer l'annuaire de notre entreprise et un système de fichiers correspondant. L'annuaire sera composé d'informations comme le nom, le prénom et le mail. Mais il va également permettre de partager des ressources entre  utilisateurs. Pour l'ensemble de la configuration du domaine Samba/LDAP, nous avons utilisé un fichier zip qui était à notre disposition: \\``http://kundera/licence3/SystemesEtReseaux2/TP/FichiersconfTp3.zip".
 
 \subsection{Mise en place de LDAP}
-LDAP ou Lightweight Directory Access Protocol est un protocole d'accès à un annuaire (tcp/ip), il existe également OpenLDAP qui est la version libre du protocole. C'est un structure arborescente constituée d'entrées nommée D.I.T. Chaque entrée est un ensemble d'attributs, un attribut est un type, c'est-à-dire un nom, une description et une ou plusieurs valeurs. Les attributs sont définis dans des schémas. Pour débuter la mise en place de LDAP, il faut l'installer avec:
+LDAP ou Lightweight Directory Access Protocol est un protocole d'accès à un annuaire (tcp/ip), il existe également OpenLDAP qui est la version libre du protocole. C'est un structure arborescente constituée d'entrées nommées D.I.T. Chaque entrée est un ensemble d'attributs, un attribut est un type, c'est-à-dire un nom, une description et une ou plusieurs valeurs. Les attributs sont définis dans des schémas. Pour débuter la mise en place de LDAP, il faut l'installer avec:
 \begin{lstlisting}[language=bash] 
     $ apt-get install slapd
 \end{lstlisting}
-Après l'installation un affichage en mode texte se lance, et nous demande différente information tel que: le DNS, le nom de l'organisation et le mot de passe du root. Après les informations renseigné on a copié le fichier de configuration "slapd.conf" qui était mis à notre disposition dans: "/etc/ldap/slapd.conf":
+Après l'installation un affichage en mode texte se lance et nous demande différentes informations telles que: le nom de domaine, le nom de l'organisation et le mot de passe du root. Après les informations renseignées, nous avons copié le fichier de configuration ``slapd.conf" qui était mis à notre disposition à la place de ``/etc/ldap/slapd.conf":
 \begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/slapdConf1.png}}
 \caption{Contenu du fichier de configuration slapd partie 1.}
@@ -1027,20 +1027,20 @@ Après l'installation un affichage en mode texte se lance, et nous demande diff�
 \caption{Contenu du fichier de configuration slapd partie 2.}
 \label{fig}
 \end{figure}
-Dans la partie 1 du fichier de configuration nous avons inclus le schéma de Samba "/etc/ldap/schema/samba.schema" mais nous en reparlerons plus tard. Dans la partie 1 et 2 du fichier de configuration nous avons remplacé les informations "dc=dijon" par "dc=atlantide", et dans la partie 2 nous avons autorisé l'accès à l'annuaire et définie une politique de sécurité vis-à-vis du DIT. Il est important de savoir que l'élément "c" est pour country afin de définir un rayonnement international, "dc" pour une Domain Component et est suffisant pour une entreprise à caractère régional. Les branches seront définies par l'élément "ou" Organizational Unit pour classer les variables.
+Dans la partie 1 du fichier de configuration, nous avons inclus le schéma de Samba ``/etc/ldap/schema/samba.schema" mais nous en reparlerons plus tard. Dans la partie 1 et 2 du fichier de configuration nous avons remplacé les informations ``dc=dijon" par ``dc=atlantide" et dans la partie 2 nous avons définit l'accès à l'annuaire en lui donnant un suffix et un utilisateur root. Il est important de savoir que l'élément ``c" désigne ``country'' afin de définir un rayonnement international, ``dc" désigne ``Domain Component'' et est suffisant pour une entreprise à caractère régional. Les branches seront définies par l'élément ``ou" (``Organizational Unit'') pour classer les variables.\\
 
-Afin de rendre ce fichier de configuration opérationnel il faut stopper le service LDAP, supprimer le fichier "/etc/ldap/slapd.d" et redémarrer le service:
+Afin de rendre ce fichier de configuration opérationnel il faut stopper le service LDAP, supprimer le fichier ``/etc/ldap/slapd.d" et redémarrer le service:
 \begin{lstlisting}[language=bash] 
     $ systemctl stop slapd
     $ rm /etc/ldap/slapd.d
     $ systemctl start slapd
 \end{lstlisting}
 
-Nous allons paramétrer notre machine afin qu'elle exploite les données notre annuaire, on a donc installé le paquet qui permet de gérer ceci:
+Nous allons désormais parametrer notre machine afin qu'elle exploite les données de notre annuaire et pour cela nous avons donc installé le paquet qui permet de gérer ceci:
 \begin{lstlisting}[language=bash] 
     $ apt-get install libnss-ldap
 \end{lstlisting}
-Et voici le contenue du fichier de configuration associé ("/etc/libnss-ldap.conf"):
+Voici le contenu du fichier de configuration associé (``/etc/libnss-ldap.conf"):
 \begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/libnssldap.png}}
 \caption{Contenu du fichier de configuration libnss.}
@@ -1048,13 +1048,14 @@ Et voici le contenue du fichier de configuration associé ("/etc/libnss-ldap.con
 \end{figure}
 
 \subsection{Mise en place de Samba}
-Samba est une application libre qui tourne sous Linux et qui permet de créer un serveur de fichiers en s'appuyant sur l'implémentation du protocole SMB. Installation de samba via la commande: 
+Samba est une application libre qui tourne sous Linux et qui permet de créer un serveur de fichiers en s'appuyant sur l'implémentation du protocole SMB. Nous avons réaliser l'installation de samba via la commande: 
 \begin{lstlisting}[language=bash] 
     $ apt-get install smbldap-tools
 \end{lstlisting}
-Comme pour LDAP, nous sommes repartie des éléments que nous avions en notre possession pour configurer Samba:
+Comme pour LDAP, nous sommes reparti des éléments que nous avions en notre possession pour configurer Samba:
 \begin{lstlisting}[language=bash] 
-    $ mv smbldap.conf /etc/smbldap-tools/smbldap_bind.conf
+    $ mv smbldap_bind.conf /etc/smbldap-tools/
+
 \end{lstlisting}
 Le fichier contient:
 \begin{figure}[H]
@@ -1063,8 +1064,8 @@ Le fichier contient:
 \label{fig}
 \end{figure}
 Dans cette configuration nous indiquons les informations relatives au DIT déterminé précédemment avec LDAP. 
-
-Viens ensuite la configuration d'un second fichier de configuration bien plus conséquent, le fichier "/etc/smbldap-tools/smbldap.conf". Dans ce fichier il faut encore une fois renseigné les Domain Component, c'est-à-dire les "dc=agence" et "dc=atlantide". De plus nous avons également renseigné le nom de domaine "agenceatlantide". Mais surtout nous avons renseigné le SID, le SID est un identifiant de sécurité utilisé pour identifier les ressources et les personnes sur un réseau. Nous avons pu le récupérer avec la commande:
+\par
+Viens ensuite la configuration d'un second fichier bien plus conséquent: le fichier ``/etc/smbldap-tools/smbldap.conf". Dans ce fichier, il faut encore une fois renseigner les Domain Component, c'est-à-dire le ``dc=agence,dc=atlantide". De plus nous avons également renseigné le nom de domaine samba ``agenceatlantide". Nous avons également renseigné le SID, qui est un identifiant de sécurité utilisé pour identifier les ressources et les personnes sur un réseau. Nous avons pu le récupérer avec la commande:
 \begin{lstlisting}[language=bash] 
     $ net getlocalsid
 \end{lstlisting}
@@ -1075,41 +1076,43 @@ Et finalement voici à quoi ressemble la partie sur la configuration général a
 \label{fig}
 \end{figure}
 
-Nous allons aborder la notion de ressources partager ainsi que le paramétrage du service Samba. Que soit pour la configuration du service samba en ou pour la configuration des ressources à partager, tout est dans le fichier "/etc/samba/smb.conf".
-Dans un premier temps expliquons le début du fichier, en particulier la configuration du service Samba:
+Nous allons aborder la notion de ressources partager ainsi que le paramétrage du service Samba. Que ce soit pour la configuration du service samba ou pour la configuration des ressources à partager, tout est dans le fichier ``/etc/samba/smb.conf".
+Dans un premier temps, expliquons le début du fichier, en particulier la configuration du service Samba:
 \begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/smbConf.png}}
 \caption{Configuration du service Samba.}
 \label{fig}
 \end{figure}
-Nous voyons au début l'authentification avec LDAP crée et paramétrer auparavant, l'authentification est mise en place avec différents paramètres tels que: le suffix LDAP "dc=agence,dc=atlantide", les suffix des utilisateurs et des groupes ("ou=Users et ou=Groups"). De plus nous avons rajouté une synchronisation automatique de tous les pass d'un utilisateur. Mais également ajouté une table d'encodage des caractères qui sont les mêmes que Windows, et ajouter le nom de domaine "agenceatlantide" dans le workgroup. Et pour terminer avec cette partie le "netbios name" qui définit le nom du serveur a été définie a "agenceatlantide", et le chemin des pass a été défini à "/usr/local/sbin/smbldap-useradd.pl". Pour l'authentification via ldap il faut installer le paquet: "libpam-ldapd" avec le gestionnaire de paquets "apt-get" que nous avons déjà utilisé à de nombreuses reprises. 
+Nous voyons au début l'authentification avec LDAP créé et parametré auparavant. L'authentification est mise en place avec différents paramètres tels que: le suffix LDAP ``dc=agence,dc=atlantide", les suffix des utilisateurs et des groupes (``ou=Users'' et ``ou=Groups"). De plus, nous pouvoir voir qu'il y a une synchronisation automatique de tous les mots de passe d'un utilisateur, mais également une table d'encodage des caractères qui sont les mêmes que Windows. Le workgroup a été défini comme le nom de domaine ``agenceatlantide". Pour terminer avec cette partie, le ``netbios name" qui définit le nom du serveur a été défini à ``agenceatlantide".\\
 
-Dans un second temps concentrons-nous sur le partage des ressources:
-Les lignes dans la partie "Share Definitions" déclarent notre partage:
+Pour l'authentification via ldap, il faut installer le paquet: ``libpam-ldapd" avec le gestionnaire de paquets ``apt-get" que nous avons déjà utilisé à de nombreuses reprises.\\
+
+Dans un second temps concentrons-nous sur le partage des ressources.
+Les lignes dans la partie ``Share Definitions" déclarent nos partages:
 \begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/smbRessourcePartager.png}}
 \caption{Partage des ressources samba.}
 \label{fig}
 \end{figure}
-Pour expliquer: [homes/public] spécifie le nom du partage entre "[]", c'est le nom qui devra être utilisé pour accéder au partage. Le paramètre comment est une description du partage, path est le chemin vers le dossier à partager, sur le serveur. Le "read only = no" nous dit que le partage n'est pas accessible pour la lecture seule. Cependant les fichier sont éditable: "writable = yes". Le fait que "browsable" ne soit pas activé rend le partage masqué si on liste les partages du serveur avec un hôte distant. Pour le partage "homes" le directory mask et create mask on tous les 2 la valeur 0700 qui représente les permissions pour les groupes et les répertoires. 
+Pour expliquer, [homes/public] spécifie le nom du partage entre ``[]": c'est le nom qui devra être utilisé pour accéder au partage. Le paramètre comment est une description du partage, path est le chemin vers le dossier à partager sur le serveur. Le ``read only = no" nous dit que le partage n'est pas accessible uniquement pour la lecture seule. De plus, les fichiers sont éditables: ``writable = yes". Le fait que ``browsable" ne soit pas activé rend le partage masqué si on liste les partages du serveur avec un hôte distant. Pour le partage ``homes" le directory mask et create mask ont tous les 2 la valeur 0700 qui représente les permissions pour les groupes et les répertoires. 
 
-Une fois la configuration terminée, il fait sauvegardez le fichier et redémarrez le service Samba:
+Une fois la configuration terminée, il faut sauvegarder le fichier et redémarrer le service Samba:
 \begin{lstlisting}[language=bash] 
     $ systemctl restart smbd
 \end{lstlisting}
 
-On souhaite dorénavant peupler notre annuaire Samba avec "smbldap-populate". La commande smbldap-populate aide à remplir un serveur LDAP en ajoutant les entrées nécessaires: suffixe de base, unités d'organisation pour les utilisateurs, les groupes et les ordinateurs, les utilisateurs intégrés: administrateur et invité et les groupes intégrés. Ce paquet est utilisable via la commande:
+On souhaite dorénavant appliquer les changements dans les données et activer le lien entre samba et ldap, ce que nous faisons avec ``smbldap-populate". La commande smbldap-populate aide à remplir un serveur LDAP en ajoutant les entrées nécessaires: suffixe de base, unités d'organisation pour les utilisateurs, les groupes et les ordinateurs, les utilisateurs intégrés: administrateur et invité et les groupes intégrés. Ce paquet est utilisable via la commande:
 \begin{lstlisting}[language=bash] 
     $ smbldap-populate
 \end{lstlisting}
 
-Samba et LDAP sont configurés, nous avons peuplé l'annuaire Samba. Il est temps de créer nos groupes et nos utilisateurs. Dans sa configuration par défaut, Samba dispose d'un partage nommé [homes]. En fait, il ne s'agit pas réellement d'un partage nommé "homes" mais cette configuration spécifique permet de créer un partage personnel pour chaque utilisateur qui se connecte sur notre machine Linux. Le groupe "public" que nous avons déclaré dans la configuration n'existe pas. Nous allons créer le groupe, ainsi que 2 utilisateurs nommés "smbtest" et "smbtest2" et qui seront membres de ce groupe. 
+Samba et LDAP sont configurés, nous avons peuplé l'annuaire Samba. Il est temps de créer nos groupes et nos utilisateurs. Dans sa configuration par défaut, Samba dispose d'un partage nommé [homes]. En fait, il ne s'agit pas réellement d'un partage nommé ``homes" mais cette configuration spécifique permet de créer un partage personnel pour chaque utilisateur qui se connecte sur notre machine Linux. Le groupe ``public" que nous avons déclaré dans la configuration n'existe pas. Nous allons créer le groupe, ainsi que 2 utilisateurs nommés ``smbtest" et ``smbtest2" et qui seront membres de ce groupe. 
 Les groupes sur Samba sont créé via la commande:
 \begin{lstlisting}[language=bash] 
     $ groupadd nom_groupe
     $ groupadd public
 \end{lstlisting}
-Le partage "public" est le partage de Samba qui permet de partager les fichiers entre les utilisateurs.
+Le partage ``public" est le partage de Samba qui permet de partager les fichiers entre les utilisateurs.\\
 
 Pour samba il faut d'abord ajouter l'utilisateur dans ldap avec la commande:
 \begin{lstlisting}[language=bash] 
@@ -1132,7 +1135,7 @@ Et pour unix simplement via:
 \begin{lstlisting}[language=bash] 
     $ useradd user
 \end{lstlisting}
-Les mots de passe peuvent être les mêmes ou non cela dépend du bon vouloir de chacun et du niveau de sécurité que vous souhaitez instaurer. 
+Les mots de passe peuvent être les mêmes ou non cela dépend du bon vouloir de chacun et du niveau de sécurité que vous souhaitez instaurer. \\
 
 Finalement il suffit de mettre les bons droits au nouveau home créé, afin de définir le propriétaire du répertoire:
 \begin{lstlisting}[language=bash] 
@@ -1141,11 +1144,11 @@ Finalement il suffit de mettre les bons droits au nouveau home créé, afin de d
     $ chown smbtest2 /home/smbtest2
 \end{lstlisting}
 
-Le partage "public" va être hébergé à l'emplacement "/srv/smbshared" de notre serveur. Commençons par créer le dossier:
+Le partage ``public" va être hébergé à l'emplacement ``/srv/smbshared" de notre serveur. Commençons par créer le dossier:
 \begin{lstlisting}[language=bash] 
     $ mkdir /srv/smbshared
 \end{lstlisting}
-Ensuite, on va attribuer le groupe "public" comme groupe propriétaire de ce dossiers:
+Ensuite, on va attribuer le groupe ``public" comme groupe propriétaire de ce dossier:
 \begin{lstlisting}[language=bash] 
     $ chgrp -R public /srv/smbshared/
 \end{lstlisting}
@@ -1154,12 +1157,12 @@ Puis, nous allons ajouter les droits de lecture/écriture à ce groupe sur ce do
     $ chmod -R g+rw /srv/smbshared/
 \end{lstlisting}
 
-Les groupes et utilisateurs une fois crée sont visible via les commandes:
+Les groupes et utilisateurs une fois créé sont visibles via les commandes:
 \begin{lstlisting}[language=bash] 
     $ nano /etc/group
     $ nano /etc/passwd
 \end{lstlisting}
-Via la première commande nous n'avons seulement accès aux groupes sur le serveur local, si des groupes sont créés uniquement sur LDAP où Samba alors on peut les afficher avec:
+Via la première commande nous avons seulement accès aux groupes sur le serveur local, si des groupes sont créés uniquement sur LDAP où Samba alors on peut les afficher avec:
 \begin{lstlisting}[language=bash] 
     $ getent group
 \end{lstlisting}
@@ -1169,24 +1172,18 @@ Si l'on souhaite afficher toutes les informations concernant Samba et LDAP un co
     $ slapcat
 \end{lstlisting}
 
-Dans "/etc/ldap/schema/samba.schema" nous avons eu besoin d'ajouter le schéma de Samba dans LDAP.
-Mais également de réadapter notre matrice de filtrage en rajoutant les lignes qui traite Samba, c'est-à-dire les ports: 139 (authentification), et 389 (active directory).
+Dans ``/etc/ldap/schema/samba.schema", nous avons eu besoin d'ajouter le schéma de Samba dans LDAP, mais également de réadapter notre matrice de filtrage en rajoutant les lignes qui traite Samba, c'est-à-dire les ports: 139 (authentification), et 389 (active directory).\\
 
-Finalement pour vérifier que les utilisateurs "smbtest" et "smbtest2" peuvent accéder au fichier partagé, on a essayé ceci:
-\begin{figure}[H]
-\centerline{ \includegraphics[width=15cm]{images/testSmbShared.png}}
-\caption{Accès aux ressources partagé de samba.}
-\label{fig}
-\end{figure}
+Finalement pour vérifier que les utilisateurs créer peuvent accéder à distance au dossier partagé et à leurs répertoires homes, nous avons monté sur un client les partages correspondant dans le système de fichier à partir de l'interface graphique. Nous pouvons également nous connecter avec la commande smb-client.
 
 \subsection{Sauvegarde automatique de l'annuaire}
-Pour ce qui est de la sauvegarde automatique de notre annuaire, nous avons utilisé crontab (pour la réaliser périodiquement), "slapcat" permettant d'avoir le contenu intégral de Samba et LDAP puis encore une fois zip afin de compresser le fichier produit dans le but d'économiser de la place sur le disque dur. Pour la sauvegarde nous avons simplement créé le dossier ``/backups/smbsldap". Finalement, nous avons ajouté dans le fichier crontab que le cron sera effectuée tous les dimanches à minuit, afin de compresser les informations pour les envoyer dans le fichier ``save.gz". 
+Pour ce qui est de la sauvegarde automatique de notre annuaire, nous avons utilisé crontab (pour la réaliser périodiquement) ainsi que ``slapcat" permettant d'avoir le contenu intégral du LDAP puis encore une fois zip afin de compresser le fichier produit dans le but d'économiser de la place sur le disque dur. Pour la sauvegarde nous avons simplement créé le dossier ``/backups/smbsldap". Finalement, nous avons ajouté dans le fichier crontab que le cron sera effectué tous les dimanches à minuit, afin de compresser les informations pour les envoyer dans le fichier ``save.gz". 
 \begin{lstlisting}[language=bash] 
     $ crontab -e 0 0 * * 0 slapcat | gzip  > /backups/smbsldap/save.gz
 \end{lstlisting}
 
 \section{Conclusion}
-Pour conclure sur l'ensemble de notre installation, nous avons installé Linux sans interface graphique, puis paramétré le réseau global, ensuite mis en place un DNS, ainsi qu'un serveur LAMP et finalement le duo LDAP/Samba. Tout ceci ne sait pas fait en 1 jour et n'a pas été de tout repos mais nous avons acquis une grande quantité de connaissance. Comme nous avons pu le montrer durant les différente étapes, chaque partie a été minutieusement traiter dans le but d'avoir un ensemble fonctionnel. Pour finir on pourrait facilement imaginer de compléter nos services actuels avec des options supplémentaires, comme par exemple pour notre annuaire: d'avoir une authentification par SSH. Mais pour aller encore plus loin, on pourrait imaginer l'installation d'un serveur FTP par exemple.
+Pour conclure sur l'ensemble de notre installation, nous avons installé Linux sans interface graphique, puis paramétré le réseau global avec la mise en place un DNS. Nous avons également installer, paramétrer et tester un serveur LAMP et finalement le duo LDAP/Samba. Tout ceci a demandé de nombreuses heures de travail mais nous avons acquis beaucoup de connaissances. Comme nous avons pu le montrer durant les différente étapes, chaque partie a été minutieusement traitée dans le but d'avoir un ensemble fonctionnel. Pour finir, on pourrait également imaginer compléter notre infrastructure avec l'installation d'un serveur FTP ou mail par exemple.
 
 \section{Annexe}
 \listoffigures  
