@@ -24,8 +24,8 @@
 \contentsline {figure}{\numberline {24}{\ignorespaces Page php de test pour la base de données MariaDb.}}{35}{figure.24}%
 \contentsline {figure}{\numberline {25}{\ignorespaces Page php de test pour la base de données PostegreSQL.}}{36}{figure.25}%
 \contentsline {figure}{\numberline {26}{\ignorespaces Page de test avec PDO.}}{37}{figure.26}%
-\contentsline {figure}{\numberline {27}{\ignorespaces Contenu du fichier de configuration de dev2.}}{38}{figure.27}%
-\contentsline {figure}{\numberline {28}{\ignorespaces Contenu du fichier de configuration de dev2.}}{39}{figure.28}%
+\contentsline {figure}{\numberline {27}{\ignorespaces Contenu du fichier /etc/firewall-free.sh.}}{38}{figure.27}%
+\contentsline {figure}{\numberline {28}{\ignorespaces Contenu du fichier /etc/firewall-rules.sh.}}{39}{figure.28}%
 \contentsline {figure}{\numberline {29}{\ignorespaces Sauvegarde de MySQL.}}{40}{figure.29}%
 \contentsline {figure}{\numberline {30}{\ignorespaces Contenu du fichier pour les sudoers.}}{41}{figure.30}%
 \contentsline {figure}{\numberline {31}{\ignorespaces Contenu du fichier de configuration slapd partie 1.}}{43}{figure.31}%

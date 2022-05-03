@@ -692,10 +692,10 @@ Le serveur DNS est fonctionnel et est donc prêt à être utilisé sur d'autres 
 \section{Installation d'un serveur LAMP}
 LAMP est un acronyme: le ``L" désigne Linux: le système d'exploitation, le ``A" désigne Apache: le serveur Web, le ``M" est pour MySQL ou MariaDB: le serveur de base de données, et le ``P" pour PHP: le langage de script.\\
 
-Avec un LAMP, on peut donc mettre en place un serveur Web, hébergeant un site web dynamique écrit en PHP, tout en allant chercher des données dans une base MySQL ou MariaDB, mais également PostgreSQL si nous l'installons également.
+Avec un LAMP, on peut donc mettre en place un serveur Web, hébergeant un site web dynamique écrit en PHP, tout en allant chercher des données dans une base MySQL ou MariaDB, mais également PostgreSQL si nous l'installons optionnellement.
 
 \subsection{Installation et mise en place du LAMP avec MariaDB}
-Pour installer le serveur web apache et son module permettant de gérer PHP plus tard, nous utiliser la commande:
+Pour installer le serveur web apache et son module permettant de gérer PHP plus tard, nous utilisons la commande:
 \begin{lstlisting}[language=bash] 
     $ apt-get install apache2 libapache2-mod-php
 \end{lstlisting} 
@@ -706,13 +706,13 @@ Nous avons également utilisé la commande:
 \end{lstlisting} 
 Elle permet de démarrer automatiquement le serveur Apache après le boot de notre routeur.\\
 
-Après l'installation (donc par défaut), la page web de notre serveur se trouve à l'emplacement `/var/www/html/index.html". Et par conséquent, à ce moment de la configuration, nous pouvons déjà visiter la page en visitant avec un navigateur ``http://localhost/index.html" depuis notre serveur.
+Après l'installation (donc par défaut), la page web de notre serveur se trouve à l'emplacement ``/var/www/html/index.html". Et par conséquent, à ce moment de la configuration, nous pouvons déjà visiter la page en visitant avec un navigateur ``http://localhost/index.html" depuis notre serveur.
 
-Pour la suite, nous avons créé un compte pour un utilisateur qui développe des applications web. Cet utilisateur a été crée avec la commande:
+Pour la suite, nous avons créé un compte pour un utilisateur qui développe des applications web. Cet utilisateur a été créé avec la commande:
 \begin{lstlisting}[language=bash] 
     $ adduser dev1
 \end{lstlisting} 
-Il s'agit d'une commande intégrée nativement à Linux permettant de créer des utilisateurs. Ensuite, nous avons créé le dossier où ce nouvel utilisateur va pouvoir ajouter ses fichiers: ``/srv/dev1". Cependant, l'utilisateur ``dev1" n'a les bons droits conçernant ce répertoire par défaut. Nous avons donc également changé les droits et changé le propriétaire du dossier via les commandes:
+Il s'agit d'une commande intégrée nativement à Linux permettant de créer des utilisateurs. Ensuite, nous avons créé le dossier où ce nouvel utilisateur va pouvoir ajouter ses fichiers: ``/srv/dev1". Cependant, l'utilisateur ``dev1" n'a pas les bons droits conçernant ce répertoire par défaut. Nous avons donc également changé les droits et changé le propriétaire du dossier via les commandes:
 \begin{lstlisting}[language=bash] 
     $ chown utilisateur nom(s)_de_fichier
     $ chown -R dev1 dev1
@@ -725,7 +725,7 @@ Ensuite nous avons fait pointer un alias (apache) sur le dossier ``/srv/dev1/www
 \caption{Contenu du fichier de configuration de apache.}
 \label{fig20}
 \end{figure}
-La ligne qui nous intéresse est ``Alias ``/dev1" ``/srv/dev1/www"". Cette ligne permet de dire au serveur apache qu'une requête visant ``http://localhost/dev1" est en réalitée à diriger vers ``/srv/dev1/www/index.html".\\
+La ligne qui nous intéresse est ``Alias ``/dev1" ``/srv/dev1/www"". Cette ligne permet de dire au serveur apache qu'une requête visant ``http://localhost/dev1" est en réalitée à diriger vers ``/srv/dev1/www/".\\
 
 Pour tester notre alias nous avons écrit un petit ``index.html" dans le dossier ``/srv/dev1/www". Nous sommes ensuite passés par ces différentes commandes:
 \begin{lstlisting}[language=bash] 
@@ -773,14 +773,14 @@ Dans la même dynamique que la première page, elle est destinée à avoir un af
 \caption{Contenu du fichier de configuration de dev2.}
 \label{fig21}
 \end{figure}
-Dans ce fichier de configuration nous y retrouvons le chemin du dossier où l'on va mettre nos pages web, ainsi que le nom de domaine utilisée qui est ``informatique.agence.dijon".\\
+Dans ce fichier de configuration nous y retrouvons le chemin du dossier où l'on va mettre nos pages web, ainsi que le nom de domaine utilisé qui est ``informatique.agence.atlantide". Cela permet d'indiquer qu'une requête sur l'adresse ``informatique.agence.atlantide'' est en réalité à destination du dossier ``/srv/dev2/www''. \\
 
 Pour des utilisateurs occasionnels, nous avons mis en place un public\_html afin de publier des
-pages personnelles. Nous avons alors activé le module ``userdir" d'apache, qui permet d'accéder à des répertoires spécifiques à l'utilisateur lors de la visite de l'adresse ``http://example.com/~user/". Voici la commande qui a permis d'activer ce module:
+pages personnelles. Nous avons alors activé le module ``userdir" d'apache, qui permet d'accéder à des répertoires spécifiques à l'utilisateur lors de la visite de l'adresse ``http://example.com/\~{} user/". Voici la commande qui a permis d'activer ce module:
 \begin{lstlisting}[language=bash] 
     $ a2enmod userdir
 \end{lstlisting} 
-Pour la suite des manipulation, nous appliquons le même principe que pour les 2 premiers utilisateurs.
+Pour la suite des manipulations, nous appliquons le même principe que pour les 2 premiers utilisateurs.
 \begin{lstlisting}[language=bash] 
     $ mkdir ~/public_html
     $ touch index.html
@@ -798,7 +798,7 @@ Voici le contenu du fichier ``/home/dev1/public\_html/index.html":
         </body>
     </html>
 \end{lstlisting} 
-
+\vspace{2cm}
 Le DNS configuré dans la section précedente va être utilisé. C'est la raison pour laquelle dans le fichier ``/etc/bind/db.agence.atlantide", nous avons ajouté la ligne:
 \begin{lstlisting}[language=bash] 
     $ informatique IN A 10.1.2.1
@@ -837,7 +837,7 @@ Pour être certain qu'elle a été créé nous avons tapé:
 \begin{lstlisting}[language=bash] 
     mysql> SHOW DATABASE;
 \end{lstlisting} 
-Nous pouvons alors voir notre base de données ``dbtest", dans la liste des tables renvoyées par MariaDB. Une fois la base de données établie, il est alors possible de l'utiliser et d'insérer des tables et des données comme une base de données classique. Nous avons essayer ceci:
+Nous pouvons alors voir notre base de données ``dbtest", dans la liste des bases renvoyées par MariaDB. Une fois la base de données établie, il est alors possible de l'utiliser et d'insérer des tables et des données comme une base de données classique. Nous avons essayer ceci:
 \begin{lstlisting}[language=bash] 
     mysql> use dbtest;
     mysql> CREATE TABLE test (nom TEXT, prenom TEXT);
@@ -851,7 +851,7 @@ Afin que PHP puisse interagir avec la base de données, nous avons créé un uti
     mysql> CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
 \end{lstlisting}
 
-L'utilisateur est alors créé avec comme nom ``user" et mot de passe ``password". Cependant, il ne possède pour l'instant aucun droit et c'est pour cela que nous lui avons donner tous les droits avec:
+L'utilisateur est alors créé avec comme nom ``user" et mot de passe ``password". Cependant, il ne possède pour l'instant aucun droit et c'est pour cela que nous lui avons donné tous les droits avec:
 \begin{lstlisting}[language=bash] 
     mysql> GRANT ALL PRIVILEGES ON * . * TO user; 
 \end{lstlisting}
@@ -869,7 +869,8 @@ Une fois l'installation terminée, nous avons créé une page de test dans le r�
 \end{figure}
 
 Ce petit script php permet de se connecter à la base de données MariaDB avec les identifiants appropriés (Nom de l'hôte, nom de la base de données, nom de l'utilisateur et son mot de passe). Dans le cas où la connexion n'est pas possible alors une erreur est affichée et dans le cas contraire on affiche sur la page le contenu de la base de données.\\\\
-La page web est accessible via ``http://informatique.agence.atlantide/testMariaDb.php". Si sur cette page le contenu de base de données MariaDB est affiché (le nom et le prenom de test entrés lors de la configuration) alors le trio Apache MariaDB PHP est fonctionnel. MariaDB n'est pas le seul SGBD utilisable avec PHP et Apache, il en existe d'autres comme nous allons le voir prochainement.
+La page web est accessible via ``http://informatique.agence.atlantide/testMariaDb.php". Si sur cette page le contenu de base de données MariaDB est affiché (le nom et le prenom de test entrés lors de la configuration) alors le trio Apache MariaDB PHP est fonctionnel.\\
+MariaDB n'est pas le seul SGBD utilisable avec PHP et Apache, il en existe d'autres comme nous allons le voir prochainement.
 
 \subsection{Installation et mise en place d'un autre LAMP avec PostgreSQL}
 PostgreSQL est un système de gestion de base de données relationnelle et objet.
@@ -904,7 +905,7 @@ PostgreSQL ne possède pas de données à cette étape. Nous allons alors créer
     postgres=# INSERT INTO test(nom,prenom) VALUES ('Postgre','SQL');
     postgres=# SELECT * FROM test;
 \end{lstlisting}
-Le principe des commandes précèdentes est le suivant: premièrement on passe sur l'utilisateur ``postgres", puis on ouvre le terminal de PostgreSQL. Une fois dans l'invite de commandes de PostgreSQL, on peut alors créer un utilisateur ``user", une base de données ``dbtest" puis une table ``test". Finalement, le fonctionnement est similaire à celui de la base de données MariaDB, le seul changement se trouve dans les valeurs de la table ``dbtest" (afin de pouvoir être sur que c'est à PostregreSQL que nous nous sommes connecté lors de nos tests).\\
+Le principe des commandes précèdentes est le suivant: premièrement on passe sur l'utilisateur ``postgres", puis on ouvre le terminal de PostgreSQL. Une fois dans l'invite de commandes de PostgreSQL, on peut alors créer un utilisateur ``user", une base de données ``dbtest" puis une table ``test". Finalement, le fonctionnement est similaire à celui de la base de données MariaDB, le seul changement se trouve dans les valeurs de la table ``dbtest" (afin de pouvoir être sur que c'est à PostregreSQL que nous nous sommes connectés lors de nos tests).\\
 
 Le script suivant permet d'afficher le contenu de la base de données de PostegreSQL et il se situe dans ``/srv/dev2/www/testPostgreSQL.php":
 \begin{figure}[H]
@@ -930,17 +931,17 @@ Voici donc le script qui est contenu dans ``/srv/dev2/www/testPDO.php", permetta
 Ce script se connecte à la base de données MariaDB et affiche le contenu de la table test dans un premier temps puis à la base PostegreSQL dans un second temps pour afficher les informations de la table test. Le script se connecte avec les différents identifiants (Nom de l'hôte, nom de la base de données, nom de l'utilisateur et le mot de passe) aux SGBD. Encore une fois c'est le même principe que les base de données vues précédemment. Dans le cas où la connexion n'est pas possible alors une erreur est affichée, et dans le cas contraire on affiche sur la page le contenue de la base de données en question. La page web est accessible via ``http://informatique.agence.atlantide/testPDO.php".
 
 \section{Script de routage et matrice de filtrage}
-Maintenant que nous avons différents services tournant sur notre machine, tels qu'un serveur web, un serveur DNS ou un serveur DHCP. Il nous faut désormais réguler le trafic pour sécuriser notre réseau et que seul les personnes qui le doivent peuvent se connectent aux différents services. Les règles de filtrage avec ``iptables" sont parfaitement adaptées pour cette tache. Afin de gérer notre filtrage, nous avons créé deux scripts qui sont ``/etc/firewall-free.sh" et ``/etc/firewall-rules.sh". Le script ``/etc/firewall-free.sh" permet de supprimer les règles pré-existantes (en cas d'erreur ou de problème), il contient seulement:
+Maintenant que nous avons différents services tournant sur notre machine, tels qu'un serveur web, un serveur DNS ou un serveur DHCP, il nous faut désormais réguler le trafic pour sécuriser notre réseau et que seules les personnes qui le doivent peuvent se connecter aux différents services. Les règles de filtrage avec ``iptables" sont parfaitement adaptées pour cette tache. Afin de gérer notre filtrage, nous avons créé deux scripts qui sont ``/etc/firewall-free.sh" et ``/etc/firewall-rules.sh". Le script ``/etc/firewall-free.sh" permet de supprimer les règles pré-existantes (en cas d'erreur ou de problème), il contient seulement:
 \begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/firewallFree.png}}
-\caption{Contenu du fichier de configuration de dev2.}
+\caption{Contenu du fichier /etc/firewall-free.sh.}
 \label{fig}
 \end{figure}
 
 Le script ``/etc/firewall-rules.sh" quant à lui contient: 
 \begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/firewallRules.png}}
-\caption{Contenu du fichier de configuration de dev2.}
+\caption{Contenu du fichier /etc/firewall-rules.sh.}
 \label{fig}
 \end{figure}
 Ce script appelle le script qui supprime les règles décrit auparavant, mais permet également d'autoriser l'interface loopback, de définir la politique par défaut pour toutes les chaines, de bloquer l'accès d'un autre groupe à notre serveur. De plus, on filtre l'accès au serveur en ouvrant les bon ports, le port 80 fait référence au protocole http. Le port 443 fait référence au protocole https, le port 53 pour le DNS et le port 22 pour SSH. On filtre de la même façon pour le réseau privé avec l'ouverture des ports adéquats. Finalement, on permet le dialogue entre notre client et le serveur, et on permet au client d'aller sur internet.
@@ -950,15 +951,15 @@ Nous n'avons pas oublié de rendre ces scripts exécutables à l'aide de la comm
     $ chmod +x script.sh
 \end{lstlisting}
 
-Dans la configuration actuelle les scripts crées ne sont jamais utilisés (il faut les appeler) et c'est pour cela que dans ``/etc/network/interfaces", nous avons ajouté la ligne suivante:
+Dans la configuration actuelle les scripts créés ne sont jamais utilisés (il faut les appeler) et c'est pour cela que dans ``/etc/network/interfaces", nous avons ajouté la ligne suivante:
 \begin{lstlisting}[language=bash] 
     pre-up /etc/firewall-rules.sh
 \end{lstlisting}
 Cette ligne permet de dire qu'au démarrage des interfaces réseaux le fichier ``/etc/firewall-rules.sh" est executé. Cela permet donc d'ajouter nos règles de filtrage dans les scripts de démarrage, dès le boot, ce qui les en quelque sorte ``permanentes''.
 
 \subsection{Sauvegarde des bases MySQL et PostgreSQL}
-Les bases de données, que ce soit avec MariaDB ou PostegreSQL, peuvent être modifiées ou supprimées durant l'exécution, peut importe la raison (utilisateur malveillant, bug, erreur, ...). Pour cela, une sauvegarde de ces bases de données est un élément important de notre architecture.\\
-Pour les sauvegarde de MariaDB donc de MySQL il existe un commande qui permet de le faire automatiquement, mais celle-ci est téléchargable uniquement avec le gestionnaire de paquet ``aptitude". \\
+Les bases de données, que ce soit avec MariaDB ou PostgreSQL, peuvent être modifiées ou supprimées durant l'exécution, peu importe la raison (utilisateur malveillant, bug, erreur, ...). Pour cela, une sauvegarde de ces bases de données est un élément important de notre architecture.\\
+Pour les sauvegardes de MariaDB donc de MySQL, il existe un commande qui permet de le faire automatiquement, mais celle-ci est téléchargable uniquement avec le gestionnaire de paquet ``aptitude". \\
 Il faut donc l'installer avec:
 \begin{lstlisting}[language=bash] 
     $ apt-get install aptitude
@@ -969,12 +970,12 @@ Une fois le gestionnaire aptitude installé on peut alors installer le paquet ``
     $ aptitude install automysqlbackup 
 \end{lstlisting}
 
-Par défaut automysqlbackup crée un fichier "/etc/default/automysqlbackup", qui est le fichier de configuration. Nous avons coupé ce fichier et avons mis le notre dans "/etc/automysqlbackup/myserver.conf". Une fois cette étape passé, il suffis de démarrer la sauvegarde automatique avec automysqlbackup:
+Par défaut, automysqlbackup crée un fichier ``/etc/default/automysqlbackup", qui est son fichier de configuration. Nous avons coupé ce fichier et avons mis le notre dans ``/etc/automysqlbackup/myserver.conf". Une fois cette étape passée, il suffit de démarrer la sauvegarde automatique avec automysqlbackup:
 \begin{lstlisting}[language=bash] 
     $ automysqlbackup myserver.conf
 \end{lstlisting}
 
-Après avoir laissé le temps aux sauvegardes de s'effectuer sur les différents jours de la semaine, on peut alors voir les sauvegardes au format "gz" donc compressé sous "/var/lib/automysqlbackup/(daily, weekly, monthly)/dbtest":
+Après avoir laissé le temps aux sauvegardes de s'effectuer sur les différents jours de la semaine, on peut alors voir les sauvegardes au format ``gz" donc compressées sous ``/var/lib/automysqlbackup/(daily, weekly, monthly)/dbtest":
 \begin{figure}[H]
 \centerline{ \includegraphics[width=18cm]{images/automysqlbackup.png}}
 \caption{Sauvegarde de MySQL.}
@@ -982,7 +983,7 @@ Après avoir laissé le temps aux sauvegardes de s'effectuer sur les différents
 \end{figure}
 On voit que chaque jour possède un sauvegarde, de même pour les semaines et le mois.
 
-Pour ce qui est de la sauvegarde de la base de données PostegreSQL, nous avons utilisé crontab (pour la réaliser périodiquement), pg\_dumpall permettant de sortir en script le contenu intégrale des bases de données (l'exécution du script restore l'état des bases) et zip afin de compreser le fichier produit par pg\_dumpall dans le but d'économiser de la place sur le disque dur. Voici l'ensemble des commandes que nous avons tapé:
+Pour ce qui est de la sauvegarde de la base de données PostegreSQL, nous avons utilisé crontab (pour la réaliser périodiquement), pg\_dumpall permettant de sortir en script le contenu intégral des bases de données (l'exécution du script restore l'état des bases) et zip afin de compreser le fichier produit par pg\_dumpall dans le but d'économiser de la place sur le disque dur. Voici l'ensemble des commandes que nous avons tapé:
 \begin{lstlisting}[language=bash] 
     $ mkdir -p /backups/postgresql
     $ chown postgre /backups/postsresql/
@@ -990,7 +991,7 @@ Pour ce qui est de la sauvegarde de la base de données PostegreSQL, nous avons 
     postgres=# crontab -e 
         0 0 * * 0 pg_dumpall -U postgres | gzip > /backups/postgresql/save.gz
 \end{lstlisting}
-Pour les sauvegardes nous avons simplement créé le dossier ``/backups/postgresql", et donné les droits de ce dossier à l'utilisateur de PostegreSQL. Finalement, nous avons ajouté dans le fichier crontab sur le compte de l'utilisateur que la sauvegarde sera effectuée tous les dimanches à minuit et de compresser la sauvegarde pour l'envoyé dans le fichier ``save.gz".
+Pour les sauvegardes nous avons simplement créé le dossier ``/backups/postgresql", et donné les droits de ce dossier à l'utilisateur de PostgreSQL. Finalement, nous avons ajouté dans le fichier crontab sur le compte de l'utilisateur que la sauvegarde sera effectuée tous les dimanches à minuit et de compresser la sauvegarde pour l'envoyer dans le fichier ``save.gz".
 
 \subsection{Les sudoers}
 Sudo est un utilitaire de ligne de commande qui permet aux utilisateurs de confiance d'exécuter des commandes en tant qu'un autre utilisateur, par défaut root qui possède l'entièreté des droits sur la machine.\\
@@ -1006,10 +1007,10 @@ Une fois installé, il faut ajouter l'utilisateur ou le groupe dans le fichier d
 \caption{Contenu du fichier pour les sudoers.}
 \label{fig25}
 \end{figure}
-Cette ligne nous indique que l'utilisateur ``dev1" à tous les droits pour exécuter ``/usr/bin/nano" sur ``/etc/apache2/*" (modifier la configuration), ``etc/init.d/apache2 restart" et ``/usr/sbin/service apache2 restart" (redémarrer le service). Dorénavant il peut donc ajouter/supprimer tous ce qu'il souhaite dans ``/etc/apache2/" et peut redemarrer le serveur apache. Nous avons du utiliser le chemin absolu pour nano par exemple car sudo ne prends pas en compte le PATH lors de l'exécution des commandes.
+Cette ligne nous indique que l'utilisateur ``dev1" à tous les droits pour exécuter ``/usr/bin/nano" sur ``/etc/apache2/*" (modifier la configuration), ``etc/init.d/apache2 restart" et ``/usr/sbin/service apache2 restart" (redémarrer le service). Dorénavant il peut donc ajouter/supprimer tout ce qu'il souhaite dans ``/etc/apache2/" et peut redemarrer le serveur apache. Nous avons du utiliser le chemin absolu pour nano par exemple car sudo ne prends pas en compte le PATH lors de l'exécution des commandes.
 
 \section{Mise en place d'un domaine Samba/LDAP}
-Dans cette section nous allons expliquer les différentes étapes de mise en place d'un domaine Samba/LDAP, pour constituer l'annuaire de notre entreprise et un système de fichiers correspondant. L'annuaire sera composé d'informations comme le nom, le prénom et le mail. Mais il va également permettre de partager des ressources entre  utilisateurs. Pour l'ensemble de la configuration du domaine Samba/LDAP, nous avons utilisé un fichier zip qui était à notre disposition: \\``http://kundera/licence3/SystemesEtReseaux2/TP/FichiersconfTp3.zip".
+Dans cette section nous allons expliquer les différentes étapes de mise en place d'un domaine Samba/LDAP, pour constituer l'annuaire de notre entreprise et un système de fichiers correspondant. L'annuaire sera composé d'informations comme le nom, le prénom et le mail, mais il va également permettre de partager des ressources entre  utilisateurs. Pour l'ensemble de la configuration du domaine Samba/LDAP, nous avons utilisé un fichier zip qui était à notre disposition: \\``http://kundera/licence3/SystemesEtReseaux2/TP/FichiersconfTp3.zip".
 
 \subsection{Mise en place de LDAP}
 LDAP ou Lightweight Directory Access Protocol est un protocole d'accès à un annuaire (tcp/ip), il existe également OpenLDAP qui est la version libre du protocole. C'est un structure arborescente constituée d'entrées nommées D.I.T. Chaque entrée est un ensemble d'attributs, un attribut est un type, c'est-à-dire un nom, une description et une ou plusieurs valeurs. Les attributs sont définis dans des schémas. Pour débuter la mise en place de LDAP, il faut l'installer avec:
@@ -1052,7 +1053,7 @@ Samba est une application libre qui tourne sous Linux et qui permet de créer un
 \begin{lstlisting}[language=bash] 
     $ apt-get install smbldap-tools
 \end{lstlisting}
-Comme pour LDAP, nous sommes reparti des éléments que nous avions en notre possession pour configurer Samba:
+Comme pour LDAP, nous sommes repartis des éléments que nous avions en notre possession pour configurer Samba:
 \begin{lstlisting}[language=bash] 
     $ mv smbldap_bind.conf /etc/smbldap-tools/
 
@@ -1065,25 +1066,25 @@ Le fichier contient:
 \end{figure}
 Dans cette configuration nous indiquons les informations relatives au DIT déterminé précédemment avec LDAP. 
 \par
-Viens ensuite la configuration d'un second fichier bien plus conséquent: le fichier ``/etc/smbldap-tools/smbldap.conf". Dans ce fichier, il faut encore une fois renseigner les Domain Component, c'est-à-dire le ``dc=agence,dc=atlantide". De plus nous avons également renseigné le nom de domaine samba ``agenceatlantide". Nous avons également renseigné le SID, qui est un identifiant de sécurité utilisé pour identifier les ressources et les personnes sur un réseau. Nous avons pu le récupérer avec la commande:
+Viens ensuite la configuration d'un second fichier bien plus conséquent: le fichier ``/etc/smbldap-tools/smbldap.conf". Dans ce fichier, il faut encore une fois renseigner les Domain Component, c'est-à-dire le ``dc=agence,dc=atlantide". De plus, nous avons également renseigné le nom de domaine samba ``agenceatlantide". Nous avons également renseigné le SID, qui est un identifiant de sécurité utilisé pour identifier les ressources et les personnes sur un réseau. Nous avons pu le récupérer avec la commande:
 \begin{lstlisting}[language=bash] 
     $ net getlocalsid
 \end{lstlisting}
-Et finalement voici à quoi ressemble la partie sur la configuration général avec le SID et le nom de domaine renseigné:
+Et finalement voici à quoi ressemble la partie sur la configuration générale avec le SID et le nom de domaine renseigné:
 \begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/smbldapSID.png}}
 \caption{Contenu du fichier de configuration smbldap.}
 \label{fig}
 \end{figure}
 
-Nous allons aborder la notion de ressources partager ainsi que le paramétrage du service Samba. Que ce soit pour la configuration du service samba ou pour la configuration des ressources à partager, tout est dans le fichier ``/etc/samba/smb.conf".
+Nous allons aborder la notion de ressources partagées ainsi que le paramétrage du service Samba. Que ce soit pour la configuration du service samba ou pour la configuration des ressources à partager, tout est dans le fichier ``/etc/samba/smb.conf".
 Dans un premier temps, expliquons le début du fichier, en particulier la configuration du service Samba:
 \begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/smbConf.png}}
 \caption{Configuration du service Samba.}
 \label{fig}
 \end{figure}
-Nous voyons au début l'authentification avec LDAP créé et parametré auparavant. L'authentification est mise en place avec différents paramètres tels que: le suffix LDAP ``dc=agence,dc=atlantide", les suffix des utilisateurs et des groupes (``ou=Users'' et ``ou=Groups"). De plus, nous pouvoir voir qu'il y a une synchronisation automatique de tous les mots de passe d'un utilisateur, mais également une table d'encodage des caractères qui sont les mêmes que Windows. Le workgroup a été défini comme le nom de domaine ``agenceatlantide". Pour terminer avec cette partie, le ``netbios name" qui définit le nom du serveur a été défini à ``agenceatlantide".\\
+Nous voyons au début l'authentification avec LDAP créée et parametrée auparavant. L'authentification est mise en place avec différents paramètres tels que: le suffix LDAP ``dc=agence,dc=atlantide", les suffix des utilisateurs et des groupes (``ou=Users'' et ``ou=Groups"). De plus, nous pouvoir voir qu'il y a une synchronisation automatique de tous les mots de passe d'un utilisateur, mais également une table d'encodage des caractères qui sont les mêmes que Windows. Le workgroup a été défini comme le nom de domaine ``agenceatlantide". Pour terminer avec cette partie, le ``netbios name" qui définit le nom du serveur a été défini à ``agenceatlantide".\\
 
 Pour l'authentification via ldap, il faut installer le paquet: ``libpam-ldapd" avec le gestionnaire de paquets ``apt-get" que nous avons déjà utilisé à de nombreuses reprises.\\
 
@@ -1101,7 +1102,7 @@ Une fois la configuration terminée, il faut sauvegarder le fichier et redémarr
     $ systemctl restart smbd
 \end{lstlisting}
 
-On souhaite dorénavant appliquer les changements dans les données et activer le lien entre samba et ldap, ce que nous faisons avec ``smbldap-populate". La commande smbldap-populate aide à remplir un serveur LDAP en ajoutant les entrées nécessaires: suffixe de base, unités d'organisation pour les utilisateurs, les groupes et les ordinateurs, les utilisateurs intégrés: administrateur et invité et les groupes intégrés. Ce paquet est utilisable via la commande:
+On souhaite dorénavant appliquer les changements dans les données et activer le lien entre samba et ldap, ce que nous faisons avec ``smbldap-populate". La commande smbldap-populate aide à remplir un serveur LDAP en ajoutant les entrées nécessaires: suffixe de base, unités d'organisation pour les utilisateurs, les groupes et les ordinateurs, les utilisateurs intégrés: administrateur, invité et les groupes intégrés. Ce paquet est utilisable via la commande:
 \begin{lstlisting}[language=bash] 
     $ smbldap-populate
 \end{lstlisting}
@@ -1174,7 +1175,7 @@ Si l'on souhaite afficher toutes les informations concernant Samba et LDAP un co
 
 Dans ``/etc/ldap/schema/samba.schema", nous avons eu besoin d'ajouter le schéma de Samba dans LDAP, mais également de réadapter notre matrice de filtrage en rajoutant les lignes qui traite Samba, c'est-à-dire les ports: 139 (authentification), et 389 (active directory).\\
 
-Finalement pour vérifier que les utilisateurs créer peuvent accéder à distance au dossier partagé et à leurs répertoires homes, nous avons monté sur un client les partages correspondant dans le système de fichier à partir de l'interface graphique. Nous pouvons également nous connecter avec la commande smb-client.
+Finalement pour vérifier que les utilisateurs créés peuvent accéder à distance au dossier partagé et à leurs répertoires homes, nous avons monté sur un client les partages correspondant dans le système de fichier à partir de l'interface graphique. Nous pouvons également nous connecter avec la commande smb-client.
 
 \subsection{Sauvegarde automatique de l'annuaire}
 Pour ce qui est de la sauvegarde automatique de notre annuaire, nous avons utilisé crontab (pour la réaliser périodiquement) ainsi que ``slapcat" permettant d'avoir le contenu intégral du LDAP puis encore une fois zip afin de compresser le fichier produit dans le but d'économiser de la place sur le disque dur. Pour la sauvegarde nous avons simplement créé le dossier ``/backups/smbsldap". Finalement, nous avons ajouté dans le fichier crontab que le cron sera effectué tous les dimanches à minuit, afin de compresser les informations pour les envoyer dans le fichier ``save.gz". 
@@ -1183,7 +1184,7 @@ Pour ce qui est de la sauvegarde automatique de notre annuaire, nous avons utili
 \end{lstlisting}
 
 \section{Conclusion}
-Pour conclure sur l'ensemble de notre installation, nous avons installé Linux sans interface graphique, puis paramétré le réseau global avec la mise en place un DNS. Nous avons également installer, paramétrer et tester un serveur LAMP et finalement le duo LDAP/Samba. Tout ceci a demandé de nombreuses heures de travail mais nous avons acquis beaucoup de connaissances. Comme nous avons pu le montrer durant les différente étapes, chaque partie a été minutieusement traitée dans le but d'avoir un ensemble fonctionnel. Pour finir, on pourrait également imaginer compléter notre infrastructure avec l'installation d'un serveur FTP ou mail par exemple.
+Pour conclure sur l'ensemble de notre installation, nous avons installé Linux sans interface graphique, puis paramétré le réseau global avec la mise en place un DNS. Nous avons également installé, paramétré et testé un serveur LAMP et finalement le duo LDAP/Samba. Tout ceci a demandé de nombreuses heures de travail mais nous avons acquis beaucoup de connaissances. Comme nous avons pu le montrer durant les différente étapes, chaque partie a été minutieusement traitée dans le but d'avoir un ensemble fonctionnel. Pour finir, on pourrait également imaginer compléter notre infrastructure avec l'installation d'un serveur FTP ou mail par exemple.
 
 \section{Annexe}
 \listoffigures  
