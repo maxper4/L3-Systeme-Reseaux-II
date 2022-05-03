@@ -1,0 +1,1264 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2022.1.30)  3 MAY 2022 11:26
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**Rapport
+(./Rapport
+LaTeX2e <2020-02-02> patch level 2
+L3 programming layer <2020-02-14>
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2019/12/20 v1.4l Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2019/12/20 v1.4l Standard LaTeX file (size option)
+)
+\c@part=\count167
+\c@section=\count168
+\c@subsection=\count169
+\c@subsubsection=\count170
+\c@paragraph=\count171
+\c@subparagraph=\count172
+\c@figure=\count173
+\c@table=\count174
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen134
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen135
+\Gin@req@width=\dimen136
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2018/08/11 v1.3c Input encoding file
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count175
+\lst@gtempboxa=\box45
+\lst@token=\toks17
+\lst@length=\count176
+\lst@currlwidth=\dimen137
+\lst@column=\count177
+\lst@pos=\count178
+\lst@lostspace=\dimen138
+\lst@width=\dimen139
+\lst@newlines=\count179
+\lst@lineno=\count180
+\lst@maxwidth=\dimen140
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
+\c@lstnumber=\count181
+\lst@skipnumbers=\count182
+\lst@framebox=\box46
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2019/09/10 1.8c listings configuration
+))
+Package: listings 2019/09/10 1.8c (Carsten Heinz)
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2020/01/14 v7.00d Hypertext links for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2019/12/15 v1.24 LaTeX kernel commands for general use (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2019/11/07 v1.0c TeX engine tests
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2019/11/24 v0.31 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2019/11/29 v3.13 Key value format for package options (HO)
+)
+\@linkdim=\dimen141
+\Hy@linkcounter=\count183
+\Hy@pagecounter=\count184
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2020/01/14 v7.00d Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+)
+(/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count185
+\pdfmajorversion=\count186
+Package hyperref Info: Hyper figures OFF on input line 4547.
+Package hyperref Info: Link nesting OFF on input line 4552.
+Package hyperref Info: Hyper index ON on input line 4555.
+Package hyperref Info: Plain pages OFF on input line 4562.
+Package hyperref Info: Backreferencing OFF on input line 4567.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4800.
+\c@Hy@tempcnt=\count187
+
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 5159.
+\XeTeXLinkMargin=\dimen142
+
+(/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count188
+\Field@Width=\dimen143
+\Fld@charsize=\dimen144
+Package hyperref Info: Hyper figures OFF on input line 6430.
+Package hyperref Info: Link nesting OFF on input line 6435.
+Package hyperref Info: Hyper index ON on input line 6438.
+Package hyperref Info: backreferencing OFF on input line 6445.
+Package hyperref Info: Link coloring OFF on input line 6450.
+Package hyperref Info: Link coloring with OCG OFF on input line 6455.
+Package hyperref Info: PDF/A mode OFF on input line 6460.
+LaTeX Info: Redefining \ref on input line 6500.
+LaTeX Info: Redefining \pageref on input line 6504.
+
+(/usr/share/texlive/texmf-dist/tex/generic/atbegshi/atbegshi.sty
+Package: atbegshi 2019/12/05 v1.19 At begin shipout hook (HO)
+)
+\Hy@abspage=\count189
+\c@Item=\count190
+\c@Hfootnote=\count191
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2020/01/14 v7.00d Hyperref driver for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/latex/atveryend/atveryend.sty
+Package: atveryend 2019-12-11 v1.11 Hooks at the very end of document (HO)
+Package atveryend Info: \enddocument detected (standard20110627).
+)
+\Fld@listcount=\count192
+\c@bookmark@seq@number=\count193
+
+(/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+86.
+)
+\Hy@SectionHShift=\skip49
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/indentfirst.sty
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count194
+\float@exts=\toks18
+\float@box=\box47
+\@float@everytoks=\toks19
+\@floatcapt=\box48
+)
+(/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
+File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count195
+\l__pdf_internal_box=\box49
+)
+(./Rapport.aux
+
+LaTeX Warning: Label `fig20' multiply defined.
+
+
+LaTeX Warning: Label `fig21' multiply defined.
+
+
+LaTeX Warning: Label `fig' multiply defined.
+
+
+LaTeX Warning: Label `fig' multiply defined.
+
+
+LaTeX Warning: Label `fig' multiply defined.
+
+
+LaTeX Warning: Label `fig' multiply defined.
+
+
+LaTeX Warning: Label `fig' multiply defined.
+
+
+LaTeX Warning: Label `fig' multiply defined.
+
+
+LaTeX Warning: Label `fig' multiply defined.
+
+
+LaTeX Warning: Label `fig' multiply defined.
+
+
+LaTeX Warning: Label `fig' multiply defined.
+
+
+LaTeX Warning: Label `fig' multiply defined.
+
+
+LaTeX Warning: Label `fig' multiply defined.
+
+
+LaTeX Warning: Label `fig' multiply defined.
+
+)
+\openout1 = `Rapport.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+ (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count196
+\scratchdimen=\dimen145
+\scratchbox=\box50
+\nofMPsegments=\count197
+\nofMParguments=\count198
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count199
+\MPscratchDim=\dimen146
+\MPnumerator=\count266
+\makeMPintoPDFobject=\count267
+\everyMPtoPDFconversion=\toks21
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\c@lstlisting=\count268
+\AtBeginShipoutBox=\box51
+Package hyperref Info: Link coloring OFF on input line 26.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count269
+)
+LaTeX Info: Redefining \ref on input line 26.
+LaTeX Info: Redefining \pageref on input line 26.
+LaTeX Info: Redefining \nameref on input line 26.
+
+(./Rapport.out) (./Rapport.out)
+\@outlinefile=\write3
+\openout3 = `Rapport.out'.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 29.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 29.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 29.
+ (./Rapport.toc
+Overfull \hbox (22.36333pt too wide) in paragraph at lines 2--2
+ [] [][]\OT1/cmr/bx/n/10 Installation d'une dis-tri-bu-tion GNU/Linux sans in-t
+er-face graphique[] []  
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 3.
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}])
+\tf@toc=\write4
+\openout4 = `Rapport.toc'.
+
+ [2]
+Overfull \hbox (12.1096pt too wide) in paragraph at lines 35--35
+[]\OT1/cmr/bx/n/14.4 Installation d'une dis-tri-bu-tion GNU/Linux sans
+ []
+
+
+Overfull \hbox (6.71356pt too wide) in paragraph at lines 39--40
+\OT1/cmr/m/n/10 tiques. Afin d'installer cette dis-tri-bu-tion, les ad-min-is-t
+ra-teurs Syst^^Remes et R^^Seseaux
+ []
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+) [3]
+<images/partitionDisque.PNG, id=235, 593.21625pt x 176.15813pt>
+File: images/partitionDisque.PNG Graphic file (type png)
+<use images/partitionDisque.PNG>
+Package pdftex.def Info: images/partitionDisque.PNG  used on input line 50.
+(pdftex.def)             Requested size: 426.79134pt x 126.74236pt.
+ [4pdfTeX warning (ext4): destination with the same identifier (name{figure.1})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.67 \begin{lstlisting}[language=bash]
+                                       <./images/partitionDisque.PNG>]
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 9
+1.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 91.
+ [5]
+Underfull \hbox (badness 10000) in paragraph at lines 141--142
+
+ []
+
+<images/ReseauInterco&Prive.png, id=273, 542.025pt x 233.37187pt>
+File: images/ReseauInterco&Prive.png Graphic file (type png)
+<use images/ReseauInterco&Prive.png>
+Package pdftex.def Info: images/ReseauInterco&Prive.png  used on input line 161
+.
+(pdftex.def)             Requested size: 426.79134pt x 183.7635pt.
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 167--169
+
+ []
+
+<images/interfacesRouteur.png, id=292, 511.9125pt x 387.69844pt>
+File: images/interfacesRouteur.png Graphic file (type png)
+<use images/interfacesRouteur.png>
+Package pdftex.def Info: images/interfacesRouteur.png  used on input line 176.
+(pdftex.def)             Requested size: 426.79134pt x 323.23306pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[7pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.186 
+       <./images/ReseauInterco&Prive.png>] [8pdfTeX warning (ext4): destination
+ with the same identifier (name{figure.3}) has been already used, duplicate ign
+ored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.193 
+       <./images/interfacesRouteur.PNG (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 201--203
+
+ []
+
+[9]
+<images/routeurPingRouteur.png, id=330, 420.82219pt x 148.30406pt>
+File: images/routeurPingRouteur.png Graphic file (type png)
+<use images/routeurPingRouteur.png>
+Package pdftex.def Info: images/routeurPingRouteur.png  used on input line 231.
+
+(pdftex.def)             Requested size: 426.79134pt x 150.41046pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 240--241
+
+ []
+
+[10pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.244 
+       <./images/routeurPingRouteur.PNG>]
+<images/routeRouteur.png, id=340, 454.69875pt x 62.48344pt>
+File: images/routeRouteur.png Graphic file (type png)
+<use images/routeRouteur.png>
+Package pdftex.def Info: images/routeRouteur.png  used on input line 251.
+(pdftex.def)             Requested size: 426.79134pt x 58.64957pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 256--258
+
+ []
+
+
+Overfull \hbox (25.5005pt too wide) in paragraph at lines 259--260
+[]\OT1/cmr/m/n/10 Les routes sta-tiques sont ajout^^Sees dans le noyau de notre
+ serveur par l'interm^^Sediaire
+ []
+
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 2
+61.
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 261.
+ [11pdfTeX warning (ext4): destination with the same identifier (name{figure.5}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.269 \end{lstlisting}
+                       <./images/routeRouteur.PNG>]
+Underfull \hbox (badness 10000) in paragraph at lines 285--287
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--294
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 292--294
+
+ []
+
+[12]
+Overfull \hbox (11.1117pt too wide) in paragraph at lines 301--302
+[]\OT1/cmr/m/n/10 Avant toute chose, nous avons cherch^^Se et in-stall^^Se le b
+on pa-quet pour l'utilisation
+ []
+
+
+Overfull \hbox (32.11174pt too wide) in paragraph at lines 305--306
+\OT1/cmr/m/n/10 Une fois l'installation ef-fectu^^See, nous nous sommes rendu d
+ans le fichier /etc/default/isc-
+ []
+
+
+Overfull \hbox (12.72273pt too wide) in paragraph at lines 305--306
+\OT1/cmr/m/n/10 dhcp-server qui a ^^Set^^Se in-stall^^Se avec le pa-quet via la
+ com-mande d^^Secrite pr^^Secedemment.
+ []
+
+<images/dhcpServeur.png, id=365, 835.62187pt x 232.61906pt>
+File: images/dhcpServeur.png Graphic file (type png)
+<use images/dhcpServeur.png>
+Package pdftex.def Info: images/dhcpServeur.png  used on input line 308.
+(pdftex.def)             Requested size: 426.79134pt x 118.81161pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 313--315
+
+ []
+
+<images/dhcpdConfServeur.png, id=366, 837.1275pt x 253.69781pt>
+File: images/dhcpdConfServeur.png Graphic file (type png)
+<use images/dhcpdConfServeur.png>
+Package pdftex.def Info: images/dhcpdConfServeur.png  used on input line 319.
+(pdftex.def)             Requested size: 426.79134pt x 129.34158pt.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[13pdfTeX warning (ext4): destination with the same identifier (name{figure.6})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.328 
+       <./images/dhcpServeur.PNG>]
+<images/dhcpLogsConf.png, id=378, 360.59718pt x 214.55156pt>
+File: images/dhcpLogsConf.png Graphic file (type png)
+<use images/dhcpLogsConf.png>
+Package pdftex.def Info: images/dhcpLogsConf.png  used on input line 354.
+(pdftex.def)             Requested size: 369.88582pt x 220.07718pt.
+ [14pdfTeX warning (ext4): destination with the same identifier (name{figure.7}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.358 P
+       our cela, nous avons modifié le fichier de configuration /etc/rsyslo...
+ <./images/dhcpdConfServeur.PNG>]
+Underfull \hbox (badness 10000) in paragraph at lines 358--359
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--359
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 360--361
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 360--361
+
+ []
+
+<images/dhcpLogsExample.png, id=397, 815.29594pt x 405.76593pt>
+File: images/dhcpLogsExample.png Graphic file (type png)
+<use images/dhcpLogsExample.png>
+Package pdftex.def Info: images/dhcpLogsExample.png  used on input line 371.
+(pdftex.def)             Requested size: 426.79134pt x 212.41115pt.
+[15pdfTeX warning (ext4): destination with the same identifier (name{figure.8})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.375 
+       <./images/dhcpLogsConf.png>] [16pdfTeX warning (ext4): destination with 
+the same identifier (name{figure.9}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.391 \begin{lstlisting}[language=bash]
+                                        <./images/dhcpLogsExample.png>]
+Overfull \hbox (9.0036pt too wide) in paragraph at lines 412--413
+[][][][][][][][][][][][][][] 
+ []
+
+<images/rsync&crontab.png, id=421, 834.86906pt x 306.39468pt>
+File: images/rsync&crontab.png Graphic file (type png)
+<use images/rsync&crontab.png>
+Package pdftex.def Info: images/rsync&crontab.png  used on input line 422.
+(pdftex.def)             Requested size: 426.79134pt x 156.63324pt.
+[17]
+<images/hostDebian.png, id=439, 335.00156pt x 36.88782pt>
+File: images/hostDebian.png Graphic file (type png)
+<use images/hostDebian.png>
+Package pdftex.def Info: images/hostDebian.png  used on input line 446.
+(pdftex.def)             Requested size: 426.79134pt x 46.99501pt.
+ [18pdfTeX warning (ext4): destination with the same identifier (name{figure.10
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.449 \end{figure}
+                   <./images/rsync&crontab.PNG>]
+Underfull \hbox (badness 10000) in paragraph at lines 451--453
+
+ []
+
+
+Overfull \hbox (6.94492pt too wide) in paragraph at lines 454--455
+[]\OT1/cmr/m/n/10 Dig est ^^Segalement un util-i-taire en ligne de com-mande qu
+i ef-fectue une recherche
+ []
+
+<images/digDebian.png, id=451, 419.31656pt x 258.9675pt>
+File: images/digDebian.png Graphic file (type png)
+<use images/digDebian.png>
+Package pdftex.def Info: images/digDebian.png  used on input line 466.
+(pdftex.def)             Requested size: 426.79134pt x 263.58221pt.
+[19pdfTeX warning (ext4): destination with the same identifier (name{figure.11}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.472 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+12}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.472 
+       <./images/hostDebian.PNG> <./images/digDebian.PNG>]
+<images/nslookupDebian.png, id=466, 298.86656pt x 113.67468pt>
+File: images/nslookupDebian.png Graphic file (type png)
+<use images/nslookupDebian.png>
+Package pdftex.def Info: images/nslookupDebian.png  used on input line 485.
+(pdftex.def)             Requested size: 426.79134pt x 162.34193pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 492--493
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 492--493
+
+ []
+
+
+Overfull \hbox (19.05621pt too wide) in paragraph at lines 494--495
+\OT1/cmr/m/n/10 con-necter ^^Ra un h^ote connu par son nom de do-maine (par ex-
+em-ple "www.debian.org"),
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 494--495
+
+ []
+
+[20pdfTeX warning (ext4): destination with the same identifier (name{figure.13}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.495 
+       <./images/nslookupDebian.PNG>]
+<images/hostDebianNS.png, id=478, 310.15875pt x 50.43843pt>
+File: images/hostDebianNS.png Graphic file (type png)
+<use images/hostDebianNS.png>
+Package pdftex.def Info: images/hostDebianNS.png  used on input line 507.
+(pdftex.def)             Requested size: 426.79134pt x 69.40498pt.
+<images/digDebianNS.png, id=479, 426.09187pt x 283.81032pt>
+File: images/digDebianNS.png Graphic file (type png)
+<use images/digDebianNS.png>
+Package pdftex.def Info: images/digDebianNS.png  used on input line 513.
+(pdftex.def)             Requested size: 426.79134pt x 284.29463pt.
+ [21pdfTeX warning (ext4): destination with the same identifier (name{figure.14
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.518 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+15}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.518 
+       <./images/hostDebianNS.PNG> <./images/digDebianNS.PNG>] [22] [23]
+Underfull \hbox (badness 10000) in paragraph at lines 572--573
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 574--575
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 576--577
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 578--579
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 580--581
+
+ []
+
+<images/namedConfLocal.png, id=504, 458.46281pt x 272.51813pt>
+File: images/namedConfLocal.png Graphic file (type png)
+<use images/namedConfLocal.png>
+Package pdftex.def Info: images/namedConfLocal.png  used on input line 584.
+(pdftex.def)             Requested size: 426.79134pt x 253.70537pt.
+
+Overfull \hbox (6.86177pt too wide) in paragraph at lines 582--587
+\OT1/cmr/m/n/10 zone dite ``in-vers^^See'' dans le fichier de con-fig-u-ra-tion
+ ``/etc/bind/-named.conf.local".
+ []
+
+[24]
+Underfull \hbox (badness 10000) in paragraph at lines 589--590
+
+ []
+
+<images/dbAgenceAtlantide.png, id=510, 367.3725pt x 169.38281pt>
+File: images/dbAgenceAtlantide.png Graphic file (type png)
+<use images/dbAgenceAtlantide.png>
+Package pdftex.def Info: images/dbAgenceAtlantide.png  used on input line 595.
+(pdftex.def)             Requested size: 341.43306pt x 157.43391pt.
+[25pdfTeX warning (ext4): destination with the same identifier (name{figure.16}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.599 
+       <./images/namedConfLocal.PNG>]
+<images/dbAgenceAtlantideInv.png, id=518, 363.60844pt x 152.06813pt>
+File: images/dbAgenceAtlantideInv.png Graphic file (type png)
+<use images/dbAgenceAtlantideInv.png>
+Package pdftex.def Info: images/dbAgenceAtlantideInv.png  used on input line 60
+3.
+(pdftex.def)             Requested size: 341.43306pt x 142.79787pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 608--609
+
+ []
+
+<images/resolvConf.png, id=521, 222.07968pt x 43.66313pt>
+File: images/resolvConf.png Graphic file (type png)
+<use images/resolvConf.png>
+Package pdftex.def Info: images/resolvConf.png  used on input line 612.
+(pdftex.def)             Requested size: 284.52756pt x 55.94455pt.
+[26pdfTeX warning (ext4): destination with the same identifier (name{figure.17}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.616 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+18}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.616 
+       <./images/dbAgenceAtlantide.png (PNG copy)> <./images/dbAgenceAtlantideI
+nv.png (PNG copy)>]
+<images/namedConfOptions.png, id=528, 545.03625pt x 309.40594pt>
+File: images/namedConfOptions.png Graphic file (type png)
+<use images/namedConfOptions.png>
+Package pdftex.def Info: images/namedConfOptions.png  used on input line 619.
+(pdftex.def)             Requested size: 426.79134pt x 242.27989pt.
+ [27pdfTeX warning (ext4): destination with the same identifier (name{figure.19
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.633 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+20}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.633 
+       <./images/resolvConf.PNG (PNG copy)> <./images/namedConfOptions.PNG>]
+Overfull \hbox (3.2227pt too wide) in paragraph at lines 645--646
+\OT1/cmr/m/n/10 donc pas, il est pos-si-ble de voir les d^^Setails des er-reurs
+ dans le fichier ``/var/log/sys-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 645--646
+
+ []
+
+<images/exempleNsLookUpDNS.png, id=540, 478.03593pt x 191.9672pt>
+File: images/exempleNsLookUpDNS.png Graphic file (type png)
+<use images/exempleNsLookUpDNS.png>
+Package pdftex.def Info: images/exempleNsLookUpDNS.png  used on input line 686.
+
+(pdftex.def)             Requested size: 426.79134pt x 171.38922pt.
+[28]
+Underfull \hbox (badness 10000) in paragraph at lines 694--695
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 708--709
+
+ []
+
+[29pdfTeX warning (ext4): destination with the same identifier (name{figure.21}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.715 \end{lstlisting}
+                       <./images/exempleNsLookUpDNS.png (PNG copy)>]
+<images/apache2Conf.png, id=577, 835.62187pt x 615.80063pt>
+File: images/apache2Conf.png Graphic file (type png)
+<use images/apache2Conf.png>
+Package pdftex.def Info: images/apache2Conf.png  used on input line 725.
+(pdftex.def)             Requested size: 426.79134pt x 314.52397pt.
+
+Overfull \hbox (18.75061pt too wide) in paragraph at lines 723--728
+[]\OT1/cmr/m/n/10 Ensuite nous avons fait pointer un alias (apache) sur le doss
+ier ``/s-rv/dev1/www".
+ []
+
+
+Overfull \hbox (19.47287pt too wide) in paragraph at lines 729--730
+\OT1/cmr/m/n/10 ligne per-met de dire au serveur apache qu'une requ^ete visant 
+``http://localhost/dev1"
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 729--730
+
+ []
+
+[30pdfTeX warning (ext4): destination with the same identifier (name{figure.22}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.734     $ 
+            nano /srv/dev1/www/index.html <./images/apache2Conf.PNG>]
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2019/09/10 1.8c listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2019/09/10 1.8c (Carsten Heinz)
+)
+Underfull \hbox (badness 10000) in paragraph at lines 748--749
+
+ []
+
+<images/virtualHostDev2Conf.png, id=590, 835.62187pt x 430.60875pt>
+File: images/virtualHostDev2Conf.png Graphic file (type png)
+<use images/virtualHostDev2Conf.png>
+Package pdftex.def Info: images/virtualHostDev2Conf.png  used on input line 773
+.
+(pdftex.def)             Requested size: 426.79134pt x 219.93607pt.
+[31]
+Underfull \hbox (badness 10000) in paragraph at lines 777--778
+
+ []
+
+
+Overfull \hbox (9.94498pt too wide) in paragraph at lines 779--781
+\OT1/cmr/m/n/10 ``userdir" d'apache, qui per-met d'acc^^Seder ^^Ra des r^^Seper
+toires sp^^Secifiques ^^Ra l'utilisateur
+ []
+
+[32pdfTeX warning (ext4): destination with the same identifier (name{figure.23}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.801 \end{lstlisting}
+                       <./images/virtualHostDev2Conf.PNG>]
+Overfull \hbox (3.08385pt too wide) in paragraph at lines 807--808
+\OT1/cmr/m/n/10 n^^Secessite le red^^Semarrage du serveur DNS, comme nous l'avo
+ns fait pr^^Sec^^Sedemment. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 807--808
+
+ []
+
+
+Overfull \hbox (115.44527pt too wide) in paragraph at lines 814--815
+\OT1/cmr/m/n/10 Finalement, la page des util-isa-teurs oc-ca-sion-nels est disp
+onible ^^Ra l'adresse ``http://agence.atlantide/ user/".
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 818--819
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 818--819
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 820--821
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 835--836
+
+ []
+
+[33]
+Overfull \hbox (111.00464pt too wide) in paragraph at lines 845--846
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 848--849
+
+ []
+
+
+Overfull \hbox (57.00409pt too wide) in paragraph at lines 852--853
+[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+<images/testMariaDbPhp.png, id=661, 484.81125pt x 204.765pt>
+File: images/testMariaDbPhp.png Graphic file (type png)
+<use images/testMariaDbPhp.png>
+Package pdftex.def Info: images/testMariaDbPhp.png  used on input line 867.
+(pdftex.def)             Requested size: 426.79134pt x 180.26872pt.
+
+Overfull \hbox (4.58386pt too wide) in paragraph at lines 865--870
+\OT1/cmr/m/n/10 Une fois l'installation ter-min^^See, nous avons cr^^Se^^Se une
+ page de test dans le r^^Sepertoire
+ []
+
+[34]
+Underfull \hbox (badness 10000) in paragraph at lines 872--875
+
+ []
+
+
+Overfull \hbox (36.11186pt too wide) in paragraph at lines 872--875
+\OT1/cmr/m/n/10 La page web est ac-ces-si-ble via ``http://informatique.agence.
+atlantide/testMariaDb.php".
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 877--879
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 886--887
+
+ []
+
+[35pdfTeX warning (ext4): destination with the same identifier (name{figure.24}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.891 \end{lstlisting}
+                       <./images/testMariaDbPhp.png (PNG copy)>]
+Overfull \hbox (69.00421pt too wide) in paragraph at lines 906--907
+[][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 909--910
+
+ []
+
+<images/testPostgreSQLPhp.png, id=689, 678.28406pt x 207.02344pt>
+File: images/testPostgreSQLPhp.png Graphic file (type png)
+<use images/testPostgreSQLPhp.png>
+Package pdftex.def Info: images/testPostgreSQLPhp.png  used on input line 913.
+(pdftex.def)             Requested size: 426.79134pt x 130.26118pt.
+[36pdfTeX warning (ext4): destination with the same identifier (name{figure.25}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.922 \begin{lstlisting}[language=bash]
+                                        <./images/testPostgreSQLPhp.png (PNG co
+py)>]
+<images/testPDOPhp.png, id=710, 536.75531pt x 317.68687pt>
+File: images/testPDOPhp.png Graphic file (type png)
+<use images/testPDOPhp.png>
+Package pdftex.def Info: images/testPDOPhp.png  used on input line 927.
+(pdftex.def)             Requested size: 426.79134pt x 252.60347pt.
+<images/firewallFree.png, id=711, 281.55188pt x 127.22531pt>
+File: images/firewallFree.png Graphic file (type png)
+<use images/firewallFree.png>
+Package pdftex.def Info: images/firewallFree.png  used on input line 937.
+(pdftex.def)             Requested size: 426.79134pt x 192.86807pt.
+ [37pdfTeX warning (ext4): destination with the same identifier (name{figure.26
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.940 \end{figure}
+                   <./images/testPDOPhp.png (PNG copy)>]
+<images/firewallRules.png, id=720, 575.90157pt x 518.6878pt>
+File: images/firewallRules.png Graphic file (type png)
+<use images/firewallRules.png>
+Package pdftex.def Info: images/firewallRules.png  used on input line 944.
+(pdftex.def)             Requested size: 426.79134pt x 384.40073pt.
+ [38pdfTeX warning (ext4): destination with the same identifier (name{figure.27
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.948 C
+       e script appelle le script qui supprime les règles décrit auparavan...
+ <./images/firewallFree.png (PNG copy)>] [39pdfTeX warning (ext4): destination 
+with the same identifier (name{figure.28}) has been already used, duplicate ign
+ored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.956 \begin{lstlisting}[language=bash]
+                                        <./images/firewallRules.png (PNG copy)>
+]
+Overfull \hbox (6.66737pt too wide) in paragraph at lines 974--975
+[]\OT1/cmr/m/n/10 Par d^^Sefaut, au-to-mysql-backup cr^^See un fichier ``/etc/d
+e-fault-/au-to-mysql-backup",
+ []
+
+<images/automysqlbackup.png, id=733, 1282.03969pt x 67.75313pt>
+File: images/automysqlbackup.png Graphic file (type png)
+<use images/automysqlbackup.png>
+Package pdftex.def Info: images/automysqlbackup.png  used on input line 981.
+(pdftex.def)             Requested size: 512.1496pt x 27.06664pt.
+[40pdfTeX warning (ext4): destination with the same identifier (name{figure.29}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.993         0 
+                0 * * 0 pg_dumpall -U postgres | gzip > /backups/postgresql/...
+ <./images/automysqlbackup.png (PNG copy)>]
+Overfull \hbox (117.0047pt too wide) in paragraph at lines 993--994
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
+
+<images/sudoers.png, id=750, 837.1275pt x 354.57469pt>
+File: images/sudoers.png Graphic file (type png)
+<use images/sudoers.png>
+Package pdftex.def Info: images/sudoers.png  used on input line 1007.
+(pdftex.def)             Requested size: 426.79134pt x 180.77118pt.
+
+Overfull \hbox (68.80644pt too wide) in paragraph at lines 1011--1012
+\OT1/cmr/m/n/10 ex^^Secuter ``/us-r/bin/-nano" sur ``/etc/a-pache2/*" (mod-i-fi
+er la con-fig-u-ra-tion), ``etc/init.d/apache2
+ []
+
+
+Overfull \hbox (11.26907pt too wide) in paragraph at lines 1011--1012
+\OT1/cmr/m/n/10 restart" et ``/us-r/s-bin/ser-vice apache2 restart" (red^^Semar
+rer le ser-vice). Dor^^Senavant
+ []
+
+[41pdfTeX warning (ext4): destination with the same identifier (name{figure.30}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1012 
+        <./images/sudoers.PNG>]
+<images/slapdConf1.png, id=762, 807.015pt x 730.22812pt>
+File: images/slapdConf1.png Graphic file (type png)
+<use images/slapdConf1.png>
+Package pdftex.def Info: images/slapdConf1.png  used on input line 1023.
+(pdftex.def)             Requested size: 426.79134pt x 386.18338pt.
+
+Overfull \hbox (8.11168pt too wide) in paragraph at lines 1021--1026
+\OT1/cmr/m/n/10 Apr^^Res l'installation un af-fichage en mode texte se lance et
+ nous de-mande diff^^Serentes
+ []
+
+<images/slapdConf2.png, id=763, 661.72218pt x 712.16063pt>
+File: images/slapdConf2.png Graphic file (type png)
+<use images/slapdConf2.png>
+Package pdftex.def Info: images/slapdConf2.png  used on input line 1028.
+(pdftex.def)             Requested size: 426.79134pt x 459.32379pt.
+[42] [43pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.31}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1032 D
+        ans la partie 1 du fichier de configuration, nous avons inclus le sc...
+ <./images/slapdConf1.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 1032--1033
+
+ []
+
+[44pdfTeX warning (ext4): destination with the same identifier (name{figure.32}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1033 
+        <./images/slapdConf2.png (PNG copy)>]
+<images/libnssldap.png, id=782, 682.80093pt x 688.07062pt>
+File: images/libnssldap.png Graphic file (type png)
+<use images/libnssldap.png>
+Package pdftex.def Info: images/libnssldap.png  used on input line 1047.
+(pdftex.def)             Requested size: 426.79134pt x 430.09558pt.
+ [45]
+<images/smbldapBindConf.png, id=793, 561.59813pt x 145.29282pt>
+File: images/smbldapBindConf.png Graphic file (type png)
+<use images/smbldapBindConf.png>
+Package pdftex.def Info: images/smbldapBindConf.png  used on input line 1064.
+(pdftex.def)             Requested size: 426.79134pt x 110.41702pt.
+ [46pdfTeX warning (ext4): destination with the same identifier (name{figure.33
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1067 \end{figure}
+                    <./images/libnssldap.png>]
+Overfull \hbox (2.05615pt too wide) in paragraph at lines 1070--1071
+\OT1/cmr/m/n/10 fois ren-seigner les Do-main Com-po-nent, c'est-^^Ra-dire le ``
+dc=agence,dc=atlantide".
+ []
+
+<images/smbldapSID.png, id=804, 648.17157pt x 529.98pt>
+File: images/smbldapSID.png Graphic file (type png)
+<use images/smbldapSID.png>
+Package pdftex.def Info: images/smbldapSID.png  used on input line 1076.
+(pdftex.def)             Requested size: 426.79134pt x 348.9711pt.
+[47pdfTeX warning (ext4): destination with the same identifier (name{figure.34}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1080 
+        <./images/smbldapBindConf.png (PNG copy)>]
+<images/smbConf.png, id=812, 615.80063pt x 729.47531pt>
+File: images/smbConf.png Graphic file (type png)
+<use images/smbConf.png>
+Package pdftex.def Info: images/smbConf.png  used on input line 1084.
+(pdftex.def)             Requested size: 426.79134pt x 505.58694pt.
+
+Overfull \hbox (2.5283pt too wide) in paragraph at lines 1081--1087
+[]\OT1/cmr/m/n/10 Nous al-lons abor-der la no-tion de ressources partag^^Sees a
+insi que le param^^Setrage
+ []
+
+[48pdfTeX warning (ext4): destination with the same identifier (name{figure.35}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1088 N
+        ous voyons au début l'authentification avec LDAP créée et paramet...
+ <./images/smbldapSID.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 1088--1089
+
+ []
+
+[49pdfTeX warning (ext4): destination with the same identifier (name{figure.36}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1089 
+        <./images/smbConf.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 1090--1091
+
+ []
+
+<images/smbRessourcePartager.png, id=824, 675.27281pt x 691.83469pt>
+File: images/smbRessourcePartager.png Graphic file (type png)
+<use images/smbRessourcePartager.png>
+Package pdftex.def Info: images/smbRessourcePartager.png  used on input line 10
+95.
+(pdftex.def)             Requested size: 426.79134pt x 437.26218pt.
+[50] [51pdfTeX warning (ext4): destination with the same identifier (name{figur
+e.37}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1102 \begin{lstlisting}[language=bash]
+                                         <./images/smbRessourcePartager.png (PN
+G copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 1117--1118
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1140--1141
+
+ []
+
+[52]
+Underfull \hbox (badness 10000) in paragraph at lines 1177--1178
+
+ []
+
+
+Overfull \hbox (75.00427pt too wide) in paragraph at lines 1184--1185
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+
+ []
+
+[53] (./Rapport.lof [54])
+\tf@lof=\write5
+\openout5 = `Rapport.lof'.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1192.
+ [55]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1192.
+ (./Rapport.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1192.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1192.
+
+Package rerunfilecheck Info: File `Rapport.out' has not changed.
+(rerunfilecheck)             Checksum: 665B239C838F5193CDDF65EBB2DC06B3;3292.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1192.
+ ) 
+Here is how much of TeX's memory you used:
+ 8198 strings out of 481239
+ 121873 string characters out of 5920377
+ 564882 words of memory out of 5000000
+ 22859 multiletter control sequences out of 15000+600000
+ 537651 words of font info for 41 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 34i,6n,53p,1640b,1765s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+sy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.p
+fb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf
+/fonts/type1/public/cm-super/sfti1000.pfb>
+Output written on Rapport.pdf (55 pages, 1586270 bytes).
+PDF statistics:
+ 1064 PDF objects out of 1200 (max. 8388607)
+ 929 compressed objects within 10 object streams
+ 451 named destinations out of 1000 (max. 500000)
+ 522 words of extra memory for PDF output out of 10000 (max. 10000000)
+
