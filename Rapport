@@ -200,7 +200,7 @@ Pour le fichier de configuration (figure \ref{fig3} ci-dessus) , nous pouvons vo
 \end{lstlisting}
 Ces 3 commandes permettent de façon similaire de redémarrer le service réseau. 
 \newline
-\par Cependant, ces configurations sur le routeur ne sont pas les seules nécessaires pour que tous les réseaux fonctionnent: il est également nécessaire de configurer la machine client qui est connectée au réseau privé, notamment pour qu'elle connaisse comment communiquer avec une machine du réseau d'interconnexion ou du réseau IEM.
+\par Cependant, ces configurations sur le routeur ne sont pas les seules nécessaires pour que tous les réseaux fonctionnent: il est également nécessaire de configurer la machine client qui est connectée au réseau privé, notamment pour qu'elle puisse communiquer avec une machine du réseau d'interconnexion ou du réseau IEM.
 
 \subsection{Les interfaces réseaux du client}
 
@@ -215,7 +215,7 @@ Nous allons maintenant expliquer comment nous avons paramétré les interfaces r
                 gateway 10.1.2.1
 \end{lstlisting}
 
-On voit ici que l'IP renseigné pour le réseau de l'interface ``enp11s0" est 10.1.2.1, qui est l'adresse de notre sous réseau. L'adresse IP de notre client est désormais fixée à 10.1.2.2.
+On voit ici que l'IP renseigné pour le réseau de l'interface ``enp11s0" est 10.1.2.1, qui est l'adresse du routeur de notre sous réseau privé. L'adresse IP de notre client est désormais fixée à 10.1.2.2.
 Comme pour le routeur, afin d'appliquer les changements il faut redémarrer le service avec l'une des trois commandes évoquées précédemment. Par la suite, toutes ces configurations vont permettre au client et au routeur de communiquer avec le reste des machines des autres groupes. 
 
 \subsection{Communication basique sans table de routage}
@@ -233,11 +233,11 @@ Pour montrer le bon fonctionnement jusqu'ici, nous allons avec notre routeur, es
 \label{fig4}
 \end{figure}
 
-Nous pouvons voir sur la figure \ref{fig4} que les paquets sont bien envoyés et reçus par notre correspondant et tout s'est bien déroulé. Cependant si notre routeur ou notre client veut ping ou plus globalement communiquer avec un client d'un autre groupe qui est donc sur un autre réseau privé, nous allons devoir lui indiquer le chemin pour aller jusqu'à celui-ci, ce qui est réaliser avec un table de routage.
+Nous pouvons voir sur la figure \ref{fig4} que les paquets sont bien envoyés et reçus par notre correspondant et tout s'est bien déroulé. Cependant si notre routeur ou notre client veut ping ou plus globalement communiquer avec un client d'un autre groupe qui est donc sur un autre réseau privé, nous allons devoir lui indiquer le chemin pour aller jusqu'à celui-ci, ce qui est réaliser avec une table de routage.
 
 \subsection{Mise en place de la table de routage}
 
-L'étape suivante est la création de routes afin de permettre la communication entre les différentes machines de la simulation: le client et le routeur, mais également entre chaque routeurs (les autres agences) et entre différents clients de différentes agences.
+L'étape suivante est la création de routes afin de permettre la communication entre les différentes machines de la simulation: le client et le routeur, mais également entre chaque routeurs (les autres agences) et entre différents clients de différentes agences.\\
 \par
 Dans la configuration actuelle, il nous est impossible de ping le client qui est connecté ``derrière'' un autre routeur que le notre, car notre routeur ne connaîtra pas de chemin (route) par lequel acheminer les paquets vers cette cible. Pour arriver à faire ceci, il nous faut mettre en place une table de routage.
 Il s'agit d'une table qui permet d'indiquer les routes possibles pour atteindre certains réseaux et avec une adresse de redirection dite de ``default'' qui indique vers qui envoyer le paquet si on ne connaît pas de chemin. Si aucun chemin n'est trouvé, l'erreur ``Network Unreachable'' sera renvoyé à l'émetteur du paquet. 
@@ -413,12 +413,12 @@ Dans le fichier crontab, nous allons renseigner cette ligne qui reprend ce qui a
 \end{lstlisting}   
 Mais nous y ajoutons cette fois ``0 15 * * *", qui indique que nous allons appliquer le principe de rsync et SSH tous les jours de tous les mois à 15h et 0 minute. En effet, le premier paramètre indique les minutes comprises entre 1 et 60, le second indique les heures de 1 à 24, le troisième est pour les jours dans le mois donc de 1 à 31. Et les deux derniers sont pour les mois et jours de la semaines compris entre 1 à 12 pour les mois et 1 (lundi) et 7 (dimanche) pour les jours.
 
-Pour examiner les tâches planifiées de l'utilisateur courant (le contenu du fichier crontab), on peut utiliser:
+Pour examiner les tâches planifiées de l'utilisateur courant (le contenu du fichier crontab), on peut utiliser la commande:
 \begin{lstlisting}[language=bash] 
     $ crontab -l
 \end{lstlisting} 
 Ce qui nous affiche :
-\begin{figure}[!h]
+\begin{figure}[H]
 \centerline{ \includegraphics[width=15cm]{images/rsync&crontab.png}}
 \caption{Contenu du fichier crontab.}
 \label{fig8}
@@ -586,7 +586,7 @@ La première étape consiste à créer 2 zones, une zone dite ``normal" et une z
 \label{fig16}
 \end{figure}
 
-Sur l'image \ref{fig16}, les 2 zones sont identifiables par l'identificateur ``zone". La première zone décrite est la zone ``inverse''. Elle a pour nom l’adresse ip ``10.1.2." inversée accompagnée de ``.in-addr.arpa". L'inversion de l'adresse IP est le standard pour décrire une zone ``inverseé''. La seconde zone est la zone ``normale" et que l'on a décrit par le nom de domaine, à savoir ``agence.atlantide". Que ce soit pour la zone ``normale" ou la zone ``inverse" nous indiquons 2 informations: le ``type" pour le type de zone et le fichier de configuration associé avec le mot clé ``file".\\
+Sur l'image \ref{fig16}, les 2 zones sont identifiables par le champ ``zone". La première zone décrite est la zone ``inverse''. Elle a pour nom l’adresse ip ``10.1.2." inversée accompagnée de ``.in-addr.arpa". L'inversion de l'adresse IP est le standard pour décrire une zone ``inverseé''. La seconde zone est la zone ``normale" et que l'on a décrit par le nom de domaine, à savoir ``agence.atlantide". Que ce soit pour la zone ``normale" ou la zone ``inverse" nous indiquons 2 informations: le ``type" pour le type de zone et le fichier de configuration associé avec le mot clé ``file".\\
 
 Afin de mettre en place les 2 fichiers de configuration des 2 zones, nous sommes partis du fichier existant ``/etc/bind/db.local". Celui-ci nous a fournis toutes les informations nécessaires et nous n'avions plus qu'a remplacer les lignes dont nous avions besoin. Par exemple le ``localhost" a été changé en "agence.atlantide", l'adresse IP de loopback (le ``127.0.0.1"), a été changé en ``10.1.2.1".  Nous indiquons ainsi que le nom de domaine agence.atlantide décrit l'adresse ``10.1.2.1'', donc notre serveur.
 Pour le fichier de la zone ``normale" nous avons utilisé des enregistrements de type ``A" afin de relier IP et nom de domaine. Nous avons donc un champ A qui définit que le sous domaine client.agence.atlantide décrit l'adresse ``10.1.2.2'', donc notre client.
@@ -597,7 +597,8 @@ Voici ci-dessous le fichier "/etc/bind/db.agence.atlantide" de configuration de 
 \label{fig17}
 \end{figure}
 
-Pour la zone inverse il faut utiliser des enregistrements de type ``PTR" qui permettent la mise en place du DNS inversé. Et voici ici le fichier "/etc/bind/db.agence.atlantide.inv" de configuration de la zone ``inverse":
+Pour la zone inverse il faut utiliser des enregistrements de type ``PTR" qui permettent la mise en place du DNS inversé.\\
+Et voici ici le fichier ``/etc/bind/db.agence.atlantide.inv" de configuration de la zone ``inverse":
 \begin{figure}[H]
 \centerline{ \includegraphics[width=12cm]{images/dbAgenceAtlantideInv.png}}
 \caption{Contenu du fichier de configuration du DNS inversé.}
